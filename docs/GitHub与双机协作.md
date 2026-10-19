@@ -2,7 +2,7 @@
 
 更新日期：2026-10-19。建议用一个私有 GitHub 仓库管理当前项目，以 Git 提交同步文件，以 HANDOFF 恢复工作上下文。保留现有目录，避免第一次同步同时搬迁文件、修改路径或改技术栈。
 
-本轮只准备忽略规则、换行约定、项目入口和接续说明；没有创建 GitHub 仓库、添加远端、提交或推送。之后的实际状态使用 Git 命令查询。
+已创建私有仓库 [ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel)，首次基线已推送至 `main`，origin 已关联。本文的首次发布命令保留作过程说明；现有仓库继续工作从克隆或日常同步开始，不重复建库或添加 origin。
 
 ## 应同步哪些内容
 
@@ -23,9 +23,9 @@
 
 ## 本机首次发布
 
-当前目录已有 `.git`，初始分支为 master，创建本文时没有提交或远端。先选择归属账号／组织、仓库名称和私有可见性。建议新建空仓库，不额外初始化 README、License 或 gitignore，避免首次历史冲突。[GitHub 导入本地项目说明](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github)
+本项目首次发布前已有 `.git`，初始分支为 master，没有提交或远端；发布时建立基线、改用 main 并关联了当前私有仓库。新项目首次发布建议使用空仓库，不额外初始化 README、License 或 gitignore，避免历史冲突。[GitHub 导入本地项目说明](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github)
 
-下列是首次发布时执行的步骤，本轮尚未执行。先检查 Git 提交身份和 GitHub 登录已设置；缺失时使用本人的信息配置，不复制凭证到仓库，也不把访问令牌贴进聊天。
+下列是首次发布步骤的留档。先检查 Git 提交身份和 GitHub 登录已设置；缺失时使用本人的信息配置，不复制凭证到仓库，也不把访问令牌贴进聊天。
 
 ```powershell
 git status --short
@@ -41,10 +41,10 @@ git commit -m "保存业务原型、高保真设计与项目交接基线"
 git branch -M main
 ```
 
-将实际仓库 HTTPS 地址替换下面的示例后再执行：
+本项目使用如下 HTTPS 地址。origin 已存在时不重复添加：
 
 ```powershell
-git remote add origin https://github.com/YOUR-ACCOUNT/YOUR-REPOSITORY.git
+git remote add origin https://github.com/ryanzhouyu/huangxiaoxi-travel.git
 git remote -v
 git push -u origin main
 ```
@@ -56,7 +56,7 @@ git push -u origin main
 安装并登录所需开发工具，克隆同一个仓库。文件夹位置和名称可以不同，不需要照搬旧电脑的用户名和绝对路径：
 
 ```powershell
-git clone https://github.com/YOUR-ACCOUNT/YOUR-REPOSITORY.git huangxiaoxi-travel
+git clone https://github.com/ryanzhouyu/huangxiaoxi-travel.git huangxiaoxi-travel
 cd huangxiaoxi-travel
 git status
 python -m http.server 8765 --bind 127.0.0.1
@@ -109,6 +109,8 @@ git switch --track origin/codex/hifi-review
 
 已经存在本地同名分支时使用 `git switch codex/hifi-review`，再 `git pull --ff-only`。接续同一任务沿用同一分支，完成验收后再合并到 main；多分支间不靠复制目录传改动。
 
+本次上传曾遇到 Git 直连失败，使用本机已配置的系统代理后恢复。当前仓库在本机 `.git/config` 中保存了相应传输设置，不提交代理地址或凭证。另一台电脑按自己的网络环境配置，不复制旧电脑的端口；若浏览器能访问而 Git 失败，先检查 Git 是否使用了所需代理。
+
 ## Git 不会携带的状态
 
 - **聊天上下文**：Git 传文件和提交，不会自动给另一台电脑上的新对话注入本次完整聊天；项目接续依赖 HANDOFF 和已有规范。它不限制应用自身是否另有历史同步能力。
@@ -120,4 +122,4 @@ git switch --track origin/codex/hifi-review
 
 另一台电脑应能看到同一已推送分支及提交，打开高保真阅览和 21 页总览、显示全部依赖图片、浏览研究原图、找到规则与交接入口。执行相应检查后再记录“新环境验证通过”，不沿用旧电脑的测试结果代替。
 
-本轮本地准备的文件不会自动出现在 GitHub；必须完成首次 commit 和 push，再通过另一台电脑 clone／pull 验证。
+后续新增或修改的文件仍需 commit 和 push 才会出现在 GitHub；换机前确认推送成功，另一台电脑再 clone／pull。

@@ -7,7 +7,7 @@
 - 本地业务原型 v0.3.1 已跑通初始化、领装、测试打卡、抽取、换装和实际 PNG 保存；两轮自测见[报告](docs/两轮自测与优化报告.md)。
 - 独立高保真稿 v0.1 已交付 21 页、31 个关键状态，包含正式登录与绑定设计；[设计说明](docs/高保真设计说明.md)及[验收结果](design/hifi/verification.json)可查。216 项断言通过是当时的记录，不表示用户已认可最终视觉。
 - 当前应先收集、评审和调整高保真稿。用户尚未确认整套视觉为最终稿，不能直接宣布进入正式开发。
-- 当前正准备 GitHub 管理及双机接续；首次提交、远端仓库关联及推送是否完成，以 `git status`、`git log`、`git remote -v` 为准。创建此文件时仍无提交、无远端，不把这条快照当作未来状态。
+- 已创建并首次推送 GitHub 私有仓库 [ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel)，默认分支 `main`，本地 origin 已关联并跟踪 origin/main。首次基线提交为 `4c45938`；以后最新状态仍以 Git 历史及 `git status` 为准，不以本文固定首次 SHA 代替当前版本。
 
 ## 接续时不能遗漏的决定
 

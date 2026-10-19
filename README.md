@@ -2,6 +2,8 @@
 
 以数字伙伴承载游客的贵州游玩经历，通过到访、收集、换装和纪念图片形成陪伴体验。当前有本地业务交互原型 v0.3.1，以及独立高保真视觉稿 v0.1；尚未接入正式账号、云端业务、支付或角色动画系统。
 
+GitHub 私有仓库：[ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel)，默认分支 `main`。访问和克隆需要拥有此仓库权限的 GitHub 账号。
+
 ## 接手项目
 
 - [AGENTS.md](AGENTS.md)：项目工作要求与设计、实施约束。
@@ -11,7 +13,14 @@
 
 ## 在另一台电脑运行
 
-把仓库完整克隆到本地，在仓库根目录运行：
+把仓库完整克隆到本地：
+
+```powershell
+git clone https://github.com/ryanzhouyu/huangxiaoxi-travel.git
+cd huangxiaoxi-travel
+```
+
+在仓库根目录启动：
 
 ```powershell
 python -m http.server 8765 --bind 127.0.0.1
