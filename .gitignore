@@ -1,0 +1,28 @@
+# 本机工具状态与可重新生成的日志
+.playwright-cli/
+.codex/
+.codex-log/
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.log
+.DS_Store
+Thumbs.db
+Desktop.ini
+/tmp/
+/temp/
+
+# 本机凭证与环境文件，示例配置可提交
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+
+# 响应式复测截图可由 verify.js 重建，不影响逐页总览。
+# 默认页面、关键状态、文档引用的图片和正式验收记录仍保留。
+/output/playwright/hifi/check-*.png
+/output/playwright/*-qa-failure.png

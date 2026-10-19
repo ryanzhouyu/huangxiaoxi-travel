@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-10-19T14:01:46.335847+00:00",
+  "passed": true,
+  "checks": [
+    {
+      "name": "required_entry_and_assets_in_commit_candidates",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "all_21_overview_images_will_sync",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "all_73_source_images_will_sync",
+      "passed": true,
+      "details": 73
+    },
+    {
+      "name": "local_automation_and_responsive_checks_excluded",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "no_candidate_larger_than_50_MiB",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "handoff_and_current_document_links",
+      "passed": true,
+      "details": {
+        "links": 169,
+        "broken": []
+      }
+    },
+    {
+      "name": "new_docs_no_trailing_whitespace",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "remote_and_first_commit_not_created",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "candidateFilesBeforeReport": 369,
+  "candidateMiBBeforeReport": 188.24,
+  "remoteConfigured": false,
+  "hasCommit": false,
+  "limits": "No files staged or committed. No remote created or pushed. No clean-clone run or application regression was performed."
+}

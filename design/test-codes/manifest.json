@@ -1,0 +1,22 @@
+[
+  {
+    "pointId": "gate",
+    "code": "HXX-GATE-2026",
+    "url": "http://127.0.0.1:8765/design/index.html#checkin?id=gate&code=HXX-GATE-2026"
+  },
+  {
+    "pointId": "ridge",
+    "code": "HXX-RIDGE-2026",
+    "url": "http://127.0.0.1:8765/design/index.html#checkin?id=ridge&code=HXX-RIDGE-2026"
+  },
+  {
+    "pointId": "brook",
+    "code": "HXX-BROOK-2026",
+    "url": "http://127.0.0.1:8765/design/index.html#checkin?id=brook&code=HXX-BROOK-2026"
+  },
+  {
+    "pointId": "shop",
+    "code": "HXX-SHOP-2026",
+    "url": "http://127.0.0.1:8765/design/index.html#checkin?id=shop&code=HXX-SHOP-2026"
+  }
+]

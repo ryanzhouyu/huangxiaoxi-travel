@@ -1,0 +1,82 @@
+[
+  {
+    "test": "page_entry",
+    "pass": true
+  },
+  {
+    "test": "page_onboarding",
+    "pass": true
+  },
+  {
+    "test": "page_partner",
+    "pass": true
+  },
+  {
+    "test": "page_explore",
+    "pass": true
+  },
+  {
+    "test": "page_scene",
+    "pass": true
+  },
+  {
+    "test": "page_point",
+    "pass": true
+  },
+  {
+    "test": "page_activity",
+    "pass": true
+  },
+  {
+    "test": "page_pool",
+    "pass": true
+  },
+  {
+    "test": "page_wardrobe",
+    "pass": true
+  },
+  {
+    "test": "page_collection",
+    "pass": true
+  },
+  {
+    "test": "page_memories",
+    "pass": true
+  },
+  {
+    "test": "page_compose",
+    "pass": true
+  },
+  {
+    "test": "page_work",
+    "pass": true
+  },
+  {
+    "test": "wardrobe_return_preserves_composition",
+    "pass": true
+  },
+  {
+    "test": "complete_pool_no_purchase_or_draw",
+    "pass": true
+  },
+  {
+    "test": "no_visit_no_real_memory",
+    "pass": true
+  },
+  {
+    "test": "error_retry",
+    "pass": true
+  },
+  {
+    "test": "mobile_no_body_overflow",
+    "pass": true
+  },
+  {
+    "test": "shared_point_template_merchant",
+    "pass": true
+  },
+  {
+    "test": "merchant_to_activity",
+    "pass": true
+  }
+]

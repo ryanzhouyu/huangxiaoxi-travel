@@ -1,0 +1,1489 @@
+[
+  {
+    "index": 1,
+    "nodeId": "node_1782200549930_d1n9tuhjc",
+    "type": "vue-flow__node-rh-image",
+    "title": "首次弹窗",
+    "text": "首次弹窗",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/552a78c6eeb557ccf79eb2f575e1d45f-%E9%A6%96%E6%AC%A1%E5%BC%B9%E7%AA%97.jpg?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 7; transform: translate(830.482px, 2743.02px); pointer-events: all;"
+  },
+  {
+    "index": 2,
+    "nodeId": "node_1782200560445_9bl9a6lx7",
+    "type": "vue-flow__node-rh-image",
+    "title": "打卡点详情页",
+    "text": "打卡点详情页",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/1572701d1eb89c14d81d8858b3d00174-%E6%89%93%E5%8D%A1%E7%82%B9%E8%AF%A6%E6%83%85%E9%A1%B5.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 8; transform: translate(441.18px, 3683.91px); pointer-events: all;"
+  },
+  {
+    "index": 3,
+    "nodeId": "node_1782200587284_3mc0203zu",
+    "type": "vue-flow__node-rh-image",
+    "title": "打卡点分享页",
+    "text": "打卡点分享页",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/397fb996d555e252f34004272e226d1f-%E5%88%86%E4%BA%AB%E9%A1%B5.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 10; transform: translate(1940.9px, 3667.54px); pointer-events: all;"
+  },
+  {
+    "index": 4,
+    "nodeId": "node_1782200611174_yp0fo8v4a",
+    "type": "vue-flow__node-rh-image",
+    "title": "抽奖动画",
+    "text": "抽奖动画",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/3e3b40c59fd0e5794af4b3a6df5833bb-%E6%8A%BD%E5%A5%96%E5%8A%A8%E7%94%BB.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 12; transform: translate(382.377px, 4536.09px); pointer-events: all;"
+  },
+  {
+    "index": 5,
+    "nodeId": "node_1782200615714_404m4r5x8",
+    "type": "vue-flow__node-rh-image",
+    "title": "抽奖结果",
+    "text": "抽奖结果",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/c1f94b5ee9334259cfedbf248f77ad48-%E6%8A%BD%E5%A5%96%E7%BB%93%E6%9E%9C.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 13; transform: translate(856.34px, 4536.09px); pointer-events: all;"
+  },
+  {
+    "index": 6,
+    "nodeId": "node_1782200675228_6lntw7afh",
+    "type": "vue-flow__node-rh-image",
+    "title": "商家文创详情页",
+    "text": "商家文创详情页",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/6a6c92e5c61fa77557268871432d8209-%E5%95%86%E5%AE%B6%E6%96%87%E5%88%9B%E8%AF%A6%E6%83%85%E9%A1%B5.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 16; transform: translate(2876.91px, 3663.89px); pointer-events: all;"
+  },
+  {
+    "index": 7,
+    "nodeId": "node_1782213199339_hk81vp9is",
+    "type": "vue-flow__node-rh-image",
+    "title": "背包-动作",
+    "text": "背包-动作",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/87004271297c31f315288c5708c9335e-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8823%E6%97%A5%2019_12_37.png?imageMogr2/ignore-error/1",
+        "width": 1023,
+        "height": 1537
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 40; transform: translate(412.288px, 2029.6px); pointer-events: all;"
+  },
+  {
+    "index": 8,
+    "nodeId": "node_1782213607447_rmniwznry",
+    "type": "vue-flow__node-rh-image",
+    "title": "背包-服饰",
+    "text": "背包-服饰",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/a91073600768c75949a63d24abd02eec-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8823%E6%97%A5%2019_19_55.png?imageMogr2/ignore-error/1",
+        "width": 1024,
+        "height": 1536
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 41; transform: translate(-14.6386px, 2029.6px); pointer-events: all;"
+  },
+  {
+    "index": 9,
+    "nodeId": "node-1782215102124-2eunix666",
+    "type": "vue-flow__node-rh-image",
+    "title": "首页",
+    "text": "首页",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/ead19f18b380174d1b02380041bb99a9-a39cbe61355477441080f6bf12d44696.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 3; transform: translate(-14.6386px, 618.185px); pointer-events: all;"
+  },
+  {
+    "index": 10,
+    "nodeId": "node_1782215489914_1184j7d2q",
+    "type": "vue-flow__node-rh-image",
+    "title": "图鉴预览",
+    "text": "图鉴预览",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/618a057506dbf8b3ba12b88ec66b3c70-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8823%E6%97%A5%2019_51_20.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 42; transform: translate(5840.28px, 1327.12px); pointer-events: all;"
+  },
+  {
+    "index": 11,
+    "nodeId": "node_1782215502737_9zf390jk9",
+    "type": "vue-flow__node-rh-image",
+    "title": "图鉴收集默认",
+    "text": "图鉴收集默认",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/cd3fa458aab7196411bf7db8fe4bd47d-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8823%E6%97%A5%2019_40_39.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 43; transform: translate(5434.85px, 1327.12px); pointer-events: all;"
+  },
+  {
+    "index": 12,
+    "nodeId": "node_1782218895853_gk0icxyaj",
+    "type": "vue-flow__node-rh-image",
+    "title": "打卡点卡池也",
+    "text": "打卡点卡池也",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/dcc835f30028a91646bcb0a8d7da8c42-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8823%E6%97%A5%2020_47_34.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 46; transform: translate(-80.8628px, 4559.59px); pointer-events: all;"
+  },
+  {
+    "index": 13,
+    "nodeId": "node_1782222547851_5ginqoudf",
+    "type": "vue-flow__node-rh-image",
+    "title": "登录页1",
+    "text": "登录页1",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/3efe4f4c21a4dc2d8acd9111e92512d8-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8823%E6%97%A5%2021_48_46.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 48; transform: translate(5424.39px, -1140.1px); pointer-events: all;"
+  },
+  {
+    "index": 14,
+    "nodeId": "node_1782222921434_tpezgidmi",
+    "type": "vue-flow__node-rh-image",
+    "title": "登录页2",
+    "text": "登录页2",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/3bc893643812c45b3a99589cdbd4654d-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8823%E6%97%A5%2021_55_04.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 49; transform: translate(5890.42px, -1140.1px); pointer-events: all;"
+  },
+  {
+    "index": 15,
+    "nodeId": "node_1782223083412_h2uybr0ow",
+    "type": "vue-flow__node-rh-image",
+    "title": "商家打卡成功页",
+    "text": "商家打卡成功页",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/04c2df123af4c88d8088b0ce94802729-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8823%E6%97%A5%2021_57_53.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 50; transform: translate(3790.68px, 3671.79px); pointer-events: all;"
+  },
+  {
+    "index": 16,
+    "nodeId": "node_1782225677040_fs9emwt7s",
+    "type": "vue-flow__node-rh-image",
+    "title": "区域选择",
+    "text": "区域选择",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/4874b61b402e1c55293ba4a045a02d32-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8823%E6%97%A5%2022_41_02.png?imageMogr2/ignore-error/1",
+        "width": 968,
+        "height": 1625
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 54; transform: translate(-58.251px, 2765.53px); pointer-events: all;"
+  },
+  {
+    "index": 17,
+    "nodeId": "node_1782226315391_urm0yxo8s",
+    "type": "vue-flow__node-rh-image",
+    "title": "景区选择",
+    "text": "景区选择",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/dbac56115bebdfe2f76789b1f5bb4cba-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8823%E6%97%A5%2022_51_48.png?imageMogr2/ignore-error/1",
+        "width": 1024,
+        "height": 1535
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 56; transform: translate(368.653px, 2801.74px); pointer-events: all;"
+  },
+  {
+    "index": 18,
+    "nodeId": "node_1782263090658_osn5gxwsy",
+    "type": "vue-flow__node-rh-image",
+    "title": "image.png",
+    "text": "image.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/d973742b41fb1f23744d4c3bb729147e-image.png?imageMogr2/ignore-error/1",
+        "width": 578,
+        "height": 246
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 57; transform: translate(-520.016px, -771.959px); pointer-events: all;"
+  },
+  {
+    "index": 19,
+    "nodeId": "node_1782263122866_ko36a0cde",
+    "type": "vue-flow__node-rh-image",
+    "title": "image.png",
+    "text": "image.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/ad52dcfd81a72794d43a463e71bf6cbe-image.png?imageMogr2/ignore-error/1",
+        "width": 453,
+        "height": 213
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 58; transform: translate(-540.197px, 10.0088px); pointer-events: all;"
+  },
+  {
+    "index": 20,
+    "nodeId": "node_1782263143198_dvuugxmhb",
+    "type": "vue-flow__node-rh-image",
+    "title": "image.png",
+    "text": "image.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/461d9e4f625dce6a13e0099d80cdcaa8-image.png?imageMogr2/ignore-error/1",
+        "width": 374,
+        "height": 177
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 59; transform: translate(-534.197px, 824.552px); pointer-events: all;"
+  },
+  {
+    "index": 21,
+    "nodeId": "node_1782263310326_c9kk5t28t",
+    "type": "vue-flow__node-rh-image",
+    "title": "image.png",
+    "text": "image.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/59fa3487e965cfcb3514fb9338f35ff7-image.png?imageMogr2/ignore-error/1",
+        "width": 417,
+        "height": 186
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 60; transform: translate(-513.18px, 1577.51px); pointer-events: all;"
+  },
+  {
+    "index": 22,
+    "nodeId": "node_1782263324068_vcsi8ey1n",
+    "type": "vue-flow__node-rh-image",
+    "title": "image.png",
+    "text": "image.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/81c7b7941fb009cec34c0601a74ac69d-image.png?imageMogr2/ignore-error/1",
+        "width": 380,
+        "height": 156
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 61; transform: translate(-513.18px, 2196.81px); pointer-events: all;"
+  },
+  {
+    "index": 23,
+    "nodeId": "node_1782263342187_jodzqlzca",
+    "type": "vue-flow__node-rh-image",
+    "title": "image.png",
+    "text": "image.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/ca4485f10a0e24a5a16bdbdd410b4e76-image.png?imageMogr2/ignore-error/1",
+        "width": 513,
+        "height": 174
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 62; transform: translate(-540.197px, 2975.55px); pointer-events: all;"
+  },
+  {
+    "index": 24,
+    "nodeId": "node_1782263365752_il5c8586y",
+    "type": "vue-flow__node-rh-image",
+    "title": "image.png",
+    "text": "image.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/9c941103a03c1f998b3b7dd6b362061c-image.png?imageMogr2/ignore-error/1",
+        "width": 345,
+        "height": 162
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 63; transform: translate(-555.351px, 3921.58px); pointer-events: all;"
+  },
+  {
+    "index": 25,
+    "nodeId": "node_1782263395718_feiiej8jg",
+    "type": "vue-flow__node-rh-image",
+    "title": "image.png",
+    "text": "image.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/1f0e8741423f79ebfcaea8abc1ae26a6-image.png?imageMogr2/ignore-error/1",
+        "width": 381,
+        "height": 165
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 64; transform: translate(-563.381px, 4780.99px); pointer-events: all;"
+  },
+  {
+    "index": 26,
+    "nodeId": "node_1782263410741_6jm0p6ter",
+    "type": "vue-flow__node-rh-image",
+    "title": "image.png",
+    "text": "image.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/9e4a59ecdc786d49cad09a11bf5f9e8c-image.png?imageMogr2/ignore-error/1",
+        "width": 341,
+        "height": 171
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 65; transform: translate(-524.882px, 5633.12px); pointer-events: all;"
+  },
+  {
+    "index": 27,
+    "nodeId": "node_1782263426219_ze5ibv69t",
+    "type": "vue-flow__node-rh-image",
+    "title": "image.png",
+    "text": "image.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/80997a2b108eafde389e1f5da9788e64-image.png?imageMogr2/ignore-error/1",
+        "width": 336,
+        "height": 168
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 66; transform: translate(-523.927px, 7705.87px); pointer-events: all;"
+  },
+  {
+    "index": 28,
+    "nodeId": "node_1782264050208_17ltnkhbm",
+    "type": "vue-flow__node-rh-image",
+    "title": "引导页",
+    "text": "引导页",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/e34b420fdbc086df4aaaa47d6ad18899-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2009_20_41.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 68; transform: translate(475.339px, -231.116px); pointer-events: all;"
+  },
+  {
+    "index": 29,
+    "nodeId": "node_1782264275344_1vw5nrst3",
+    "type": "vue-flow__node-rh-image",
+    "title": "创建角色",
+    "text": "创建角色",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/54364d655f1ceca986c4f11a43994fbd-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2009_24_18.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 70; transform: translate(-0.245295px, -221.257px); pointer-events: all;"
+  },
+  {
+    "index": 30,
+    "nodeId": "node_1782264473101_oyp77v19n",
+    "type": "vue-flow__node-rh-image",
+    "title": "创建确认弹窗",
+    "text": "创建确认弹窗",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/ede63d9a5051c5508e1a8e6008c7f663-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2009_27_40.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 71; transform: translate(5442.69px, -291.257px); pointer-events: all;"
+  },
+  {
+    "index": 31,
+    "nodeId": "crop_1782264914684_4zz84w5mz",
+    "type": "vue-flow__node-rh-image",
+    "title": "5连抽购买弹窗",
+    "text": "5连抽购买弹窗",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/465a64c5b76ec28bc978ea2bdf464ab4-crop_1782264913611.png?imageMogr2/ignore-error/1",
+        "width": 917,
+        "height": 1644
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 75; transform: translate(1822.15px, 4537.09px); pointer-events: all;"
+  },
+  {
+    "index": 32,
+    "nodeId": "node-1782265015720-2yb2q4vi6",
+    "type": "vue-flow__node-rh-image",
+    "title": "打卡动画",
+    "text": "打卡动画",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/3e3b40c59fd0e5794af4b3a6df5833bb-%E6%8A%BD%E5%A5%96%E5%8A%A8%E7%94%BB.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 12; transform: translate(940.261px, 3683.91px); pointer-events: all;"
+  },
+  {
+    "index": 33,
+    "nodeId": "node-1782265043331-9rwz25m4y",
+    "type": "vue-flow__node-rh-image",
+    "title": "抽奖结果",
+    "text": "抽奖结果",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/c1f94b5ee9334259cfedbf248f77ad48-%E6%8A%BD%E5%A5%96%E7%BB%93%E6%9E%9C.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 13; transform: translate(6268.38px, 3401.23px); pointer-events: all;"
+  },
+  {
+    "index": 34,
+    "nodeId": "node-1782265043331-c987cx3sw",
+    "type": "vue-flow__node-rh-image",
+    "title": "打卡成功赠送1张抽奖券弹窗",
+    "text": "打卡成功赠送1张抽奖券弹窗",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-23/becc5d9532ffe9b69eb8714c4c4dd11b-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8823%E6%97%A5%2021_33_36.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 47; transform: translate(6748.59px, 3395.32px); pointer-events: all;"
+  },
+  {
+    "index": 35,
+    "nodeId": "node_1782265300733_vi0h620lh",
+    "type": "vue-flow__node-rh-image",
+    "title": "单抽购买页面",
+    "text": "单抽购买页面",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/717423a3ceeeac1d5e6a15f17791c5c0-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2009_41_32.png?imageMogr2/ignore-error/1",
+        "width": 942,
+        "height": 1670
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 76; transform: translate(1366.3px, 4537.09px); pointer-events: all;"
+  },
+  {
+    "index": 36,
+    "nodeId": "node_1782265579716_c7moanl5d",
+    "type": "vue-flow__node-rh-image",
+    "title": "可多抽弹窗提示",
+    "text": "可多抽弹窗提示",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/c4b0718872edb26852adb7a48360d8b0-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2009_46_08.png?imageMogr2/ignore-error/1",
+        "width": 950,
+        "height": 1655
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 77; transform: translate(2326.51px, 4545.74px); pointer-events: all;"
+  },
+  {
+    "index": 37,
+    "nodeId": "node_1782266585403_y14dum3z1",
+    "type": "vue-flow__node-rh-image",
+    "title": "同行人邀请弹窗-增加了关系选择",
+    "text": "同行人邀请弹窗-增加了关系选择",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/f552cd0d92f85f2826d92ef228544616-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2010_02_50.png?imageMogr2/ignore-error/1",
+        "width": 1086,
+        "height": 1448
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 78; transform: translate(449.054px, 5491.09px); pointer-events: all;"
+  },
+  {
+    "index": 38,
+    "nodeId": "node_1782267181590_2wrh8umvr",
+    "type": "vue-flow__node-rh-image",
+    "title": "增加关系标签",
+    "text": "增加关系标签",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/55d4cfb99d618a69c52f1152a97dfb3c-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2010_12_52.png?imageMogr2/ignore-error/1",
+        "width": 1086,
+        "height": 1448
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 79; transform: translate(970.069px, 5489.09px); pointer-events: all;"
+  },
+  {
+    "index": 39,
+    "nodeId": "node_1782267422380_gd5ckn8b0",
+    "type": "vue-flow__node-rh-image",
+    "title": "增加关系标签",
+    "text": "增加关系标签",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/68fdb8242ba7c73715c398f1d5987154-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2010_16_54.png?imageMogr2/ignore-error/1",
+        "width": 1024,
+        "height": 1536
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 80; transform: translate(1485.73px, 5489.09px); pointer-events: all;"
+  },
+  {
+    "index": 40,
+    "nodeId": "node_1782268351356_43f1xxefx",
+    "type": "vue-flow__node-rh-image",
+    "title": "打卡点未打卡状态页",
+    "text": "打卡点未打卡状态页",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/6825d602d1955e3f49d8aea998fee77e-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2010_32_18.png?imageMogr2/ignore-error/1",
+        "width": 1024,
+        "height": 1535
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 81; transform: translate(-78.4247px, 3703.37px); pointer-events: all;"
+  },
+  {
+    "index": 41,
+    "nodeId": "node_1782270192223_rr7dc3m7t",
+    "type": "vue-flow__node-rh-image",
+    "title": "同行人-取消关系",
+    "text": "同行人-取消关系",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/91531285730478f940d56a24e55d36b3-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2011_03_05.png?imageMogr2/ignore-error/1",
+        "width": 1024,
+        "height": 1536
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 86; transform: translate(3334.29px, 5473.71px); pointer-events: all;"
+  },
+  {
+    "index": 42,
+    "nodeId": "node_1782270414107_khvtyiv75",
+    "type": "vue-flow__node-rh-image",
+    "title": "同行人-取消关系二次弹窗确认",
+    "text": "同行人-取消关系二次弹窗确认",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/cf95d494d21f55ace2bb6d0eb642f32a-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2011_06_45.png?imageMogr2/ignore-error/1",
+        "width": 1024,
+        "height": 1536
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 87; transform: translate(3841.23px, 5460.99px); pointer-events: all;"
+  },
+  {
+    "index": 43,
+    "nodeId": "node_1782281445262_jg1mhh0wc",
+    "type": "vue-flow__node-rh-image",
+    "title": "附近商家彩蛋列表页",
+    "text": "附近商家彩蛋列表页",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/55d2c42fa7b657efe48cc8bfd34eb025-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2014_10_22.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 88; transform: translate(2411.49px, 3680.68px); pointer-events: all;"
+  },
+  {
+    "index": 44,
+    "nodeId": "node_1782287003268_3d2mzk8jg",
+    "type": "vue-flow__node-rh-image",
+    "title": "省级地图回忆",
+    "text": "省级地图回忆",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/068945d96d29af6bcc23219cbcf8b7c4-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2015_43_07.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1670
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 91; transform: translate(-111.445px, 7452.73px); pointer-events: all;"
+  },
+  {
+    "index": 45,
+    "nodeId": "node_1782287289601_0oo1r8spi",
+    "type": "vue-flow__node-rh-image",
+    "title": "景区回忆",
+    "text": "景区回忆",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/e14a2e1ca154d04fd92606d6216ec00d-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2015_48_00.png?imageMogr2/ignore-error/1",
+        "width": 1024,
+        "height": 1536
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 92; transform: translate(322.452px, 7452.73px); pointer-events: all;"
+  },
+  {
+    "index": 46,
+    "nodeId": "node_1782287692577_3soa2lqq8",
+    "type": "vue-flow__node-rh-image",
+    "title": "宝箱开启弹窗",
+    "text": "宝箱开启弹窗",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/6b51f2db71d848b50167e3e46afcfb70-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2015_54_36.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 93; transform: translate(2861.19px, 5468.87px); pointer-events: all;"
+  },
+  {
+    "index": 47,
+    "nodeId": "node_1782287959226_4aawxyiat",
+    "type": "vue-flow__node-rh-image",
+    "title": "ChatGPT Image 2026年6月24日 15_59_05.png",
+    "text": "ChatGPT Image 2026年6月24日 15_59_05.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/01fc6c7daae3c1b5b72d7fa9fd74986f-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2015_59_05.png?imageMogr2/ignore-error/1",
+        "width": 872,
+        "height": 1802
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 94; transform: translate(6321.76px, 2056.69px); pointer-events: all;"
+  },
+  {
+    "index": 48,
+    "nodeId": "node_1782288692494_2apuoky2f",
+    "type": "vue-flow__node-rh-image",
+    "title": "地图导览厕所选择，最近的3-5个地点信息",
+    "text": "地图导览厕所选择，最近的3-5个地点信息",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/fa362a547653b4a1e2c29692a2d08891-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2016_10_17.png?imageMogr2/ignore-error/1",
+        "width": 1024,
+        "height": 1536
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 95; transform: translate(1741.38px, 2765.53px); pointer-events: all;"
+  },
+  {
+    "index": 49,
+    "nodeId": "node_1782289634608_b1ka5rjnk",
+    "type": "vue-flow__node-rh-image",
+    "title": "图鉴收集默认1",
+    "text": "图鉴收集默认1",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/4849d17db8df9e0b5132b67157da0c17-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2016_27_03%20%281%29.png?imageMogr2/ignore-error/1",
+        "width": 1024,
+        "height": 1535
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 96; transform: translate(6309px, 1342.8px); pointer-events: all;"
+  },
+  {
+    "index": 50,
+    "nodeId": "node-1782290998160-xlsv6cnk9",
+    "type": "vue-flow__node-rh-image",
+    "title": "image.png",
+    "text": "image.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/fbfba3e915e81081d6cbcea3fffdfc04/uploads/5db19d11958f0451b3d9ff8235c11572.png?imageMogr2/ignore-error/1",
+        "width": 312,
+        "height": 172
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 88; transform: translate(-533.384px, 6511.98px); pointer-events: all;"
+  },
+  {
+    "index": 51,
+    "nodeId": "node-1782290998160-ehl536rst",
+    "type": "vue-flow__node-rh-image",
+    "title": "宠物孵化.png",
+    "text": "宠物孵化.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/fbfba3e915e81081d6cbcea3fffdfc04/uploads/44b525ecf78b7ec78a48e6eb5722bd09.png?imageMogr2/ignore-error/1",
+        "width": 1086,
+        "height": 1448
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 89; transform: translate(-108.305px, 6465.84px); pointer-events: all;"
+  },
+  {
+    "index": 52,
+    "nodeId": "node-1782290998160-7gjkjqan6",
+    "type": "vue-flow__node-rh-image",
+    "title": "孵化成功.png",
+    "text": "孵化成功.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/fbfba3e915e81081d6cbcea3fffdfc04/uploads/1a71795ba545a4b5dfac59d5e466b80e.png?imageMogr2/ignore-error/1",
+        "width": 1194,
+        "height": 1317
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 90; transform: translate(733.222px, 6465.84px); pointer-events: all;"
+  },
+  {
+    "index": 53,
+    "nodeId": "node-1782290998160-7n8usz4xs",
+    "type": "vue-flow__node-rh-image",
+    "title": "宠物孵化中.png",
+    "text": "宠物孵化中.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/fbfba3e915e81081d6cbcea3fffdfc04/uploads/448452df8ce205ae02053fb89d16ea47.png?imageMogr2/ignore-error/1",
+        "width": 1086,
+        "height": 1448
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 91; transform: translate(318.098px, 6465.84px); pointer-events: all;"
+  },
+  {
+    "index": 54,
+    "nodeId": "node-1782290998160-6zk3cibor",
+    "type": "vue-flow__node-rh-image",
+    "title": "无宠物状态.png",
+    "text": "无宠物状态.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/fbfba3e915e81081d6cbcea3fffdfc04/uploads/79ccb0f3d4cbb4886b5387476190c1cc.png?imageMogr2/ignore-error/1",
+        "width": 1086,
+        "height": 1448
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 92; transform: translate(1206.83px, 6465.84px); pointer-events: all;"
+  },
+  {
+    "index": 55,
+    "nodeId": "node-1782290998160-ylpi2xue2",
+    "type": "vue-flow__node-rh-image",
+    "title": "宠物衣橱.png",
+    "text": "宠物衣橱.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/fbfba3e915e81081d6cbcea3fffdfc04/uploads/eb7ddce9db2158d671690b4c592ad8a4.png?imageMogr2/ignore-error/1",
+        "width": 1122,
+        "height": 1402
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 94; transform: translate(2502.7px, 6503.82px); pointer-events: all;"
+  },
+  {
+    "index": 56,
+    "nodeId": "node-1782290998160-hmp1e8h8i",
+    "type": "vue-flow__node-rh-image",
+    "title": "我的宠物.png",
+    "text": "我的宠物.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/fbfba3e915e81081d6cbcea3fffdfc04/uploads/cd1413078a23294daf2ce4babc9aadac.png?imageMogr2/ignore-error/1",
+        "width": 1086,
+        "height": 1448
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 95; transform: translate(2078.87px, 6500.39px); pointer-events: all;"
+  },
+  {
+    "index": 57,
+    "nodeId": "node-1782290998160-8l56xht3u",
+    "type": "vue-flow__node-rh-image",
+    "title": "旅行相册.png",
+    "text": "旅行相册.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/fbfba3e915e81081d6cbcea3fffdfc04/uploads/494526353938805e1af2bfcba287288d.png?imageMogr2/ignore-error/1",
+        "width": 1122,
+        "height": 1402
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 96; transform: translate(2948.14px, 6500.39px); pointer-events: all;"
+  },
+  {
+    "index": 58,
+    "nodeId": "node-1782290998160-hn1v65a5x",
+    "type": "vue-flow__node-rh-image",
+    "title": "出发旅行.png",
+    "text": "出发旅行.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/fbfba3e915e81081d6cbcea3fffdfc04/uploads/c3032aac3a64debbff02fe0bbe081734.png?imageMogr2/ignore-error/1",
+        "width": 1195,
+        "height": 1316
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 97; transform: translate(1648.01px, 7030.98px); pointer-events: all;"
+  },
+  {
+    "index": 59,
+    "nodeId": "node-1782290998160-fpfdj7fkf",
+    "type": "vue-flow__node-rh-image",
+    "title": "旅行结算.png",
+    "text": "旅行结算.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/fbfba3e915e81081d6cbcea3fffdfc04/uploads/8bbe66b518f3b8013b69d3e9b5d41194.png?imageMogr2/ignore-error/1",
+        "width": 1122,
+        "height": 1402
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 98; transform: translate(2948.14px, 7059.18px); pointer-events: all;"
+  },
+  {
+    "index": 60,
+    "nodeId": "node-1782290998160-zthlwcz1u",
+    "type": "vue-flow__node-rh-image",
+    "title": "宠物主页-旅行中.png",
+    "text": "宠物主页-旅行中.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/fbfba3e915e81081d6cbcea3fffdfc04/uploads/b70f0cbc486e54fa5ebf0479d800f26d.png?imageMogr2/ignore-error/1",
+        "width": 1086,
+        "height": 1448
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 99; transform: translate(2086.23px, 7068.01px); pointer-events: all;"
+  },
+  {
+    "index": 61,
+    "nodeId": "node-1782290998160-iupiwacw7",
+    "type": "vue-flow__node-rh-image",
+    "title": "加速返程.png",
+    "text": "加速返程.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/fbfba3e915e81081d6cbcea3fffdfc04/uploads/3ff261664757846236aa90c2b7922692.png?imageMogr2/ignore-error/1",
+        "width": 1198,
+        "height": 1313
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 100; transform: translate(2515.45px, 7087.83px); pointer-events: all;"
+  },
+  {
+    "index": 62,
+    "nodeId": "node-1782290998160-he7xdi4tu",
+    "type": "vue-flow__node-rh-text",
+    "title": "Text",
+    "text": "Text\n1、同行人亲密度达到10即可领养宠物。\n2、领养后是一个蛋，需要等待8小时孵化，随机三选一\n3、可以在领养页面指定形象和跳过孵化时间",
+    "images": [],
+    "style": "visibility: visible; z-index: 101; transform: translate(-85.5845px, 7023.23px); pointer-events: all;"
+  },
+  {
+    "index": 63,
+    "nodeId": "node-1782290998160-rbovr52bk",
+    "type": "vue-flow__node-rh-text",
+    "title": "Text",
+    "text": "Text\n1、点击免费孵化跳转到这个页面，是宠物页面下的孵化状态。展示倒计时\n2、点击立即孵化弹窗展示三个宠物形象，选择后付费则直接孵化成功",
+    "images": [],
+    "style": "visibility: visible; z-index: 101; transform: translate(350.408px, 7023.23px); pointer-events: all;"
+  },
+  {
+    "index": 64,
+    "nodeId": "node-1782290998160-pffn8ba32",
+    "type": "vue-flow__node-rh-text",
+    "title": "Text",
+    "text": "Text\n自然孵化成功或付费加速后展示该页面，主要就是给宠物起名字",
+    "images": [],
+    "style": "visibility: visible; z-index: 101; transform: translate(768.954px, 7023.23px); pointer-events: all;"
+  },
+  {
+    "index": 65,
+    "nodeId": "node-1782290998160-esp66gddn",
+    "type": "vue-flow__node-rh-image",
+    "title": "宠物主页-有宠物.png",
+    "text": "宠物主页-有宠物.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/fbfba3e915e81081d6cbcea3fffdfc04/uploads/859dca8092955b0acedefb1d9cd184b3.png?imageMogr2/ignore-error/1",
+        "width": 1086,
+        "height": 1448
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 102; transform: translate(1648.01px, 6465.84px); pointer-events: all;"
+  },
+  {
+    "index": 66,
+    "nodeId": "node-1782290998160-tg2ci02pw",
+    "type": "vue-flow__node-rh-image",
+    "title": "ChatGPT Image 2026年6月24日 16_02_02.png",
+    "text": "ChatGPT Image 2026年6月24日 16_02_02.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/fbfba3e915e81081d6cbcea3fffdfc04/uploads/bf14133adb76dca33e9825eb7ac567ab.png?imageMogr2/ignore-error/1",
+        "width": 1213,
+        "height": 1297
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 104; transform: translate(3397.64px, 6566.84px); pointer-events: all;"
+  },
+  {
+    "index": 67,
+    "nodeId": "node_1782291143960_3cip1m4b1",
+    "type": "vue-flow__node-rh-image",
+    "title": "背包背景页面_1023x1537.png",
+    "text": "背包背景页面_1023x1537.png",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/1c8ab51fc63f393bfe02d5b0b33d20cf-%E8%83%8C%E5%8C%85%E8%83%8C%E6%99%AF%E9%A1%B5%E9%9D%A2_1023x1537.png?imageMogr2/ignore-error/1",
+        "width": 1023,
+        "height": 1537
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 105; transform: translate(868.599px, 2037.5px); pointer-events: all;"
+  },
+  {
+    "index": 68,
+    "nodeId": "node_1782292404696_a3b0l3oyz",
+    "type": "vue-flow__node-rh-image",
+    "title": "亲密度奖励规则",
+    "text": "亲密度奖励规则",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/5bd96c0f8ab0f8bfbd22cdcdb1d6af90-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2017_13_16.png?imageMogr2/ignore-error/1",
+        "width": 1024,
+        "height": 1535
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 108; transform: translate(2404.26px, 5476.8px); pointer-events: all;"
+  },
+  {
+    "index": 69,
+    "nodeId": "node_1782293154133_vuwdudgm3",
+    "type": "vue-flow__node-rh-image",
+    "title": "抽奖结果+赠送抽奖券",
+    "text": "抽奖结果+赠送抽奖券",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-24/8e96ac15440113c8c7baa74383308abb-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8824%E6%97%A5%2017_25_41.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 109; transform: translate(1444.73px, 3683.91px); pointer-events: all;"
+  },
+  {
+    "index": 70,
+    "nodeId": "node_1782349731449_n7nslorew",
+    "type": "vue-flow__node-rh-image",
+    "title": "图鉴预览1",
+    "text": "图鉴预览1",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-25/fc0383b3cab45748c936b3c189a61e0a-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8825%E6%97%A5%2009_08_42.png?imageMogr2/ignore-error/1",
+        "width": 1023,
+        "height": 1537
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 110; transform: translate(412.288px, 1351.14px); pointer-events: all;"
+  },
+  {
+    "index": 71,
+    "nodeId": "node_1782350236429_ed7riv09g",
+    "type": "vue-flow__node-rh-image",
+    "title": "图鉴收集默认1",
+    "text": "图鉴收集默认1",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-25/66216cf98275eca6367b1cd5eb29ea96-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8825%E6%97%A5%2009_17_08.png?imageMogr2/ignore-error/1",
+        "width": 1024,
+        "height": 1535
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 111; transform: translate(-35.0732px, 1351.14px); pointer-events: all;"
+  },
+  {
+    "index": 72,
+    "nodeId": "node_1782350501407_quugx61se",
+    "type": "vue-flow__node-rh-image",
+    "title": "地图导览默认",
+    "text": "地图导览默认",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-25/d3bd75138fef842e7428e513d554dd2f-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8825%E6%97%A5%2009_21_32.png?imageMogr2/ignore-error/1",
+        "width": 942,
+        "height": 1669
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 112; transform: translate(1287.32px, 2745.02px); pointer-events: all;"
+  },
+  {
+    "index": 73,
+    "nodeId": "node_1782352633144_1akfgjvzd",
+    "type": "vue-flow__node-rh-image",
+    "title": "礼物赠送页面",
+    "text": "礼物赠送页面",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-25/c6025c239f1574d6df3d8dec13d6c769-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8825%E6%97%A5%2009_56_57.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 113; transform: translate(1942.51px, 5483.76px); pointer-events: all;"
+  },
+  {
+    "index": 74,
+    "nodeId": "node_1782353272980_403t3jcee",
+    "type": "vue-flow__node-rh-image",
+    "title": "同行人列表",
+    "text": "同行人列表",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-25/1d82e4e73c826823eeb0d93c5404bdd8-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8825%E6%97%A5%2010_07_41.png?imageMogr2/ignore-error/1",
+        "width": 1024,
+        "height": 1536
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 114; transform: translate(-58.251px, 5491.09px); pointer-events: all;"
+  },
+  {
+    "index": 75,
+    "nodeId": "node_1782353922265_sv0rhqvie",
+    "type": "vue-flow__node-rh-image",
+    "title": "附近商家首次打卡成功赠送1张抽奖券页面",
+    "text": "附近商家首次打卡成功赠送1张抽奖券页面",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-25/be5d35ee852412385e1d04ffa35532a3-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8825%E6%97%A5%2010_18_28.png?imageMogr2/ignore-error/1",
+        "width": 1024,
+        "height": 1536
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 115; transform: translate(3311.68px, 3675.01px); pointer-events: all;"
+  },
+  {
+    "index": 76,
+    "nodeId": "node_1782355657801_5qc6ftnvy",
+    "type": "vue-flow__node-rh-image",
+    "title": "登录页",
+    "text": "登录页",
+    "images": [
+      {
+        "src": "https://rh-canvas-files.xiaoyaoyou.com/c34ed5d42ca4bc3893c1e59c63049355/uploads/2026-06-25/e51276fdd9aeec1f12e96c2124f67457-ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8825%E6%97%A5%2010_47_26.png?imageMogr2/ignore-error/1",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "https://rhtv.runninghub.cn/camp/view/2069614228987592706",
+        "width": 0,
+        "height": 0
+      }
+    ],
+    "style": "visibility: visible; z-index: 116; transform: translate(1.22434px, -1022.03px); pointer-events: all;"
+  }
+]

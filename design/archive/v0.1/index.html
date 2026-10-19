@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>黄晓西 页面结构草案</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<body>
+<header class="review-head"><div><span class="eyebrow">黄晓西 · 产品结构研究</span><h1>先把体验连起来。</h1><p>可点击线框 v0.1 · 示例数据与文字占位 · 用于确认页面职责、状态和跳转，未接业务服务。</p></div><a href="../../../docs/页面模块与初始化范围.md">页面与模块说明 ↗</a></header>
+<section class="controls"><label>查看页面 <select id="page-picker"></select></label><label>查看状态 <select id="scenario"><option value="fresh">未实地到访</option><option value="visited">已有足迹与可用卡池</option><option value="complete">卡池已收齐</option><option value="error">接口异常</option></select></label></section>
+<main class="workspace"><aside class="page-index"><div class="eyebrow">页面目录 / 13</div><nav id="page-list" aria-label="结构页面目录"></nav><p class="side-note">搭配与图鉴共用衣橱模块。购买、获得和核验结果用弹层承接。</p></aside><section class="phone" aria-label="手机页面结构预览"><div class="phone-head"><button id="back" aria-label="返回上一页">←</button><strong id="page-title"></strong><span>结构预览</span></div><div id="screen" class="screen"></div><nav id="bottom-nav" class="bottom-nav" aria-label="一级导航"></nav></section><aside class="spec"><div class="eyebrow">本页职责</div><div id="page-spec"></div><div class="research-link"><a href="../../../research/2026-10-19-competitors/换装游戏界面参考.md">查看竞品依据 ↗</a><a href="../../../research/2026-10-19-runninghub/index.html">查看原画板索引 ↗</a></div></aside></main>
+<dialog id="sheet"><div class="sheet-head"><strong id="sheet-title"></strong><button id="close-sheet" aria-label="关闭弹层">×</button></div><div id="sheet-content"></div></dialog>
+<footer class="review-footer">本轮确认结构与能力；人物、服饰、背景和素材制作方式后置。原画板与竞品素材均未用于本草案产品界面。</footer>
+<script src="app.js"></script>
+</body></html>
+
