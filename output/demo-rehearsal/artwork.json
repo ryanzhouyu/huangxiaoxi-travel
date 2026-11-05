@@ -1,4 +1,9 @@
 {
+  "wardrobe": {
+    "outfits": 6,
+    "distinctItems": 24,
+    "sharedFace": true
+  },
   "layers": {
     "hair": true,
     "top": true,

@@ -1,4 +1,6 @@
-import {POINTS} from '../data.mjs';
+import {ASSETS, POINTS} from '../data.mjs';
+import {prepareArtwork} from './renderer.mjs';
+import {thumbnailUrl} from './wardrobe-art.mjs';
 import {
   demoKey,
   inspectArchive,
@@ -107,13 +109,13 @@ try {
   const storeProbe = demoKey + '.probe';
   localStorage.setItem(storeProbe, '1');
   localStorage.removeItem(storeProbe);
-  await Promise.all(
-    ['companion', 'night', 'map', 'inventory'].map(async (name) => {
-      const img = new Image();
-      img.src = '../hifi/assets/' + name + '.png';
-      await img.decode();
-    }),
-  );
+  const itemIds = ASSETS.filter((a) => a.outfit).map((a) => a.id);
+  const thumbnails = ['cameo', ...itemIds].map(async (id) => {
+    const image = new Image();
+    image.src = thumbnailUrl(id);
+    await image.decode();
+  });
+  await Promise.all([prepareArtwork(), ...thumbnails]);
   el('status').textContent = '本机素材、存档读取和写入检查通过。';
 } catch (e) {
   el('status').textContent = '准备检查未通过。' + e.message;

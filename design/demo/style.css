@@ -358,7 +358,7 @@ dialog#sheet {
 }
 
 .cameo {
-  background: #d4bd8a url('../hifi/assets/companion.png') center 3% / 200% auto
+  background: #d4bd8a url('./assets/wardrobe/cameo.webp') center / cover
     no-repeat;
   border-radius: 50%;
   border: 1px solid #bea274;
@@ -372,7 +372,7 @@ dialog#sheet {
   flex: 1;
 }
 .identity-button.btn > .cameo {
-  background: #d4bd8a url('../hifi/assets/companion.png') center 3% / 200% auto
+  background: #d4bd8a url('./assets/wardrobe/cameo.webp') center / cover
     no-repeat;
 }
 .hud-ticket small {

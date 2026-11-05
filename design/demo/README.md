@@ -2,6 +2,8 @@
 
 从仓库根目录启动 `./Start-Local.ps1`，先在[演示准备页](http://127.0.0.1:8765/design/demo/presenter.html)检查本机素材和存储，再打开[旅行手账](http://127.0.0.1:8765/design/demo/index.html)。Windows PowerShell 也可用 `.\Start-Local.ps1`。运行时只需要本地 HTTP 服务。
 
+六套已确认装扮使用原有获取位置。初始为 A1、A2、C3，景区见面礼为 A4，云山和花溪池分别为 B5、A6。[查看实装](../../reviews/2026-11-05-wardrobe/selected/equipped.webp) · [跨套搭配](../../reviews/2026-11-05-wardrobe/selected/mixed.webp) · [素材来源与重建](../../reviews/2026-11-05-wardrobe/selected/README.md)
+
 ## 明早开场
 
 提前在演示电脑打开准备页，确认显示“本机素材、存档读取和写入检查通过”。有需要保留的手账时先下载备份。需要从零开场时，点“重新开始彩排”并确认。用浏览器全屏，检查实际投影画面的文字、底部导航和明暗。将备用录屏和下载目录准备在本机。
@@ -23,7 +25,7 @@
 
 ## 备用及复演
 
-- [连续操作录屏](../../output/visual-repair/连续操作彩排.webm)与[实际纪念图](../../output/visual-repair/下载纪念.png)可以离线播放／打开。录屏无声，包含新身份、回访及复位过程。
+- [连续操作录屏](../../output/demo-rehearsal/连续操作彩排.webm)与[实际纪念图](../../output/demo-rehearsal/旅行纪念.png)可以离线播放／打开。录屏无声，包含新身份、回访及复位过程。
 - 本机彩排生成的备用回访手账在 `.codex/local-deploy/demo-run/备用回访手账.json`。它通过正常点击和下载备份产生。准备页可载入备份，确认后替换当前客户演示手账。个人备份由演示者单独保存。
 - 项目分支为 `codex/presenter-console-20261106`。新电脑可运行 `git clone -b codex/presenter-console-20261106 https://github.com/ryanzhouyu/huangxiaoxi-travel.git`。已有目录请先保护未提交工作，再 fetch、切到该分支并快进拉取。浏览器存档按来源域隔离。
 - 旧原型及高保真评审稿分别在 `design/index.html`、`design/hifi/index.html`。[演示验收记录](../../docs/客户演示实施与彩排.md)列出本次复核范围及限制。
@@ -36,7 +38,8 @@
 | `../app.mjs`、`../game-ui.mjs` | 复用导航守卫、事务、衣橱草稿、手账和动态场景构图。 |
 | `../store.mjs`、`../data.mjs` | 使用原有点位、资产、卡池、套餐及领域用例。 |
 | `views.mjs` | 根据当前身份和 ID 呈现核验、账号、收支及订单详情。 |
-| `renderer.mjs` | 读取固定概念立绘，在浏览器分区渲染衣料、纹样、冠饰、鞋履以及静态表情／姿势。相同搭配复用缓存。 |
+| `wardrobe-art.mjs`、`assets/wardrobe/` | 由六套独立款式按发型、上装、下装、鞋履合成，附带静态挥手及笑眼。衣橱、伙伴和纪念图共用同一次渲染。 |
+| `renderer.mjs` | 场景、单品缩图与角色展示入口。 |
 | `postcard.mjs` | 读取同一个渲染结果，按最后选中地点及背景搭配取景，结合经历和模板生成 PNG。 |
 | `storage.mjs`、`presenter.mjs` | 业务进度映射到 `hxx.demo.v1`。草稿按演示批次和身份保存；复位／还原更新批次并通知其他标签。 |
 | `item-thumbnails.mjs`、`map-art.mjs` | 单品等比取图、地点视窗与导览原画坐标。 |

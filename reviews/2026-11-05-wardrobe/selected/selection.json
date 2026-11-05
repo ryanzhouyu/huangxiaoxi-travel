@@ -1,7 +1,7 @@
 {
   "status": {
     "chosenDesigns": "confirmed-by-user",
-    "breakdownBoards": "awaiting-visual-confirmation"
+    "breakdownBoards": "confirmed-by-user"
   },
   "generator": "built-in image_gen",
   "identityReference": "../../../design/hifi/assets/companion.png",

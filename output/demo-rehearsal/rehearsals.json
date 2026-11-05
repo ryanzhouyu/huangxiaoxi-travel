@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-05T09:40:24.009Z",
+  "at": "2026-11-05T11:29:06.925Z",
   "runs": [
     {
       "label": "首次身份完整主线",
@@ -8,7 +8,7 @@
       "draws": 2,
       "works": 2,
       "balance": 15,
-      "firstWork": "82946e63258c02b6c88a258c0b92ef0fa7ac372d59e43cefc2bc2abdc2da1476",
+      "firstWork": "917cd227d7cd4fc1e0ff3e89e6f778aa0cf67c977ca1572d362bf1283746dc7a",
       "assets": [
         "flower-hair",
         "mountain-top"
@@ -18,7 +18,7 @@
       "label": "刷新回访和旧作品",
       "seconds": 1,
       "balance": 15,
-      "firstWork": "82946e63258c02b6c88a258c0b92ef0fa7ac372d59e43cefc2bc2abdc2da1476"
+      "firstWork": "917cd227d7cd4fc1e0ff3e89e6f778aa0cf67c977ca1572d362bf1283746dc7a"
     },
     {
       "label": "复位后重新完整演示 1920×1080",
@@ -27,9 +27,9 @@
       "draws": 2,
       "works": 2,
       "balance": 15,
-      "firstWork": "4750f44a94e7251ee609e142d58edf7ab13796f225ba5cde9a7557d4fa7716ac",
+      "firstWork": "a75686261dcb5419d5f1a558ebe5d74048e0ddd3685521ba6b895fb9ea096f67",
       "assets": [
-        "flower-bg",
+        "flower-top",
         "mountain-bg"
       ]
     },
@@ -40,10 +40,10 @@
       "draws": 2,
       "works": 2,
       "balance": 15,
-      "firstWork": "ab2419e3d13c63f332364c55b52daeb91afcf7836635e1ee28b2c185c24fe82d",
+      "firstWork": "ba5dcdc1bb5a2e2072e59d35a1c61e52dafe547dd96df43850f2564e18a183b6",
       "assets": [
-        "flower-bottom",
-        "mountain-bottom"
+        "wave",
+        "mountain-top"
       ]
     }
   ],
@@ -95,7 +95,7 @@
     },
     {
       "label": "抽取 bloom",
-      "prize": "flower-bg",
+      "prize": "flower-top",
       "balance": 5
     },
     {
@@ -105,7 +105,7 @@
     },
     {
       "label": "抽取 cloud",
-      "prize": "mountain-bottom",
+      "prize": "mountain-top",
       "balance": 1
     },
     {
@@ -120,7 +120,7 @@
     },
     {
       "label": "抽取 bloom",
-      "prize": "flower-bottom",
+      "prize": "wave",
       "balance": 5
     }
   ],

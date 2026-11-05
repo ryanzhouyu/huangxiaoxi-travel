@@ -1,6 +1,6 @@
 # 六套选定服装拆件视觉稿
 
-选款已确认，拆件视觉稿待用户确认。打开[六套评审页](index.html)，可逐套放大查看，并展开上一轮已选图作对照。
+六套选款和拆件稿均已确认，24 件装扮已接入[客户演示](../../../design/demo/index.html)。打开[六套评审页](index.html)，可逐套放大查看，并展开上一轮已选图作对照。
 
 | 选款 | 套装 | 获取方式 | 四个部件 |
 | --- | --- | --- | --- |
@@ -13,4 +13,15 @@
 
 六张完整效果图由内置 imagegen 分别生成，每张引用本目录 references 中的已选原图以及同一份[角色参考](../../../design/hifi/assets/companion.png)。references 是第一轮评审页选中单格的浏览器截图。每套对应现有四个资产 ID，明细、原稿来源和最终提示见[生成记录](selection.json)。
 
-图册用于款式与拆件评审，当前整身和四件单品按展示需要分别排版。上机前需单独制作透明穿戴层，统一腰线、头部及手脚锚点，并验证袖型和长裙在不同搭配下的遮挡。
+[六套实际穿着效果](equipped.webp)与[跨套混搭](mixed.webp)取自演示端渲染。角色使用统一的双眼定位和共用脸部，服装、发型、姿势及鞋履分别按层贴合。四件单品图来自各自确认稿右侧，穿着图同时使用左侧人物与右侧独立单品。
+
+## 更新或重建素材
+
+- 在 [fittings.mjs](build/fittings.mjs) 按选款维护头部、衣领、腰、鞋跟的定位与切片。在 [silhouettes.mjs](build/silhouettes.mjs) 维护浅色鞋面和裙摆边缘。
+- 从仓库根目录启动 8765 预览，按[演示者说明](../../../design/demo/README.md)准备 Playwright。在根目录运行以下命令重建透明图集、24 张单品和伙伴头像。正式演示使用已提交的成品，换机后直接运行即可。
+
+~~~powershell
+node reviews/2026-11-05-wardrobe/selected/build/build.mjs
+~~~
+
+- 成品在 [assets/wardrobe](../../../design/demo/assets/wardrobe/)，绘制顺序见 [wardrobe-art.mjs](../../../design/demo/wardrobe-art.mjs)。替换素材后须用深色背景检查脸部与颈部、袖口挥手、短裤露腿、裙腰和鞋口，再走一遍保存搭配和两种纪念图的导出。

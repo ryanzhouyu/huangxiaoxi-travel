@@ -10,7 +10,70 @@ export async function verifyArtwork(browser) {
     await page.locator('#app[data-page="entry"]').waitFor();
     const result = await page.evaluate(async () => {
       const {renderedLook, sceneStyle} = await import('./renderer.mjs');
-      const {lookFor} = await import('../data.mjs');
+      const {lookFor, OUTFITS, ASSETS} = await import('../data.mjs');
+      const {thumbnailUrl} = await import('./wardrobe-art.mjs');
+      const {frames} = await import('./assets/wardrobe/frames.mjs');
+      const slots = ['hair', 'top', 'bottom', 'shoes'];
+      const thumbs = ASSETS.filter((a) => a.outfit);
+      const thumbHashes = await Promise.all(
+        thumbs.map(async (a) => {
+          const image = new Image();
+          image.src = thumbnailUrl(a.id);
+          await image.decode();
+          if (image.width !== 256 || image.height !== 256)
+            throw Error('单品尺寸错误 ' + a.id);
+          const c = document.createElement('canvas');
+          c.width = c.height = 256;
+          const g = c.getContext('2d');
+          g.drawImage(image, 0, 0);
+          const {data} = g.getImageData(0, 0, 256, 256);
+          for (let i = 0; i < 256; i++) {
+            if (
+              [i, 255 * 256 + i, i * 256, i * 256 + 255].some(
+                (n) => data[4 * n + 3] > 8,
+              )
+            )
+              throw Error('单品碰边 ' + a.id);
+          }
+          return c.toDataURL();
+        }),
+      );
+      const patch = (surface, x, y, w, h) =>
+        surface.getContext('2d').getImageData(x, y, w, h).data.join(',');
+      const bodies = new Set(),
+        facePatches = new Set();
+      for (const outfit of OUTFITS) {
+        const look = lookFor(outfit.id);
+        const figure = renderedLook(look);
+        bodies.add(figure.src);
+        facePatches.add(patch(figure.surface, 205, 133, 26, 15));
+        for (const part of [...slots, 'wave']) {
+          const [, , width, height, left, top] = frames[outfit.id][part];
+          if (
+            left < 2 ||
+            top < 2 ||
+            left + width >= 658 ||
+            top + height >= 1018
+          )
+            throw Error('穿戴层触边 ' + outfit.id + ' ' + part);
+        }
+        for (const slot of slots) {
+          const mixed = {...look, [slot]: 'start-a-' + slot};
+          if (look[slot] === mixed[slot]) continue;
+          const changed = renderedLook(mixed).surface;
+          const outside =
+            slot === 'shoes' || slot === 'bottom'
+              ? [160, 63, 117, 67]
+              : [163, 633, 115, 20];
+          if (patch(changed, ...outside) !== patch(figure.surface, ...outside))
+            throw Error('换件影响其他部位 ' + outfit.id + ' ' + mixed[slot]);
+        }
+      }
+      const wardrobe = {
+        outfits: bodies.size,
+        distinctItems: new Set(thumbHashes).size,
+        sharedFace: facePatches.size === 1,
+      };
       const {composeImage} = await import('./postcard.mjs');
       const start = lookFor('start-a');
       const changes = {
@@ -51,11 +114,17 @@ export async function verifyArtwork(browser) {
         background: 'flower-bg',
       });
       return {
+        wardrobe,
         layers,
         singleSize: [single.width, single.height],
         trailSize: [trail.width, trail.height],
         backgroundChangesPng: single.src !== alternate.src,
       };
+    });
+    assert.deepEqual(result.wardrobe, {
+      outfits: 6,
+      distinctItems: 24,
+      sharedFace: true,
     });
     assert.ok(Object.values(result.layers).every(Boolean));
     assert.ok(result.trailSize[1] > result.singleSize[1]);
