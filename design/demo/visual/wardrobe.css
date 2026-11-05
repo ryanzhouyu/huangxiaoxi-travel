@@ -1,0 +1,896 @@
+/* 服装完整上身，卡池进度与套装件数独立显示。 */
+.collection-pavilion {
+  --stage: clamp(286px, calc(100dvh - 325px), 61dvh);
+  --setting: var(--cloud);
+  position: relative;
+  background: var(--setting) center/cover;
+}
+.collection-pavilion[data-pool='bloom'] {
+  --setting: var(--bloom);
+}
+.pool-ambience,
+.showcase-ring,
+.showcase-note > span,
+.showcase-note > p,
+.collection-pavilion .ribbon-heading,
+.pool-title .title-plaque p {
+  display: none;
+}
+.pool-paper {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0 6px;
+  padding: 0 16px 12px;
+  isolation: isolate;
+}
+.pool-paper::before {
+  content: '';
+  z-index: -1;
+  position: absolute;
+  inset: var(--stage) 0 0;
+  background: var(--paper);
+  border: 1px solid var(--copper);
+  border-radius: 12px;
+  box-shadow:
+    inset 0 0 0 3px #f9eed8,
+    inset 0 0 0 4px #dfc197;
+}
+.pool-title {
+  position: absolute;
+  z-index: 3;
+  top: 18px;
+  left: 49px;
+  right: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.pool-title h1,
+.pool-currency {
+  font: 15px var(--hand);
+  color: var(--cream);
+  padding: 5px 9px;
+  background: #654835ed;
+  border: 1px solid #c9a981;
+  border-radius: 16px;
+}
+.pool-currency {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+}
+.pool-currency .ui-icon {
+  width: 18px;
+  height: 18px;
+}
+.pool-currency .btn {
+  min-height: 28px;
+  padding: 2px;
+  color: var(--cream);
+  font-size: 12px;
+}
+[data-page='pool'] .app-header :is(strong, .test-label) {
+  display: none;
+}
+.outfit-showcase,
+.showcase-note {
+  display: contents;
+}
+.showcase-character {
+  margin: 0 -22px;
+  height: var(--stage);
+  position: relative;
+  background: var(--setting) center 65% / cover;
+}
+.showcase-character img {
+  position: absolute;
+  inset: 14% 2% 0 15%;
+  width: 83%;
+  height: 88%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 1px #3b2a2740);
+}
+.showcase-note h2 {
+  position: absolute;
+  left: 4%;
+  top: calc(var(--stage) * 0.22);
+  writing-mode: vertical-rl;
+  padding: 13px 6px 19px;
+  letter-spacing: 5px;
+  border: 1px solid var(--copper);
+  border-radius: 8px;
+  background: #fae8c5f7;
+  box-shadow:
+    inset 0 0 0 3px #ecd3a6,
+    1px 3px 1px #87644977;
+  transform: rotate(2deg);
+  font: clamp(24px, 3.8dvh, 33px) var(--hand);
+  letter-spacing: 5px;
+}
+.showcase-note .btn.text {
+  position: absolute;
+  right: 11px;
+  top: calc(var(--stage) - 43px);
+  font: 13px var(--hand);
+  color: var(--cream);
+  background: #6e513eeb;
+  border: 1px solid var(--line);
+  min-height: 29px;
+  padding: 4px 10px;
+}
+.pool-progress {
+  margin: 14px 0 10px;
+}
+.pool-progress-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: 19px var(--hand);
+}
+.pool-progress-label strong {
+  font:
+    24px Georgia,
+    serif;
+  color: var(--berry);
+}
+progress {
+  display: block;
+  margin: 7px 0 0;
+  width: 100%;
+  height: 8px;
+  appearance: none;
+  border: 0;
+  border-radius: 6px;
+  background: #e6cfa8;
+}
+progress::-webkit-progress-bar {
+  border-radius: 6px;
+  background: #e5d1ad;
+  box-shadow: inset 0 0 0 1px #cba97f;
+}
+progress::-webkit-progress-value {
+  border-radius: 6px;
+  background: #a66954;
+}
+progress::-moz-progress-bar {
+  border-radius: 6px;
+  background: #a66954;
+}
+.asset-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+.asset {
+  position: relative;
+  display: grid;
+  justify-items: stretch;
+  align-content: center;
+  min-width: 0;
+  padding: 4px 3px;
+  color: var(--ink);
+}
+.asset .swatch {
+  display: grid;
+  place-items: center;
+  height: auto;
+  aspect-ratio: 1.35;
+  min-height: 0;
+  container-type: size;
+}
+.reward-shelf .swatch img,
+.inventory-scroll .swatch img {
+  width: min(100cqw, 100cqh);
+  height: min(100cqw, 100cqh);
+  object-fit: contain;
+}
+.asset strong,
+.asset small {
+  font-size: 11px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.equipped-mark,
+.asset.owned::before {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  display: grid;
+  place-items: center;
+  background: var(--moss);
+  color: white;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+.asset.owned::before {
+  content: '✓';
+  font: 11px var(--body);
+}
+.equipped-mark {
+  background: var(--berry);
+}
+.equipped-mark .ui-icon {
+  width: 14px;
+  height: 14px;
+}
+.reward-shelf
+  .asset[data-slot]:is(
+    [data-slot='hair'],
+    [data-slot='top'],
+    [data-slot='bottom'],
+    [data-slot='shoes']
+  )::after {
+  content: attr(data-slot-label);
+  font-size: 13px;
+}
+.reward-shelf .asset strong,
+.reward-shelf .asset small {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.collection-pavilion .reward-shelf {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.collection-pavilion .reward-shelf > .asset {
+  width: calc((100% - 18px) / 4);
+  min-height: clamp(58px, 9dvh, 81px);
+}
+.collection-pavilion .reward-shelf > .asset:nth-child(n + 5) {
+  width: calc((100% - 12px) / 3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 33px;
+  background: none;
+  box-shadow: none;
+  border: 0;
+  font-size: 11px;
+}
+.collection-pavilion .reward-shelf > .asset:nth-child(n + 5) .swatch {
+  width: 20px;
+  height: 20px;
+  aspect-ratio: 1;
+}
+.collection-pavilion .reward-shelf > .asset:nth-child(n + 5) strong {
+  position: static;
+  clip-path: none;
+  width: auto;
+  height: auto;
+  font-size: 11px;
+  font-weight: 400;
+}
+.pool-rules,
+.pool-exits,
+.collection-complete,
+.unlock-note {
+  text-align: center;
+}
+.pool-rules {
+  font-size: 12px;
+  margin: 7px 0 10px;
+  color: var(--muted);
+}
+.gacha-dock,
+.unlock-note,
+.collection-complete {
+  padding: 5px 2px;
+}
+.gacha-button {
+  width: 100%;
+}
+.gacha-button > .ui-icon {
+  display: none;
+}
+.gacha-button span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.gacha-button small {
+  font: 13px var(--body);
+  color: inherit;
+}
+.gacha-dock .text {
+  min-height: 33px;
+}
+.pool-exits {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.pool-exits .btn {
+  flex: 1;
+  font-size: 13px;
+}
+.unlock-note p,
+.collection-complete p {
+  font-size: 13px;
+  margin: 5px 0;
+}
+.unlock-note .btn {
+  margin: 3px;
+}
+.dressroom {
+  --rack: var(--studio);
+  --floor: clamp(272px, calc(100dvh - 272px), 66dvh);
+  position: relative;
+  min-height: 100dvh;
+  padding: 0 10px 7px;
+  background:
+    var(--rack) center top / auto var(--floor) no-repeat,
+    var(--paper);
+}
+.dressroom[data-background='mountain-bg'] {
+  --rack: var(--cloud);
+}
+.dressroom[data-background='flower-bg'] {
+  --rack: var(--bloom);
+}
+.dressroom > .world-art {
+  display: none;
+}
+[data-page='wardrobe'] .app-header :is(strong, .test-label) {
+  display: none;
+}
+.dressing-top {
+  position: absolute;
+  z-index: 3;
+  top: 17px;
+  left: 54px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.dressing-top > * {
+  pointer-events: auto;
+}
+.dressing-plaque {
+  display: flex;
+}
+.dressing-plaque .ui-icon {
+  display: none;
+}
+.dressing-plaque h1 {
+  font: 16px var(--hand);
+  color: var(--cream);
+  background: #694d3e;
+  border: 1px solid var(--copper);
+  padding: 5px 10px;
+  border-radius: 18px;
+}
+.dressing-top .segmented {
+  gap: 2px;
+  padding: 2px 3px;
+  border: 1px solid var(--copper);
+  border-radius: 14px;
+  background: #f7e4c3;
+}
+.dressing-top .segmented .btn {
+  min-height: 25px;
+  font-size: 13px;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+.dressing-workspace {
+  display: grid;
+  grid-template-rows: var(--floor) auto auto;
+  grid-template-columns: minmax(0, 1fr) minmax(67px, 23%);
+  column-gap: 6px;
+}
+.dressing-actor,
+.wardrobe-cabinet {
+  display: contents;
+}
+.dressing-platform {
+  display: none;
+}
+.dressed-character {
+  grid-area: 1/1/2/2;
+  align-self: end;
+  justify-self: center;
+  width: 100%;
+  height: 80%;
+  position: relative;
+}
+.dressing-state {
+  position: absolute;
+  top: 12%;
+  left: 6%;
+  background: var(--moss);
+  color: var(--cream);
+  font: 15px var(--hand);
+  padding: 5px 12px;
+  clip-path: polygon(0 0, 100% 0, 97% 50%, 100% 100%, 0 100%, 3% 50%);
+}
+.inventory-scroll {
+  grid-area: 1/2;
+  align-self: end;
+  height: calc(var(--floor) - 75px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 2px 4px 9px;
+  border-left: 4px solid #a88150;
+  scrollbar-width: thin;
+}
+.inventory-scroll .asset-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+.inventory-scroll .asset .swatch {
+  aspect-ratio: 1.5;
+}
+.inventory-scroll .asset {
+  min-height: 62px;
+}
+.inventory-scroll .asset small {
+  display: none;
+}
+.chosen-item {
+  grid-column: 1/-1;
+  grid-row: 2;
+  padding: 17px 11px 5px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 5px;
+}
+.chosen-item strong {
+  font: 18px var(--hand);
+}
+.chosen-item p {
+  display: none;
+}
+.cabinet-categories {
+  grid-column: 1/-1;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin: 8px 0 0;
+  gap: 1px;
+}
+.cabinet-categories .btn,
+.dressing-tools .btn {
+  font: 14px var(--hand);
+  min-height: 34px;
+  color: var(--ink);
+  padding: 3px 1px;
+  background: none;
+  box-shadow: none;
+  border: 0;
+}
+.cabinet-categories .selected,
+.dressing-tools .selected {
+  background: var(--berry);
+  color: var(--cream);
+  border-radius: 4px;
+}
+.dressing-tools {
+  grid-column: 1/-1;
+  grid-row: 4;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.dressing-tools .ui-icon {
+  width: 16px;
+  height: 16px;
+}
+.dressing-save {
+  margin: 8px 7px 0;
+  display: grid;
+  justify-items: stretch;
+}
+.dressing-save .text {
+  min-height: 32px;
+}
+.dressroom:has(.catalog-album) {
+  padding: 76px 18px 30px;
+  background: var(--desk) center/cover;
+}
+.catalog-album > p {
+  font: 19px var(--hand);
+  text-align: center;
+  margin: 4px 0 12px;
+}
+.catalog-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+}
+.catalog-outfit {
+  text-align: left;
+  padding: 5px 6px 7px;
+}
+.catalog-figure {
+  display: block;
+  height: clamp(120px, 17dvh, 165px);
+  background: var(--studio) center/cover;
+}
+.catalog-outfit:nth-child(3n) .catalog-figure {
+  background-image: var(--bloom);
+}
+.catalog-outfit:nth-child(2),
+.catalog-outfit:nth-child(5) {
+  transform: rotate(1deg);
+}
+.catalog-outfit:nth-child(5) .catalog-figure {
+  background-image: var(--cloud);
+}
+.catalog-outfit strong {
+  font: 18px var(--hand);
+}
+.catalog-outfit small {
+  font-size: 12px;
+}
+.outfit-folio {
+  position: relative;
+  padding-bottom: 20px;
+  background: var(--paper);
+  min-height: 100dvh;
+}
+.outfit-folio > .title-plaque {
+  position: absolute;
+  z-index: 1;
+  top: 78px;
+  left: 22px;
+  color: var(--cream);
+  background: var(--moss);
+  padding: 4px 13px;
+}
+.outfit-folio > .title-plaque h1 {
+  font: 21px var(--hand);
+}
+.outfit-folio > .title-plaque p {
+  font-size: 11px;
+}
+.folio-display {
+  position: relative;
+  height: 54dvh;
+  min-height: 290px;
+  background: var(--cloud) center/cover;
+  padding: 70px 15px 10px;
+}
+.outfit-folio[data-outfit='flower'] .folio-display {
+  background-image: var(--bloom);
+}
+.folio-stamp {
+  position: absolute;
+  bottom: 10px;
+  right: 13px;
+  padding: 4px 9px;
+  border: 1px solid var(--copper);
+  border-radius: 9px;
+  background: var(--paper);
+  font: 15px var(--hand);
+}
+.folio-stamp small {
+  margin-left: 5px;
+}
+.outfit-folio > .reward-shelf,
+.outfit-folio > .fine,
+.outfit-folio > .btn,
+.extra-collection {
+  margin: 14px auto;
+  width: 91%;
+}
+.extra-collection h2 {
+  font-size: 19px;
+}
+.extra-collection > p {
+  font-size: 13px;
+  margin: 5px 0;
+}
+.extra-collection .asset strong {
+  position: static;
+  clip-path: none;
+  width: auto;
+  height: auto;
+}
+.extra-collection .reward-shelf {
+  grid-template-columns: repeat(3, 1fr);
+}
+#sheet:has(.gift-preview),
+#sheet:has(.reward-reveal) {
+  width: calc(var(--frame) - 16px);
+  padding-top: 0;
+}
+#sheet:has(.gift-preview) .sheet-head h2,
+#sheet:has(.reward-reveal) .sheet-head h2 {
+  font: 21px var(--hand);
+  color: var(--cream);
+  background: var(--berry);
+  padding: 5px 14px;
+  border-radius: 3px;
+}
+.gift-preview {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+}
+.gift-portrait {
+  height: clamp(170px, 32dvh, 300px);
+  background: var(--box) center 56% / cover;
+  border-radius: 8px;
+}
+.gift-inventory h3 {
+  font-size: 26px;
+}
+.gift-inventory > p,
+.gift-fitting-note {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+.gift-inventory ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+  padding: 0;
+  margin: 8px 0 0;
+  list-style: none;
+}
+.gift-inventory li {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--cream);
+  font-size: 12px;
+  padding: 4px;
+}
+.gift-inventory .item-art {
+  height: clamp(30px, 6dvh, 57px);
+}
+.reward-reveal {
+  display: grid;
+  justify-items: center;
+  position: relative;
+  padding: 7px 0 0;
+  gap: 3px;
+}
+.reward-art {
+  height: clamp(150px, 36dvh, 320px);
+  width: 100%;
+  display: grid;
+  place-items: center;
+  background: var(--box) center 58% / cover;
+  border-radius: 6px;
+}
+.reward-art img {
+  width: min(61%, 220px);
+  height: 65%;
+}
+.reward-kind,
+.reveal-kicker {
+  font: 14px var(--hand);
+  color: var(--muted);
+}
+.reward-reveal h3 {
+  font: 24px var(--hand);
+}
+.reward-spark,
+.reveal-rays {
+  display: none;
+}
+.reward-balance {
+  text-align: center;
+}
+
+.folio-progress {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px;
+  margin: 16px 5% 0;
+  font: 19px var(--hand);
+}
+.folio-progress b {
+  font:
+    22px Georgia,
+    serif;
+  color: var(--berry);
+}
+.folio-progress progress {
+  grid-column: 1/-1;
+}
+.folio-stamp {
+  font-size: 13px;
+}
+.folio-stamp small {
+  display: none;
+}
+#sheet:has(.source-art) {
+  min-height: min(48dvh, 390px);
+}
+.source-art {
+  display: grid;
+  place-items: center;
+  height: clamp(80px, 16dvh, 135px);
+  padding: 6px;
+  background: radial-gradient(ellipse, #f7e4c0, transparent 70%);
+}
+#sheet:has(.gift-preview) {
+  bottom: 3dvh;
+  max-height: 92dvh;
+  padding: 10px 14px 17px;
+}
+#sheet:has(.gift-preview) .gift-portrait {
+  height: clamp(205px, 38dvh, 335px);
+}
+#sheet:has(.reward-reveal) {
+  width: var(--frame);
+  max-width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  inset: 0;
+  margin: auto;
+  border: none;
+  border-radius: 0;
+  padding: 0 18px 14px;
+  background: var(--paper);
+}
+#sheet:has(.reward-reveal) .sheet-head {
+  position: absolute;
+  z-index: 1;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+}
+#sheet:has(.reward-reveal) #sheet-body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.reward-reveal {
+  margin: 0 -18px;
+  gap: 0;
+  text-align: left;
+  justify-items: start;
+  padding: 0;
+}
+.reward-reveal .reveal-kicker {
+  display: none;
+}
+.reward-art {
+  height: 60dvh;
+  border-radius: 0;
+  background-position: center 59%;
+}
+.reward-art img {
+  height: 44%;
+  width: 68%;
+  align-self: center;
+  transform: translateY(10%);
+}
+.reward-kind {
+  margin: 20px 22px 7px;
+}
+.reward-reveal h3 {
+  margin: 0 22px 6px;
+  font-size: 28px;
+}
+.reward-balance {
+  text-align: left;
+  padding: 0 4px;
+}
+.reward-balance + .btn {
+  margin-top: auto;
+}
+.inventory-scroll .swatch img,
+.starter-list img {
+  transform: scale(1.08);
+}
+@media (max-height: 740px) {
+  #sheet:has(.gift-preview) {
+    bottom: 5px;
+    padding-top: 0;
+  }
+  .reward-art {
+    height: 51dvh;
+  }
+  .gift-inventory h3 {
+    font-size: 21px;
+  }
+}
+
+.collection-pavilion {
+  --stage: clamp(286px, calc(100dvh - 323px), 60dvh);
+}
+.showcase-character {
+  background:
+    linear-gradient(#402d386b, transparent 26%),
+    var(--setting) center 65% / cover;
+}
+.showcase-character img {
+  top: 18%;
+  height: 84%;
+}
+.showcase-note h2 {
+  height: clamp(165px, 27dvh, 230px);
+  padding-top: 17px;
+  background: #fae8c5 url('./blossom.svg') center bottom 5px/28px auto no-repeat;
+}
+.showcase-note h2::after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  left: 49%;
+  height: 15px;
+  width: 2px;
+  background: #99684f;
+  box-shadow: 1px 6px 0 #af7054;
+}
+.pool-includes {
+  margin-top: 8px;
+  font-size: 12px;
+  text-align: center;
+  color: var(--muted);
+}
+.pool-supplement {
+  order: 1;
+  margin-top: 19px;
+  border-top: 1px dashed var(--line);
+  padding-top: 18px;
+}
+.pool-supplement h2 {
+  font: 22px var(--hand);
+}
+.pool-supplement > p {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 5px 0;
+}
+.collection-pavilion .pool-supplement .reward-shelf {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.collection-pavilion .pool-supplement .asset {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  text-align: left;
+  gap: 9px;
+  min-height: 52px;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px dashed var(--line);
+  background: none;
+  box-shadow: none;
+}
+.pool-supplement .swatch {
+  width: 42px;
+  height: 42px;
+}
+.pool-supplement .asset :is(strong, small) {
+  position: static;
+  clip-path: none;
+  height: auto;
+  width: auto;
+  font-size: 13px;
+}
+.pool-supplement .asset.owned::before {
+  right: auto;
+  left: 2px;
+}
+
+.showcase-character img {
+  top: 19%;
+  height: 84.2%;
+}
+.dressed-character {
+  height: 82%;
+  transform: translate(-3px, 7px);
+}

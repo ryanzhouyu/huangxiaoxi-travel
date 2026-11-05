@@ -1,0 +1,628 @@
+/* 相遇与陪伴：场景、角色和纸面分别取景。 */
+.arrival-stage,
+.first-meeting {
+  height: 100dvh;
+  min-height: 550px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  row-gap: 9px;
+  padding-top: 14px;
+  background:
+    var(--post) center top / 100% 56% no-repeat,
+    var(--desk) center/cover;
+}
+.first-meeting {
+  background:
+    var(--studio) center top/auto 66% no-repeat,
+    var(--desk) center/cover;
+}
+.arrival-logo,
+.meeting-heading {
+  margin: 0 22px;
+  color: #fff1ce;
+  text-shadow: 0 2px 4px #513a29;
+}
+.arrival-logo h1 {
+  margin: 5px 0 0;
+  font: 48px var(--hand);
+}
+.meeting-heading {
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+}
+.meeting-heading .ribbon {
+  font-size: 20px;
+}
+.arrival-companion,
+.meeting-character {
+  min-height: 0;
+  width: 82%;
+  justify-self: center;
+}
+.arrival-companion img,
+.meeting-character img,
+.dressed-character img {
+  filter: drop-shadow(0 3px 2px #51371d45);
+}
+.arrival-panel,
+.meeting-bottom {
+  position: relative;
+  margin: 0 7px;
+  padding: clamp(16px, 2.7dvh, 26px) 18px max(15px, env(safe-area-inset-bottom));
+  min-height: clamp(280px, 46dvh, 418px);
+}
+.arrival-panel h2 {
+  margin: 18px 0 15px;
+}
+.arrival-panel .fine,
+.meeting-bottom > p {
+  text-align: center;
+  margin: 16px 0 8px;
+}
+.account-choice {
+  display: flex;
+  text-align: left;
+  width: 100%;
+  justify-content: flex-start;
+  gap: 15px;
+  background: none;
+  color: var(--ink);
+  box-shadow: none;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px dashed var(--line);
+  min-height: 66px;
+}
+.account-choice span > small,
+.account-choice strong {
+  display: block;
+}
+.account-choice b {
+  margin-left: auto;
+  color: var(--berry);
+  font-size: 14px;
+}
+.meeting-bottom {
+  min-height: 0;
+  padding: 12px 15px 9px;
+}
+.meeting-bottom > p {
+  font-size: 13px;
+  margin: 10px 0;
+}
+.meeting-bottom > .text {
+  min-height: 29px;
+}
+.companion-note,
+.companion-dialogue {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 13px;
+}
+.companion-note strong,
+.companion-dialogue strong,
+.speaker {
+  color: #974f40;
+  font-size: 13px;
+}
+.companion-note p,
+.dialogue-line {
+  font-size: 14px;
+  margin: 3px 0;
+  text-align: left;
+}
+.starter-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 12px 0 0;
+}
+.starter,
+.asset,
+.catalog-outfit {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #f7e8cc;
+  color: var(--ink);
+  box-shadow:
+    inset 0 0 0 3px #f7ecd7,
+    0 2px 1px #75553838;
+}
+.starter {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: 5px;
+  font-size: 13px;
+}
+.starter.selected,
+.asset.selected {
+  outline: 2px solid #aa6451;
+  outline-offset: -2px;
+  background: #efd5aa;
+}
+.starter .item-art {
+  width: 100%;
+  height: clamp(38px, 6dvh, 58px);
+}
+.companion-world,
+.travel-atlas {
+  position: relative;
+  min-height: 465px;
+  height: calc(100dvh - var(--nav));
+  isolation: isolate;
+}
+.companion-world > .world-art {
+  z-index: -1;
+  background-size: cover;
+  background-position: center !important;
+}
+.home-hud {
+  position: absolute;
+  z-index: 2;
+  left: 14px;
+  right: 15px;
+  top: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.identity-button {
+  color: var(--ink);
+  background: #f2dab1;
+  border-radius: 10px;
+  padding: 4px 10px 4px 5px;
+  text-align: left;
+  box-shadow: inset 0 0 0 2px #ecd1a8;
+}
+.identity-button strong {
+  font: 17px var(--hand);
+}
+.identity-button small {
+  font-size: 11px;
+}
+.hud-ticket,
+.location-plaque {
+  border-radius: 20px;
+  min-height: 32px;
+  background: #664b38ee;
+  box-shadow: none;
+  color: var(--cream);
+  font-family: var(--hand);
+  padding: 5px 12px;
+}
+.world-location {
+  position: absolute;
+  top: 11%;
+  left: 16px;
+  z-index: 2;
+}
+.home-tools,
+.home-side-tools {
+  position: absolute;
+  z-index: 3;
+  top: 22%;
+  left: 14px;
+  display: grid;
+  gap: clamp(6px, 2.1dvh, 19px);
+}
+.home-side-tools {
+  left: auto;
+  right: 14px;
+}
+.hud-orb {
+  display: grid;
+  gap: 0;
+  justify-items: center;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+.hud-orb .ui-icon {
+  background: #f5dcaf;
+  border: 2px solid #d3b17a;
+  box-shadow: 0 1px 3px #5c392e7a;
+  border-radius: 50%;
+  width: 43px;
+  height: 43px;
+  padding: 4px;
+}
+.hud-orb span:last-child {
+  font: 13px var(--hand);
+  margin-top: -2px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  color: var(--cream);
+  background: #624433f2;
+  border: 1px solid var(--copper);
+}
+.companion-character {
+  position: absolute;
+  left: 14%;
+  width: 72%;
+  top: 16%;
+  height: 69%;
+  transform-origin: bottom center;
+}
+.companion-character.greeting {
+  animation: greet 0.55s ease-out;
+}
+@keyframes greet {
+  30% {
+    transform: translateY(-4px) rotate(-1.3deg);
+  }
+  70% {
+    transform: rotate(0.8deg);
+  }
+}
+.companion-dialogue {
+  position: absolute;
+  bottom: 2.8%;
+  left: 4.3%;
+  right: 4.3%;
+  min-height: 65px;
+}
+.travel-atlas {
+  background:
+    linear-gradient(#473b2430, transparent 30%),
+    var(--map) center/cover;
+}
+.travel-atlas h1 {
+  position: absolute;
+  top: 20px;
+  left: 16px;
+  font-weight: 500;
+}
+.region-label {
+  position: absolute;
+  top: 15%;
+  left: 22px;
+  writing-mode: vertical-rl;
+  background: var(--paper);
+  border: 1px solid var(--copper);
+  border-radius: 5px;
+  padding: 14px 7px;
+  font: 33px var(--hand);
+  letter-spacing: 8px;
+}
+.destination-island {
+  position: absolute;
+  bottom: 3%;
+  left: 5%;
+  right: 5%;
+  padding: 17px 18px 12px;
+}
+.destination-island h2 {
+  font-size: 32px;
+  margin: 5px 0;
+}
+.destination-island p {
+  margin: 6px 0 13px;
+}
+.destination-island > small:last-child {
+  display: block;
+  text-align: center;
+  margin-top: 6px;
+}
+.scenic-play {
+  position: relative;
+  min-height: 540px;
+  height: 100dvh;
+  background: var(--map) center/cover;
+  isolation: isolate;
+}
+.atlas-map {
+  position: absolute;
+  inset: 0 0 22%;
+  overflow: hidden;
+  container-type: size;
+}
+.map-plane {
+  position: absolute;
+  width: max(100cqw, calc(100cqh * 941 / 1672));
+  aspect-ratio: 941/1672;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.map-plane .world-art {
+  background-size: 100% 100%;
+}
+.map-pin {
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  transform: translate(-50%, -32px);
+  display: grid;
+  justify-items: center;
+  white-space: nowrap;
+}
+.pin-medal {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 2px solid var(--copper);
+  box-shadow: 0 2px 4px #392d3280;
+}
+.map-pin .pin-label {
+  margin-top: 2px;
+  padding: 3px 8px;
+  border-radius: 8px;
+  color: var(--cream);
+  background: #70513c;
+  line-height: 1.15;
+  font: 14px var(--hand);
+}
+.pin-label small {
+  display: block;
+  color: #f9dfaf;
+  font: 10px var(--body);
+}
+.map-caption,
+.map-heading {
+  display: none;
+}
+.map-filter {
+  position: absolute;
+  top: 65px;
+  left: 5%;
+  width: 90%;
+  display: flex;
+  gap: 6px;
+}
+.map-filter .btn {
+  min-height: 29px;
+  padding: 3px 8px;
+  flex: 1;
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: none;
+  font-size: 13px;
+}
+.map-filter .btn.selected {
+  background: var(--moss);
+  color: var(--cream);
+}
+.map-filter .ui-icon {
+  display: none;
+}
+.map-gift,
+.map-bottom {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+}
+.map-gift {
+  bottom: 26%;
+}
+.gift-medal,
+.map-bottom {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--copper);
+  border-radius: 11px;
+  box-shadow:
+    inset 0 0 0 3px #fff4d5,
+    inset 0 0 0 4px #ddbe95,
+    0 2px 4px #63472760;
+}
+.gift-medal {
+  width: 100%;
+  justify-content: start;
+  padding: 11px 14px;
+  gap: 17px;
+  text-align: left;
+  font: 22px var(--hand);
+}
+.gift-medal .ui-icon {
+  width: 44px;
+  height: 44px;
+}
+.gift-medal small,
+.pool-charm small {
+  display: block;
+  font: 12px var(--body);
+}
+.gift-medal::after {
+  content: '›';
+  margin-left: auto;
+  font-size: 25px;
+}
+.map-bottom {
+  bottom: 3%;
+  padding: 9px 12px 8px;
+}
+.footprint-counter {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.footprint-counter > .btn {
+  margin-left: auto;
+  min-height: 25px;
+  font-size: 13px;
+}
+.map-pools {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.pool-charm {
+  background: #eed7af;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: none;
+  font: 17px var(--hand);
+  text-align: left;
+  justify-content: start;
+  padding: 4px;
+  gap: 2px;
+}
+.pool-charm img {
+  width: 35%;
+  height: clamp(48px, 8dvh, 75px);
+}
+.map-bottom > small {
+  display: block;
+  text-align: center;
+  margin-top: 4px;
+}
+.location-story {
+  min-height: 100dvh;
+}
+.location-portrait {
+  height: 47dvh;
+  position: relative;
+}
+.location-view {
+  width: 100%;
+  height: 100%;
+}
+.location-portrait::after,
+.visit-camera::after {
+  content: '';
+  position: absolute;
+  inset: 40% 0 0;
+  background: linear-gradient(transparent, #3c2929aa);
+  pointer-events: none;
+}
+.location-sign {
+  z-index: 1;
+  position: absolute;
+  bottom: 22px;
+  left: 20px;
+  color: var(--cream);
+}
+.location-sign h1 {
+  font-size: 38px;
+}
+.story-paper {
+  position: relative;
+  margin: -2px 6px 0;
+  padding: 14px 17px;
+}
+.story-paper .companion-note {
+  margin-bottom: 10px;
+}
+.checkin-reward {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px dashed var(--line);
+  padding: 10px 0;
+}
+.checkin-reward small {
+  display: block;
+}
+.checkin-reward b {
+  margin-left: auto;
+  color: var(--berry);
+}
+.story-paper .gold {
+  margin-top: 16px;
+}
+.story-paper > .fine {
+  font-size: 12px;
+}
+@media (max-height: 740px) {
+  .arrival-stage,
+  .first-meeting {
+    padding-top: 9px;
+  }
+  .arrival-panel {
+    min-height: 0;
+  }
+  .account-choice {
+    min-height: 50px;
+  }
+  .arrival-panel h2 {
+    margin: 10px 0;
+  }
+  .arrival-panel .fine {
+    margin: 8px 0;
+  }
+  .meeting-heading {
+    gap: 8px;
+  }
+  .meeting-bottom {
+    padding-top: 7px;
+  }
+  .meeting-bottom .companion-note {
+    padding: 5px 10px;
+  }
+  .starter-list {
+    margin-top: 6px;
+  }
+  .meeting-bottom p {
+    margin: 5px 0;
+  }
+  .map-gift {
+    bottom: 26%;
+  }
+  .map-bottom {
+    bottom: 1%;
+  }
+  .map-pools img {
+    height: 42px;
+  }
+  .hud-orb .ui-icon {
+    width: 37px;
+    height: 37px;
+  }
+  .companion-dialogue {
+    min-height: 55px;
+  }
+}
+
+.arrival-stage,
+.first-meeting {
+  position: relative;
+  isolation: isolate;
+  background: var(--desk) center/cover;
+}
+.arrival-stage::before,
+.first-meeting::before {
+  position: absolute;
+  content: '';
+  z-index: -1;
+  inset: 0 0 44%;
+  background: var(--post) center 55% / cover;
+}
+.first-meeting::before {
+  inset: 0 0 30%;
+  background-image: var(--studio);
+}
+.companion-character {
+  width: 90%;
+  left: 5%;
+  height: 72%;
+  top: 13%;
+}
+.story-paper {
+  min-height: 53dvh;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.story-paper > .gold {
+  margin-top: auto;
+}
+.story-paper > .fine {
+  margin: 0 2px;
+}
+.map-gift {
+  bottom: max(26%, 163px);
+}
+
+/* 390 × 844 确认稿的落脚线在画布高度约 75%，对话区留在人物下方。 */
+.companion-character {
+  left: 6.3%;
+  top: 14.4%;
+}

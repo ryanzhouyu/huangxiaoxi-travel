@@ -1,5 +1,7 @@
 # 黄晓西客户演示
 
+当前游客页面使用「黔山同行」视觉。[逐屏对照](../../output/companion-visual-review/index.html) · [覆盖范围、差异与验收](../../docs/黔山同行视觉实施与验收.md)。
+
 从仓库根目录启动 `./Start-Local.ps1`，先在[演示准备页](http://127.0.0.1:8765/design/demo/presenter.html)检查本机素材和存储，再打开[旅行手账](http://127.0.0.1:8765/design/demo/index.html)。Windows PowerShell 也可用 `.\Start-Local.ps1`。运行时只需要本地 HTTP 服务。
 
 六套已确认装扮使用原有获取位置。初始为 A1、A2、C3，景区见面礼为 A4，云山和花溪池分别为 B5、A6。[查看实装](../../reviews/2026-11-05-wardrobe/selected/equipped.webp) · [跨套搭配](../../reviews/2026-11-05-wardrobe/selected/mixed.webp) · [素材来源与重建](../../reviews/2026-11-05-wardrobe/selected/README.md)
@@ -45,7 +47,7 @@
 | `postcard.mjs` | 读取同一个渲染结果，按最后选中地点及背景搭配取景，结合经历和模板生成 PNG。 |
 | `storage.mjs`、`presenter.mjs` | 业务进度映射到 `hxx.demo.v1`。草稿按演示批次和身份保存；复位／还原更新批次并通知其他标签。 |
 | `item-thumbnails.mjs`、`map-art.mjs` | 单品等比取图、地点视窗与导览原画坐标。 |
-| `style.css`、`art-layout.css` | 演示页面材质、高清场景、投屏版式及小屏适配。 |
+| `visual/`、`assets/scenes/` | 当前演示的场景素材、页面材质、手机／投屏排版、手账及纪念图绘制。 |
 | `tests/` | 功能边界、主线复演、下载／还原和渲染检查。用独立上下文运行。 |
 
 ## 复验

@@ -13,6 +13,11 @@ const banners = {
   ridge: ['map', '110 15 790 458'],
   brook: ['map', '100 689 660 440'],
 };
+export function photoWindow(pointId, sceneName) {
+  const banner = banners[pointId];
+  return banner?.[0] === sceneName ? banner[1].split(' ').map(Number) : null;
+}
+
 export function locationBanner(pointId, picture) {
   const [name, frame] = banners[pointId];
   return (

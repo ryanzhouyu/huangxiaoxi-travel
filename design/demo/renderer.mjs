@@ -12,14 +12,17 @@ const textures = {};
 export async function prepareArtwork() {
   await Promise.all([
     prepareWardrobe(),
-    ...['map', 'night', 'inventory'].map(async (name) => {
+    ...['map', 'night', 'inventory','travel-journal'].map(async (name) => {
       const image = new Image();
-      image.src = picture(name);
+      image.src = name === 'travel-journal'
+        ? new URL('./assets/scenes/travel-journal.webp', import.meta.url).href : picture(name);
       await image.decode();
       textures[name] = image;
     }),
   ]);
 }
+export const journalPaper = () => textures['travel-journal'];
+
 export function stageFigure(look) {
   return (
     '<img class="figure stage-figure" alt="黄晓西的当前搭配" src="' +

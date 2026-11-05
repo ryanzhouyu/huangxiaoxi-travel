@@ -4,48 +4,48 @@
       "w": 1280,
       "h": 720,
       "entry": {
-        "above": 11.515625,
-        "below": 11.515625,
-        "buttonBottom": 706
+        "above": 9,
+        "below": 9,
+        "buttonBottom": 720
       },
       "meeting": {
-        "above": 11.515625,
-        "below": 32.625,
-        "buttonBottom": 706
+        "above": 9,
+        "below": 9,
+        "buttonBottom": 720
       },
       "pinChecks": [
         {
           "target": "point?id=gate",
-          "dx": -0.0018750000000409273,
-          "dy": -0.00960205078126819,
+          "dx": -0.009374999999977263,
+          "dy": -0.008750000000020464,
           "reachable": true,
           "inside": true
         },
         {
           "target": "point?id=ridge",
-          "dx": -0.014374999999972715,
-          "dy": 0.0009924316406113576,
+          "dx": -0.017187499999977263,
+          "dy": -0.014375000000029559,
           "reachable": true,
           "inside": true
         },
         {
           "target": "point?id=brook",
-          "dx": -0.0028125000000045475,
-          "dy": 0.0006799316406045364,
+          "dx": -0.006250000000022737,
+          "dy": -0.005937500000015916,
           "reachable": true,
           "inside": true
         },
         {
           "target": "point?id=shop",
-          "dx": -0.01312499999994543,
-          "dy": -0.012132568359334073,
+          "dx": -0.0031249999999545253,
+          "dy": -0.0037499999999681677,
           "reachable": true,
           "inside": true
         }
       ],
       "shelf": {
-        "width": 115.078125,
-        "height": 115.078125,
+        "width": 49.25,
+        "height": 49.25,
         "dcx": 0,
         "dcy": 0
       }
@@ -54,48 +54,48 @@
       "w": 1440,
       "h": 900,
       "entry": {
-        "above": 14.390625,
-        "below": 14.390625,
-        "buttonBottom": 886
+        "above": 9,
+        "below": 9,
+        "buttonBottom": 900
       },
       "meeting": {
-        "above": 14.390625,
-        "below": 38.375,
-        "buttonBottom": 886
+        "above": 9,
+        "below": 9,
+        "buttonBottom": 900
       },
       "pinChecks": [
         {
           "target": "point?id=gate",
-          "dx": -0.01031250000005457,
-          "dy": -0.010227050781281832,
+          "dx": -0.01468750000003638,
+          "dy": -0.007187499999986358,
           "reachable": true,
           "inside": true
         },
         {
           "target": "point?id=ridge",
-          "dx": -0.00874999999996362,
-          "dy": -0.003382568359427296,
+          "dx": -0.008437500000013642,
+          "dy": -0.00343750000001819,
           "reachable": true,
           "inside": true
         },
         {
           "target": "point?id=brook",
-          "dx": -0.007656249999968168,
-          "dy": -0.005852050781300022,
+          "dx": -0.00640625000005457,
+          "dy": -0.005156250000027285,
           "reachable": true,
           "inside": true
         },
         {
           "target": "point?id=shop",
-          "dx": -0.009687500000040927,
-          "dy": 0.0010229492187363576,
+          "dx": -0.009062500000027285,
+          "dy": -0.013125000000002274,
           "reachable": true,
           "inside": true
         }
       ],
       "shelf": {
-        "width": 133,
-        "height": 133,
+        "width": 59.578125,
+        "height": 59.578125,
         "dcx": -0.0078125,
         "dcy": 0
       }
@@ -104,49 +104,49 @@
       "w": 1920,
       "h": 1080,
       "entry": {
-        "above": 17,
-        "below": 17,
-        "buttonBottom": 1066
+        "above": 9,
+        "below": 9,
+        "buttonBottom": 1080
       },
       "meeting": {
-        "above": 17,
-        "below": 43.59375,
-        "buttonBottom": 1066
+        "above": 9,
+        "below": 9,
+        "buttonBottom": 1080
       },
       "pinChecks": [
         {
           "target": "point?id=gate",
           "dx": -0.010625000000004547,
-          "dy": 0.00164794921875,
+          "dy": -0.00687500000003638,
           "reachable": true,
           "inside": true
         },
         {
           "target": "point?id=ridge",
-          "dx": -0.01375000000007276,
-          "dy": 0.0016174316405681566,
+          "dx": -0.02156250000007276,
+          "dy": -0.0012500000000272848,
           "reachable": true,
           "inside": true
         },
         {
           "target": "point?id=brook",
-          "dx": -0.008125000000063665,
-          "dy": 0.00164794921875,
+          "dx": -0.00031250000006366463,
+          "dy": -0.0018749999999840838,
           "reachable": true,
           "inside": true
         },
         {
           "target": "point?id=shop",
           "dx": -0.01187500000014552,
-          "dy": 0.00164794921875,
+          "dy": -0.011874999999974989,
           "reachable": true,
           "inside": true
         }
       ],
       "shelf": {
-        "width": 153.0625,
-        "height": 153.0625,
-        "dcx": -0.0078125,
+        "width": 62.21875,
+        "height": 62.21875,
+        "dcx": 0,
         "dcy": 0
       }
     },
@@ -154,48 +154,48 @@
       "w": 390,
       "h": 844,
       "entry": {
-        "above": 13.5,
-        "below": 13.5,
-        "buttonBottom": 830
+        "above": 9,
+        "below": 9,
+        "buttonBottom": 844
       },
       "meeting": {
-        "above": 13.5,
-        "below": 36.59375,
-        "buttonBottom": 830
+        "above": 9,
+        "below": 9,
+        "buttonBottom": 844
       },
       "pinChecks": [
         {
           "target": "point?id=gate",
-          "dx": 0,
-          "dy": -0.0030395507812954747,
+          "dx": -0.006250000000022737,
+          "dy": -0.005937500000015916,
           "reachable": true,
           "inside": true
         },
         {
           "target": "point?id=ridge",
-          "dx": -0.0078125,
-          "dy": 0.00005493164059089395,
+          "dx": -0.014062499999994316,
+          "dy": -0.010312500000026148,
           "reachable": true,
           "inside": true
         },
         {
           "target": "point?id=brook",
-          "dx": 0,
-          "dy": -0.008538818359397737,
+          "dx": -0.009375000000005684,
+          "dy": -0.015468750000025011,
           "reachable": true,
           "inside": true
         },
         {
           "target": "point?id=shop",
-          "dx": 0,
-          "dy": -0.0015075683593863687,
+          "dx": -0.012499999999988631,
+          "dy": -0.008125000000006821,
           "reachable": true,
           "inside": true
         }
       ],
       "shelf": {
-        "width": 79.453125,
-        "height": 79.453125,
+        "width": 54.8125,
+        "height": 54.8125,
         "dcx": 0,
         "dcy": 0
       }
@@ -204,48 +204,48 @@
       "w": 360,
       "h": 640,
       "entry": {
-        "above": 10.234375,
-        "below": 10.234375,
-        "buttonBottom": 626
+        "above": 9,
+        "below": 9,
+        "buttonBottom": 640
       },
       "meeting": {
-        "above": 10.234375,
-        "below": 30.0625,
-        "buttonBottom": 626
+        "above": 9,
+        "below": 9,
+        "buttonBottom": 640
       },
       "pinChecks": [
         {
           "target": "point?id=gate",
-          "dx": -0.0012499999999988631,
-          "dy": -0.007445068359345441,
+          "dx": -0.009375000000005684,
+          "dy": -0.008750000000020464,
           "reachable": true,
           "inside": true
         },
         {
           "target": "point?id=ridge",
-          "dx": -0.012187500000010232,
-          "dy": 0.0006799316406045364,
+          "dx": -0.017187500000005684,
+          "dy": -0.014375000000029559,
           "reachable": true,
           "inside": true
         },
         {
           "target": "point?id=brook",
-          "dx": -0.0018749999999982947,
-          "dy": 0.00021118164062272626,
+          "dx": -0.006249999999994316,
+          "dy": -0.005937500000015916,
           "reachable": true,
           "inside": true
         },
         {
           "target": "point?id=shop",
-          "dx": -0.008750000000020464,
-          "dy": -0.0033825683593704525,
+          "dx": -0.0031250000000113687,
+          "dy": -0.0037499999999681677,
           "reachable": true,
           "inside": true
         }
       ],
       "shelf": {
-        "width": 71.453125,
-        "height": 71.453125,
+        "width": 49.25,
+        "height": 49.25,
         "dcx": 0,
         "dcy": 0
       }
@@ -255,12 +255,12 @@
     {
       "template": "postcard",
       "identical": true,
-      "sha256": "91389ed9c7ac7eec858c8cd55d4589c15f23edc703354411ebe55cab1e540be2"
+      "sha256": "9651f531c5ab1958cfc6b1d504910680d6c6962c9528913b5bc723e8339202e4"
     },
     {
       "template": "trail",
       "identical": true,
-      "sha256": "9711b08fce6dd8cb7bb12099b977a5f06c5e1b939cb7bc9660dbaa4be0cc075b"
+      "sha256": "6af31abd8676980d4bd19b3464d7ce33fa3cd46e43f3a6458984bf15d2aa8437"
     }
   ],
   "errors": []

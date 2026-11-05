@@ -1,4 +1,6 @@
-import {asset, point, POINTS, POOLS} from '../data.mjs';
+import {asset, point, POINTS, POOLS, ACTIVITY} from '../data.mjs';
+
+import {visitPhoto,companionNote} from './visual/pages.mjs';
 
 const orderStatus = {
   pending: '待模拟支付',
@@ -13,7 +15,7 @@ export function renderDetails({route, a, button, link, esc, fmt}) {
     const p = point(id);
     const code = route.params.get('code') || '';
     return (
-      '<section class="visit-camera"><div class="camera-mark">⌖</div><h1>留下一枚足迹</h1><p>' +
+      '<section class="visit-camera">' + (p ? visitPhoto(p.id) : '') + '<h1>留下一枚足迹</h1><p>' +
       esc(p?.name || '选择沿途地点') +
       '</p></section>' +
       '<section class="visit-paper"><h2>' +
@@ -48,17 +50,26 @@ export function renderDetails({route, a, button, link, esc, fmt}) {
       '<p class="fine">此处核对测试码内容。定位及店员确认使用模拟结果。</p></section>'
     );
   }
+  if (route.name === 'activity') {
+    const claimed = a.claimed.includes('activity:' + ACTIVITY.id);
+    return `<section class="craft-setting"><h1>${ACTIVITY.name}</h1></section><div class="craft-paper paper">
+      ${companionNote('把今天做的小物，也记到我们的手账里。')}
+      <p>${ACTIVITY.description}</p><section class="craft-line"><strong>完成手作体验</strong><b>+${ACTIVITY.reward} 次</b></section>
+      <p class="fine">完成后请店员确认，每个账号首次完成可领。到店奖励独立记录。</p>
+      ${claimed ? '<p class="notice">这项活动奖励已领取。</p>'+link('查看回忆','memories','full') : button('演示店员核验','staff','gold full')}
+      ${link('查看山间手作铺','point?id=shop','text full')}<p class="fine">仅模拟体验核验。</p></div>`;
+  }
   if (route.name === 'account') {
     return (
-      '<h1>我的旅行手账</h1><p>' +
+      '<section class="identity-card paper"><span class="ribbon">我的旅行手账</span><div class="identity-owner"><span class="cameo"></span><h1>' +
       esc(a.name) +
-      ' · 本机演示身份</p><div class="card"><h2>' +
+      '</h1></div><p>本机演示身份</p><div class="account-totals"><h2>' +
       a.events.length +
       ' 段经历</h2><p>' +
       a.owned.length +
       ' 件装扮 · ' +
       a.works.length +
-      ' 张作品</p></div>' +
+      ' 张作品</p></div></section>' +
       link('查看次数与订单', 'wallet', 'secondary full') +
       button('切换演示身份', 'logout', 'text full')
     );
@@ -96,7 +107,7 @@ export function renderDetails({route, a, button, link, esc, fmt}) {
   }
   if (route.name === 'wallet') {
     return (
-      '<h1>旅途收获</h1><section class="order-receipt"><small>黔山漫游 · 通用次数</small><div class="receipt-amount">' +
+      '<section class="order-receipt wallet-ticket"><span class="ribbon">景区通用次数</span><div class="receipt-amount">' +
       a.balance +
       ' 次</div>' +
       button('模拟购买次数', 'purchase-wallet', 'secondary') +

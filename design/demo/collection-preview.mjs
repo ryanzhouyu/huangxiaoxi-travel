@@ -21,7 +21,7 @@ export function giftPreview(outfitId) {
 export function poolProgress(pool, collected) {
   const total = pool.assets.length;
   return `<div class="pool-progress">
-    <div class="pool-progress-label"><span>已收集</span><strong>${collected} / ${total}</strong></div>
+    <div class="pool-progress-label"><span>本池收集</span><strong>${collected} / ${total}</strong></div>
     <progress aria-label="${pool.name}奖品收集进度" aria-valuetext="已收集 ${collected} 件，共 ${total} 件" value="${collected}" max="${total}"></progress>
   </div>`;
 }

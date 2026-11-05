@@ -1,16 +1,16 @@
 {
-  "at": "2026-11-05T12:44:04.595Z",
+  "at": "2026-11-05T14:44:50.209Z",
   "runs": [
     {
       "label": "首次身份完整主线",
-      "seconds": 37,
+      "seconds": 39,
       "visits": 4,
       "draws": 2,
       "works": 2,
       "balance": 15,
-      "firstWork": "2880e385e76d2f5162283f9021c6c7a919eca48cee07e5999c9faa267b0ad223",
+      "firstWork": "c91f1cce8541d02a9563453ff31d7bd2027d2d3fa3dfa4f050bc8dfb2720aa4f",
       "assets": [
-        "joy",
+        "flower-hair",
         "mountain-bottom"
       ]
     },
@@ -18,32 +18,32 @@
       "label": "刷新回访和旧作品",
       "seconds": 1,
       "balance": 15,
-      "firstWork": "2880e385e76d2f5162283f9021c6c7a919eca48cee07e5999c9faa267b0ad223"
+      "firstWork": "c91f1cce8541d02a9563453ff31d7bd2027d2d3fa3dfa4f050bc8dfb2720aa4f"
     },
     {
       "label": "复位后重新完整演示 1920×1080",
-      "seconds": 6,
+      "seconds": 7,
       "visits": 4,
       "draws": 2,
       "works": 2,
       "balance": 15,
-      "firstWork": "ca2bbbe44c14ec24f091774418264c05353c3810c8201d91a8968fc5bbb70e30",
+      "firstWork": "8ebb8b37bc027fbb67cc2d6f01fda0e9459d2bc7d270325b15e2f516635f6fa3",
       "assets": [
-        "wave",
-        "mountain-top"
+        "flower-shoes",
+        "wave"
       ]
     },
     {
       "label": "1440×900 全链路复核",
-      "seconds": 6,
+      "seconds": 7,
       "visits": 4,
       "draws": 2,
       "works": 2,
       "balance": 15,
-      "firstWork": "56e593d40ba7dfe2517ef545e89cf545f0331a5f11d878ce802a81d1a9bf765e",
+      "firstWork": "1c04b2319e6b09161b28aebefd32183099a9a7de9ebff5b1be63dc5166e117a4",
       "assets": [
         "flower-bg",
-        "wave"
+        "mountain-shoes"
       ]
     }
   ],
@@ -70,7 +70,7 @@
     },
     {
       "label": "抽取 bloom",
-      "prize": "joy",
+      "prize": "flower-hair",
       "balance": 5
     },
     {
@@ -80,7 +80,7 @@
     },
     {
       "label": "抽取 cloud",
-      "prize": "mountain-top",
+      "prize": "wave",
       "balance": 1
     },
     {
@@ -95,7 +95,7 @@
     },
     {
       "label": "抽取 bloom",
-      "prize": "wave",
+      "prize": "flower-shoes",
       "balance": 5
     },
     {
@@ -105,7 +105,7 @@
     },
     {
       "label": "抽取 cloud",
-      "prize": "wave",
+      "prize": "mountain-shoes",
       "balance": 1
     },
     {
