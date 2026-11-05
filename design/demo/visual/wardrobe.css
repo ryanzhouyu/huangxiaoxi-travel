@@ -323,13 +323,16 @@ progress::-moz-progress-bar {
 }
 .dressroom {
   --rack: var(--studio);
-  --floor: clamp(272px, calc(100dvh - 272px), 66dvh);
   position: relative;
   min-height: 100dvh;
-  padding: 0 10px 7px;
-  background:
-    var(--rack) center top / auto var(--floor) no-repeat,
-    var(--paper);
+  padding: 0 10px max(8px, var(--safe-bottom));
+  background: var(--paper);
+}
+.dressroom:has(.dressing-workspace) {
+  height: 100dvh;
+  min-height: 540px;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
 }
 .dressroom[data-background='mountain-bg'] {
   --rack: var(--cloud);
@@ -386,9 +389,19 @@ progress::-moz-progress-bar {
 }
 .dressing-workspace {
   display: grid;
-  grid-template-rows: var(--floor) auto auto;
+  grid-template-rows: minmax(235px, 1fr) auto auto auto;
   grid-template-columns: minmax(0, 1fr) minmax(67px, 23%);
   column-gap: 6px;
+  row-gap: clamp(3px, 0.9dvh, 10px);
+  isolation: isolate;
+}
+.dressing-workspace::before {
+  content: '';
+  grid-area: 1 / 1 / 2 / -1;
+  margin-inline: -10px;
+  background: var(--rack) center 65% / cover no-repeat;
+  z-index: -1;
+  pointer-events: none;
 }
 .dressing-actor,
 .wardrobe-cabinet {
@@ -399,10 +412,9 @@ progress::-moz-progress-bar {
 }
 .dressed-character {
   grid-area: 1/1/2/2;
-  align-self: end;
+  align-self: start;
   justify-self: center;
   width: 100%;
-  height: 80%;
   position: relative;
 }
 .dressing-state {
@@ -417,8 +429,9 @@ progress::-moz-progress-bar {
 }
 .inventory-scroll {
   grid-area: 1/2;
-  align-self: end;
-  height: calc(var(--floor) - 75px);
+  align-self: stretch;
+  min-height: 0;
+  margin-top: 75px;
   overflow: auto;
   overscroll-behavior: contain;
   padding: 2px 4px 9px;
@@ -891,6 +904,9 @@ progress::-moz-progress-bar {
   height: 84.2%;
 }
 .dressed-character {
-  height: 82%;
+  /* 舞台补满屏高时保留已确认的人物构图；窄矮窗口仍受可用舞台约束。 */
+  --portrait-stage: clamp(272px, calc(100dvh - 272px), 66dvh);
+  top: min(18%, calc(var(--portrait-stage) * 0.18));
+  height: min(82%, calc(var(--portrait-stage) * 0.82));
   transform: translate(-3px, 7px);
 }

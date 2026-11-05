@@ -1,6 +1,6 @@
 /* 手账使用实际到访照片窗；日期、筛选和行数可变。 */
 .travel-journal {
-  min-height: calc(100dvh - var(--nav));
+  min-height: calc(100dvh - var(--nav-space));
   padding: 15px 20px 12px;
   position: relative;
   isolation: isolate;
@@ -731,7 +731,7 @@
 }
 .journal-action {
   position: sticky;
-  bottom: var(--nav);
+  bottom: var(--nav-space);
   z-index: 2;
   padding: 4px 0;
 }

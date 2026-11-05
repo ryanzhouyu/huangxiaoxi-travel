@@ -11,6 +11,8 @@
   --padding: clamp(15px, 5vw, 24px);
   --frame: min(100%, 430px);
   --nav: 73px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --nav-space: calc(var(--nav) + var(--safe-bottom));
   --hand: KaiTi, STKaiti, 'Kaiti SC', 'Songti SC', SimSun, serif;
   --body: 'Microsoft YaHei', 'PingFang SC', system-ui, sans-serif;
   --night: url('../../hifi/assets/night.png');
@@ -313,18 +315,16 @@ canvas {
   box-shadow: inset 0 0 0 2px #977a5c;
 }
 .bottom-nav {
-  position: fixed;
+  position: sticky;
   z-index: 9;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: var(--frame);
-  height: calc(var(--nav) + env(safe-area-inset-bottom));
-  padding: 5px 10px max(8px, env(safe-area-inset-bottom));
+  width: 100%;
+  height: var(--nav-space);
+  padding: 5px 10px calc(8px + var(--safe-bottom));
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 6px;
-  align-items: end;
+  align-items: center;
   background: linear-gradient(transparent, #422b2580);
 }
 .bottom-nav button {
@@ -344,7 +344,6 @@ canvas {
   font: 17px var(--hand);
 }
 .bottom-nav button[aria-current='page'] {
-  align-self: start;
   background: #ebce9d;
 }
 .bottom-nav .ui-icon,
@@ -354,9 +353,6 @@ canvas {
 }
 .bottom-nav button b {
   font-weight: 600;
-}
-.root-page .content {
-  padding-bottom: var(--nav);
 }
 #sheet {
   padding: 0 18px 15px;
@@ -486,7 +482,7 @@ select {
 }
 #toast {
   position: fixed;
-  bottom: calc(var(--nav) + 8px);
+  bottom: calc(var(--nav-space) + 8px);
   left: 50%;
   transform: translateX(-50%);
   max-width: min(90%, 360px);

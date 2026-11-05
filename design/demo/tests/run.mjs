@@ -2,6 +2,7 @@
 import {createRequire} from 'node:module';
 import {rehearse} from './rehearsal.mjs';
 import {verifyLayout} from './visual-layout.mjs';
+import {verifyFrameEdges} from './frame-edges.mjs';
 import {verifyArtwork} from './artwork.mjs';
 import {audit} from './audit.mjs';
 import {verifyRestore} from './restore.mjs';
@@ -21,6 +22,7 @@ try {
     await verifyRestore(browser);
     await verifyArtwork(browser);
     await verifyLayout(browser);
+    await verifyFrameEdges(browser);
   }
 } finally {
   await browser.close();

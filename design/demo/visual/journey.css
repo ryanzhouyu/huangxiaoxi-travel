@@ -151,10 +151,12 @@
 .travel-atlas {
   position: relative;
   min-height: 465px;
-  height: calc(100dvh - var(--nav));
+  height: calc(100dvh - var(--nav-space));
   isolation: isolate;
 }
 .companion-world > .world-art {
+  /* 背景延伸至主导航下方，人物与对白仍在导航上方布局。 */
+  bottom: calc(0px - var(--nav-space));
   z-index: -1;
   background-size: cover;
   background-position: center !important;
@@ -265,7 +267,7 @@
   right: 4.3%;
   min-height: 65px;
 }
-.travel-atlas {
+.app[data-page='explore'] {
   background:
     linear-gradient(#473b2430, transparent 30%),
     var(--map) center/cover;
@@ -311,12 +313,16 @@
   position: relative;
   min-height: 540px;
   height: 100dvh;
-  background: var(--map) center/cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: clamp(8px, 1.8dvh, 18px);
+  padding: 0 4% max(12px, var(--safe-bottom));
   isolation: isolate;
 }
 .atlas-map {
   position: absolute;
-  inset: 0 0 22%;
+  inset: 0;
   overflow: hidden;
   container-type: size;
 }
@@ -394,12 +400,7 @@
 }
 .map-gift,
 .map-bottom {
-  position: absolute;
-  left: 4%;
-  right: 4%;
-}
-.map-gift {
-  bottom: 26%;
+  position: relative;
 }
 .gift-medal,
 .map-bottom {
@@ -435,7 +436,6 @@
   font-size: 25px;
 }
 .map-bottom {
-  bottom: 3%;
   padding: 9px 12px 8px;
 }
 .footprint-counter {
@@ -563,14 +563,22 @@
   .meeting-bottom p {
     margin: 5px 0;
   }
-  .map-gift {
-    bottom: 26%;
-  }
-  .map-bottom {
-    bottom: 1%;
-  }
   .map-pools img {
     height: 42px;
+  }
+  .gift-medal {
+    min-height: 44px;
+    padding: 5px 12px;
+  }
+  .gift-medal .ui-icon {
+    width: 32px;
+    height: 32px;
+  }
+  /* 山门位于地图下方；矮屏把文字放到标记上面，保持点位坐标与礼物入口可点。 */
+  .map-pin[data-target='point?id=gate'] .pin-label {
+    position: absolute;
+    bottom: calc(100% + 2px);
+    justify-self: center;
   }
   .hud-orb .ui-icon {
     width: 37px;
@@ -578,6 +586,21 @@
   }
   .companion-dialogue {
     min-height: 55px;
+  }
+}
+
+/* 宽而矮的浏览窗口让两块纸签并排，给地图点位留出可点击的空间。 */
+@media (min-width: 500px) and (max-width: 700px) and (min-aspect-ratio: 4/5) {
+  .scenic-play {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    align-content: end;
+    align-items: end;
+    gap: 8px;
+  }
+  .gift-medal {
+    padding-inline: 8px;
+    gap: 6px;
   }
 }
 
@@ -616,9 +639,6 @@
 }
 .story-paper > .fine {
   margin: 0 2px;
-}
-.map-gift {
-  bottom: max(26%, 163px);
 }
 
 /* 390 × 844 确认稿的落脚线在画布高度约 75%，对话区留在人物下方。 */
