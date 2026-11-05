@@ -2,7 +2,8 @@
   "wardrobe": {
     "outfits": 6,
     "distinctItems": 24,
-    "sharedFace": true
+    "sharedFace": true,
+    "neckFits": 36
   },
   "layers": {
     "hair": true,

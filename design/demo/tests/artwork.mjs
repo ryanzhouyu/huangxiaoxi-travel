@@ -42,12 +42,22 @@ export async function verifyArtwork(browser) {
         surface.getContext('2d').getImageData(x, y, w, h).data.join(',');
       const bodies = new Set(),
         facePatches = new Set();
+      let neckFits = 0;
       for (const outfit of OUTFITS) {
         const look = lookFor(outfit.id);
         const figure = renderedLook(look);
         bodies.add(figure.src);
         facePatches.add(patch(figure.surface, 205, 133, 26, 15));
-        for (const part of [...slots, 'wave']) {
+        for (const top of OUTFITS) {
+          const mixed = renderedLook({...look, top: top.id + '-top'}).surface;
+          const throat = mixed
+            .getContext('2d')
+            .getImageData(220, 172, 4, 38).data;
+          if (throat.some((value, i) => i % 4 === 3 && value < 245))
+            throw Error('下颌至领口出现空隙 ' + outfit.id + '/' + top.id);
+          neckFits++;
+        }
+        for (const part of [...slots, 'neck', 'wave']) {
           const [, , width, height, left, top] = frames[outfit.id][part];
           if (
             left < 2 ||
@@ -73,6 +83,7 @@ export async function verifyArtwork(browser) {
         outfits: bodies.size,
         distinctItems: new Set(thumbHashes).size,
         sharedFace: facePatches.size === 1,
+        neckFits,
       };
       const {composeImage} = await import('./postcard.mjs');
       const start = lookFor('start-a');
@@ -125,6 +136,7 @@ export async function verifyArtwork(browser) {
       outfits: 6,
       distinctItems: 24,
       sharedFace: true,
+      neckFits: 36,
     });
     assert.ok(Object.values(result.layers).every(Boolean));
     assert.ok(result.trailSize[1] > result.singleSize[1]);

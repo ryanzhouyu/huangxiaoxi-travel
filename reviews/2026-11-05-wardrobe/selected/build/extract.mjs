@@ -1,4 +1,5 @@
 // 离线从确认稿制作透明图集，演示端只读取成品。
+import {refinePortrait} from './portrait-matte.mjs';
 import {fittings} from './fittings.mjs';
 import {hems, soles, wornShoes} from './silhouettes.mjs';
 const W = 660,
@@ -216,17 +217,6 @@ function withSmile(face) {
 function bodyBase(legs) {
   const c = surface(),
     g = ctx(c);
-  // 衣物之间共用颈部和小腿。
-  const neck = g.createLinearGradient(302, 0, 359, 0);
-  neck.addColorStop(0, '#d79770');
-  neck.addColorStop(0.5, '#f1b88c');
-  neck.addColorStop(1, '#efab7e');
-  g.fillStyle = neck;
-  g.fill(
-    new Path2D(
-      'M308 250H350L353 284Q359 297 375 302L352 336H311L286 302Q307 293 307 278Z',
-    ),
-  );
   const left = [
     [223, 276],
     [211, 268],
@@ -300,8 +290,6 @@ function upperLayer(left, f, id, raiseCuff = false) {
     p.drawImage(hand, 0, 0);
     p.restore();
   }
-  const out = surface(),
-    g = ctx(out);
   if (id === 'mountain') {
     p.save();
     p.globalCompositeOperation = 'destination-over';
@@ -309,23 +297,40 @@ function upperLayer(left, f, id, raiseCuff = false) {
     p.fill(new Path2D('M308 386L333 385L341 438L304 438Z'));
     p.restore();
   }
-  const sy = 179 / (f.waist - f.collar);
+  return fitTorso(raw, f);
+}
+function fitTorso(raw, f) {
+  const out = surface(),
+    g = ctx(out);
+  const [jawX, jawY] = f.chin,
+    targetJaw = 269,
+    targetWaist = 464;
+  const torsoScale = (targetWaist - targetJaw) / (f.waist - jawY);
+  const armScale = (575 - targetJaw) / (562 - jawY);
+  const offset = 333 - (CX - f.center + jawX);
+  const aligned = surface(),
+    a = ctx(aligned);
   for (let x = 0; x < raw.width; x++) {
-    const distance = Math.abs(x - f.center);
-    const blend = Math.max(0, Math.min(1, (distance - 60) / 88));
-    const armScale = 290 / (562 - f.collar);
-    const scale = sy * (1 - blend) + armScale * blend;
-    g.drawImage(
+    const blend = Math.max(0, Math.min(1, (Math.abs(x - f.center) - 60) / 88));
+    const sy = torsoScale * (1 - blend) + armScale * blend;
+    a.drawImage(
       raw,
       x,
       0,
       1,
       raw.height,
       CX - f.center + x,
-      285 - f.collar * scale,
+      targetJaw - jawY * sy,
       1,
-      raw.height * scale,
+      raw.height * sy,
     );
+  }
+  // 水平方向按整行采样。逐列斜切会在相邻列之间留下透明的像素缝。
+  for (let y = 0; y < 730; y++) {
+    const shift =
+      offset *
+      Math.max(0, Math.min(1, (targetWaist - y) / (targetWaist - targetJaw)));
+    g.drawImage(aligned, 0, y, W, 1, shift, y, W, 1);
   }
   return out;
 }
@@ -444,7 +449,7 @@ function waving(top, id) {
         if (input[src + 3]) dst.data.set(input.subarray(src, src + 4), to);
       }
   }
-  for (let y = 265; y < 730; y += 10)
+  for (let y = 235; y < 730; y += 10)
     for (let x = 0; x < 660; x += 10) {
       const a = transform(x, y),
         b = transform(x + 10, y),
@@ -493,20 +498,38 @@ export async function buildSet(id) {
     1,
     1000,
   ).data;
-  // 清除发丝、下颌和衣领之间封闭区域里的底色。
-  const g = ctx(left),
-    pixels = g.getImageData(0, 0, left.width, 395),
-    px = pixels.data;
-  for (let y = Math.floor(f.eyes[1]); y < Math.min(395, f.collar + 68); y++) {
-    for (let x = 158; x < 468; x++) {
-      const i = 4 * (y * left.width + x),
-        d = Math.max(
-          ...[0, 1, 2].map((k) => Math.abs(px[i + k] - reference[4 * y + k])),
-        );
-      if (d < 15) px[i + 3] = 0;
-    }
+  const portrait = crop(left, 0, 0, left.width, left.height);
+  refinePortrait(portrait, reference, f);
+  // 短发与耳饰之间可能夹有原衣领的碎片。下巴以下的颈部由当前上装提供。
+  const betweenEarrings = {
+    A1: [250, 353],
+    A2: [239, 330],
+    C3: [294, 349],
+    A4: [251, 345],
+    B5: [269, 374],
+    A6: [284, 377],
+  };
+  const [neckLeft, neckRight] = betweenEarrings[f.board];
+  ctx(portrait).clearRect(neckLeft, f.chin[1] + 2, neckRight - neckLeft, 39);
+  if (f.board === 'A1') {
+    const g = ctx(left),
+      hood = g.getImageData(200, 240, 245, 30);
+    for (let y = 0; y < 30; y++)
+      for (let x = 0; x < 245; x++) {
+        if (x + 200 > 295 && x + 200 < 348) continue;
+        const i = 4 * (y * 245 + x),
+          b = 4 * (y + 240);
+        if (
+          Math.max(
+            ...[0, 1, 2].map((k) =>
+              Math.abs(hood.data[i + k] - reference[b + k]),
+            ),
+          ) < 23
+        )
+          hood.data[i + 3] = 0;
+      }
+    g.putImageData(hood, 200, 240);
   }
-  g.putImageData(pixels, 0, 0);
   const items = f.tiles.map((r, index) => {
     if (index === 2) return trim(mask(img, hems[f.board]));
     if (index === 3) {
@@ -522,13 +545,14 @@ export async function buildSet(id) {
   });
   const top = upperLayer(left, f, id);
   const layers = {
-    hair: headLayer(left, f, f.head),
+    hair: headLayer(portrait, f, f.head),
+    neck: fitTorso(mask(left, f.neck), f),
     top,
     wave: id === 'start-a' ? upperLayer(left, f, id, true) : waving(top, id),
     bottom: lowerLayer(items[2], f),
     shoes: shoeLayer(left, items[3], f, id),
   };
-  if (f.frontHair) layers.braid = headLayer(left, f, f.frontHair);
+  if (f.frontHair) layers.braid = headLayer(portrait, f, f.frontHair);
   if (id === 'start-a') {
     layers.face = facePatch(left, f);
     layers.joy = withSmile(layers.face);

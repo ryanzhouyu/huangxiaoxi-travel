@@ -43,6 +43,7 @@ export function renderedLook(look) {
   paint(ctx, 'start-b', 'base');
   paint(ctx, asset(look.shoes).outfit, 'shoes');
   paint(ctx, asset(look.bottom).outfit, 'bottom');
+  paint(ctx, top, 'neck');
   paint(ctx, hair, 'hair');
   paint(ctx, 'start-a', look.expression === 'joy' ? 'joy' : 'face');
   paint(ctx, top, look.pose === 'wave' ? 'wave' : 'top');
