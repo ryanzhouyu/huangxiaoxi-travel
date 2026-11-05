@@ -236,6 +236,13 @@ export async function audit(browser) {
       assert.equal(a.draws.length, 12);
       assert.equal(new Set(a.draws.map((d) => d.assetId)).size, 12);
       assert.equal(a.balance, 2);
+      await nav('collection?id=flower');
+      assert.match(await q.locator('.extra-collection').innerText(), /7 \/ 7/);
+      assert.equal(
+        await q.locator('.extra-collection .asset.owned').count(),
+        3,
+      );
+
       await nav('wallet');
       assert.equal(
         a.ledger.reduce((sum, e) => sum + e.delta, 0),

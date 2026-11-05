@@ -393,3 +393,13 @@ dialog#sheet {
   color: #534329 !important;
   text-shadow: none;
 }
+
+.extra-collection {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #bfab85;
+}
+.extra-collection p {
+  margin: 4px 0 12px;
+  color: #66583e;
+}

@@ -1,7 +1,7 @@
 import * as art from './renderer.mjs';
 import {demoKey, demoStorage, sessionPrefix, epochKey} from './storage.mjs';
 import {composeImage} from './postcard.mjs';
-import {renderDetails} from './views.mjs';
+import {renderDetails, collectionExtras} from './views.mjs';
 
 export async function loadDemo() {
   await art.prepareArtwork();
@@ -9,6 +9,7 @@ export async function loadDemo() {
     art,
     composeImage,
     renderDetails,
+    collectionExtras,
     storage: demoStorage(localStorage),
     storageKey: demoKey,
     epochKey,

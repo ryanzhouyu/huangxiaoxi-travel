@@ -27,18 +27,27 @@ export async function verifyRestore(browser) {
       await page.locator('.final-image').getAttribute('src'),
       work.image,
     );
+    await page.evaluate(() =>
+      Object.defineProperty(navigator, 'canShare', {
+        value: () => false,
+        configurable: true,
+      }),
+    );
+    await page.locator('[data-action="share"]').click();
+    await page.getByText('保存图片后分享', {exact: true}).waitFor();
+    const downloaded = page.waitForEvent('download');
+    await page.locator('#sheet [data-action="download"]').click();
+    assert.ok((await downloaded).suggestedFilename().endsWith('.png'));
     const other = await ctx.newPage();
     await other.goto(base + 'presenter.html');
     await other.locator('#reset').click();
     await other.locator('#confirm-action').click();
     await page.locator('#app[data-page="entry"]').waitFor();
-    await other
-      .locator('#restore')
-      .setInputFiles({
-        name: '坏备份.json',
-        mimeType: 'application/json',
-        buffer: Buffer.from('{"version":2,"accounts":null}'),
-      });
+    await other.locator('#restore').setInputFiles({
+      name: '坏备份.json',
+      mimeType: 'application/json',
+      buffer: Buffer.from('{"version":2,"accounts":null}'),
+    });
     await other.getByText('无法载入备份。', {exact: false}).waitFor();
     assert.equal(
       await page.evaluate(() => localStorage.getItem('hxx.demo.v1')),
@@ -52,6 +61,7 @@ export async function verifyRestore(browser) {
           restoredAccount: expected.current,
           restoredWorks: expected.accounts[expected.current].works.length,
           exactSnapshot: true,
+          shareFallbackDownloadsPng: true,
           otherTabReset: true,
           badArchivePreserved: true,
         },

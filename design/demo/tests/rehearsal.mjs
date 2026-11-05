@@ -5,9 +5,13 @@ import path from 'node:path';
 
 const base = 'http://127.0.0.1:8765/design/demo/';
 const key = 'hxx.demo.v1';
-const output = path.resolve('output/demo-rehearsal');
 const digest = (value) => createHash('sha256').update(value).digest('hex');
-export async function rehearse(browser) {
+export async function rehearse(browser, {nativeDisplay = false} = {}) {
+  const output = path.resolve(
+    nativeDisplay
+      ? '.codex/local-deploy/demo-run/external-display'
+      : 'output/demo-rehearsal',
+  );
   await mkdir(output, {recursive: true});
   const recordDir = path.resolve('.codex/local-deploy/demo-run/video');
   await mkdir(recordDir, {recursive: true});
@@ -15,7 +19,7 @@ export async function rehearse(browser) {
     errors = [],
     external = [];
   const ctx = await browser.newContext({
-    viewport: {width: 1280, height: 720},
+    viewport: nativeDisplay ? null : {width: 1280, height: 720},
     recordVideo: {dir: recordDir, size: {width: 1280, height: 720}},
     acceptDownloads: true,
   });
@@ -217,6 +221,31 @@ export async function rehearse(browser) {
       localStorage.setItem('hxx.interactive.v2', 'legacy-sentinel'),
     );
     const first = await mainRun('首次身份完整主线', true);
+    if (nativeDisplay) {
+      const display = await page.evaluate(() => ({
+        width: screen.width,
+        height: screen.height,
+        viewport: [innerWidth, innerHeight],
+        scale: devicePixelRatio,
+      }));
+      assert.deepEqual(errors, []);
+      assert.deepEqual(external, []);
+      await writeFile(
+        'output/demo-rehearsal/external-display.json',
+        JSON.stringify(
+          {
+            at: new Date().toISOString(),
+            browser: 'Chrome headed',
+            display,
+            runs,
+            errors,
+          },
+          null,
+          2,
+        ),
+      );
+      return;
+    }
     readablePlayback = false;
     const start = Date.now();
     await page.reload();

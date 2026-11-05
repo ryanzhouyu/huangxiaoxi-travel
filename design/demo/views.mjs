@@ -1,4 +1,4 @@
-import {point, POINTS} from '../data.mjs';
+import {asset, point, POINTS, POOLS} from '../data.mjs';
 
 const orderStatus = {
   pending: '待模拟支付',
@@ -127,4 +127,25 @@ export function renderDetails({route, a, button, link, esc, fmt}) {
     );
   }
   return null;
+}
+
+export function collectionExtras(outfit, account, shelf) {
+  const related = POOLS.find((pool) => pool.outfits.includes(outfit.id));
+  if (!related) return '';
+  const extras = related.assets.filter((id) => asset(id).outfit !== outfit.id);
+  const collected = related.assets.filter((id) =>
+    account.owned.includes(id),
+  ).length;
+  return (
+    '<section class="extra-collection"><h2>同池的表情、姿势与背景</h2>' +
+    '<p>' +
+    related.name +
+    ' · 含服饰已收集 ' +
+    collected +
+    ' / ' +
+    related.assets.length +
+    '</p>' +
+    shelf(extras) +
+    '</section>'
+  );
 }
