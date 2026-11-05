@@ -1,0 +1,395 @@
+@charset "UTF-8";
+:root {
+  --paper: #f7efdc;
+  --ink: #453b2c;
+  --muted: #6c5d47;
+  --app-width: clamp(420px, 42vw, 680px);
+  --nav-height: 79px;
+  font-size: 15px;
+  background: #213a31;
+}
+body {
+  background:
+    linear-gradient(90deg, #172923a8, #24392e96),
+    url('../hifi/assets/night.png') center 52% / cover fixed;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(16px);
+  pointer-events: none;
+}
+.app {
+  background:
+    radial-gradient(ellipse at 12% 0%, #fff9ec, transparent 75%), #f5ebd6;
+}
+.loading-note {
+  padding: 32px;
+}
+.demo-scenery {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.stage-figure {
+  object-fit: contain;
+  object-position: center;
+  max-height: 100%;
+}
+.arrival-stage,
+.first-meeting,
+.companion-world,
+.travel-atlas,
+.scenic-play,
+.dressroom {
+  height: 100dvh;
+  min-height: 560px;
+}
+.world-vignette {
+  background: linear-gradient(180deg, #192b2940, transparent 40%, #2b2d2033);
+}
+.arrival-logo,
+.meeting-heading,
+.world-location,
+.atlas-heading {
+  filter: drop-shadow(0 2px 4px #382a2266);
+}
+.arrival-logo h1 {
+  color: #fff3d9;
+  text-shadow: 0 3px 14px #382518;
+}
+.arrival-companion {
+  top: 19%;
+  height: 43%;
+  width: 58%;
+  left: 21%;
+}
+.meeting-character {
+  top: 15%;
+  height: 49%;
+  width: 66%;
+  left: 17%;
+}
+.arrival-panel,
+.meeting-bottom,
+.companion-dialogue,
+.map-bottom,
+.destination-island,
+.story-paper,
+.cabinet,
+.order-receipt,
+.visit-paper {
+  color: var(--ink);
+  border-color: #c7aa77;
+  background: linear-gradient(120deg, #fff9e9f7, #f1dfbff7);
+  border-radius: 20px;
+  box-shadow:
+    inset 0 0 0 2px #fff8,
+    0 6px 24px #291e2422;
+}
+.meeting-bottom {
+  padding: 12px 16px;
+}
+.account-choice {
+  border-radius: 12px;
+}
+.meeting-bottom .starter-list {
+  gap: 8px;
+}
+.companion-character {
+  inset: auto 12% calc(var(--nav-height) + 125px);
+  width: 76%;
+  height: 53%;
+}
+.companion-dialogue {
+  min-height: 82px;
+  bottom: calc(var(--nav-height) + 8px);
+  padding: 18px 18px 9px;
+}
+.home-hud .identity-button,
+.home-hud .hud-ticket {
+  background: #fff2d9eb;
+  border-radius: 30px;
+  color: #4e412c;
+}
+.home-tools {
+  left: 15px;
+  right: auto;
+  top: 20%;
+  gap: 11px;
+}
+.home-side-tools {
+  right: 15px;
+  left: auto;
+  top: 24%;
+}
+.hud-orb.btn {
+  border-radius: 14px;
+  background: linear-gradient(140deg, #fff9e7f7, #e6cf9ef2);
+  border: 1px solid #bd9f66;
+  padding: 5px 8px;
+  min-width: 54px;
+  box-shadow: 0 3px 8px #25271933;
+}
+.hud-orb > .ui-icon {
+  background: none;
+  border: none;
+  box-shadow: none;
+  width: 33px;
+  height: 33px;
+  padding: 0;
+}
+.hud-orb span {
+  color: #514129;
+  text-shadow: none;
+  font-weight: 600;
+}
+.bottom-nav {
+  padding: 8px 16px 12px;
+  background: linear-gradient(transparent, #292c2480);
+}
+.bottom-nav button {
+  background: #f5e7cdef;
+  color: #4c4530;
+  border-radius: 16px;
+}
+.bottom-nav button[aria-current='page'] {
+  background: #536950;
+  color: #fff9e9;
+}
+.btn {
+  font-size: 14px;
+}
+.btn.gold,
+.gacha-button {
+  background: linear-gradient(115deg, #657b58, #415e46);
+  color: #fff8df;
+  border-color: #bc9e65;
+}
+.detail-page
+  .content:not(
+    :has(
+      .location-story,
+      .dressroom,
+      .collection-pavilion,
+      .scenic-play,
+      .travel-journal,
+      .photo-studio,
+      .outfit-folio
+    )
+  ) {
+  padding: 22px;
+}
+.btn.text,
+.fine,
+small,
+.pool-rules,
+.asset small,
+.chosen-item p {
+  font-size: 12px;
+}
+.pool-paper .ribbon-heading {
+  margin-top: 12px;
+}
+.asset strong,
+.inventory-scroll .asset strong,
+.reward-shelf .asset strong,
+.cabinet-categories .btn {
+  font-size: 12px;
+}
+.world-location .location-plaque,
+.location-line {
+  font-size: 14px;
+}
+.world-location > small {
+  color: #fff8de;
+  font-size: 12px;
+  text-shadow: 0 1px 4px #222;
+}
+.visit-camera {
+  text-align: center;
+  color: #fff4da;
+  background:
+    linear-gradient(#1d302b55, #192b2ad9),
+    url('../hifi/assets/night.png') 50% 48% / cover;
+  border-radius: 18px;
+  padding: 28px 12px;
+}
+.camera-mark {
+  font: 54px Georgia;
+}
+.visit-paper,
+.order-receipt {
+  padding: 20px;
+  margin: 16px 0;
+  border: 1px solid #c8ad7a;
+}
+.receipt-amount {
+  font:
+    600 40px Georgia,
+    serif;
+  color: #476047;
+  margin: 16px 0;
+}
+.ledger small {
+  display: block;
+}
+.story-paper {
+  border-radius: 23px 23px 0 0;
+}
+.location-portrait {
+  overflow: hidden;
+}
+.companion-dialogue .speaker,
+.dressing-state,
+.map-caption,
+.reward-kind {
+  font-size: 13px;
+}
+.reveal-kicker,
+.art-caption,
+.region-label {
+  pointer-events: none;
+}
+dialog#sheet {
+  border-radius: 20px;
+  background: #fbf2df;
+  max-height: 90dvh;
+}
+#sheet p,
+.reward-balance {
+  font-size: 14px !important;
+}
+.dressed-character > .stage-figure {
+  object-fit: contain;
+  width: 100%;
+}
+.catalog-figure .stage-figure {
+  height: 100%;
+  width: 100%;
+}
+.pool-ambience .world-art {
+  filter: none;
+}
+.showcase-ring,
+.dressing-platform {
+  opacity: 0.5;
+}
+.studio-scene > .stage-figure {
+  height: 88%;
+  bottom: 4%;
+  object-fit: contain;
+}
+.folio-display > .stage-figure {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+@media (min-width: 701px) {
+  .app {
+    border-inline: 1px solid #e4cca477;
+  }
+  .companion-character {
+    height: 57%;
+  }
+  .dressing-workspace {
+    grid-template-columns: 52% 48%;
+  }
+  .dressroom {
+    padding-inline: 18px;
+  }
+  .bottom-nav button b {
+    font-size: 16px;
+  }
+  .bottom-nav button {
+    max-width: none;
+  }
+  .btn.gold {
+    font-size: 16px;
+  }
+}
+@media (max-width: 700px) {
+  :root {
+    --app-width: 100%;
+  }
+  .app,
+  .bottom-nav {
+    width: 100%;
+    max-width: none;
+  }
+  .arrival-panel h2 {
+    font-size: 16px;
+  }
+  .meeting-bottom {
+    padding: 8px 12px;
+  }
+  .companion-character {
+    height: 50%;
+  }
+}
+@media (max-height: 740px) {
+  .arrival-logo {
+    top: 3%;
+  }
+  .arrival-companion {
+    top: 18%;
+    height: 36%;
+  }
+  .meeting-character {
+    top: 17%;
+    height: 38%;
+  }
+  .companion-character {
+    height: 46%;
+  }
+  .companion-dialogue {
+    min-height: 73px;
+  }
+  .world-location {
+    top: 78px;
+  }
+  .home-tools {
+    top: 22%;
+  }
+  .home-side-tools {
+    top: 25%;
+  }
+  .meeting-bottom {
+    bottom: 7px;
+  }
+  .dressing-workspace {
+    min-height: 0;
+  }
+}
+
+.cameo {
+  background: #d4bd8a url('../hifi/assets/companion.png') center 3% / 200% auto
+    no-repeat;
+  border-radius: 50%;
+  border: 1px solid #bea274;
+}
+.pool-exits {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.pool-exits > * {
+  flex: 1;
+}
+.atlas-item {
+  display: block;
+  background-image: url('../hifi/assets/inventory.png');
+  background-size: 300% 300%;
+  background-position: calc(var(--col) * 50%) calc(var(--row) * 50%);
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1;
+}
+.identity-button.btn > .cameo {
+  background: #d4bd8a url('../hifi/assets/companion.png') center 3% / 200% auto
+    no-repeat;
+}
+.hud-ticket small {
+  color: #534329 !important;
+  text-shadow: none;
+}

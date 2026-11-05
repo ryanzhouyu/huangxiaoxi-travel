@@ -15,6 +15,7 @@ if ($taskListener) {
     if ($taskResponse.Content.Trim() -ne $taskExpected.Trim()) {
         throw "Port $Port is used by another service. Choose another port with -Port."
     }
+    Write-Host "Customer demo: $taskBaseUrl/design/demo/index.html"
     Write-Host "Project preview is already running: $taskBaseUrl/design/hifi/index.html#partner"
     return
 }
@@ -37,6 +38,8 @@ foreach ($taskCandidate in ($taskCandidates | Select-Object -Unique)) {
 if (!$taskPython) { throw 'Python 3 was not found. Install Python 3 and run this script again.' }
 
 Write-Host "Python: $taskPython"
+Write-Host "Customer demo: $taskBaseUrl/design/demo/index.html"
+Write-Host "Presenter: $taskBaseUrl/design/demo/presenter.html"
 Write-Host "Design: $taskBaseUrl/design/hifi/index.html#partner"
 Write-Host "Overview: $taskBaseUrl/design/hifi/overview.html"
 Write-Host "Prototype: $taskBaseUrl/design/index.html?v=3.1#partner"
