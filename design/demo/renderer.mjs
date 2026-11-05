@@ -1,6 +1,10 @@
-import {asset, OUTFITS, lookFor} from '../data.mjs';
+import {asset, OUTFITS} from '../data.mjs';
 import {icon as sketchIcon} from '../world.mjs';
-import {icon as paintedIcon, item} from '../hifi/art.mjs';
+import {icon as paintedIcon} from '../hifi/art.mjs';
+
+import {itemThumbnail} from './item-thumbnails.mjs';
+import {locationBanner} from './map-art.mjs';
+export {mapPins,mapPlane} from './map-art.mjs';
 
 const picture = (name) =>
   new URL('../hifi/assets/' + name + '.png', import.meta.url).href;
@@ -18,7 +22,7 @@ function canvas() {
 
 export async function prepareArtwork() {
   await Promise.all(
-    ['companion', 'map', 'night'].map(async (name) => {
+    ['companion', 'map', 'night', 'inventory'].map(async (name) => {
       const image = new Image();
       image.src = picture(name);
       await image.decode();
@@ -332,6 +336,7 @@ export function sceneStyle(look, pointId = 'gate') {
   return {image: textures[name], name, position, wash};
 }
 export function world(theme, look, pointId) {
+  if (pointId && !look && theme==='map') return locationBanner(pointId,picture);
   const scene = sceneStyle(look, pointId);
   const name = theme === 'map' && !look && !pointId ? 'map' : scene.name;
   return (
@@ -362,19 +367,5 @@ export function icon(name) {
   );
 }
 export function itemArt(a) {
-  const crops = {
-    hair: '245 0 500 340',
-    top: '234 476 574 365',
-    bottom: '191 757 623 420',
-    shoes: '430 1285 281 237',
-  };
-  if (!a.outfit) return item(a.slot);
-  const src = renderedLook(lookFor(a.outfit)).src;
-  return (
-    '<svg class="item-art" viewBox="' +
-    crops[a.slot] +
-    '" aria-hidden="true"><image href="' +
-    src +
-    '" width="1024" height="1536"/></svg>'
-  );
+  return itemThumbnail(a,textures.inventory,palettes[a.outfit]);
 }

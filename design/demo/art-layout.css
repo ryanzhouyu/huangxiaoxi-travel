@@ -1,0 +1,235 @@
+/* 单品、整身立绘和风景具有不同的取景要求。此文件只加载于客户演示入口。 */
+.swatch,
+.reward-art {
+  display: grid;
+  place-items: center;
+}
+.swatch .item-thumbnail,
+.reward-art .item-thumbnail {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 0;
+  min-height: 0;
+  object-fit: contain;
+  display: block;
+}
+.reward-shelf .swatch {
+  aspect-ratio: 1.25;
+  container-type: size;
+}
+.reward-shelf .swatch .item-thumbnail {
+  width: min(100cqw, 100cqh);
+  height: auto;
+  aspect-ratio: 1;
+  max-height: none;
+}
+
+.arrival-stage,
+.first-meeting {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: clamp(9px, 1.6dvh, 17px);
+  padding: clamp(14px, 3.2dvh, 35px) clamp(16px, 4%, 26px)
+    max(14px, env(safe-area-inset-bottom));
+  isolation: isolate;
+}
+.first-meeting {
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+}
+.arrival-stage > .world-art,
+.first-meeting > .world-art {
+  z-index: -1;
+}
+.arrival-stage > .arrival-logo,
+.arrival-stage > .arrival-panel,
+.first-meeting > .meeting-heading,
+.first-meeting > .meeting-bottom,
+.first-meeting > .art-caption {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  margin: 0;
+  align-self: center;
+}
+.first-meeting > .meeting-heading {
+  max-width: 330px;
+  justify-self: center;
+}
+.arrival-stage > .arrival-companion,
+.first-meeting > .meeting-character {
+  position: relative;
+  inset: auto;
+  width: min(76%, 390px);
+  height: 100%;
+  min-height: 0;
+  justify-self: center;
+  align-self: stretch;
+}
+.arrival-companion > img,
+.meeting-character > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.first-meeting > .art-caption {
+  color: #fff2d7;
+  text-shadow: 0 1px 4px #251c13;
+  line-height: 1.2;
+}
+.meeting-bottom > .text {
+  color: #604e34;
+}
+
+.location-portrait > .location-view {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: none;
+}
+/* 用同一张原画承载底图和点位；cover 的额外裁边由外层视窗完成。 */
+.atlas-map {
+  container-type: size;
+}
+.map-plane {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: max(100cqw, calc(100cqh * 941 / 1672));
+  aspect-ratio: 941 / 1672;
+}
+.map-plane > .world-art {
+  inset: 0;
+  height: 100%;
+  background-size: 100% 100%;
+}
+.map-plane .map-pin {
+  margin: 0;
+  top: var(--y);
+  /* 5px 内边距 + 17px 半边长 + 24.04px 半对角线，将尖端固定在原画坐标上。 */
+  transform: translate(-50%, -46.04px);
+}
+.map-plane .pin-medal {
+  width: 34px;
+  height: 34px;
+}
+.map-plane .map-pin:hover .pin-medal {
+  transform: rotate(-45deg);
+  filter: brightness(1.08);
+}
+.atlas-map > .map-caption {
+  pointer-events: none;
+}
+/* 总览保留地图全貌，纸色从图缘过渡到两侧。 */
+.travel-atlas {
+  isolation: isolate;
+  background: #d9d8b7;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  gap: 12px;
+  padding: clamp(22px, 5dvh, 54px) 20px calc(var(--nav-height) + 12px);
+}
+.travel-atlas > .world-art {
+  width: min(100%, calc(100dvh * 941 / 1672));
+  height: auto;
+  aspect-ratio: 941 / 1672;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  background-size: contain;
+  background-position: center !important;
+  z-index: -1;
+  mask-image:
+    linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent),
+    linear-gradient(transparent, #000 5%, #000 95%, transparent);
+  mask-composite: intersect;
+}
+.travel-atlas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: center / cover url('../hifi/assets/map.png');
+  filter: blur(12px);
+  opacity: 0.38;
+}
+.travel-atlas .atlas-heading,
+.travel-atlas .destination-island,
+.travel-atlas .atlas-footer {
+  position: relative;
+  inset: auto;
+  align-self: end;
+  justify-self: center;
+  width: 100%;
+}
+.travel-atlas .atlas-heading {
+  grid-row: 1;
+  max-width: 380px;
+}
+.travel-atlas .region-label {
+  display: none;
+}
+.travel-atlas .destination-island {
+  grid-row: 3;
+  max-width: 310px;
+  padding: 14px 18px;
+  transform: rotate(-1deg);
+}
+.travel-atlas .atlas-footer {
+  grid-row: 4;
+  padding: 7px 12px;
+  width: fit-content;
+  max-width: 100%;
+}
+.travel-atlas .atlas-footer p {
+  margin: 0;
+}
+.travel-atlas .atlas-footer:has(.stamp) {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 52px 1fr;
+  column-gap: 12px;
+  text-align: left;
+}
+.travel-atlas .atlas-footer .stamp {
+  grid-row: span 2;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.location-portrait:has(.location-view)::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    transparent 10%,
+    #172c2242 35%,
+    #172c2266 80%,
+    transparent
+  );
+}
+.location-portrait:has(.location-view) .location-sign {
+  z-index: 1;
+  text-shadow: 0 1px 4px #193323;
+}
+
+.draft-postcard {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 给左、右工具各留一个按钮的宽度，抬手时指尖也在中央留白区。 */
+.companion-character {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  max-width: calc(100% - 134px);
+}

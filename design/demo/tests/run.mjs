@@ -1,6 +1,7 @@
 // 从仓库根目录执行。Playwright 仅供验收使用，游客端无需安装。
 import {createRequire} from 'node:module';
 import {rehearse} from './rehearsal.mjs';
+import {verifyLayout} from './visual-layout.mjs';
 import {verifyArtwork} from './artwork.mjs';
 import {audit} from './audit.mjs';
 import {verifyRestore} from './restore.mjs';
@@ -19,6 +20,7 @@ try {
     await rehearse(browser);
     await verifyRestore(browser);
     await verifyArtwork(browser);
+    await verifyLayout(browser);
   }
 } finally {
   await browser.close();

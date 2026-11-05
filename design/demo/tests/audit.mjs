@@ -274,10 +274,7 @@ export async function audit(browser) {
       await at('compose');
       assert.equal(await q.locator('#work-title').inputValue(), '两岸山色');
       assert.equal(await q.locator('[data-event]:checked').count(), 1);
-      assert.equal(
-        await q.locator('.studio-scene img').getAttribute('src'),
-        draft,
-      );
+      const draftPng = await q.locator('.draft-postcard').evaluate(canvas => canvas.toDataURL('image/png'));
       await click('preview-work');
       await click('save-work');
       const w = (await state()).works[0];
@@ -285,6 +282,7 @@ export async function audit(browser) {
         path.join(out, '搭配对照-纪念.png'),
         Buffer.from(w.image.split(',')[1], 'base64'),
       );
+      assert.equal(w.image === draftPng, true, '已保存的纪念图须与生成前的草稿逐像素一致');
       assert.equal(w.events.length, 1);
       assert.equal(w.look.top, 'start-c-top');
       await nav('partner');

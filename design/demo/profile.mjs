@@ -1,6 +1,6 @@
 import * as art from './renderer.mjs';
 import {demoKey, demoStorage, sessionPrefix, epochKey} from './storage.mjs';
-import {composeImage} from './postcard.mjs';
+import {composeImage, paintDraft, draftMarkup} from './postcard.mjs';
 import {renderDetails, collectionExtras} from './views.mjs';
 
 export async function loadDemo() {
@@ -8,6 +8,8 @@ export async function loadDemo() {
   return {
     art,
     composeImage,
+    paintDraft,
+    draftMarkup,
     renderDetails,
     collectionExtras,
     storage: demoStorage(localStorage),

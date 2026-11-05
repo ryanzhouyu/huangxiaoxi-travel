@@ -275,11 +275,6 @@ dialog#sheet {
 .dressing-platform {
   opacity: 0.5;
 }
-.studio-scene > .stage-figure {
-  height: 88%;
-  bottom: 4%;
-  object-fit: contain;
-}
 .folio-display > .stage-figure {
   height: 100%;
   width: 100%;
@@ -375,15 +370,6 @@ dialog#sheet {
 }
 .pool-exits > * {
   flex: 1;
-}
-.atlas-item {
-  display: block;
-  background-image: url('../hifi/assets/inventory.png');
-  background-size: 300% 300%;
-  background-position: calc(var(--col) * 50%) calc(var(--row) * 50%);
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 1;
 }
 .identity-button.btn > .cameo {
   background: #d4bd8a url('../hifi/assets/companion.png') center 3% / 200% auto

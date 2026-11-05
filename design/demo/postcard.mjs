@@ -1,9 +1,7 @@
 import {renderedLook, sceneStyle} from './renderer.mjs';
 
-export async function composeImage({look, events, template, title}) {
-  if (!events.length) throw Error('请先选择一段到访经历。');
+function paintCard(paper, {look, events, template, title}, actor) {
   const trail = template === 'trail';
-  const paper = document.createElement('canvas');
   paper.width = 680;
   const rows = trail ? events.length : Math.min(4, events.length);
   paper.height =
@@ -25,9 +23,13 @@ export async function composeImage({look, events, template, title}) {
   const dates = events.map((e) => day(e.at)).sort();
   c.fillStyle = '#7b6b54';
   c.font = '16px sans-serif';
-  c.fillText([...new Set([dates[0], dates.at(-1)])].join(' — '), 42, 147);
+  c.fillText(
+    dates.length ? [...new Set([dates[0], dates.at(-1)])].join(' — ') : '',
+    42,
+    147,
+  );
   const box = {x: 39, y: 172, w: 602, h: trail ? 530 : 370};
-  const scene = sceneStyle(look, events.at(-1).pointId);
+  const scene = sceneStyle(look, events.at(-1)?.pointId);
   const cropH = Math.min(
     scene.image.height,
     (scene.image.width * box.h) / box.w,
@@ -45,21 +47,15 @@ export async function composeImage({look, events, template, title}) {
   );
   c.fillStyle = scene.wash;
   c.fillRect(box.x, box.y, box.w, box.h);
-  const actor = renderedLook(look).surface,
-    actorH = box.h * 0.92,
-    actorW = (actorH * actor.width) / actor.height;
-  const bitmap = await createImageBitmap(actor);
-  try {
-    c.drawImage(
-      bitmap,
-      (w - actorW) / 2,
-      box.y + box.h - actorH - 5,
-      actorW,
-      actorH,
-    );
-  } finally {
-    bitmap.close();
-  }
+  const actorH = box.h * 0.92;
+  const actorW = (actorH * actor.width) / actor.height;
+  c.drawImage(
+    actor,
+    (w - actorW) / 2,
+    box.y + box.h - actorH - 5,
+    actorW,
+    actorH,
+  );
   c.fillStyle = '#4c614d';
   c.font = 'bold 23px serif';
   c.fillText(trail ? '沿途足迹' : '记得这次相遇', 43, box.y + box.h + 49);
@@ -94,5 +90,23 @@ export async function composeImage({look, events, template, title}) {
   c.fillStyle = '#837259';
   c.font = '15px serif';
   c.fillText('黔山漫游   ·   测试到访纪念', 42, h - 40);
-  return paper.toDataURL('image/png');
+}
+
+export const draftMarkup =
+  '<canvas class="draft-postcard" role="img" aria-label="当前搭配与所选经历的纪念图草稿"></canvas>';
+
+export function paintDraft(canvas, options) {
+  paintCard(canvas, options, renderedLook(options.look).surface);
+}
+
+export async function composeImage(options) {
+  if (!options.events.length) throw Error('请先选择一段到访经历。');
+  const paper = document.createElement('canvas');
+  const bitmap = await createImageBitmap(renderedLook(options.look).surface);
+  try {
+    paintCard(paper, options, bitmap);
+    return paper.toDataURL('image/png');
+  } finally {
+    bitmap.close();
+  }
 }
