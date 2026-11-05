@@ -6,7 +6,7 @@ GitHub 私有仓库：[ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzho
 
 ## 11 月 6 日客户演示
 
-连续演示交付在 `codex/presenter-console-20261106` 分支。新电脑执行 `git clone -b codex/presenter-console-20261106 https://github.com/ryanzhouyu/huangxiaoxi-travel.git`，进入目录后运行 `.\Start-Local.ps1`。演示使用[旅行手账](http://127.0.0.1:8765/design/demo/index.html)，开场和复位使用[准备页](http://127.0.0.1:8765/design/demo/presenter.html)。现场顺序与备用录屏见[演示者说明](design/demo/README.md)。
+连续演示交付在 `codex/presenter-console-20261106` 分支。新电脑执行 `git clone -b codex/presenter-console-20261106 https://github.com/ryanzhouyu/huangxiaoxi-travel.git`，进入目录后运行 `.\Start-Local.ps1`。电脑投屏从[三栏演示台](http://127.0.0.1:8765/design/demo/stage.html)进入，开场、四个地点的模拟扫码、实操和回放都在同一窗口。也可单独打开[游客手账](http://127.0.0.1:8765/design/demo/index.html)。现场顺序与备用录屏见[演示者说明](design/demo/README.md)。
 
 ## 接手项目
 

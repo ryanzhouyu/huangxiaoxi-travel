@@ -16,6 +16,7 @@ if ($taskListener) {
         throw "Port $Port is used by another service. Choose another port with -Port."
     }
     Write-Host "Customer demo: $taskBaseUrl/design/demo/index.html"
+    Write-Host "Presentation stage: $taskBaseUrl/design/demo/stage.html"
     Write-Host "Project preview is already running: $taskBaseUrl/design/hifi/index.html#partner"
     return
 }
@@ -39,7 +40,7 @@ if (!$taskPython) { throw 'Python 3 was not found. Install Python 3 and run this
 
 Write-Host "Python: $taskPython"
 Write-Host "Customer demo: $taskBaseUrl/design/demo/index.html"
-Write-Host "Presenter: $taskBaseUrl/design/demo/presenter.html"
+Write-Host "Presentation stage: $taskBaseUrl/design/demo/stage.html"
 Write-Host "Design: $taskBaseUrl/design/hifi/index.html#partner"
 Write-Host "Overview: $taskBaseUrl/design/hifi/overview.html"
 Write-Host "Prototype: $taskBaseUrl/design/index.html?v=3.1#partner"

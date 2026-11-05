@@ -4,7 +4,7 @@
 
 ## 当前接手位置
 
-当前客户演示已采用 A1、A2、C3、A4、B5、A6 六套确认稿。24 个装扮沿用原资产 ID 与获取点位，可在衣橱独立试穿，保存后用于伙伴和新纪念图。换机运行使用随仓库提交的透明图集。见[服装来源与重建](reviews/2026-11-05-wardrobe/selected/README.md)、[演示入口与备用录屏](design/demo/README.md)。上一轮[画面修复记录](docs/客户演示画面修复.md)保留备查。三栏操作台待另行讨论。
+当前客户演示已采用 A1、A2、C3、A4、B5、A6 六套确认稿。24 个装扮沿用原资产 ID 与获取点位，可在衣橱独立试穿，保存后用于伙伴和新纪念图。换机运行使用随仓库提交的透明图集。见[服装来源与重建](reviews/2026-11-05-wardrobe/selected/README.md)、[演示入口与备用录屏](design/demo/README.md)。上一轮[画面修复记录](docs/客户演示画面修复.md)保留备查。电脑投屏已接入[三栏现场演示台](http://127.0.0.1:8765/design/demo/stage.html)，同一窗口可从准备、点位核验一直走到真实 PNG；演示顺序与新版录像见[开场说明](design/demo/README.md#明早开场)。
 
 - 客户演示已进入投屏复演与交付阶段。分支为 `codex/presenter-console-20261106`，从[演示者说明](design/demo/README.md)启动，测试证据见[实施与彩排](docs/客户演示实施与彩排.md)。
 - 游客演示 `design/demo/` 已采用[黔山同行](<reviews/2026-11-05-ui-companion/黄晓西 · 黔山同行视觉评审册.pdf>)。44 个对应画面、三种尺寸与实际差异见[视觉验收](docs/黔山同行视觉实施与验收.md)。`design/hifi/` 的 v0.2 保留供查阅历史交互。
@@ -43,7 +43,8 @@ git pull --ff-only
 
 | 预览内容 | 本地入口 |
 | --- | --- |
-| 客户演示与开场准备 | http://127.0.0.1:8765/design/demo/index.html · http://127.0.0.1:8765/design/demo/presenter.html |
+| 三栏现场演示台 | http://127.0.0.1:8765/design/demo/stage.html |
+| 单独游客页与旧准备页 | http://127.0.0.1:8765/design/demo/index.html · http://127.0.0.1:8765/design/demo/presenter.html |
 | 高保真伙伴首页 | http://127.0.0.1:8765/design/hifi/index.html#partner |
 | 21 页总览 | http://127.0.0.1:8765/design/hifi/overview.html |
 | 60 个展示视图及验收证据 | http://127.0.0.1:8765/output/playwright/all-ui-review/gallery.html |

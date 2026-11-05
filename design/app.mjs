@@ -20,6 +20,7 @@ const titles={entry:'进入旅行衣橱',onboarding:'初次相遇',partner:'伙�
 if(profile.orderPages)titles.order='模拟订单';
 const methodName={qr:'测试码核验','geo-demo':'定位模拟','staff-demo':'店员核验模拟'};
 let db,loadError='',route={name:'entry',params:new URLSearchParams()},ui={},busy=false,failNext=false,modalContext=null,focusBeforeSheet=null,queuedNavigation=null;
+let reportStage;
 const busyControls=new Map();
 const sessionGet=k=>{try{return sessionStorage.getItem(sessionKey(k));}catch{return null;}};
 const sessionSet=(k,v)=>{try{sessionStorage.setItem(sessionKey(k),v);}catch{/* Local business storage is validated independently. */}};
@@ -44,12 +45,12 @@ function setUI(){try{ui=JSON.parse(sessionGet('hxx.ui.'+db.current)||'{}');}catc
 function keepUI(){if(!db.current)return;try{const clean={...ui};delete clean.preview;sessionSet('hxx.ui.'+db.current,JSON.stringify(clean));}catch{/* Editing state remains available in memory. */}}
 function change(fn){if(loadError)throw Error(loadError);const current=S.readDB(progressStorage());const storage=failNext?{setItem(){throw Error('test');}}:progressStorage();failNext=false;const next=S.commit(storage,current,fn);const previousOwner=db.current;db=next.db;if(previousOwner===db.current)keepUI();return next.result;}
 function tx(fn){const active=db.current;return change(d=>{if(d.current!==active)throw Error('演示账号已在另一页切换，请等待页面同步后再操作。');return fn(d.accounts[active]);});}
-function lockApp(value){busy=value;$('#app').setAttribute('aria-busy',String(value));if(value){$('#app').querySelectorAll('button,input,select').forEach(el=>{if(!busyControls.has(el))busyControls.set(el,el.disabled);el.disabled=true;});}else{busyControls.forEach((wasDisabled,el)=>el.disabled=wasDisabled);busyControls.clear();}}
+function lockApp(value){busy=value;reportStage?.();$('#app').setAttribute('aria-busy',String(value));if(value){$('#app').querySelectorAll('button,input,select').forEach(el=>{if(!busyControls.has(el))busyControls.set(el,el.disabled);el.disabled=true;});}else{busyControls.forEach((wasDisabled,el)=>el.disabled=wasDisabled);busyControls.clear();}}
 function resumeNavigation(){if(!queuedNavigation)return false;const {target,options}=queuedNavigation;queuedNavigation=null;go(target,options);return true;}
 function compositionStamp(){return JSON.stringify({owner:db.current,look:me()?.look,events:selectedEvents().map(e=>e.id),title:ui.title||'把黔山带回去',template:ui.template});}
 function toast(text){$('#toast').textContent=text;$('#toast').classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('#toast').classList.remove('show'),2800);}
-function close(){if($('#sheet').open)$('#sheet').close();modalContext=null;focusBeforeSheet?.focus?.();}
-function sheet(title,body,context=null){focusBeforeSheet=document.activeElement;$('#sheet-title').textContent=title;$('#sheet-body').innerHTML=body;$('#sheet').dataset.kind=body.includes('reward-reveal')?'reward':'standard';modalContext=context;if(!$('#sheet').open)$('#sheet').showModal();}
+function close(){reportStage?.();if($('#sheet').open)$('#sheet').close();modalContext=null;focusBeforeSheet?.focus?.();}
+function sheet(title,body,context=null){reportStage?.();focusBeforeSheet=document.activeElement;$('#sheet-title').textContent=title;$('#sheet-body').innerHTML=body;$('#sheet').dataset.kind=body.includes('reward-reveal')?'reward':'standard';modalContext=context;if(!$('#sheet').open)$('#sheet').showModal();}
 function error(e){sheet('操作未完成',notice(esc(e.message),'error')+button('返回继续','close','full'));}
 function dirty(){return route.name==='wardrobe'&&ui.draft&&JSON.stringify(ui.draft)!==JSON.stringify(me()?.look);}
 function guarded(target){let r=parse(target);const a=me();if(!a){if(!['entry','onboarding'].includes(r.name))sessionSet('hxx.pending',routeString(r));return parse('entry');}if(!a.initialized){if(!['entry','onboarding'].includes(r.name))sessionSet('hxx.pending',routeString(r));return parse('onboarding');}if(r.name==='entry'||r.name==='onboarding')return parse('partner');return r;}
@@ -85,7 +86,7 @@ function refreshDraft(){
  const canvas=$('.draft-postcard');
  if(canvas && profile.paintDraft)profile.paintDraft(canvas,{look:me().look,events:selectedEvents(),template:ui.template,title:ui.title});
 }
-function render(){if(loadError){$('#app').innerHTML=empty('暂时无法读取进度',esc(loadError),button('重试读取','reload','full'));return;}
+function render(){reportStage?.();if(loadError){$('#app').innerHTML=empty('暂时无法读取进度',esc(loadError),button('重试读取','reload','full'));return;}
  const root=roots.includes(route.name)&&!(route.name==='wardrobe'&&ui.returnTo),gate=['entry','onboarding'].includes(route.name);document.title=titles[route.name]+' · 黄晓西';$('#app').dataset.page=route.name;$('#app').className='app '+(gate?'gate-page':root?'root-page':'detail-page');
  const immersive=['entry','onboarding','partner','explore','scene','point','pool','wardrobe','collection','memories','compose'].includes(route.name);$('#app').classList.toggle('immersive',immersive);
  const head=gate||root?'':`<header class="app-header ${immersive?'stage-header':''}">${button(icon('back'),'back','icon','aria-label="返回上一页"')}<strong>${titles[route.name]}</strong><span class="test-label">体验版</span></header>`;
@@ -176,4 +177,10 @@ $('#sheet').addEventListener('cancel',()=>{modalContext=null;});
 window.addEventListener('hashchange',()=>{const target=location.hash.slice(1);if(target===routeString(route))return;if(dirty()){history.replaceState(null,'','#'+routeString(route));go(target);}else go(target,{replace:true});});
 window.addEventListener('beforeunload',e=>{if(dirty()){keepUI();e.preventDefault();e.returnValue='';}});
 window.addEventListener('storage',e=>{if(demo&&e.key===profile.epochKey){location.reload();return;}if(e.key!==storageKey&&e.key!==null)return;if(demo&&e.newValue===null){for(const key of Object.keys(sessionStorage))if(key.startsWith(profile.sessionPrefix))sessionStorage.removeItem(key);location.reload();return;}try{const oldAccount=db.current,oldLook=JSON.stringify(me()?.look),hadEdits=dirty(),next=S.readDB(progressStorage());keepUI();db=next;const sameAccount=oldAccount===db.current&&me()?.initialized;if(sameAccount){if(ui.draft&&!hadEdits)ui.draft=clone(me().look);if(hadEdits&&Object.values(ui.draft).some(x=>!me().owned.includes(x))){ui.draft=clone(me().look);toast('另一页重置了装扮，试穿已恢复为当前搭配');}if(oldLook!==JSON.stringify(me().look))ui.preview=null;}else{close();setUI();ui.preview=null;if(!me()?.initialized||ui.draft&&Object.values(ui.draft).some(x=>!me().owned.includes(x))){ui.draft=null;ui.returnTo=null;}failNext=false;route=guarded(routeString(route));history.replaceState(null,'','#'+routeString(route));}render();toast(sameAccount&&hadEdits?'进度已同步，当前未保存的试穿已保留':sameAccount?'其他页面更新了进度，已同步':'演示账号已在另一页切换，页面已同步');}catch(err){error(err);}});
+if(demo && parent!==window && new URLSearchParams(location.search).get('stage')==='1' && window.frameElement && parent.location.pathname===new URL('./demo/stage.html',import.meta.url).pathname){
+ const {connectStage}=await import('./demo/stage/bridge.mjs');
+ reportStage=connectStage(()=>({account:me(),owner:db.current,route,pageTitle:titles[route.name],modal:$('#sheet').open?$('#sheet-title').textContent:'',dirty:!!dirty(),busy,error:loadError,preview:!!ui.preview,selected:route.name==='compose'&&me()?selectedEvents().length:0}),go);
+ $('#sheet').addEventListener('close',reportStage);
+ document.addEventListener('input',reportStage);
+}
 setUI();route=guarded(location.hash.slice(1)||'partner');history.replaceState(null,'','#'+routeString(route));render();

@@ -1,0 +1,474 @@
+:root {
+  color-scheme: light;
+  --ink: #3e382d;
+  --moss: #425c49;
+  --line: #d0bda0;
+  --paper: #f8eed9;
+  --title: KaiTi, STKaiti, 'Songti SC', SimSun, serif;
+  --screen: clamp(360px, 46.2dvh, 430px);
+  font:
+    15px/1.55 'Microsoft YaHei',
+    'PingFang SC',
+    system-ui,
+    sans-serif;
+  color: var(--ink);
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: #243b34;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(100deg, #172e2aed, #2c4237ea 48%, #24362feb),
+    url('../../hifi/assets/night.png') center/cover;
+}
+button,
+summary {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+button {
+  background: #fff8e9;
+  border: 1px solid #cbb795;
+  border-radius: 7px;
+  padding: 5px 10px;
+  line-height: 1.45;
+}
+button:hover:not(:disabled),
+summary:hover {
+  color: #643e26;
+  background-color: #f2e2c4;
+}
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #a8623a;
+  outline-offset: 2px;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+h1,
+h2,
+h3,
+p,
+dl,
+dd {
+  margin: 0;
+}
+[hidden] {
+  display: none !important;
+}
+.stage {
+  height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--screen) minmax(0, 1fr);
+  gap: clamp(18px, 2.6vw, 54px);
+  align-items: center;
+}
+.screen {
+  height: 100%;
+  min-height: 0;
+  grid-column: 2;
+  grid-row: 1;
+  box-shadow:
+    0 0 0 1px #ad9668,
+    0 8px 40px #10221b80;
+}
+iframe {
+  border: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #382e2c;
+}
+.rail {
+  width: min(100%, 296px);
+  max-height: calc(100dvh - 30px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #bba785 var(--paper);
+  border-radius: 15px;
+  background: var(--paper);
+  border: 1px solid #baa47a;
+  box-shadow: 0 12px 44px #0e1e193d;
+}
+#controls {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: end;
+}
+#progress {
+  grid-column: 3;
+  grid-row: 1;
+}
+.folio {
+  padding: clamp(16px, 1.6vw, 25px);
+  background: linear-gradient(125deg, #fffaeb80, transparent 55%);
+}
+.mast {
+  position: relative;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #ad9570;
+}
+.kicker,
+.identity {
+  font-size: 12px;
+  color: var(--moss);
+  letter-spacing: 0.12em;
+  font-weight: 650;
+}
+.kicker i {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
+  border: 1px solid #9f7955;
+  margin-right: 3px;
+  background: #dec898;
+}
+h1,
+.display {
+  font: 600 31px/1.25 var(--title);
+  margin-top: 4px;
+  letter-spacing: 0.04em;
+}
+section {
+  margin-top: 15px;
+}
+section h2 {
+  font: 600 19px/1.4 var(--title);
+  margin: 0 0 4px;
+}
+section h2 span {
+  font:
+    italic 14px Georgia,
+    serif;
+  margin-right: 5px;
+  color: #795c3d;
+}
+.preflight,
+.annotation,
+.overlay-note,
+.feedback,
+.place small,
+.identity {
+  font-size: 13px;
+  line-height: 1.55;
+}
+.annotation,
+.place small {
+  color: #665a49;
+}
+.preflight {
+  color: var(--moss);
+  margin-top: 8px;
+}
+.preflight::before {
+  content: '●';
+  padding-right: 6px;
+}
+.preflight[data-fail='true'],
+.feedback {
+  color: #86442f;
+}
+.feedback:not(:empty) {
+  margin-top: 8px;
+}
+.place {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+.place strong,
+.place small {
+  display: block;
+}
+.place strong {
+  font: 600 18px/1.3 var(--title);
+}
+.place small {
+  font-size: 11px;
+}
+.place button,
+#activity span {
+  font-size: 13px;
+}
+.place .scan {
+  background: #506551;
+  color: #fff7e6;
+  border-color: #506551;
+}
+.place .scan:hover:not(:disabled) {
+  background: #3d5542;
+  color: white;
+}
+#activity {
+  width: 100%;
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #efe1c5;
+}
+.switches,
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 7px;
+}
+.switches button {
+  flex: 1;
+}
+.tools button,
+.switches button {
+  font-size: 14px;
+}
+details {
+  margin-top: 10px;
+}
+summary {
+  font-size: 13px;
+  color: var(--moss);
+  padding: 3px 0;
+}
+details .annotation {
+  font-size: 12px;
+  margin-top: 5px;
+}
+.identity {
+  letter-spacing: 0;
+}
+.live-scene {
+  margin-top: 10px;
+}
+.live-scene h3 {
+  font: 600 22px/1.4 var(--title);
+  overflow-wrap: anywhere;
+}
+.overlay-note:not(:empty) {
+  color: #844d37;
+  margin-top: 2px;
+}
+.balance {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--moss);
+  margin: 10px 0;
+  border-block: 1px solid var(--line);
+  padding: 7px 0;
+}
+.balance b {
+  font:
+    600 42px/1.1 Georgia,
+    serif;
+  font-variant-numeric: tabular-nums;
+}
+.balance span {
+  font-size: 15px;
+}
+.balance small {
+  display: block;
+  font-size: 11px;
+  color: #6a6353;
+}
+.counts div {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 4px 0;
+  border-bottom: 1px dotted #cebda1;
+}
+.counts dd {
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  color: var(--moss);
+}
+.ledger p,
+.cue p {
+  font-size: 14px;
+}
+.ledger {
+  margin-top: 11px;
+}
+.cue {
+  border-left: 3px solid #ab8355;
+  background: #ecdfc5;
+  padding: 9px 12px;
+  border-radius: 0 6px 6px 0;
+  margin-top: 12px;
+}
+.cue h2 {
+  font-size: 16px;
+}
+.mobile-bar,
+.dismiss,
+body.folded .rail {
+  display: none;
+}
+#bring-back {
+  position: fixed;
+  z-index: 1;
+  top: 14px;
+  left: 18px;
+  color: #f7ead3;
+  background: #354b41;
+  border-color: #837d64;
+}
+dialog {
+  max-width: min(420px, 92vw);
+  color: var(--ink);
+  border: 1px solid #b49463;
+  background: var(--paper);
+  border-radius: 15px;
+  padding: 23px;
+}
+dialog h2 {
+  font: 600 25px var(--title);
+  margin: 6px 0 12px;
+}
+dialog p {
+  white-space: pre-line;
+}
+dialog .switches {
+  margin-top: 18px;
+}
+dialog::backdrop {
+  background: #182921b3;
+}
+#apply {
+  background: #885342;
+  color: white;
+}
+#milestones:not(:empty) {
+  margin-top: 7px;
+  color: var(--moss);
+}
+#playback {
+  padding: 3px 0;
+  border: 0;
+  background: transparent;
+  color: #57634d;
+  font-size: 13px;
+  margin-top: 3px;
+}
+#replay {
+  width: min(1050px, 96vw);
+  max-width: 96vw;
+  max-height: 94dvh;
+  padding: 14px;
+}
+#replay header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+#replay video {
+  display: block;
+  width: 100%;
+  max-height: 72dvh;
+  background: #20362d;
+}
+#replay p {
+  font-size: 13px;
+  margin-top: 6px;
+}
+@media (max-height: 760px) and (min-width: 901px) {
+  .folio {
+    padding: 13px 17px;
+  }
+  .rail {
+    max-height: calc(100dvh - 16px);
+  }
+  section {
+    margin-top: 9px;
+  }
+  .place {
+    padding: 5px 0;
+  }
+}
+@media (max-width: 900px) {
+  .mobile-bar {
+    height: 43px;
+    padding: 4px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff0d5;
+  }
+  .mobile-bar span {
+    font: 18px var(--title);
+  }
+  .mobile-bar button {
+    font-size: 13px;
+    background: #344e42;
+    border-color: #9f9778;
+    color: #fff2d9;
+  }
+  .stage {
+    grid-template-columns: 1fr min(100%, var(--screen)) 1fr;
+    gap: 0;
+    height: calc(100dvh - 43px);
+  }
+  .stage #guest {
+    height: 100%;
+  }
+  .rail,
+  body.folded .rail {
+    display: none;
+  }
+  .rail.open,
+  body.folded .rail.open {
+    display: block;
+    position: fixed;
+    z-index: 4;
+    top: 49px;
+    left: 8px;
+    width: min(316px, calc(100vw - 16px));
+    max-height: calc(100dvh - 58px);
+  }
+  #progress.open {
+    left: auto;
+    right: 8px;
+  }
+  .dismiss {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 12px;
+  }
+  #shade {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+    background: #1a251eb3;
+  }
+  #bring-back,
+  #fold {
+    display: none !important;
+  }
+}
+@media (max-width: 520px) {
+  :root {
+    --screen: 100%;
+  }
+}

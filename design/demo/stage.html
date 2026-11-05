@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#263e37" />
+    <title>黔山同行 · 现场演示台</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="stage/stage.css" />
+  </head>
+  <body>
+    <header class="mobile-bar">
+      <button data-panel="controls" aria-controls="controls">现场操作</button
+      ><span>黔山同行</span
+      ><button data-panel="progress" aria-controls="progress">游玩实况</button>
+    </header>
+    <button id="bring-back" hidden>展开演示台</button>
+    <main class="stage">
+      <aside class="rail" id="controls" aria-label="现场操作">
+        <div class="folio">
+          <header class="mast">
+            <div class="kicker"><i></i> 黔山同行 · 放映手册</div>
+            <h1>现场操作</h1>
+            <button class="dismiss" aria-label="关闭现场操作">收起</button>
+          </header>
+          <p class="preflight" id="preflight" role="status">
+            正在检查本机素材与手账…
+          </p>
+          <section>
+            <h2><span>01</span> 点位切换</h2>
+            <p class="annotation" id="point-help">
+              在中央确认到访后，才会记录足迹。
+            </p>
+            <div id="places"></div>
+            <button id="activity" data-jump="activity" disabled>
+              手作体验 <span>打开活动 ›</span>
+            </button>
+          </section>
+          <section>
+            <h2><span>02</span> 开场与投屏</h2>
+            <div class="switches">
+              <button id="fullscreen">进入全屏</button
+              ><button id="fold">收起两侧</button>
+            </div>
+            <details id="files">
+              <summary>备份、载入与重新开场</summary>
+              <div class="tools">
+                <button id="backup">备份</button
+                ><button id="choose">载入…</button
+                ><button id="reset">重新开场…</button>
+              </div>
+              <input
+                id="restore"
+                type="file"
+                accept=".json,application/json"
+                hidden
+              />
+              <p id="file-note" class="annotation">
+                仅管理本机的 A、B 演示手账。
+              </p>
+            </details>
+            <button id="playback">观看备用彩排 ↗</button>
+          </section>
+          <p class="feedback" id="feedback" role="status"></p>
+        </div>
+      </aside>
+      <div class="screen">
+        <template id="guest-view"
+          ><iframe id="guest" title="黄晓西 · 游客实操"></iframe
+        ></template>
+      </div>
+      <aside class="rail" id="progress" aria-label="游玩实况">
+        <div class="folio">
+          <header class="mast">
+            <div class="kicker"><i></i> 同行记录 · 实时</div>
+            <h2 class="display">游玩实况</h2>
+            <button class="dismiss" aria-label="关闭游玩实况">收起</button>
+          </header>
+          <section class="live-scene">
+            <div class="identity" id="identity">等待连接</div>
+            <h3 id="scene-title">正在翻开手账</h3>
+            <p class="overlay-note" id="overlay"></p>
+          </section>
+          <div class="balance">
+            <b id="balance">—</b
+            ><span>次可用机会<small>黔山漫游 · 景区通用</small></span>
+          </div>
+          <dl class="counts">
+            <div>
+              <dt>到过的地点</dt>
+              <dd id="visits">—</dd>
+            </div>
+            <div>
+              <dt>到访与活动经历</dt>
+              <dd id="events">—</dd>
+            </div>
+            <div>
+              <dt>已解锁卡池</dt>
+              <dd id="pools">—</dd>
+            </div>
+            <div>
+              <dt>抽取记录</dt>
+              <dd id="draws">—</dd>
+            </div>
+            <div>
+              <dt>已存作品</dt>
+              <dd id="works">—</dd>
+            </div>
+          </dl>
+          <section class="ledger">
+            <h2>最近一笔收支</h2>
+            <p id="ledger">等待读取</p>
+          </section>
+          <p id="milestones" class="annotation"></p>
+          <section class="cue">
+            <h2>演示提示</h2>
+            <p id="cue" aria-live="polite">在中央打开游客手账。</p>
+          </section>
+        </div>
+      </aside>
+    </main>
+    <button id="shade" aria-label="收起侧栏" hidden tabindex="-1"></button>
+    <dialog id="confirm" aria-labelledby="confirm-title">
+      <div class="kicker">现场手账管理</div>
+      <h2 id="confirm-title"></h2>
+      <p id="warning"></p>
+      <div class="switches">
+        <button id="cancel" autofocus>保留当前手账</button
+        ><button id="apply">确认替换</button>
+      </div>
+    </dialog>
+    <dialog id="replay" aria-labelledby="replay-title">
+      <header>
+        <h2 id="replay-title">现场彩排 · 无声回放</h2>
+        <button id="end-replay" autofocus>回到现场</button>
+      </header>
+      <video
+        controls
+        playsinline
+        preload="none"
+        aria-label="从新手账到纪念图的三栏演示"
+      ></video>
+      <p>录像来自独立演示手账，不会改变当前游客的进度。</p>
+    </dialog>
+    <script type="module" src="stage/controller.mjs"></script>
+  </body>
+</html>
