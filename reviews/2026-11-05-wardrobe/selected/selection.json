@@ -1,0 +1,185 @@
+{
+  "status": {
+    "chosenDesigns": "confirmed-by-user",
+    "breakdownBoards": "awaiting-visual-confirmation"
+  },
+  "generator": "built-in image_gen",
+  "identityReference": "../../../design/hifi/assets/companion.png",
+  "commonPrompt": "Use case: identity-preserve. Art deliverable: one landscape 3:2 master WARDROBE MODEL SHEET for the Huang Xiaoxi game. Two images attached. Image 1 is a SINGLE selected outfit (the design and cut are already approved): faithfully reproduce its hairstyle, closures, materials, hem, embroidery placement, shoes, colors, weight and styling. Image 2 is exclusively the canonical character identity and 3D finish: copy her actual face, large warm brown eyes, eyebrows, nose, mouth, skin, petite age-appropriate compact proportions and friendly expression, NOT the clothes/headpiece of image 2. FRONT view, tall enough to show neck and waist, arms relaxed slightly away from body with both hands visible; absolutely no new costume design. Use the exact same front facing model, stance, framing and warm ivory background as a premium game-wardrobe catalog series.\nLayout is mandatory: one fully dressed, full-length character centered in the LEFT 40 percent of the canvas, from hairstyle/accessories to both soles with about 5 percent safety margin. In the RIGHT 60 percent: exactly FOUR fully isolated wardrobe catalog items in a clean 2x2 array, with large margins and absolute separation. Upper left tile: sculpted hairstyle plus selected hair ornament as a single standalone hairpiece, NO face or neck. Upper right tile: ONLY the COMPLETE upper garment including undershirt if applicable and attached neck jewelry; on an invisible form with EMPTY NECK and empty sleeves; no body, head, skin, hands, bottoms or waist belt unless an integral part of top. Lower left tile: ONLY the entire bottom garment with visible waistband, fold detail and hem, no legs, torso or shoes. Lower right tile: a MATCHING PAIR of complete shoes together, no ankles or feet. Precisely match the four items on the figure, including pattern placement. Shoes and hair must be complete and recognizable, pants clearly separated legs, no parts touching. Each tile has its own neutral background the SAME color as the left side. All items upright at useful size, with slight natural studio contact shadow, generous negative space. No rules or border lines, no inset duplicates, swatches, numbers, typography, labels, symbols, callouts, UI controls, mannequins, logos, extra look, or disembodied hands/heads. Fine tactile fabric, realistic silver highlights, refined stylized 3D collectible doll rendering identical to the reference style. Clear enough for art director to judge how four independent wardrobe slots would fit, not a production sprite image.",
+  "outfits": [
+    {
+      "id": "A1",
+      "outfitId": "start-a",
+      "name": "山野来信",
+      "source": "初始装扮 ①",
+      "slots": {
+        "hair": {
+          "assetId": "start-a-hair",
+          "design": "银叶发夹与侧编发"
+        },
+        "top": {
+          "assetId": "start-a-top",
+          "design": "苔绿连帽斗篷、米白衬衫"
+        },
+        "bottom": {
+          "assetId": "start-a-bottom",
+          "design": "带腰带的沙色工装长裤"
+        },
+        "shoes": {
+          "assetId": "start-a-shoes",
+          "design": "棕色系带靴"
+        }
+      },
+      "note": "衬衫与斗篷按一件上装处理，腰带随工装裤。",
+      "board": "A1.png",
+      "approvedLook": "references/A1.png",
+      "prompt": "Keep the selected moss green hooded travel cape, small patterned geometric embroidered border, toggles and visible ivory collared shirt together as ONE upper item. Hair is dark side braid with silver leaf clip and small tie; trousers are separate sand-colored relaxed cargo pants with patch pockets, belt belongs to trouser tile; shoes are brown lace-up hiking boots. The full figure has the same cape-to-pocket overlap as the reference.",
+      "generated": "exec-8510d398-79c2-4e0e-bc1f-d889241f8e50.png"
+    },
+    {
+      "id": "A2",
+      "outfitId": "start-b",
+      "name": "晴日出发",
+      "source": "初始装扮 ②",
+      "slots": {
+        "hair": {
+          "assetId": "start-b-hair",
+          "design": "双旋银扣高马尾"
+        },
+        "top": {
+          "assetId": "start-b-top",
+          "design": "绣边棒球夹克、浅色内搭"
+        },
+        "bottom": {
+          "assetId": "start-b-bottom",
+          "design": "深灰翻边及膝短裤"
+        },
+        "shoes": {
+          "assetId": "start-b-shoes",
+          "design": "象牙白高帮鞋"
+        }
+      },
+      "note": "选定的是棒球夹克与短裤。裤腿中缝、翻边和单侧绣花都保留在下装。",
+      "board": "A2.png",
+      "approvedLook": "references/A2.png",
+      "prompt": "Match the saffron embroidered bomber with striped knit trim, colorful geometric placket and sleeves; jacket plus its visible ivory knit layer form ONE top. Keep the dark high ponytail with double spiral silver ornament, clearly cut dark cuffed knee-length Bermuda SHORTS with a small embroidered motif on one leg and their belt, and ivory lace-up high-top sneakers. It must be SHORTS, not a skirt. No tailored blazer, no new headdress.",
+      "generated": "exec-ec54e503-5488-4256-8181-f41e4cb8fd2a.png"
+    },
+    {
+      "id": "C3",
+      "outfitId": "start-c",
+      "name": "溪边薄荷",
+      "source": "初始装扮 ③",
+      "slots": {
+        "hair": {
+          "assetId": "start-c-hair",
+          "design": "银梳半盘长发"
+        },
+        "top": {
+          "assetId": "start-c-top",
+          "design": "象牙白交领绣花短衫"
+        },
+        "bottom": {
+          "assetId": "start-c-bottom",
+          "design": "玉色双层纱裙、腰结及银流苏"
+        },
+        "shoes": {
+          "assetId": "start-c-shoes",
+          "design": "浅色绣花鞋"
+        }
+      },
+      "note": "腰结和双流苏随裙替换。后续制层时，披发置于肩袖之后。",
+      "board": "C3.png",
+      "approvedLook": "references/C3.png",
+      "prompt": "Match the ivory crossover upper blouse with pale jade diagonal collar, leafy sprig embroidery and gentle flared sleeves. Preserve the half-up dark hairstyle with the curved silver comb, long dark hair behind. Separate pale jade layered calf-length skirt with diaphanous asymmetrical embroidered water-and-flower overlay, tied waist bow and paired silver tassels; the bow AND both tassels belong to the skirt tile only. Warm ivory embroidered low flats. Do not turn the separate skirt and blouse into a single dress.",
+      "generated": "exec-989a654d-e6f4-490e-bc5b-71e761b1492f.png"
+    },
+    {
+      "id": "A4",
+      "outfitId": "gift",
+      "name": "黔山初见",
+      "source": "景区免费见面礼",
+      "slots": {
+        "hair": {
+          "assetId": "gift-hair",
+          "design": "花银冠与盘发"
+        },
+        "top": {
+          "assetId": "gift-top",
+          "design": "红绣衣、银胸饰"
+        },
+        "bottom": {
+          "assetId": "gift-bottom",
+          "design": "黑红百褶绣裙"
+        },
+        "shoes": {
+          "assetId": "gift-shoes",
+          "design": "红色绣花搭带鞋"
+        }
+      },
+      "note": "银冠跟发型，胸前两层银饰跟上装；两者可分开搭配。",
+      "board": "A4.png",
+      "approvedLook": "references/A4.png",
+      "prompt": "Preserve the selected full flower silver crown on dark fixed updo, dangling fringe; vermilion bell-cuff embroidered upper jacket with its characteristic layered silver chest plaques and dangling silverwork INCLUDED on the top tile. The black pleated knee skirt with bands of red lining and precise embroidered multicolored panels is the separate lower item. Red low embroidered Mary Jane shoes with ankle straps, silver floral fasteners. Keep the distinctive recognizable original silhouette.",
+      "generated": "exec-e110be5c-6c89-48ba-ae46-c5477239cc20.png"
+    },
+    {
+      "id": "B5",
+      "outfitId": "mountain",
+      "name": "云山拾光",
+      "source": "云山卡池 · 山门入口／望山台",
+      "slots": {
+        "hair": {
+          "assetId": "mountain-hair",
+          "design": "弯月银梳与高髻"
+        },
+        "top": {
+          "assetId": "mountain-top",
+          "design": "深蓝山纹灯笼袖短夹克、银颈饰"
+        },
+        "bottom": {
+          "assetId": "mountain-bottom",
+          "design": "银灰折扇长裙"
+        },
+        "shoes": {
+          "assetId": "mountain-shoes",
+          "design": "黑色短靴"
+        }
+      },
+      "note": "夹克在腰际收短，让裙褶从腰头展开。重点核对袖量和裙摆的折面。",
+      "board": "B5.png",
+      "approvedLook": "references/B5.png",
+      "prompt": "Keep the compact bun with a crescent silver comb and dangling drops. One very distinctive cropped midnight-blue architectural jacket with huge rounded lantern sleeves, high stand collar, angular geometric silver mountain embroidery and short silver neckpiece included on the top; do not turn it into a long-sleeved hanfu robe. Separate silver grey ankle-length folded fan skirt, sharply folded layered asymmetric panels, angular edges, visible waistband and pleated fabric; not a generic flowing pleated skirt. A matched pair of black smooth chunky ankle boots peeks out below the skirt.",
+      "generated": "exec-7a0b0c90-ac50-47e3-8964-661ee9393186.png"
+    },
+    {
+      "id": "A6",
+      "outfitId": "flower",
+      "name": "花溪漫步",
+      "source": "花溪卡池 · 花溪小径／山间手作铺",
+      "slots": {
+        "hair": {
+          "assetId": "flower-hair",
+          "design": "花簪盘发"
+        },
+        "top": {
+          "assetId": "flower-top",
+          "design": "粉色立领泡袖短衫"
+        },
+        "bottom": {
+          "assetId": "flower-bottom",
+          "design": "莓紫叠瓣纱裙与花形腰扣"
+        },
+        "shoes": {
+          "assetId": "flower-shoes",
+          "design": "粉色绣花搭带鞋"
+        }
+      },
+      "note": "花形腰扣随裙，衣襟盘扣随上装。透纱和深色里裙合成一件下装。",
+      "board": "A6.png",
+      "approvedLook": "references/A6.png",
+      "prompt": "Keep the floral dark updo with pink blossom and tiny silver pendant hairpin. Blush-pink mandarin-collar short-sleeved PUFF SLEEVE blouse with narrow frog closures and delicate sprig embroidery. Separate berry-mauve calf-to-ankle layered translucent PETAL skirt with a wrapped waist, silver flower clasp and asymmetrical darker blossom embroidery sweeping down one side; the clasp belongs only to the lower garment. Pink embroidered Mary Jane flats. Maintain the visible graduated sheer edges and original petal overlap.",
+      "generated": "exec-e06b1f6d-4c84-4111-8984-c5f6a231fb10.png"
+    }
+  ]
+}
