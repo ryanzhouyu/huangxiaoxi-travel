@@ -1,0 +1,29 @@
+{
+  "at": "2026-11-05T09:44:00.119Z",
+  "browser": "Chrome headed",
+  "display": {
+    "width": 2048,
+    "height": 1152,
+    "viewport": [
+      2048,
+      1018
+    ],
+    "scale": 1.25
+  },
+  "runs": [
+    {
+      "label": "首次身份完整主线",
+      "seconds": 38,
+      "visits": 4,
+      "draws": 2,
+      "works": 2,
+      "balance": 15,
+      "firstWork": "bb7ea16772a2bb5b34375925845f4d7c37a002faca40a6837fa3a5b8ad382b0a",
+      "assets": [
+        "flower-shoes",
+        "joy"
+      ]
+    }
+  ],
+  "errors": []
+}

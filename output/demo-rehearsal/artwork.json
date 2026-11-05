@@ -1,0 +1,24 @@
+{
+  "layers": {
+    "hair": true,
+    "top": true,
+    "bottom": true,
+    "shoes": true,
+    "expression": true,
+    "pose": true,
+    "background": true
+  },
+  "singleSize": [
+    680,
+    763
+  ],
+  "trailSize": [
+    680,
+    937
+  ],
+  "backgroundChangesPng": true,
+  "videoSize": [
+    1280,
+    720
+  ]
+}

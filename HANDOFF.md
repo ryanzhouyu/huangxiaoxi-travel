@@ -4,7 +4,8 @@
 
 ## 当前接手位置
 
-- 当前处于**高保真视觉评审阶段**。业务原型 v0.3.1；高保真稿 v0.2 在 `design/hifi/`，覆盖 21 页、31 个清单关键状态及 8 个额外弹层，共 60 个展示视图。整套视觉仍待用户最终评审。
+- 客户演示已进入投屏复演与交付阶段。分支为 `codex/client-demo-20261106`，从[演示者说明](design/demo/README.md)启动，测试证据见[实施与彩排](docs/客户演示实施与彩排.md)。
+- 产品视觉仍在评审。业务原型 v0.3.1；高保真稿 v0.2 在 `design/hifi/`，覆盖 21 页、31 个清单关键状态及 8 个额外弹层，共 60 个展示视图。整套视觉仍待用户最终评审。
 - 已按用户批准的方案完成首页及全页面 UI 修订：保留色彩、人物场景和功能结构，采用填色道具插画、轻纸面材质、可读字号，调整按钮比例及内距。没有改变业务原型、存档键或经济规则。
 - 本次将上一轮尚未提交的源码、页面 PNG、验收资料和启动脚本一起整理提交，目标为私有仓库 [ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel) 的 `main`。实际同步状态用 `git fetch origin`、`git status -sb` 和 `git log -1` 核对，不在本文手填最新 SHA。
 - 2026-11-05 已恢复本地预览。旧记录中“Git 身份缺失、未提交”描述的是 2026-10-20 当时状态，不作为本次交接结论。
@@ -19,7 +20,7 @@
 首次克隆：
 
 ```powershell
-git clone https://github.com/ryanzhouyu/huangxiaoxi-travel.git
+git clone -b codex/client-demo-20261106 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
 cd huangxiaoxi-travel
 git status -sb
 git log -1 --oneline
@@ -30,7 +31,8 @@ git log -1 --oneline
 
 ```powershell
 git status -sb
-git switch main
+git fetch origin
+git switch codex/client-demo-20261106
 git pull --ff-only
 .\Start-Local.ps1
 ```
@@ -39,6 +41,7 @@ git pull --ff-only
 
 | 预览内容 | 本地入口 |
 | --- | --- |
+| 客户演示与开场准备 | http://127.0.0.1:8765/design/demo/index.html · http://127.0.0.1:8765/design/demo/presenter.html |
 | 高保真伙伴首页 | http://127.0.0.1:8765/design/hifi/index.html#partner |
 | 21 页总览 | http://127.0.0.1:8765/design/hifi/overview.html |
 | 60 个展示视图及验收证据 | http://127.0.0.1:8765/output/playwright/all-ui-review/gallery.html |
@@ -76,7 +79,7 @@ python docs/check_docs.py
 
 ## 下一步与未决事项
 
-2026-11-05 已编制面向 11 月 6 日上午电脑投屏的[客户演示修改计划与验收](docs/客户演示修改计划与验收.md)。当前仅完成检查和计划，用户尚未要求本轮实施，产品代码未改；新增连续演示入口、角色样板、状态接入与彩排均待执行。若下一轮执行，以该计划的依赖及验收推进，不把原有高保真页面连线视为已完成连续业务演示。
+2026-11-05 已按[客户演示修改计划](docs/客户演示修改计划与验收.md)完成独立本机演示。复位与恢复只作用于客户演示存档，运行和异常恢复指引见[演示说明](design/demo/README.md)。后续处理客户反馈前，先确认反馈来自客户演示、业务原型还是独立视觉评审稿。
 
 1. 按用户下一次明确反馈继续整套视觉评审，重点是图标与精细人物场景的协调、字号、按钮内距和页面平衡。保留“伙伴／游玩／回忆”三个主场景。
 2. 视觉方向明确后，再讨论固定身份角色母版、分层素材、逐件穿戴、动作与互动需求，并以小型验证确定渲染技术。当前概念形象和部件图集不是生产换装资产，不具备真实逐件穿戴及动画能力。
@@ -90,6 +93,6 @@ python docs/check_docs.py
 
 ## 可直接复制给另一端 Codex
 
-> 请在克隆的 huangxiaoxi-travel 仓库根目录工作，先读取 AGENTS.md、HANDOFF.md、docs/README.md，核对分支、最新提交和未提交改动，再按 README 启动本地预览。当前业务原型 v0.3.1，高保真 v0.2 已完成 21 页 UI 修订和历史验收，仍处于视觉评审阶段。请先概括当前状态和未决事项，保留已确认规则和已有工作，然后继续我本次指定的任务。正式账号、云同步、支付及生产角色换装／动作尚未接入，不要自行开发这些能力或大规模重构；历史验收不能冒充新环境实测。
+> 请先核对分支、工作区及 HANDOFF。客户演示使用 codex/client-demo-20261106，按 design/demo/README.md 打开准备页和演示入口。新问题在独立演示身份下复现，并按实际改动回归。
 
 完成实质阶段后更新本文的状态、决定和下一步，与代码、规范及必要证据一起提交。提交号与推送结果以实际 Git 状态为准。

@@ -1,0 +1,16 @@
+{
+  "codeRevision": "44d39597c1f4dfd31b337c4383307007132ea423",
+  "ruleTestsPassed": 14,
+  "browserRegressionPassed": 91,
+  "edgeGroupsPassed": 11,
+  "rehearsalRuns": 4,
+  "headedDisplayRun": true,
+  "activeWindowsDisplayPath": "HDMI, 2560x1440, 125%",
+  "actualDisplayViewport": [
+    2048,
+    1018
+  ],
+  "workPngSha256": "78e2311a38c1b03cacda6cba8885bd6366e2f044b5bbf5c43684d09574e1258d",
+  "recordingBytes": 16052543,
+  "venueEquipment": "check on site"
+}

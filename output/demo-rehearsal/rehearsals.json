@@ -1,0 +1,129 @@
+{
+  "at": "2026-11-05T09:40:24.009Z",
+  "runs": [
+    {
+      "label": "首次身份完整主线",
+      "seconds": 37,
+      "visits": 4,
+      "draws": 2,
+      "works": 2,
+      "balance": 15,
+      "firstWork": "82946e63258c02b6c88a258c0b92ef0fa7ac372d59e43cefc2bc2abdc2da1476",
+      "assets": [
+        "flower-hair",
+        "mountain-top"
+      ]
+    },
+    {
+      "label": "刷新回访和旧作品",
+      "seconds": 1,
+      "balance": 15,
+      "firstWork": "82946e63258c02b6c88a258c0b92ef0fa7ac372d59e43cefc2bc2abdc2da1476"
+    },
+    {
+      "label": "复位后重新完整演示 1920×1080",
+      "seconds": 6,
+      "visits": 4,
+      "draws": 2,
+      "works": 2,
+      "balance": 15,
+      "firstWork": "4750f44a94e7251ee609e142d58edf7ab13796f225ba5cde9a7557d4fa7716ac",
+      "assets": [
+        "flower-bg",
+        "mountain-bg"
+      ]
+    },
+    {
+      "label": "1440×900 全链路复核",
+      "seconds": 6,
+      "visits": 4,
+      "draws": 2,
+      "works": 2,
+      "balance": 15,
+      "firstWork": "ab2419e3d13c63f332364c55b52daeb91afcf7836635e1ee28b2c185c24fe82d",
+      "assets": [
+        "flower-bottom",
+        "mountain-bottom"
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "label": "到访 gate",
+      "balance": 2,
+      "event": "山门入口"
+    },
+    {
+      "label": "抽取 cloud",
+      "prize": "mountain-top",
+      "balance": 1
+    },
+    {
+      "label": "到访 ridge",
+      "balance": 3,
+      "event": "望山台"
+    },
+    {
+      "label": "到访 shop",
+      "balance": 4,
+      "event": "山间手作铺"
+    },
+    {
+      "label": "抽取 bloom",
+      "prize": "flower-hair",
+      "balance": 5
+    },
+    {
+      "label": "到访 gate",
+      "balance": 2,
+      "event": "山门入口"
+    },
+    {
+      "label": "抽取 cloud",
+      "prize": "mountain-bg",
+      "balance": 1
+    },
+    {
+      "label": "到访 ridge",
+      "balance": 3,
+      "event": "望山台"
+    },
+    {
+      "label": "到访 shop",
+      "balance": 4,
+      "event": "山间手作铺"
+    },
+    {
+      "label": "抽取 bloom",
+      "prize": "flower-bg",
+      "balance": 5
+    },
+    {
+      "label": "到访 gate",
+      "balance": 2,
+      "event": "山门入口"
+    },
+    {
+      "label": "抽取 cloud",
+      "prize": "mountain-bottom",
+      "balance": 1
+    },
+    {
+      "label": "到访 ridge",
+      "balance": 3,
+      "event": "望山台"
+    },
+    {
+      "label": "到访 shop",
+      "balance": 4,
+      "event": "山间手作铺"
+    },
+    {
+      "label": "抽取 bloom",
+      "prize": "flower-bottom",
+      "balance": 5
+    }
+  ],
+  "errors": [],
+  "external": []
+}

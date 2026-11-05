@@ -4,6 +4,10 @@
 
 GitHub 私有仓库：[ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel)，默认分支 `main`。访问和克隆需要拥有此仓库权限的 GitHub 账号。
 
+## 11 月 6 日客户演示
+
+连续演示交付在 `codex/client-demo-20261106` 分支。新电脑执行 `git clone -b codex/client-demo-20261106 https://github.com/ryanzhouyu/huangxiaoxi-travel.git`，进入目录后运行 `.\Start-Local.ps1`。演示使用[旅行手账](http://127.0.0.1:8765/design/demo/index.html)，开场和复位使用[准备页](http://127.0.0.1:8765/design/demo/presenter.html)。现场顺序与备用录屏见[演示者说明](design/demo/README.md)。
+
 ## 接手项目
 
 - [AGENTS.md](AGENTS.md)：项目工作要求与设计、实施约束。
