@@ -4,7 +4,9 @@
 
 ## 当前接手位置
 
-- 客户演示已进入投屏复演与交付阶段。分支为 `codex/client-demo-20261106`，从[演示者说明](design/demo/README.md)启动，测试证据见[实施与彩排](docs/客户演示实施与彩排.md)。
+当前分支已完成[客户演示画面修复](docs/客户演示画面修复.md)，包括单品、人物、地图和纪念图的视觉回归。三栏操作台仍待单独讨论。
+
+- 客户演示已进入投屏复演与交付阶段。分支为 `codex/presenter-console-20261106`，从[演示者说明](design/demo/README.md)启动，测试证据见[实施与彩排](docs/客户演示实施与彩排.md)。
 - 产品视觉仍在评审。业务原型 v0.3.1；高保真稿 v0.2 在 `design/hifi/`，覆盖 21 页、31 个清单关键状态及 8 个额外弹层，共 60 个展示视图。整套视觉仍待用户最终评审。
 - 已按用户批准的方案完成首页及全页面 UI 修订：保留色彩、人物场景和功能结构，采用填色道具插画、轻纸面材质、可读字号，调整按钮比例及内距。没有改变业务原型、存档键或经济规则。
 - 本次将上一轮尚未提交的源码、页面 PNG、验收资料和启动脚本一起整理提交，目标为私有仓库 [ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel) 的 `main`。实际同步状态用 `git fetch origin`、`git status -sb` 和 `git log -1` 核对，不在本文手填最新 SHA。
@@ -20,7 +22,7 @@
 首次克隆：
 
 ```powershell
-git clone -b codex/client-demo-20261106 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
+git clone -b codex/presenter-console-20261106 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
 cd huangxiaoxi-travel
 git status -sb
 git log -1 --oneline
@@ -32,7 +34,7 @@ git log -1 --oneline
 ```powershell
 git status -sb
 git fetch origin
-git switch codex/client-demo-20261106
+git switch codex/presenter-console-20261106
 git pull --ff-only
 .\Start-Local.ps1
 ```
@@ -93,6 +95,6 @@ python docs/check_docs.py
 
 ## 可直接复制给另一端 Codex
 
-> 请先核对分支、工作区及 HANDOFF。客户演示使用 codex/client-demo-20261106，按 design/demo/README.md 打开准备页和演示入口。新问题在独立演示身份下复现，并按实际改动回归。
+> 请先核对分支、工作区及 HANDOFF。客户演示使用 codex/presenter-console-20261106，按 design/demo/README.md 打开准备页和演示入口。新问题在独立演示身份下复现，并按实际改动回归。
 
 完成实质阶段后更新本文的状态、决定和下一步，与代码、规范及必要证据一起提交。提交号与推送结果以实际 Git 状态为准。

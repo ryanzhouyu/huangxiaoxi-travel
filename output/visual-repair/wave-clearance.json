@@ -1,0 +1,37 @@
+[
+  {
+    "width": 360,
+    "height": 640,
+    "sampled": 2574,
+    "occluded": 0,
+    "by": {}
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "sampled": 2574,
+    "occluded": 0,
+    "by": {}
+  },
+  {
+    "width": 1280,
+    "height": 720,
+    "sampled": 2574,
+    "occluded": 0,
+    "by": {}
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "sampled": 2574,
+    "occluded": 0,
+    "by": {}
+  },
+  {
+    "width": 1920,
+    "height": 1080,
+    "sampled": 2574,
+    "occluded": 0,
+    "by": {}
+  }
+]

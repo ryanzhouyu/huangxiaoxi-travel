@@ -23,9 +23,9 @@
 
 ## 备用及复演
 
-- [连续操作录屏](../../output/demo-rehearsal/连续操作彩排.webm)与[实际纪念图](../../output/demo-rehearsal/旅行纪念.png)可以离线播放／打开。录屏无声，包含新身份、回访及复位过程。
+- [连续操作录屏](../../output/visual-repair/连续操作彩排.webm)与[实际纪念图](../../output/visual-repair/下载纪念.png)可以离线播放／打开。录屏无声，包含新身份、回访及复位过程。
 - 本机彩排生成的备用回访手账在 `.codex/local-deploy/demo-run/备用回访手账.json`。它通过正常点击和下载备份产生。准备页可载入备份，确认后替换当前客户演示手账。个人备份由演示者单独保存。
-- 项目分支为 `codex/client-demo-20261106`。新电脑可运行 `git clone -b codex/client-demo-20261106 https://github.com/ryanzhouyu/huangxiaoxi-travel.git`。已有目录请先保护未提交工作，再 fetch、切到该分支并快进拉取。浏览器存档按来源域隔离。
+- 项目分支为 `codex/presenter-console-20261106`。新电脑可运行 `git clone -b codex/presenter-console-20261106 https://github.com/ryanzhouyu/huangxiaoxi-travel.git`。已有目录请先保护未提交工作，再 fetch、切到该分支并快进拉取。浏览器存档按来源域隔离。
 - 旧原型及高保真评审稿分别在 `design/index.html`、`design/hifi/index.html`。[演示验收记录](../../docs/客户演示实施与彩排.md)列出本次复核范围及限制。
 
 ## 代码与存档
@@ -39,7 +39,8 @@
 | `renderer.mjs` | 读取固定概念立绘，在浏览器分区渲染衣料、纹样、冠饰、鞋履以及静态表情／姿势。相同搭配复用缓存。 |
 | `postcard.mjs` | 读取同一个渲染结果，按最后选中地点及背景搭配取景，结合经历和模板生成 PNG。 |
 | `storage.mjs`、`presenter.mjs` | 业务进度映射到 `hxx.demo.v1`。草稿按演示批次和身份保存；复位／还原更新批次并通知其他标签。 |
-| `style.css` | 演示页面材质、高清场景、投屏版式及小屏适配。 |
+| `item-thumbnails.mjs`、`map-art.mjs` | 单品等比取图、地点视窗与导览原画坐标。 |
+| `style.css`、`art-layout.css` | 演示页面材质、高清场景、投屏版式及小屏适配。 |
 | `tests/` | 功能边界、主线复演、下载／还原和渲染检查。用独立上下文运行。 |
 
 ## 复验

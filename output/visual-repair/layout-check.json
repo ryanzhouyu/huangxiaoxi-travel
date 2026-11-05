@@ -1,0 +1,267 @@
+{
+  "viewports": [
+    {
+      "w": 1280,
+      "h": 720,
+      "entry": {
+        "above": 11.515625,
+        "below": 11.515625,
+        "buttonBottom": 706
+      },
+      "meeting": {
+        "above": 11.515625,
+        "below": 32.625,
+        "buttonBottom": 706
+      },
+      "pinChecks": [
+        {
+          "target": "point?id=gate",
+          "dx": -0.0018750000000409273,
+          "dy": -0.00960205078126819,
+          "reachable": true,
+          "inside": true
+        },
+        {
+          "target": "point?id=ridge",
+          "dx": -0.014374999999972715,
+          "dy": 0.0009924316406113576,
+          "reachable": true,
+          "inside": true
+        },
+        {
+          "target": "point?id=brook",
+          "dx": -0.0028125000000045475,
+          "dy": 0.0006799316406045364,
+          "reachable": true,
+          "inside": true
+        },
+        {
+          "target": "point?id=shop",
+          "dx": -0.01312499999994543,
+          "dy": -0.012132568359334073,
+          "reachable": true,
+          "inside": true
+        }
+      ],
+      "shelf": {
+        "width": 115.078125,
+        "height": 115.078125,
+        "dcx": 0,
+        "dcy": 0
+      }
+    },
+    {
+      "w": 1440,
+      "h": 900,
+      "entry": {
+        "above": 14.390625,
+        "below": 14.390625,
+        "buttonBottom": 886
+      },
+      "meeting": {
+        "above": 14.390625,
+        "below": 38.375,
+        "buttonBottom": 886
+      },
+      "pinChecks": [
+        {
+          "target": "point?id=gate",
+          "dx": -0.01031250000005457,
+          "dy": -0.010227050781281832,
+          "reachable": true,
+          "inside": true
+        },
+        {
+          "target": "point?id=ridge",
+          "dx": -0.00874999999996362,
+          "dy": -0.003382568359427296,
+          "reachable": true,
+          "inside": true
+        },
+        {
+          "target": "point?id=brook",
+          "dx": -0.007656249999968168,
+          "dy": -0.005852050781300022,
+          "reachable": true,
+          "inside": true
+        },
+        {
+          "target": "point?id=shop",
+          "dx": -0.009687500000040927,
+          "dy": 0.0010229492187363576,
+          "reachable": true,
+          "inside": true
+        }
+      ],
+      "shelf": {
+        "width": 133,
+        "height": 133,
+        "dcx": -0.0078125,
+        "dcy": 0
+      }
+    },
+    {
+      "w": 1920,
+      "h": 1080,
+      "entry": {
+        "above": 17,
+        "below": 17,
+        "buttonBottom": 1066
+      },
+      "meeting": {
+        "above": 17,
+        "below": 43.59375,
+        "buttonBottom": 1066
+      },
+      "pinChecks": [
+        {
+          "target": "point?id=gate",
+          "dx": -0.010625000000004547,
+          "dy": 0.00164794921875,
+          "reachable": true,
+          "inside": true
+        },
+        {
+          "target": "point?id=ridge",
+          "dx": -0.01375000000007276,
+          "dy": 0.0016174316405681566,
+          "reachable": true,
+          "inside": true
+        },
+        {
+          "target": "point?id=brook",
+          "dx": -0.008125000000063665,
+          "dy": 0.00164794921875,
+          "reachable": true,
+          "inside": true
+        },
+        {
+          "target": "point?id=shop",
+          "dx": -0.01187500000014552,
+          "dy": 0.00164794921875,
+          "reachable": true,
+          "inside": true
+        }
+      ],
+      "shelf": {
+        "width": 153.0625,
+        "height": 153.0625,
+        "dcx": -0.0078125,
+        "dcy": 0
+      }
+    },
+    {
+      "w": 390,
+      "h": 844,
+      "entry": {
+        "above": 13.5,
+        "below": 13.5,
+        "buttonBottom": 830
+      },
+      "meeting": {
+        "above": 13.5,
+        "below": 36.59375,
+        "buttonBottom": 830
+      },
+      "pinChecks": [
+        {
+          "target": "point?id=gate",
+          "dx": 0,
+          "dy": -0.0030395507812954747,
+          "reachable": true,
+          "inside": true
+        },
+        {
+          "target": "point?id=ridge",
+          "dx": -0.0078125,
+          "dy": 0.00005493164059089395,
+          "reachable": true,
+          "inside": true
+        },
+        {
+          "target": "point?id=brook",
+          "dx": 0,
+          "dy": -0.008538818359397737,
+          "reachable": true,
+          "inside": true
+        },
+        {
+          "target": "point?id=shop",
+          "dx": 0,
+          "dy": -0.0015075683593863687,
+          "reachable": true,
+          "inside": true
+        }
+      ],
+      "shelf": {
+        "width": 79.453125,
+        "height": 79.453125,
+        "dcx": 0,
+        "dcy": 0
+      }
+    },
+    {
+      "w": 360,
+      "h": 640,
+      "entry": {
+        "above": 10.234375,
+        "below": 10.234375,
+        "buttonBottom": 626
+      },
+      "meeting": {
+        "above": 10.234375,
+        "below": 30.0625,
+        "buttonBottom": 626
+      },
+      "pinChecks": [
+        {
+          "target": "point?id=gate",
+          "dx": -0.0012499999999988631,
+          "dy": -0.007445068359345441,
+          "reachable": true,
+          "inside": true
+        },
+        {
+          "target": "point?id=ridge",
+          "dx": -0.012187500000010232,
+          "dy": 0.0006799316406045364,
+          "reachable": true,
+          "inside": true
+        },
+        {
+          "target": "point?id=brook",
+          "dx": -0.0018749999999982947,
+          "dy": 0.00021118164062272626,
+          "reachable": true,
+          "inside": true
+        },
+        {
+          "target": "point?id=shop",
+          "dx": -0.008750000000020464,
+          "dy": -0.0033825683593704525,
+          "reachable": true,
+          "inside": true
+        }
+      ],
+      "shelf": {
+        "width": 71.453125,
+        "height": 71.453125,
+        "dcx": 0,
+        "dcy": 0
+      }
+    }
+  ],
+  "templates": [
+    {
+      "template": "postcard",
+      "identical": true,
+      "sha256": "28758f4395e15f05812708303aeb35e4979e0b070d97fde5bff12c54e0377f03"
+    },
+    {
+      "template": "trail",
+      "identical": true,
+      "sha256": "87dbc95cf36e13ffcdb3ac2490c0d770ceaff6a0bf8a69c4b0eed735a7ff7fe3"
+    }
+  ],
+  "errors": []
+}
