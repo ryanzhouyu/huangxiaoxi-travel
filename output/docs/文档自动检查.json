@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-19T14:20:28.917301+00:00",
+  "checkedAt": "2026-11-05T03:13:09.358158+00:00",
   "applicationVersion": "0.3.1",
   "passed": true,
   "checks": [
@@ -7,13 +7,13 @@
       "name": "document_files_exist",
       "passed": true,
       "errors": [],
-      "count": 21
+      "count": 24
     },
     {
       "name": "local_markdown_links",
       "passed": true,
       "errors": [],
-      "count": 155,
+      "count": 232,
       "scope": "Current root documents and the newly archived structure. No remote URL or legacy-history audit."
     },
     {

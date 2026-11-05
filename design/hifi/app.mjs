@@ -80,11 +80,20 @@ function render(){
 }
 
 const categoryNames={hair:'头饰',top:'上装',bottom:'下装',shoes:'鞋履',expression:'表情',pose:'姿势',background:'背景'};
+// 页签只更新本页的视觉选择反馈，不写入账号或业务搭配。
+function selectWardrobeTab(action){
+  document.querySelectorAll('.wardrobe-subtabs button').forEach(button=>{
+    const selected=button.dataset.action===action;
+    button.classList.toggle('active',selected);
+    button.setAttribute('aria-pressed',String(selected));
+  });
+}
 function showCategory(type){
   $('#category-name').textContent=categoryNames[type];
   const names={hair:['银花轻冠','山野发饰','晴日草帽','溪边花簪'],top:['黔山绣衣','山野来信','晴日出发','溪边薄荷'],bottom:['山纹百褶','山野长裙','晴日短裙','溪边长裙'],shoes:['花绣布鞋','山野布鞋','晴日绣鞋','溪边便鞋'],expression:['自在','开心笑眼'],pose:['轻松站立','挥手问候'],background:['旅行手账','山色留白']};
   $('.wardrobe-grid').innerHTML=names[type].map((n,i)=>`<button class="asset-tile ${i===0?'selected':''}" data-action="select-asset" data-type="${type}"><span>${item(type==='hair'&&i===2?'hat':type==='hair'&&i===3?'pin':type)}</span><b>${n}</b><small>已收集</small></button>`).join('');
   $('#selected-name').textContent=names[type][0];
+  $('.selected-item>small').textContent='当前分类 · '+categoryNames[type];
 }
 
 document.addEventListener('click',event=>{
@@ -120,10 +129,10 @@ document.addEventListener('click',event=>{
     case 'locked-pool':navigate('pool','pool-locked',{pool:'bloom'});break;
     case 'unlock-source':modal('place-list');break;
     case 'category':document.querySelectorAll('.wardrobe-categories button').forEach(b=>b.classList.toggle('active',b===el));showCategory(el.dataset.type);break;
-    case 'wardrobe-kind':showCategory('hair');break;
-    case 'wardrobe-expression':showCategory('expression');break;
-    case 'wardrobe-background':showCategory('background');break;
-    case 'select-asset':document.querySelectorAll('.asset-tile').forEach(b=>b.classList.toggle('selected',b===el));if($('#selected-name'))$('#selected-name').textContent=el.querySelector('b').textContent;break;
+    case 'wardrobe-kind':selectWardrobeTab(action);showCategory('hair');break;
+    case 'wardrobe-expression':selectWardrobeTab(action);showCategory('expression');break;
+    case 'wardrobe-background':selectWardrobeTab(action);showCategory('background');break;
+    case 'select-asset':document.querySelectorAll('.asset-tile').forEach(b=>b.classList.toggle('selected',b===el));if($('#selected-name')){$('#selected-name').textContent=el.querySelector('b').textContent;$('.selected-item>small').textContent='当前分类 · '+categoryNames[el.dataset.type];}break;
     case 'save-look':navigate(returnTo);toast('已预览保存并返回路径；设计稿不写入业务原型进度。');break;
     case 'discard-look':navigate(returnTo);break;
     case 'template':composeDraft.template=el.textContent;document.querySelectorAll('.template-options button').forEach(b=>b.classList.toggle('active',b===el));toast(el.textContent==='足迹长图'?'已选择足迹长图版式；当前为构图示意。':'已选择单页纪念版式。');break;

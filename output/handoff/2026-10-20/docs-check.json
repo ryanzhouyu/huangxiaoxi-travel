@@ -1,0 +1,106 @@
+{
+  "checkedAt": "2026-10-20T01:34:29.754021+00:00",
+  "applicationVersion": "0.3.1",
+  "passed": true,
+  "checks": [
+    {
+      "name": "document_files_exist",
+      "passed": true,
+      "errors": [],
+      "count": 22
+    },
+    {
+      "name": "local_markdown_links",
+      "passed": true,
+      "errors": [],
+      "count": 161,
+      "scope": "Current root documents and the newly archived structure. No remote URL or legacy-history audit."
+    },
+    {
+      "name": "markdown_and_encoding_basics",
+      "passed": true,
+      "errors": []
+    },
+    {
+      "name": "confirmed_rule_ids",
+      "passed": true,
+      "errors": [],
+      "count": 36
+    },
+    {
+      "name": "page_catalog_matches_route_names",
+      "passed": true,
+      "errors": [],
+      "routes": [
+        "account",
+        "activity",
+        "checkin",
+        "collection",
+        "compose",
+        "entry",
+        "explore",
+        "memories",
+        "onboarding",
+        "partner",
+        "point",
+        "pool",
+        "scene",
+        "wallet",
+        "wardrobe",
+        "work"
+      ]
+    },
+    {
+      "name": "documented_npm_commands",
+      "passed": true,
+      "errors": [],
+      "scripts": [
+        "check",
+        "start",
+        "test"
+      ],
+      "version": "0.3.1"
+    },
+    {
+      "name": "current_domain_functions_mapped",
+      "passed": true,
+      "errors": [],
+      "functions": [
+        "readDB",
+        "initialize",
+        "gift",
+        "checkin",
+        "activity",
+        "eligible",
+        "draw",
+        "createOrder",
+        "pay",
+        "saveLook",
+        "saveWork"
+      ]
+    },
+    {
+      "name": "referenced_test_scripts_exist",
+      "passed": true,
+      "errors": [],
+      "scripts": [
+        "audit-recovery.js",
+        "audit-round1.js",
+        "audit-round2.js",
+        "browser-flow.js",
+        "domain.test.mjs",
+        "game-visual.js"
+      ]
+    },
+    {
+      "name": "superseded_active_wording",
+      "passed": true,
+      "errors": []
+    }
+  ],
+  "limits": [
+    "No application tests were rerun.",
+    "Semantic and implementation review is recorded separately.",
+    "Hash parameters, remote URLs and Mermaid rendering are not executed by this checker."
+  ]
+}

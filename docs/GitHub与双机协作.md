@@ -1,6 +1,6 @@
 # 黄晓西 GitHub 管理与双机协作
 
-更新日期：2026-10-19。建议用一个私有 GitHub 仓库管理当前项目，以 Git 提交同步文件，以 HANDOFF 恢复工作上下文。保留现有目录，避免第一次同步同时搬迁文件、修改路径或改技术栈。
+更新日期：2026-11-05。用私有 GitHub 仓库管理当前项目，以 Git 提交同步文件，以 HANDOFF 恢复工作上下文。当前交接内容为业务原型 v0.3.1 和高保真 v0.2；已完成项、验证日期和待办以 [HANDOFF](../HANDOFF.md) 为准。
 
 已创建私有仓库 [ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel)，首次基线已推送至 `main`，origin 已关联。本文的首次发布命令保留作过程说明；现有仓库继续工作从克隆或日常同步开始，不重复建库或添加 origin。
 
@@ -59,12 +59,12 @@ git push -u origin main
 git clone https://github.com/ryanzhouyu/huangxiaoxi-travel.git huangxiaoxi-travel
 cd huangxiaoxi-travel
 git status
-python -m http.server 8765 --bind 127.0.0.1
+.\Start-Local.ps1
 ```
 
 在 Codex 中把克隆后的仓库根目录作为项目工作目录，而不是只打开 design/hifi。项目 AGENTS 是可随 Git 携带的指导文件；Codex 会按全局及项目目录读取指导。[官方 AGENTS 说明](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
 
-然后使用[HANDOFF](../HANDOFF.md)中的接续提示，打开 README 给出的 localhost 地址。另一台电脑需要自行启动服务；旧电脑正在运行的进程不会随 Git 一起出现。
+然后使用[HANDOFF](../HANDOFF.md)中的接续提示，打开 README 给出的 localhost 地址。另一台电脑需要自行启动服务；旧电脑正在运行的进程不会随 Git 一起出现。Windows 脚本查找 Codex 附带或 PATH 中可用的 Python 3；其他系统可从根目录运行 `python -m http.server 8765 --bind 127.0.0.1`。
 
 当前应用无第三方运行依赖，查看页面不需要 CUDA 或本地模型。需要执行 Node 测试时安装 Node.js／npm；需要维护图片及二维码才安装 Python 工具包，见根目录 requirements-tools.txt。不要把旧电脑的 node_modules、Python 环境或整个用户目录复制过去。
 

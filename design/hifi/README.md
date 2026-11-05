@@ -1,6 +1,8 @@
 # 黄晓西高保真视觉设计
 
-版本：视觉设计 v0.1。更新日期：2026-10-19。应用交互基线仍为 v0.3.1，本目录独立，不读取或写入原型账号、库存、余额和作品。
+版本：视觉设计 v0.2。更新日期：2026-10-20。应用交互基线仍为 v0.3.1，本目录独立，不读取或写入原型账号、库存、余额和作品。
+
+已将伙伴首页的道具图标、轻纸面板、字号、按钮比例和内距扩展到全部 21 页与公共弹层；按登录、地图、衣橱、回忆、账号各自职责调整布局。功能与业务规则保持，衣橱页签补齐视觉选中反馈。逐页方案、实施与本轮验收见[全页面 UI 调整方案与验收](../../docs/全页面UI调整方案与验收.md)，[完整状态截图索引](../../output/playwright/all-ui-review/gallery.html)可逐项查看。此前的[首页专项记录](../../docs/伙伴首页UI修订与验收.md)保留作阶段依据。
 
 ## 查看与交付
 
@@ -35,12 +37,25 @@
 | --- | --- |
 | `catalog.mjs` | 页面、分组、状态与设计说明 |
 | `pages.mjs` | 各页面及弹层的设计构图 |
+| `partner-page.mjs` | 伙伴首页独立构图 |
+| `partner-art.mjs` | 从首页扩展的全稿共用道具插画；`art.mjs` 按语义调用 |
+| `partner.css` | 只作用于伙伴首页的材质、文字、尺寸与桌面阅览样式 |
+| `ui-system.css` | 全稿共用材质、可读字号、按钮、导航、弹层和原尺寸阅览 |
+| `ui-auth.css`、`ui-journey.css` | 登录／初始化与游玩／核验／卡池布局 |
+| `ui-wardrobe.css`、`ui-memory.css`、`ui-account.css` | 衣橱收藏、手账制作作品、身份安全账本订单的局部布局 |
 | `art.mjs` | 可编辑图标、花饰、部件图示及图片引用 |
 | `style.css` | 独立画布、组件、页面和尺寸适配 |
 | `app.mjs` | 阅览导航及临时交互，不接真实业务存储 |
 | `overview.html` | 默认页面 PNG 总览 |
 | `verify.js` | Playwright CLI 检查与页面导出 |
+| `verify-partner.js` | 首页双状态、六尺寸、入口、对比度与布局验收；输出在 `output/playwright/partner-review/` |
+| `verify-all-ui.js` | 全页四尺寸及按钮弹层验收；结果 `window.hxxAllUIQA` |
+| `verify-ui-interactions.js` | 两种手机尺寸的路径串联、输入返回和实际样式对比度；结果 `window.hxxUIFlowQA` |
 
 检查命令：`node --check design/hifi/app.mjs` 等语法检查；服务与 CLI 浏览器就绪后，执行 `npx --yes --package @playwright/cli playwright-cli run-code --filename design/hifi/verify.js`。结果变量为 `window.hxxHifiQA`，需另行提取归档。
+
+首页专项执行 `npx --yes --package @playwright/cli playwright-cli run-code --filename design/hifi/verify-partner.js`，结果变量为 `window.hxxPartnerQA`；同样需另外提取 JSON，不能只以 CLI 退出状态判断通过。
+
+全页脚本采用相同 CLI 命令，替换为 `design/hifi/verify-all-ui.js` 或 `design/hifi/verify-ui-interactions.js`。全页临时图写入 `.codex/local-deploy/all-ui-audit/`，本轮已把正式默认稿和状态稿导出到 `output/playwright/hifi/`；验收 JSON 与逐页清单在 `output/playwright/all-ui-review/`。结果变量需另外提取。`verification.json` 保留 v0.1 的历史记录，当前结果以本轮报告为准。
 
 设计验收记录见[高保真设计说明](../../docs/高保真设计说明.md)。自动化检查页面存在和串联，人物位置、裁切、文字与层级需要逐张看图；不把断言通过当作用户认可最终视觉。

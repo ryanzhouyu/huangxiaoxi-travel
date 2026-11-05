@@ -1,0 +1,336 @@
+{
+  "checkedDate": "2026-11-05",
+  "timezone": "Asia/Shanghai",
+  "purpose": "GitHub 同步前的源码、交接与交付资源复核",
+  "passed": true,
+  "checks": [
+    {
+      "name": "prototype_syntax",
+      "passed": true,
+      "command": [
+        "--prefix",
+        "design",
+        "run",
+        "check"
+      ],
+      "exitCode": 0,
+      "output": "> huangxiaoxi-travel-wardrobe-prototype@0.3.1 check\n> node --check app.mjs && node --check data.mjs && node --check store.mjs && node --check visual.mjs && node --check world.mjs && node --check game-ui.mjs && node --check postcard.mjs"
+    },
+    {
+      "name": "domain_tests",
+      "passed": true,
+      "command": [
+        "--prefix",
+        "design",
+        "test"
+      ],
+      "exitCode": 0,
+      "output": "> huangxiaoxi-travel-wardrobe-prototype@0.3.1 test\n> node --test tests/domain.test.mjs\n\n✔ 初始化所有初始装扮，选项只影响默认搭配 (3.6261ms)\n✔ 领装不穿戴、不产生到访且幂等 (0.7516ms)\n✔ 二维码不合法时不产生任何业务变化 (3.3671ms)\n✔ 打卡记录、发奖、共享池解锁；同请求重试不重复 (3.5494ms)\n✔ 重复到访不发奖，跨日持续积累且不需要结束动作 (1.2342ms)\n✔ 商家到店与体验各一次；活动可单独记录有效参与 (0.7542ms)\n✔ 购买余额不能越过锁池；取消失败均不发次数，成功重复回调幂等 (1.1775ms)\n✔ 次数跨点通用、跨池排除共有资产；等概率按当前候选序列选择 (10.36ms)\n✔ 余额不足不扣次、不发物 (0.7436ms)\n✔ 未拥有不可保存；当前搭配与到访时搭配分离 (0.852ms)\n✔ 作品只使用已有经历和已保存搭配；后续搭配变化不改写作品 (1.1715ms)\n✔ 原子写入失败不扣钱不发奖，原数据和另一账号不变 (1.5132ms)\n✔ 损坏的进度阻止写入，不悄悄清空 (0.4124ms)\n✔ 合法 JSON 的不完整账号、无效当前账号和坏作品都保护性报错 (1.2365ms)\nℹ tests 14\nℹ suites 0\nℹ pass 14\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 255.8328"
+    },
+    {
+      "name": "documentation_check",
+      "passed": true,
+      "command": [
+        "docs/check_docs.py"
+      ],
+      "exitCode": 0,
+      "output": "{\"passed\": true, \"checks\": 9, \"documents\": 24, \"report\": \"output/docs/\\u6587\\u6863\\u81ea\\u52a8\\u68c0\\u67e5.json\"}"
+    },
+    {
+      "name": "hifi_syntax",
+      "passed": true,
+      "files": 10,
+      "errors": []
+    },
+    {
+      "name": "hifi_delivery_manifest",
+      "passed": true,
+      "pages": 21,
+      "displayViews": 60,
+      "errors": []
+    },
+    {
+      "name": "additional_handoff_links",
+      "passed": true,
+      "links": 32,
+      "errors": []
+    },
+    {
+      "name": "local_preview_http",
+      "passed": true,
+      "resources": 65,
+      "results": [
+        {
+          "path": "design/hifi/index.html",
+          "status": 200
+        },
+        {
+          "path": "design/hifi/overview.html",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/all-ui-review/gallery.html",
+          "status": 200
+        },
+        {
+          "path": "design/index.html",
+          "status": 200
+        },
+        {
+          "path": "design/hifi/ui-system.css",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/entry.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/entry-agreement.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/entry-modal-terms.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/entry-modal-privacy.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/entry-modal-wechat.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/code.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/code-returning.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/code-code-error.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/code-limited.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/bind.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/bind-bind-conflict.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/onboarding.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/partner.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/partner-first-visit.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/explore.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/scene.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/scene-place-list.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/scene-gift.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/point.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/point-claimed.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/point-merchant.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/point-modal-geo.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/checkin.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/checkin-checkin-success.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/checkin-checkin-failed.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/activity.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/activity-activity-done.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/activity-modal-staff.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/pool.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/pool-pool-locked.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/pool-pool-empty.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/pool-no-balance.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/pool-prize.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/pool-modal-purchase.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/wardrobe.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/wardrobe-dirty.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/collection.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/outfit.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/outfit-source.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/memories.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/memories-works.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/memories-memory-empty.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/compose.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/compose-compose-preview.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/compose-render-failed.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/compose-modal-select-events.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/work.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/work-share.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/account.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/account-logout.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/security.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/security-change-phone.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/security-recover.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/wallet.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/wallet-orders.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/order.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/order-order-paid.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/order-order-failed.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/order-order-cancelled.png",
+          "status": 200
+        },
+        {
+          "path": "output/playwright/hifi/states/order-modal-payment.png",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "name": "git_diff_whitespace",
+      "passed": true,
+      "output": "warning: in the working copy of 'HANDOFF.md', CRLF will be replaced by LF the next time Git touches it\nwarning: in the working copy of 'output/docs/文档自动检查.json', CRLF will be replaced by LF the next time Git touches it\n"
+    }
+  ],
+  "limits": [
+    "本次未重跑历史 Playwright 浏览器主线及全页视觉验收。",
+    "HTTP 可访问与图片哈希一致不代表视觉已获用户最终认可。",
+    "另一端仍需自行启动服务、验证环境，浏览器进度和工具登录不随 Git 迁移。"
+  ]
+}

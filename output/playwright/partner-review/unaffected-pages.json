@@ -1,0 +1,82 @@
+[
+  {
+    "page": "account",
+    "identical": true
+  },
+  {
+    "page": "activity",
+    "identical": true
+  },
+  {
+    "page": "bind",
+    "identical": true
+  },
+  {
+    "page": "checkin",
+    "identical": true
+  },
+  {
+    "page": "code",
+    "identical": true
+  },
+  {
+    "page": "collection",
+    "identical": true
+  },
+  {
+    "page": "compose",
+    "identical": true
+  },
+  {
+    "page": "entry",
+    "identical": true
+  },
+  {
+    "page": "explore",
+    "identical": true
+  },
+  {
+    "page": "memories",
+    "identical": true
+  },
+  {
+    "page": "onboarding",
+    "identical": true
+  },
+  {
+    "page": "order",
+    "identical": true
+  },
+  {
+    "page": "outfit",
+    "identical": true
+  },
+  {
+    "page": "point",
+    "identical": true
+  },
+  {
+    "page": "pool",
+    "identical": false
+  },
+  {
+    "page": "scene",
+    "identical": true
+  },
+  {
+    "page": "security",
+    "identical": true
+  },
+  {
+    "page": "wallet",
+    "identical": true
+  },
+  {
+    "page": "wardrobe",
+    "identical": true
+  },
+  {
+    "page": "work",
+    "identical": true
+  }
+]

@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+.phone .memory-screen { display: flex; flex-direction: column; padding-bottom: 105px; }
+.phone .memory-screen > .chapter { padding-top: 26px; padding-bottom: 10px; flex-shrink: 0; }
+.phone .memory-screen > .ribbon-tabs { flex-shrink: 0; }
+.phone .memory-book {
+  position: relative; inset: auto; margin: 0 18px; padding: 16px;
+  flex: 1; min-height: 0; border: 1px solid var(--ui-border); border-radius: 0 0 17px 17px;
+  background: linear-gradient(100deg,#ecdcba,#fcf1d8 5%,#f6e7c5); box-shadow: var(--ui-shadow);
+}
+.phone .date-title { gap: 4px; }
+.phone .date-title > span { font: 12px/1.5 var(--body); color: #715a35; letter-spacing: 2px; }
+.phone .date-title > b { font: 600 24px/1.4 var(--serif); }
+.phone .date-title > small { font: 12px/1.5 var(--body); color: #675132; }
+.phone .memory-map { height: 96px; flex-shrink: 0; margin: 13px 1px 17px; border-radius: 7px; }
+.phone .memory-map::after { font: 12px/1.5 var(--body); padding: 3px 6px; color: #4c613f; }
+.phone .memory-book .timeline { min-height: 50px; margin-bottom: 8px; }
+.phone .timeline > div { gap: 9px; padding-bottom: 16px; }
+.phone .timeline time { font: 12px/1.5 Georgia,serif; width: 33px; padding-top: 4px; color: #715a35; }
+.phone .timeline .seal { width: 29px; height: 29px; flex-shrink: 0; border-color: #b2b98b; background: #e1e5c7; }
+.phone .timeline .seal .icon { width: 24px; height: 24px; }
+.phone .timeline b { font: 500 15px/1.5 var(--body); }
+.phone .timeline p { font: 12px/1.6 var(--body); color: #675132; margin: 4px 0 0; }
+.phone .memory-book > .primary { min-height: 48px; font-size: 15px; margin-top: 0; flex-shrink: 0; }
+.phone .memory-empty { margin: 0 24px; padding: 26px 0; overflow-y: auto; text-align: center; }
+.phone .memory-empty > .icon { width: 70px; height: 70px; }
+.phone .memory-empty h2 { font-size: 24px; margin: 18px 0 10px; }
+.phone .memory-empty > p { font-size: 14px; color: #675132; }
+.phone .memory-empty > .primary { margin-top: 18px; }
+.phone .works-book { margin: 20px 28px 0; padding-bottom: 15px; overflow-y: auto; flex: 1; min-height: 0; }
+.phone .work-preview { max-width: 280px; margin: 0 auto; }
+.phone .works-book > p { font: 600 19px/1.5 var(--serif); margin: 17px 0 5px; }
+.phone .works-book > small { font: 12px/1.5 var(--body); color: #675132; }
+.phone .works-book > .secondary { margin-top: 18px; font-size: 14px; }
+.phone .postcard { padding: 8px 8px 0; border-radius: 3px; background: #fff8e9; border-color: #cdb88b; }
+.phone .postcard-picture { height: 270px; }
+.phone .postcard-title { top: 18px; left: 13px; gap: 6px; }
+.phone .postcard-title small { font: 12px/1.5 var(--serif); letter-spacing: 1px; color: #fff5df; }
+.phone .postcard-title strong { font: 24px/1.5 var(--serif); letter-spacing: 3px; color: #fff5df; }
+.phone .travel-stamp { width: 43px; height: auto; min-height: 54px; font: 14px/1.3 var(--serif); }
+.phone .travel-stamp small { font: 8px/1.4 Georgia,serif; letter-spacing: .3px; }
+.phone .postcard-caption { padding: 10px 0 12px; }
+.phone .postcard-caption > span { font: 12px/1.5 var(--body); }
+.phone .postcard-caption > small { font: 12px/1.5 var(--body); color: #675132; margin-top: 4px; letter-spacing: 0; }
+.phone .compose-screen,.phone .work-screen { overflow-y: auto; padding-bottom: 20px; }
+.phone .compose-stage { width: 246px; margin: 18px auto; }
+.phone .compose-stage .postcard-picture { height: 254px; }
+.phone .compose-paper { position: relative; inset: auto; margin: 18px 18px 0; padding: 18px; }
+.phone .compose-paper .collection-line { gap: 8px; }
+.phone .compose-paper h3 { font-size: 18px; margin: 0; }
+.phone .compose-paper .collection-line .text-button { font-size: 13px; white-space: nowrap; padding-inline: 0; }
+.phone .title-field { gap: 9px; padding: 11px; margin: 13px 0; min-height: 48px; }
+.phone .title-field > span { font: 12px/1.5 var(--body); color: #675132; }
+.phone .title-field > input { font: 15px/1.5 var(--body); }
+.phone .template-options { gap: 8px; }
+.phone .template-options > button { min-height: 46px; font: 14px/1.5 var(--body); padding: 10px 5px; border-radius: 10px; border: 1px solid var(--ui-border); background: #f6e8c9; }
+.phone .template-options > .active { background: #dfe5c9; color: #405d3d; border: 1px solid #89966c; }
+.phone .selected-events { margin: 8px 0; gap: 5px; }
+.phone .selected-events > b { font: 500 13px/1.5 var(--body); }
+.phone .selected-events > .text-button { font-size: 13px; white-space: nowrap; }
+.phone .compose-paper .primary { min-height: 48px; margin-top: 4px; }
+.phone .compose-paper .fine { font-size: 12px; margin: 10px 0 0; }
+.phone .saved-postcard { width: 274px; margin: 18px auto 0; }
+.phone .saved-postcard .postcard-picture { height: 318px; }
+.phone .work-description { margin: 22px 18px 16px; }
+.phone .work-description h2 { font-size: 23px; margin: 0 0 6px; }
+.phone .work-description > span { font: 12px/1.5 var(--body); color: #675132; }
+.phone .work-paper { position: relative; inset: auto; margin: 16px 18px 0; padding: 18px 18px 9px; }
+.phone .two-buttons { gap: 9px; }
+.phone .two-buttons > button { font-size: 15px; padding-inline: 7px; min-width: 0; }
+.phone .source-caption { margin-top: 16px; padding-top: 12px; }
+.phone .source-caption > b { font: 500 14px/1.5 var(--body); }
+.phone .source-caption > p { font: 12px/1.6 var(--body); color: #675132; margin: 6px 0; }
+.phone .work-paper > .text-button { min-height: 44px; padding: 10px 0; font-size: 14px; }
+
+@media (max-height:760px) and (max-width:700px) {
+  .phone .memory-screen > .chapter { padding-top: 20px; }
+  .phone .memory-screen .chapter h2 { font-size: 24px; }
+  .phone .memory-map { height: 64px; margin-top: 10px; margin-bottom: 12px; }
+  .phone .timeline > div { padding-bottom: 12px; }
+  .phone .compose-stage { width: 220px; margin-block: 14px; }
+  .phone .compose-stage .postcard-picture { height: 222px; }
+  .phone .saved-postcard { width: 246px; }
+  .phone .saved-postcard .postcard-picture { height: 270px; }
+}

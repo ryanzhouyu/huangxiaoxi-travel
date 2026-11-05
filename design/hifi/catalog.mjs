@@ -3,7 +3,7 @@ export const pages = [
   {id:'code',name:'验证码确认',group:'相遇与账号',note:'验证码、重新发送、改手机号、错误与受限状态。此处为设计演示，不发送短信；输入任意六位数字可查看成功路径，回访账号状态验证后恢复伙伴。',states:['default','returning','code-error','limited']},
   {id:'bind',name:'手机号绑定',group:'相遇与账号',note:'拟定微信授权成功后可选择绑定手机号，也可稍后补充。已被其他账号使用时不自动合并或覆盖，提供原账号登录路径。合并政策尚未确定。',states:['default','bind-conflict']},
   {id:'onboarding',name:'初次相遇',group:'相遇与账号',note:'只选择黄晓西的默认搭配；全部初始装扮免费。没有主菜单。三种搭配名称用于选择结构，当前人物为同一示意母版，不伪装已完成三套素材。',states:['default']},
-  {id:'partner',name:'伙伴场景',group:'陪伴与游玩',note:'夜景、伙伴主体与环绕入口。点伙伴可回应，背包去衣橱；不出现宠物、好友、等级或亲密度。三入口保留伙伴／游玩／回忆。',states:['default','first-visit']},
+  {id:'partner',name:'伙伴场景',group:'陪伴与游玩',note:'2026-10-20 首页 UI 修订：保留夜景、人物与全部入口，使用道具插画、轻暖纸面板和清晰字号。桌面保持原尺寸，可滚动查看。点伙伴仍显示原回应，三入口保留伙伴／游玩／回忆；本次未新增玩法。',states:['default','first-visit']},
   {id:'explore',name:'发现贵州',group:'陪伴与游玩',note:'目前一个测试景区，以山水画卷承载目的地。进入导览而非领取必做任务。测试地点不当作真实景区导航。',states:['default']},
   {id:'scene',name:'景区导览',group:'陪伴与游玩',note:'地图标记、免费见面礼、卡池与地点一览。只保留现有四测试点与一活动；位置是示意，未增加导航能力或新奖励。',states:['default','place-list','gift']},
   {id:'point',name:'景点与商家',group:'陪伴与游玩',note:'景点首次奖励与再次到访状态分开；商家有独立体验活动入口。查看详情不产生到访，买次数不解锁卡池。',states:['default','claimed','merchant']},

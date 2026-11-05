@@ -1,3 +1,5 @@
+import {partnerIcon} from './partner-art.mjs';
+
 const shapes={
   back:'<path d="m15 5-7 7 7 7M8 12h13"/>',
   map:'<path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Zm6-3v15m6-12v15"/>',
@@ -19,7 +21,10 @@ const shapes={
   arrow:'<path d="M3 12h18m-7-7 7 7-7 7"/>',
   download:'<path d="M12 2v14m-5-5 5 5 5-5M3 16v6h18v-6"/>',
 };
-export const icon=(name,cls='')=>`<svg class="icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${shapes[name]||shapes.flower}</svg>`;
+const paintedNames = {partner:'companion',map:'map',book:'memories',bag:'wardrobe',camera:'camera',pin:'pin',ticket:'ticket',gift:'gift',check:'check',lock:'lock',phone:'phone',chat:'chat',shield:'shield',flower:'flower',shop:'shop',download:'download'};
+export const icon=(name,cls='')=>paintedNames[name]
+  ? partnerIcon(paintedNames[name]).replace('class="partner-art"',`class="icon ui-art ${cls}"`)
+  : `<svg class="icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${shapes[name]||shapes.arrow}</svg>`;
 export const floral=()=>`<svg viewBox="0 0 80 80" class="floral" aria-hidden="true"><path d="M4 74C22 40 36 26 74 7M7 56C4 28 24 37 25 40M31 31c0-29 22-16 17-8M46 18C49 0 66 3 65 10" fill="none" stroke="#8c8d53" stroke-width="3"/><g fill="#f3e7c5" stroke="#bd9457" stroke-width="1"><ellipse cx="24" cy="49" rx="7" ry="14"/><ellipse cx="24" cy="49" rx="7" ry="14" transform="rotate(60 24 49)"/><ellipse cx="24" cy="49" rx="7" ry="14" transform="rotate(120 24 49)"/><circle cx="24" cy="49" r="5" fill="#d2a755"/><ellipse cx="55" cy="19" rx="5" ry="10"/><ellipse cx="55" cy="19" rx="5" ry="10" transform="rotate(60 55 19)"/><ellipse cx="55" cy="19" rx="5" ry="10" transform="rotate(120 55 19)"/><circle cx="55" cy="19" r="3.5" fill="#d2a755"/></g><path d="M6 65c-6-18 17-17 10-3m22-36c-10-18 13-24 9-9" fill="#75805a" stroke="#626c48"/></svg>`;
 export const ornament=()=>`<span class="ornament left">${floral()}</span><span class="ornament right">${floral()}</span>`;
 export const figure=(cls='')=>`<img class="figure ${cls}" src="assets/companion.png" alt="黄晓西伙伴形象设计示意">`;
