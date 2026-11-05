@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-05T11:55:54.502Z",
+  "at": "2026-11-05T12:44:04.595Z",
   "runs": [
     {
       "label": "首次身份完整主线",
@@ -8,17 +8,17 @@
       "draws": 2,
       "works": 2,
       "balance": 15,
-      "firstWork": "35fa56ce6e3061adf706578cb8d967bd9586e66b926f933345e14d29d3932935",
+      "firstWork": "2880e385e76d2f5162283f9021c6c7a919eca48cee07e5999c9faa267b0ad223",
       "assets": [
-        "flower-top",
-        "joy"
+        "joy",
+        "mountain-bottom"
       ]
     },
     {
       "label": "刷新回访和旧作品",
       "seconds": 1,
       "balance": 15,
-      "firstWork": "35fa56ce6e3061adf706578cb8d967bd9586e66b926f933345e14d29d3932935"
+      "firstWork": "2880e385e76d2f5162283f9021c6c7a919eca48cee07e5999c9faa267b0ad223"
     },
     {
       "label": "复位后重新完整演示 1920×1080",
@@ -27,10 +27,10 @@
       "draws": 2,
       "works": 2,
       "balance": 15,
-      "firstWork": "83a8fe43d8b8c2d18e65205e7a90ea1a17721cf52e196184b670e60a19e81fd4",
+      "firstWork": "ca2bbbe44c14ec24f091774418264c05353c3810c8201d91a8968fc5bbb70e30",
       "assets": [
-        "flower-hair",
-        "mountain-hair"
+        "wave",
+        "mountain-top"
       ]
     },
     {
@@ -40,10 +40,10 @@
       "draws": 2,
       "works": 2,
       "balance": 15,
-      "firstWork": "1f60072c52ec1ea5ee5aca3b0cb8f38fa782652f4b3e761d51b181b810eef76d",
+      "firstWork": "56e593d40ba7dfe2517ef545e89cf545f0331a5f11d878ce802a81d1a9bf765e",
       "assets": [
-        "flower-bottom",
-        "mountain-top"
+        "flower-bg",
+        "wave"
       ]
     }
   ],
@@ -55,47 +55,22 @@
     },
     {
       "label": "抽取 cloud",
+      "prize": "mountain-bottom",
+      "balance": 1
+    },
+    {
+      "label": "到访 ridge",
+      "balance": 3,
+      "event": "望山台"
+    },
+    {
+      "label": "到访 shop",
+      "balance": 4,
+      "event": "山间手作铺"
+    },
+    {
+      "label": "抽取 bloom",
       "prize": "joy",
-      "balance": 1
-    },
-    {
-      "label": "到访 ridge",
-      "balance": 3,
-      "event": "望山台"
-    },
-    {
-      "label": "到访 shop",
-      "balance": 4,
-      "event": "山间手作铺"
-    },
-    {
-      "label": "抽取 bloom",
-      "prize": "flower-top",
-      "balance": 5
-    },
-    {
-      "label": "到访 gate",
-      "balance": 2,
-      "event": "山门入口"
-    },
-    {
-      "label": "抽取 cloud",
-      "prize": "mountain-hair",
-      "balance": 1
-    },
-    {
-      "label": "到访 ridge",
-      "balance": 3,
-      "event": "望山台"
-    },
-    {
-      "label": "到访 shop",
-      "balance": 4,
-      "event": "山间手作铺"
-    },
-    {
-      "label": "抽取 bloom",
-      "prize": "flower-hair",
       "balance": 5
     },
     {
@@ -120,7 +95,32 @@
     },
     {
       "label": "抽取 bloom",
-      "prize": "flower-bottom",
+      "prize": "wave",
+      "balance": 5
+    },
+    {
+      "label": "到访 gate",
+      "balance": 2,
+      "event": "山门入口"
+    },
+    {
+      "label": "抽取 cloud",
+      "prize": "wave",
+      "balance": 1
+    },
+    {
+      "label": "到访 ridge",
+      "balance": 3,
+      "event": "望山台"
+    },
+    {
+      "label": "到访 shop",
+      "balance": 4,
+      "event": "山间手作铺"
+    },
+    {
+      "label": "抽取 bloom",
+      "prize": "flower-bg",
       "balance": 5
     }
   ],

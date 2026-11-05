@@ -1,3 +1,4 @@
+import {giftPreview, poolProgress} from './collection-preview.mjs';
 import * as art from './renderer.mjs';
 import {demoKey, demoStorage, sessionPrefix, epochKey} from './storage.mjs';
 import {composeImage, paintDraft, draftMarkup} from './postcard.mjs';
@@ -12,6 +13,8 @@ export async function loadDemo() {
     draftMarkup,
     renderDetails,
     collectionExtras,
+    giftPreview,
+    poolProgress,
     storage: demoStorage(localStorage),
     storageKey: demoKey,
     epochKey,

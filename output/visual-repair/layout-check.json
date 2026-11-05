@@ -255,12 +255,12 @@
     {
       "template": "postcard",
       "identical": true,
-      "sha256": "6e4e6e26e5037c7dd50c99c3caa0d171530e6d49f11d2dd2d42499188caabc04"
+      "sha256": "91389ed9c7ac7eec858c8cd55d4589c15f23edc703354411ebe55cab1e540be2"
     },
     {
       "template": "trail",
       "identical": true,
-      "sha256": "1c170f071f81262a83aff2359e21141ca4732d149f9ed1ba119536bb4d91710d"
+      "sha256": "9711b08fce6dd8cb7bb12099b977a5f06c5e1b939cb7bc9660dbaa4be0cc075b"
     }
   ],
   "errors": []

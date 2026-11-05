@@ -70,7 +70,7 @@ function renderPage(){const a=me(),p=D.point(id())||D.POINTS[0],pool=D.pool(id()
  if(route.name==='checkin'&&id()&&!D.point(id()))return empty('找不到这个地点','请从景区地图重新选择。',link('返回景区','scene','full'));
  const detail=profile.renderDetails?.({route,a,button,link,esc,fmt});
  if(detail!=null)return detail;
- const game=renderGamePage({draftMarkup:profile.draftMarkup,collectionExtras:profile.collectionExtras,customerDemo:demo,art:artwork,route,a,ui,accounts:db.accounts,button,link,esc,fmt,dirty,ownedCount,assetCard,pointCard,poolCard,workCard,filteredByRange,rangeFields});if(game!==null)return game;
+ const game=renderGamePage({poolProgress:profile.poolProgress,draftMarkup:profile.draftMarkup,collectionExtras:profile.collectionExtras,customerDemo:demo,art:artwork,route,a,ui,accounts:db.accounts,button,link,esc,fmt,dirty,ownedCount,assetCard,pointCard,poolCard,workCard,filteredByRange,rangeFields});if(game!==null)return game;
  switch(route.name){
  case 'checkin':{const code=route.params.get('code')||'',matched=D.POINTS.find(x=>x.code===code);return heading(matched?'确认这次到访':'扫描地点二维码','扫码只识别地点，确认核验后才记录经历和发放奖励。')+(matched?card(matched.name,`${matched.spot} · 测试点位`,tag(a.claimed.includes('point:'+matched.id)?'首次奖励已领':`首次到访 +${matched.reward} 次`)):'')+`<label class="field">点位二维码内容或测试码<input id="checkin-code" value="${esc(code)}" placeholder="粘贴点位链接或输入测试码" autocomplete="off"></label>`+button('验证并记录到访','verify-code','full')+notice('可用手机系统相机扫描外部点位二维码，再通过链接进入此页。此版本也支持粘贴链接或测试码。')+`<details><summary>没有现场二维码？使用测试点位</summary><p class="fine">以下操作仅验证流程，会产生带演示标记的测试经历。</p>${D.POINTS.map(x=>button(x.name,'test-code','secondary full',`data-id="${x.id}"`)).join('')}</details>`;}
  case 'activity':return tag('店内活动 · 模拟核验')+heading(D.ACTIVITY.name,D.ACTIVITY.description)+card('参与方式','1. 到山间手作铺了解活动。<br>2. 完成手作体验。<br>3. 请店员核验后领取奖励。')+card('活动奖励',`完成体验 +${D.ACTIVITY.reward} 次景区通用次数，每个账号一次。与到店首次奖励独立。`)+(a.claimed.includes('activity:craft')?notice('这项活动奖励已领取。可在回忆中查看体验记录。')+link('查看回忆','memories','full'):button('演示店员核验','staff','full'))+link('查看山间手作铺','point?id=shop','secondary full')+notice('测试版仅演示核验成功或失败，不代表真实消费已完成。');
@@ -112,7 +112,13 @@ async function handle(act,el){const a=me(),value=el.dataset.value,xid=el.dataset
  case 'greet':ui.lineIndex=(ui.lineIndex||0)+1;ui.greeting=true;render();break;
  case 'map-list':sheet('沿途的相遇',D.POINTS.map(pointCard).join('')+link('一枚旅行手作 · 查看活动','activity','secondary full'));break;
  case 'filter':ui.filter=value;render();break;
- case 'gift':{const got=tx(S.gift);render();sheet(got?'领取成功，装进旅行衣橱':'这套装扮已经领取',`<div class="result-mark">✧</div><h3>黔山初见 · 4 件装扮</h3><p>拥有了，但还没有穿上。要看看新模样吗？</p>${button('立即试穿','try-gift','full')}${button('先收好，继续看景区','close','secondary full')}`);break;}
+ case 'gift':{
+  const got=tx(S.gift);
+  render();
+  const preview=profile.giftPreview?.('gift') ?? '<div class="result-mark">✧</div><h3>黔山初见 · 4 件装扮</h3><p>拥有了，但还没有穿上。要看看新模样吗？</p>';
+  sheet(got?'领取成功，装进旅行衣橱':'这套装扮已经领取',preview+button('立即试穿','try-gift','full')+button('先收好，继续看景区','close','secondary full'));
+  break;
+ }
  case 'try-gift':wardrobe({look:{...a.look,...Object.fromEntries(outfitIds('gift').map(x=>[D.asset(x).slot,x]))},back:'scene'});break;
  case 'open-checkin':go('checkin?id='+xid);break;
  case 'test-code':go(href('checkin',{id:xid,code:D.point(xid).code}));break;

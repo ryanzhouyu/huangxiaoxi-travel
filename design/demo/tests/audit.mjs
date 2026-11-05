@@ -98,6 +98,22 @@ export async function audit(browser) {
       await seed();
       await nav('scene');
       await click('gift');
+      const receipt = q.locator('#sheet .gift-preview');
+      const items = await receipt.locator('li img').evaluateAll(images =>
+        Promise.all(images.map(async image => {
+          await image.decode();
+          return new URL(image.src).pathname.split('/').pop();
+        })),
+      );
+      assert.deepEqual(items, ['gift-hair.webp','gift-top.webp','gift-bottom.webp','gift-shoes.webp']);
+      const outfitMatches = await receipt.locator('.stage-figure').evaluate(async image => {
+        await image.decode();
+        const {renderedLook} = await import('./renderer.mjs');
+        const {lookFor} = await import('../data.mjs');
+        return image.src === renderedLook(lookFor('gift')).src;
+      });
+      assert.ok(outfitMatches);
+      assert.equal((await state()).look.top, 'start-a-top');
       await click('try-gift');
       await click('wardrobe-return');
       await click('dirty-discard');
@@ -186,8 +202,10 @@ export async function audit(browser) {
   await check(
     'A06 A07 A08 跨池排重 耗尽 收齐与刷新',
     async ({seed, q, nav, click, state, close}) => {
+      const progress = () => q.getByRole('progressbar').evaluate(el=>[el.value,el.max]);
       await seed(['gate']);
       await nav('pool?id=bloom');
+      assert.deepEqual(await progress(),[0,7]);
       assert.equal(await q.locator('[data-action="draw"]').count(), 0);
       await nav('pool?id=cloud');
       const first = q.locator('[data-action="draw"]');
@@ -195,6 +213,7 @@ export async function audit(browser) {
       await q.locator('.reward-reveal').waitFor();
       assert.equal((await state()).draws.length, 1);
       await close();
+      assert.deepEqual(await progress(),[1,7]);
       await click('draw', 'cloud');
       await q.locator('.reward-reveal').waitFor();
       await close();
@@ -221,6 +240,10 @@ export async function audit(browser) {
       await q.reload();
       await q.locator('.collection-complete').waitFor();
       assert.match(await q.locator('#app').innerText(), /收齐/);
+      assert.deepEqual(await progress(),[7,7]);
+      await nav('pool?id=bloom');
+      assert.deepEqual(await progress(),[2,7]);
+      assert.equal(await q.locator('[data-action="draw"]').count(),0);
       await nav('checkin?id=brook');
       await click('test-code', 'brook');
       await click('verify-code');

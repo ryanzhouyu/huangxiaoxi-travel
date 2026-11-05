@@ -1,0 +1,114 @@
+/* 见面礼的穿着示例和入库部件并排，按钮沿用手账已有的试穿、收好动作。 */
+.gift-preview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr);
+  gap: clamp(10px, 3vw, 18px);
+  align-items: center;
+  margin: 12px 0 0;
+}
+.gift-portrait {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  height: clamp(190px, 34dvh, 292px);
+  border: 1px solid #b49c71;
+  border-radius: 80px 80px 8px 8px;
+  background: radial-gradient(ellipse at 50% 52%, #fffcf0 15%, #f0e3c4 80%, #e1cfaa);
+  box-shadow: inset 0 0 0 3px #f9f1db;
+}
+.gift-portrait::before {
+  content: '';
+  position: absolute;
+  bottom: 4.8%;
+  width: 36%;
+  height: 3%;
+  border-radius: 50%;
+  background: #997f5550;
+  filter: blur(3px);
+}
+.gift-portrait .stage-figure {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  object-fit: contain;
+}
+.gift-inventory h3 {
+  margin: 0;
+  font: 600 clamp(19px, 4.8vw, 24px)/1.3 SimSun, serif;
+  color: #53412c;
+}
+#sheet .gift-inventory p {
+  margin: 4px 0 9px;
+  font-size: 12px !important;
+  color: #715c3b;
+}
+.gift-inventory ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.gift-inventory li {
+  display: grid;
+  justify-items: center;
+  min-width: 0;
+  color: #564730;
+  font: 12px/1.4 SimSun, serif;
+}
+.gift-inventory .item-thumbnail {
+  position: static;
+  display: block;
+  width: min(100%, 60px);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border: 1px solid #dacaa9;
+  border-radius: 7px;
+  background: #f3ead7;
+  margin-bottom: 2px;
+}
+#sheet .gift-fitting-note {
+  text-align: center;
+  line-height: 1.5;
+  margin: 12px 0;
+}
+.showcase-note:has(.pool-progress) {
+  flex: 1;
+  min-width: 0;
+  padding-right: 8px;
+}
+.pool-progress { max-width: 154px; margin: 16px 0 6px; }
+.pool-progress-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 12px;
+  color: #514936;
+}
+.pool-progress-label strong {
+  font: 600 19px/1.2 Georgia, serif;
+  font-variant-numeric: tabular-nums;
+  color: #425a3e;
+}
+.pool-progress progress {
+  display: block;
+  appearance: none;
+  width: 100%;
+  height: 9px;
+  margin: 6px 0 0;
+  overflow: hidden;
+  border: 1px solid #aa9266;
+  border-radius: 99px;
+  background: #e6d8b9;
+  color: #526c49;
+}
+.pool-progress progress::-webkit-progress-bar { background: #e6d8b9; }
+.pool-progress progress::-webkit-progress-value { border-radius: 99px; background: #526c49; }
+.pool-progress progress::-moz-progress-bar { border-radius: 99px; background: #526c49; }
