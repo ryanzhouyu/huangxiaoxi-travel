@@ -1,34 +1,44 @@
-# 黄晓西运行与部署说明
+# 黄晓西运行与模块说明
 
-更新日期：2026-10-19。当前应用 v0.3.1，是场景化游玩的本地交互原型；本次文档整理没有改变应用版本。产品和工程说明从[文档入口](../docs/README.md)进入。
+更新日期：2026-11-08。当前游客演示位于 `design/demo/`，复用 v0.3.1 共享业务控制器及领域规则；package.json 的 v0.3.1 是原型包版本，不是连续动画或云端产品的发布号。版本与分支见 [HANDOFF](../HANDOFF.md)。
 
-另有独立的[高保真视觉设计](hifi/index.html#partner)和[逐页总览](hifi/overview.html)，包含正式登录／绑定草案，不读取或写入本原型进度；设计说明及单独检查见[hifi README](hifi/README.md)。
+## 启动与环境
 
-## 环境与启动
-
-需要 Node.js／npm 执行业务检查，Python 运行静态服务；应用运行时为 HTML、CSS、原生 ES modules，无第三方运行时依赖，无打包步骤。当前命令已按 package.json 核对，不要求为了运行原型新增框架或安装构建链。
-
-从工作区根目录选择一种启动方式；8765 已有本项目服务时直接复用：
+从仓库根目录启动 `.\Start-Local.ps1`，已有本项目 8765 服务时复用；其他端口用 `-Port 8766`。也可选择：
 
 ```powershell
 npm --prefix design start
 ```
 
-或者：
+或者 `python -m http.server 8765 --bind 127.0.0.1`。需要 Python 3；语法和业务测试需要 Node.js／npm。运行时为 HTML、CSS、原生 ES modules，无第三方运行时依赖，无安装应用包或打包步骤。不能双击 HTML 运行，电脑的 127.0.0.1 也不能供另一部手机访问。
 
-```powershell
-python -m http.server 8765 --bind 127.0.0.1
-```
+| 用途 | 入口与状态 |
+| --- | --- |
+| 当前游客演示 | [demo/index.html](http://127.0.0.1:8765/design/demo/index.html) |
+| 三栏投屏台 | [demo/stage.html](http://127.0.0.1:8765/design/demo/stage.html)，准备／备份／回放与游客业务分离 |
+| 旧单页准备台 | [demo/presenter.html](http://127.0.0.1:8765/design/demo/presenter.html)，仍可使用 |
+| 早期可操作原型 | [index.html?v=3.1](http://127.0.0.1:8765/design/index.html?v=3.1#partner)，独立存档 |
+| 历史高保真 v0.2 | [hifi/index.html](http://127.0.0.1:8765/design/hifi/index.html#partner)、[21 页总览](http://127.0.0.1:8765/design/hifi/overview.html)，账号／绑定为草案 |
 
-访问 `http://127.0.0.1:8765/design/index.html?v=3.1#partner`。不能双击 file URL 运行 ES modules。当前只绑定本机地址，外部手机不能访问电脑的 127.0.0.1。
+## 当前模块与依赖
 
-## 当前模块与配置
+| 入口 | 实际职责 |
+| --- | --- |
+| `demo/start.mjs`、`demo/profile.mjs` | 素材加载和演示适配装配 |
+| `app.mjs`、`game-ui.mjs` | 共享导航守卫、交互、草稿与场景页面 |
+| `store.mjs`、`data.mjs` | 本地业务、结构校验及固定配置 |
+| `demo/storage.mjs` | 演示存储映射、批次与账号隔离 |
+| `demo/views.mjs`、`demo/visual/pages.mjs`、`demo/visual/journal.mjs` | 演示页面、状态、场景及手账呈现 |
+| `demo/wardrobe-art.mjs`、`demo/renderer.mjs`、`demo/assets/wardrobe/` | 透明图集与静态姿势、角色及单品渲染 |
+| `demo/postcard.mjs`、`demo/visual/print.mjs` | PNG 合成与纪念图构图 |
+| `demo/visual/*.css`、`demo/assets/scenes/` | 现行视觉样式与场景；不能仅改原型 style.css 判断演示效果 |
+| `demo/stage/` | 三栏导航、只读实况、确认式备份／载入及回放 |
+| `hifi/art.mjs` 及其依赖、`hifi/assets/` | 部分图标、地图和夜景仍被演示引用，虽然 hifi 页面是历史稿 |
+| `visual.mjs`、`world.mjs`、`postcard.mjs`、`style.css` | 原型示意渲染／合成／样式，不能与 demo 同名能力混淆 |
 
-`data.mjs` 集中固定测试配置；`store.mjs` 处理本地业务及持久化；`app.mjs` 处理路由与交互；`game-ui.mjs` 渲染游玩页面；`visual.mjs/world.mjs` 绘制伙伴、场景、部件及图标；`postcard.mjs` 实际合成 PNG；`style.css` 为当前样式。
+固定测试配置包含一个景区、四个点位、一个活动、两池、三套初始搭配及 1／5／10 次套餐。名称、价格和样例数量不等于正式运营决策。详见[演示代码索引](demo/README.md#代码与存档)、[架构草案](../docs/模块架构与代码组织.md)。目标目录尚未整体落地。
 
-现配置一个测试景区、四个点位、一个活动、两池、三套初始搭配及 1／5／10 次测试套餐。修改业务配置先检查资产 ID、点位／池关联、奖励资格和所属景区；样例名称、价格及次数不是正式运营规则。目标模块拆分见[架构说明](../docs/模块架构与代码组织.md)，不能把目标目录当作现有文件。
-
-## 检查命令与浏览器准备
+## 检查及输出
 
 ```powershell
 npm --prefix design run check
@@ -36,50 +46,39 @@ npm --prefix design test
 python docs/check_docs.py
 ```
 
-浏览器检查需要静态服务和 Playwright CLI 浏览器页面。已有 CLI 页面时复用；没有时先执行：
+check 只覆盖 package.json 列出的共享模块，新增／改动的其他 JS 还需对应 `node --check`。test 执行本地域规则测试，不证明真实服务并发、手机权限或视觉合格。
+
+文档检查默认写 `.codex/local-deploy/docs-check.json`，不覆盖历史报告。需正式归档时显式指定：
+
+```powershell
+python docs/check_docs.py --report output/housekeeping/2026-11-08/docs-check.json
+```
+
+浏览器检查与应用运行依赖分开。当前演示检查的 Playwright 包路径、Chrome、录屏组件及命令见 [demo/README](demo/README.md#复验)。其中 `node design/demo/tests/stage.mjs` 的普通模式写忽略目录；`--record` 和演示完整复演会覆盖既有输出，重跑前应选择临时副本或明确归档目标，不能无意改写历史证据。
+
+早期原型脚本使用 Playwright CLI，先启动服务，再按需执行：
 
 ```powershell
 npx --yes --package @playwright/cli playwright-cli open http://127.0.0.1:8765/design/index.html
-```
-
-再根据改动运行所需脚本，例如：
-
-```powershell
 npx --yes --package @playwright/cli playwright-cli run-code --filename design/tests/browser-flow.js
 ```
 
-首次使用 CLI 可能需要安装其运行包及浏览器环境，按工具实际提示处理；这不是应用运行时依赖。其他脚本与结果变量见[测试与发布验收](../docs/测试与发布验收.md)。脚本使用独立上下文，不修改当前游客账号；控制台中的结果变量需另外读取后才能归档，执行脚本不会自动刷新已有 JSON 文件。当前结果文件保留的是 v0.3.1 历史证据。
+这些脚本用独立上下文；输出变量及验收矩阵见[测试与发布验收](../docs/测试与发布验收.md)。旧 JSON 是历史结果，新执行需另记日期／版本并查看截图。
 
-## 部署与二维码
+## 部署与测试码
 
-当前支持静态部署，不依赖服务器路由重写；hash 路由由前端解析。面向外部演示优先部署 design 运行文件及需要的测试二维码，不把整个研究目录、Git 或测试日志作为发布资源。
+当前只有静态本地预览方案，正式托管、域名、身份及存储尚未确定。演示实际依赖 demo、共享模块／样式、hifi 部分模块／图片和三栏回放的 `output/stage-rehearsal/`；不能只拷贝 demo 目录或沿用旧“七个模块”清单发布。
 
-部署目录需包含 `index.html`、`style.css` 及七个 `.mjs` 运行模块；后续增加模块时同步部署依赖。可选提供 `test-points.html/test-codes/` 作演示。只部署 design 时，现有桌面说明和验收工具中的 `../docs/` 外链不包含在内；需要外部可读时另部署文档或在发布阶段处理这些外链，不宣称它们自然可用。
+对外部署时应从实际引用生成发布资源清单并验收，不把 .git、研究目录、个人存档或本机工具日志公开。只部署运行资源时，设计／证据链接需单独处理。原型单独部署与整套演示部署不是同一清单。
 
-- 挂在站点根目录时，入口为 `https://实际域名/index.html`。
-- 保留 `/design/` 子目录时，入口为 `https://实际域名/design/index.html`。
-- 真正域名、托管平台及环境配置尚未确定；以上不是已创建的地址。
+测试码脚本 `design/tests/build_test_codes.py` 需要 Node.js、Python 及 qrcode 包，支持 `--base-url`，但会重写二维码、manifest 与测试点位页。只有确定实际入口及部署范围后才重建；不要在文档检查时顺手生成。正式手机扫码需可达 URL、完整登录／初始化恢复和现场核验方案，码解析成功不证明到场。
 
-测试二维码脚本需 Node.js、Python 和 Python `qrcode` 包。部署地址确定后按实际入口重建，例如根目录部署：
+## 存储、恢复与能力边界
 
-```powershell
-python design/tests/build_test_codes.py --base-url https://实际域名/index.html
-```
+原型 localStorage 键为 `hxx.interactive.v2`，演示为 `hxx.demo.v1`；草稿依身份／演示批次隔离。A/B 是本机身份，不是真实认证。更换协议、域名或端口会使用另一份存储。
 
-base-url 不带 query 或 hash。脚本会重写 `design/test-points.html`、四张二维码及 manifest；不要在文档检查中顺手重建或改变当前测试码。部署后用手机实际扫码验证前置恢复与核验，码内容有效不证明实际到场。
+演示台具备下载备份、验证载入、明确确认后重新开场的工具；旧原型不借此自动获得迁移工具。备份涉及演示手账，个人文件不提交 Git。坏数据读取时保护原值，写入失败不提交本次业务，不能通过换键、清空或复位修复。大量 PNG 仍受浏览器容量限制。
 
-## 进度、恢复与回退
+回退须保持模块与资源版本一致，数据迁移另需兼容和恢复方案；`archive/v0.1`、`archive/v0.2` 是历史体验，不作为生产回退工具。
 
-业务数据在当前来源域的 localStorage，键为 `hxx.interactive.v2`；编辑会话在按账号隔离的 sessionStorage。A/B 是同浏览器中选择的身份，共享选择可在多标签同步，并非真正的云端认证。更换协议、域名或端口会进入另一份浏览器存储，不表示旧进度被迁移。
-
-目前无内置存档导入导出工具。涉及存储迁移前先设计并验证备份／恢复机制；必要的人工备份通过浏览器开发工具保存在用户指定本地位置，不将游客数据提交仓库。不能用清空存储、重置账号或更换键名解决读取失败。
-
-坏数据读取失败时保护原值；空间不足写入失败时不提交本次业务。大量 PNG 长期保存仍可能达到容量上限，未来作品文件存储在服务阶段设计。
-
-文件版本回退时同步恢复引用的 CSS／模块及资源版本，保持依赖匹配；浏览器已有存档必须继续可读。存在数据迁移时，单纯替换旧静态文件不足以保证回退，需同时使用经过演练的数据恢复方案。历史界面在 `archive/v0.1` 和 `archive/v0.2`，仅作参考，不作为生产回退工具。
-
-## 未接入与后续发布
-
-尚无真实账号、云端同步、支付、定位、店员端、服务端权威结算及生产并发保证；静态公开部署不会补齐这些能力。角色和背景是代码示意，手机系统分享与相机完整链路需实机验证。
-
-真实服务接入后在本文补充实际环境、身份及配置项、数据／文件存储、日志诊断和发布恢复步骤；当前不编造环境变量或服务地址。发布前执行[发布清单](../docs/测试与发布验收.md)。
+真实账号、云端进度、支付、定位和店员服务未接入；静态姿势／表情不等于连续动画。新阶段先做账号与动画样板方案；真实手机相机、系统分享及动画性能仍需实机验证。

@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-08",
+  "passed": true,
+  "checks": [
+    {
+      "name": "existing_sources_assets_evidence_preserved",
+      "passed": true,
+      "missing": [],
+      "changed": [],
+      "files": 818
+    },
+    {
+      "name": "36_existing_confirmed_rules_unchanged",
+      "passed": true,
+      "count": 36
+    },
+    {
+      "name": "missing_link_is_rejected",
+      "passed": true,
+      "exitCode": 1
+    },
+    {
+      "name": "default_checker_writes_ignored_output",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "out_of_repository_report_rejected",
+      "passed": true,
+      "exitCode": 2
+    },
+    {
+      "name": "historical_outputs_not_overwritten",
+      "passed": true,
+      "changed": []
+    }
+  ]
+}

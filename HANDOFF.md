@@ -1,101 +1,72 @@
 # 黄晓西项目接续说明
 
-更新时间：2026-11-05。换电脑或开启新 Codex 对话时先读本文；业务规则以对应产品文档为准。
+更新时间：2026-11-08。本文维护当前状态；工作要求见 [AGENTS](AGENTS.md)，资料职责见[文档索引](docs/README.md)。
 
 ## 当前接手位置
 
-当前客户演示已采用 A1、A2、C3、A4、B5、A6 六套确认稿。24 个装扮沿用原资产 ID 与获取点位，可在衣橱独立试穿，保存后用于伙伴和新纪念图。换机运行使用随仓库提交的透明图集。见[服装来源与重建](reviews/2026-11-05-wardrobe/selected/README.md)、[演示入口与备用录屏](design/demo/README.md)。上一轮[画面修复记录](docs/客户演示画面修复.md)保留备查。电脑投屏已接入[三栏现场演示台](http://127.0.0.1:8765/design/demo/stage.html)，同一窗口可从准备、点位核验一直走到真实 PNG；演示顺序与新版录像见[开场说明](design/demo/README.md#明早开场)。
+客户演示已结束。本轮先完成项目复盘、资料整理和协作标准更新，再讨论真实产品的具体实施。已确认的下一阶段目标保留：**独立手机网页、真实账号与云端进度、待机／眨眼／点击回应等连续动画**；后续再接入黄晓西及景区试点。
 
-- 客户演示已进入投屏复演与交付阶段。分支为 `codex/presenter-console-20261106`，从[演示者说明](design/demo/README.md)启动，测试证据见[实施与彩排](docs/客户演示实施与彩排.md)。
-- 游客演示 `design/demo/` 已采用[黔山同行](<reviews/2026-11-05-ui-companion/黄晓西 · 黔山同行视觉评审册.pdf>)。44 个对应画面、三种尺寸与实际差异见[视觉验收](docs/黔山同行视觉实施与验收.md)。`design/hifi/` 的 v0.2 保留供查阅历史交互。
-- 已按用户批准的方案完成首页及全页面 UI 修订：保留色彩、人物场景和功能结构，采用填色道具插画、轻纸面材质、可读字号，调整按钮比例及内距。没有改变业务原型、存档键或经济规则。
-- 本次将上一轮尚未提交的源码、页面 PNG、验收资料和启动脚本一起整理提交，目标为私有仓库 [ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel) 的 `main`。实际同步状态用 `git fetch origin`、`git status -sb` 和 `git log -1` 核对，不在本文手填最新 SHA。
-- 2026-11-05 已恢复本地预览。旧记录中“Git 身份缺失、未提交”描述的是 2026-10-20 当时状态，不作为本次交接结论。
+| 版本 | 用途与状态 |
+| --- | --- |
+| `codex/project-housekeeping-20261108` | 本轮整理分支；后续接手从此读取更新后的文档。最终提交和新克隆验证见[整理验收](docs/项目复盘与资料整理记录.md)。 |
+| `demo-20261106-stage-v1` → `68d9f33` | 已冻结演示基线，原分支 `codex/presenter-console-20261106` 保留；不得覆盖标签。 |
+| `codex/client-demo-20261106` → `48dfc4f` | 更早客户演示基线，保留回溯。 |
+| `main` → `4d2c933` | 现有主线，尚未包含上述最新演示与整理；不能直接从默认分支接续新工作。 |
 
-## 新 Codex 接手步骤
+本轮不合并 main、不改变游客代码、业务规则、素材内容或浏览器数据。正式开发分支尚未建立；未来应从**验收后的整理分支提交**派生，避免从旧演示标签重新丢掉文档更新。具体新分支名在实施时确定。
 
-1. 完整克隆仓库，或在已有目录先检查分支和未提交改动。工作区干净时再 `git pull --ff-only`，有改动时先保护和核对，不能直接覆盖。
-2. 读取 [AGENTS.md](AGENTS.md)、本文和 [docs/README.md](docs/README.md)，再按具体任务查阅产品规则、设计和实施文件。
-3. 从仓库根目录启动服务，打开首页、总览和状态截图索引，确认图片完整，再继续用户指定的评审或修改。
-4. 业务改动先读 [产品规则](docs/一期产品规则与业务流程.md) 和 [测试与发布验收](docs/测试与发布验收.md)；只改 UI 时保留功能结构和数据行为，核对受影响页面的手机及桌面显示。
+## 已有能力与边界
+
+- `design/demo/` 已贯通初始搭配、线上见面礼、测试码核验、次数／卡池解锁、排重抽取、同屏换装、手账及实际 PNG 导出；六套确认服装 A1、A2、C3、A4、B5、A6 共 24 件沿用原 ID。来源见[拆件说明](reviews/2026-11-05-wardrobe/selected/README.md)。
+- 当前视觉基线是[黔山同行](docs/高保真设计说明.md)，实现对照及后来补验见[视觉验收](docs/黔山同行视觉实施与验收.md)。图集与静态姿势不是生产动画系统。
+- 三栏台中央使用同一游客页，左右侧只读实况和导航；核验／支付仍在游客页明确操作。具备显式确认的备份、载入、重新开场与备用录屏，见[演示说明](design/demo/README.md)。
+- A/B 为本机手账，演示键 `hxx.demo.v1`，原型键 `hxx.interactive.v2`。未接真实认证、云端数据、支付、现场定位及店员服务；码解析不证明实际到场。
+- 高保真正式登录与绑定是设计草案。账号渠道、绑定／恢复、部署资源、数据迁移、渲染技术和真实支付范围仍待决定，不能按设计稿默认已选型。
+
+## 换机接手
 
 首次克隆：
 
 ```powershell
-git clone -b codex/presenter-console-20261106 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
+git clone -b codex/project-housekeeping-20261108 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
 cd huangxiaoxi-travel
 git status -sb
 git log -1 --oneline
 .\Start-Local.ps1
 ```
 
-已有目录同步（工作区干净时）：
+已有目录先检查未提交改动，再 fetch；工作区干净且确认可切换时：
 
 ```powershell
-git status -sb
 git fetch origin
-git switch codex/presenter-console-20261106
+git switch codex/project-housekeeping-20261108
 git pull --ff-only
 .\Start-Local.ps1
 ```
 
-私有仓库需要新电脑的 GitHub 访问权限。Windows 脚本自动查找 Codex 附带或 PATH 中的 Python 3，新启动服务时保持终端打开；支持 `-Port 8766`。其他系统可从根目录运行 `python -m http.server 8765 --bind 127.0.0.1`。没有应用依赖安装或打包步骤，不能双击 HTML 运行 ES modules。端口被其他项目占用时换端口，不终止不明服务。
+若本地尚无该分支，使用 `git switch --track origin/codex/project-housekeeping-20261108`。私有仓库需要本人 GitHub 权限；不复制旧电脑凭证或代理设置。详细环境与处理见[双机协作](docs/GitHub与双机协作.md)。
 
-| 预览内容 | 本地入口 |
+| 用途 | 入口 |
 | --- | --- |
-| 三栏现场演示台 | http://127.0.0.1:8765/design/demo/stage.html |
-| 单独游客页与旧准备页 | http://127.0.0.1:8765/design/demo/index.html · http://127.0.0.1:8765/design/demo/presenter.html |
-| 高保真伙伴首页 | http://127.0.0.1:8765/design/hifi/index.html#partner |
-| 21 页总览 | http://127.0.0.1:8765/design/hifi/overview.html |
-| 60 个展示视图及验收证据 | http://127.0.0.1:8765/output/playwright/all-ui-review/gallery.html |
-| 可实际导出 PNG 的业务原型 | http://127.0.0.1:8765/design/index.html?v=3.1#partner |
+| 当前游客／电脑投屏 | [游客页](http://127.0.0.1:8765/design/demo/index.html) · [三栏台](http://127.0.0.1:8765/design/demo/stage.html) |
+| 当前整套视觉及实机对照 | [确认稿说明](docs/高保真设计说明.md) · [对照页](output/companion-visual-review/index.html) |
+| 历史业务原型与独立高保真 | [原型 v0.3.1](http://127.0.0.1:8765/design/index.html?v=3.1#partner) · [高保真 v0.2](http://127.0.0.1:8765/design/hifi/index.html#partner) |
+| 当前模块入口与检查 | [运行说明](design/README.md) · [演示模块](design/demo/README.md#代码与存档) |
 
-## 修改入口与资料
+历史测试、截图和录像保留原日期。本轮整理验收与未来新电脑验收分别记录；本机全新克隆验证不等于另一台物理设备已经验证。浏览器测试使用独立上下文，不能清空用户手账。
 
-| 内容 | 当前入口 |
-| --- | --- |
-| 高保真页面、状态及构图 | `design/hifi/catalog.mjs`、`pages.mjs`、`app.mjs` |
-| 伙伴首页 | `design/hifi/partner-page.mjs`、`partner.css` |
-| 共用道具插画 | `design/hifi/partner-art.mjs` 经 `art.mjs` 按语义复用 |
-| 共用材质、文字、按钮、弹层 | `design/hifi/ui-system.css` |
-| 分页样式 | `design/hifi/` 下 `ui-auth.css`、`ui-journey.css`、`ui-wardrobe.css`、`ui-memory.css`、`ui-account.css` |
-| 业务原型职责 | [运行说明](design/README.md)、[模块架构](docs/模块架构与代码组织.md) |
-| 最新逐页方案与验收 | [全页面 UI 调整方案与验收](docs/全页面UI调整方案与验收.md) |
-| 首页专项历史依据 | [伙伴首页 UI 修订与验收](docs/伙伴首页UI修订与验收.md) |
-| 启动与跨机协作 | [README](README.md)、[GitHub 与双机协作](docs/GitHub与双机协作.md) |
+## 下一步讨论范围
 
-## 验收记录如何使用
+整理交付后，再依据[实施顺序草案 R00—R02](docs/开发实施任务与里程碑.md)讨论：
 
-2026-10-20 的 UI 验收结果在 `output/playwright/all-ui-review/`：四尺寸 240 视图共 1743 项检查、交互及对比度 70 项、高保真回归 216 项、首页专项 141 项、业务浏览器主线 91 项均通过；实际纪念 PNG 已下载并打开检查。范围、两轮问题及限制见逐页验收文档。`page-manifest.json` 记录逐页实现及图片哈希，`gallery.html` 提供截图入口。
+1. 内测对象、目标手机、登录／恢复渠道和可用部署资源。
+2. 动画母版、素材制作资源及最小样板，通过换装、连续动作、手机表现与 PNG 导出共同验证后再定技术。
+3. 账号云端方案与样板通过后，安排第一条真实身份／云端进度闭环及增量模块化。
 
-以上是**历史执行证据**，不表示新电脑已执行或用户已认可最终视觉。`design/hifi/verification.json` 属于更早的 v0.1 历史记录。本次同步复核单独见 [2026-11-05 检查记录](output/handoff/2026-11-05/sync-checks.json)，没有将旧浏览器验收写成今日重新执行。
+R00—R06 是讨论用顺序，不是已批准的排期或已完成的开发。当前免费主线优先、正式账号重新开始进度等仍是建议；真实支付、现场核验、商家工具另行确认。不在资料整理任务中实施这些功能。
 
-常用检查（需要 Node.js／npm 和可用的 Python 3）：
+## 不随 Git 同步
 
-```powershell
-npm --prefix design run check
-npm --prefix design test
-python docs/check_docs.py
-```
+聊天、工具登录、环境、服务进程、浏览器存档均不随代码同步。演示台可手动导出／载入演示备份，个人备份不上传仓库。新域名／端口会使用独立浏览器存储；正式账号的数据迁移政策尚未确定。
 
-高保真新增模块需另做 `node --check`。浏览器验收需启动服务并准备独立 Playwright 上下文，脚本及结果变量见 [高保真说明](design/hifi/README.md)。不要清空用户浏览器进度测试。
-
-## 下一步与未决事项
-
-2026-11-05 已按[客户演示修改计划](docs/客户演示修改计划与验收.md)完成独立本机演示。复位与恢复只作用于客户演示存档，运行和异常恢复指引见[演示说明](design/demo/README.md)。后续处理客户反馈前，先确认反馈来自客户演示、业务原型还是独立视觉评审稿。
-
-1. 视觉改动从 `design/demo/visual/` 接续；下一轮意见请标注画面编号、设备和当时的搭配／到访状态，对照[实机截图](output/companion-visual-review/index.html)核实。
-2. 演示沿用六套服装的分层试穿与静态表情／姿势；连续角色动画、正式角色母版及生产渲染技术另行验证。
-3. 正式登录与绑定已设计、接入后置。短信／微信渠道、手机号是否必须、恢复及冲突合并政策仍待确认。
-4. 真实账号、云同步、支付、定位和店员核验未接入。高保真展示独立设计场景；实际本地业务进度及 PNG 导出在业务原型中验证。不能自行开始生产衣橱、账号服务或大规模重构。
-5. 地图摘要面板及收齐后剩余次数用途仍是建议，不擅自加入清零、兑换、有效期或退款规则。后续工程化见 [实施计划](docs/开发实施任务与里程碑.md)。
-
-## 不随 Git 迁移的内容
-
-聊天上下文、Codex／GitHub 登录、本机工具配置、服务进程、浏览器 localStorage／sessionStorage 不随仓库同步。新浏览器出现新演示进度是预期行为，当前没有一键存档迁移工具。不复制凭证、整个用户目录或旧电脑代理端口。依赖环境、临时日志及浏览器自动化会话已忽略；查看所需素材和正式截图保留在仓库。
-
-## 可直接复制给另一端 Codex
-
-> 请先核对分支、工作区及 HANDOFF。客户演示使用 codex/presenter-console-20261106，按 design/demo/README.md 打开准备页和演示入口。新问题在独立演示身份下复现，并按实际改动回归。
-
-完成实质阶段后更新本文的状态、决定和下一步，与代码、规范及必要证据一起提交。提交号与推送结果以实际 Git 状态为准。
+> 接续提示：先核对本整理分支及工作区，读 AGENTS、HANDOFF、复盘与资料整理记录。已有游客演示保持可运行；下一阶段目标是独立网页的真实账号、云端进度和连续角色动画。先讨论范围及账号／动画样板方案，避免直接开发未经选型的正式衣橱。

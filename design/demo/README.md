@@ -1,5 +1,7 @@
 # 黄晓西客户演示
 
+> 2026-11-06 冻结演示的操作说明，保留复演与原分支信息；后续接手分支和当前阶段以 [HANDOFF](../../HANDOFF.md) 为准。
+
 当前游客页面使用「黔山同行」视觉。[逐屏对照](../../output/companion-visual-review/index.html) · [覆盖范围、差异与验收](../../docs/黔山同行视觉实施与验收.md)。
 
 从仓库根目录启动 `./Start-Local.ps1`，电脑投屏直接打开[三栏现场演示台](http://127.0.0.1:8765/design/demo/stage.html)。中央是[同一份游客手账](http://127.0.0.1:8765/design/demo/index.html)，左右栏只用于现场准备、定位和讲解。[旧准备页](http://127.0.0.1:8765/design/demo/presenter.html)仍可单独使用。Windows PowerShell 也可用 `.\Start-Local.ps1`。运行时只需要本地 HTTP 服务。

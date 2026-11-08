@@ -1,56 +1,41 @@
 # 黄晓西换装与旅行回忆体验
 
-以数字伙伴承载游客的贵州游玩经历，通过到访、收集、换装和纪念图片形成陪伴体验。当前有本地业务交互原型 v0.3.1，以及独立高保真视觉稿 v0.2；尚未接入正式账号、云端业务、支付或角色动画系统。
+以黄晓西数字伙伴承载游客的贵州游玩经历，通过到访、收集、换装和纪念图形成陪伴体验。当前可运行成果是采用「黔山同行」视觉的游客演示与三栏投屏台；进度保存在本浏览器。真实账号、云端进度和连续角色动画是已确认的下一阶段目标，尚未实现。
 
-GitHub 私有仓库：[ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel)，默认分支 `main`。访问和克隆需要拥有此仓库权限的 GitHub 账号。
+私有仓库：[ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel)。**最新接手分支、冻结演示版本及验收状态只看 [HANDOFF](HANDOFF.md)**，默认分支 `main` 暂不代表最新演示成果。
 
-## 11 月 6 日客户演示
+## 启动当前成果
 
-连续演示交付在 `codex/presenter-console-20261106` 分支。新电脑执行 `git clone -b codex/presenter-console-20261106 https://github.com/ryanzhouyu/huangxiaoxi-travel.git`，进入目录后运行 `.\Start-Local.ps1`。电脑投屏从[三栏演示台](http://127.0.0.1:8765/design/demo/stage.html)进入，开场、四个地点的模拟扫码、实操和回放都在同一窗口。也可单独打开[游客手账](http://127.0.0.1:8765/design/demo/index.html)。现场顺序与备用录屏见[演示者说明](design/demo/README.md)。
-
-## 接手项目
-
-- [AGENTS.md](AGENTS.md)：项目工作要求与设计、实施约束。
-- [HANDOFF.md](HANDOFF.md)：当前阶段、下一步与关键未决事项，换电脑或新对话先看。
-- [产品与开发文档](docs/README.md)：规则、流程、页面、架构、契约和验收的统一入口。
-- [GitHub 与双机协作](docs/GitHub与双机协作.md)：首次推送、克隆、日常交接与不随 Git 同步的内容。
-- [本机部署与接续验收](docs/本机部署与接续验收.md)：2026-10-20 新电脑启动、验证证据与继续工作的位置。
-- [全页面 UI 调整方案与验收](docs/全页面UI调整方案与验收.md)：21 页逐页方案、统一修订与本轮验收；[状态截图索引](output/playwright/all-ui-review/gallery.html)包含全部 60 个验收展示视图。
-
-## 在另一台电脑运行
-
-把仓库完整克隆到本地：
+首次获取整理后的工作基线：
 
 ```powershell
-git clone https://github.com/ryanzhouyu/huangxiaoxi-travel.git
+git clone -b codex/project-housekeeping-20261108 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
 cd huangxiaoxi-travel
-```
-
-在仓库根目录启动：
-
-```powershell
 .\Start-Local.ps1
 ```
 
-脚本优先使用本机 Codex 附带的 Python 3，也支持 PATH 中的 Python 3；已有本项目服务时直接复用。新启动时保持终端打开，按 Ctrl+C 停止。需要其他端口可传入 `-Port 8766`。也可在已配置 Python 的环境直接运行：
+已有工作目录先按[双机协作](docs/GitHub与双机协作.md)核对分支和改动，不能直接覆盖。Windows 脚本会查找 Python 3，已有本项目服务时复用，新启动时保持终端打开；端口冲突可传 `-Port 8766`。其他系统或已配置 Python 的环境可在根目录运行 `python -m http.server 8765 --bind 127.0.0.1`。
 
-```powershell
-python -m http.server 8765 --bind 127.0.0.1
-```
+| 用途 | 入口 |
+| --- | --- |
+| 当前游客演示 | [打开游客页](http://127.0.0.1:8765/design/demo/index.html) |
+| 电脑三栏投屏与存档备份 | [打开演示台](http://127.0.0.1:8765/design/demo/stage.html) |
+| 已确认整套视觉 | [黔山同行设计说明](docs/高保真设计说明.md) |
+| 已确认六套服装与重建来源 | [拆件说明](reviews/2026-11-05-wardrobe/selected/README.md) |
+| 早期业务原型／独立高保真稿 | [历史入口与依赖说明](design/README.md) |
 
-再打开：
+不能双击 HTML 运行 ES modules。本机地址仅供本机访问；新电脑需独立启动服务。演示 A/B 手账不是正式账号，浏览器存档不随 Git 迁移；可由演示台手动备份／载入。
 
-- 高保真阅览：`http://127.0.0.1:8765/design/hifi/index.html#partner`
-- 高保真总览：`http://127.0.0.1:8765/design/hifi/overview.html`
-- 业务交互原型：`http://127.0.0.1:8765/design/index.html?v=3.1#partner`
+## 工作与资料入口
 
-高保真稿共 21 页及 31 个关键状态，登录和绑定仅为设计演示；原型演示账号进度只在当前浏览器保存。不能直接双击 index.html 运行 ES modules。
+- [AGENTS](AGENTS.md)：工作方法、模块化、视觉检查和交付标准。
+- [HANDOFF](HANDOFF.md)：当前状态、分支、能力边界和下一步。
+- [文档索引](docs/README.md)：现行规则、工程草案、视觉基线和历史证据。
+- [项目复盘与资料整理记录](docs/项目复盘与资料整理记录.md)：经验教训、保留／归档／精简清单及本轮验收。
+- [运行说明](design/README.md)：模块位置、环境与检查；[演示者说明](design/demo/README.md)：复演顺序。
+- [双机协作](docs/GitHub与双机协作.md)：克隆、日常同步、证据及存档迁移边界。
 
-## 环境与检查
-
-2026-11-05 当前工作机观察值：Node.js v24.14.0、npm 11.9.0、Python 3.12.14。换机使用不同版本时先执行检查，不把这些观察值当成已经验证过的兼容矩阵。
-
-应用没有第三方运行时依赖，无需 `npm install` 或打包即可浏览。Node.js 用于语法与业务测试；只查看页面时 Python 静态服务即可。维护研究索引、渲染流程图或重建二维码时，可在独立 Python 环境安装 `requirements-tools.txt`。原归档中的部分绘图脚本使用 Windows 字体路径，非 Windows 运行这些维护脚本前需调整字体；已生成页面和图片不受影响。
+应用运行没有第三方包依赖，无需安装应用依赖或打包；Node.js／npm 用于语法及规则检查，Python 用于静态服务和文档检查。二维码或素材维护工具另见 `requirements-tools.txt`。具体环境以本次验收报告为准，历史版本观察值不是兼容性保证。
 
 ```powershell
 npm --prefix design run check
@@ -58,16 +43,10 @@ npm --prefix design test
 python docs/check_docs.py
 ```
 
-浏览器检查另需 Playwright CLI，准备及命令见[运行说明](design/README.md)和[高保真说明](design/hifi/README.md)。现有 JSON 记录是历史验证证据，不表示新电脑已经执行测试。
+浏览器验收另需 Playwright 和 Chrome，准备及脚本见运行说明。历史 JSON 和录屏只证明当时版本的结果，不代替新环境验证。
 
-## 仓库目录
+## 仓库范围
 
-| 目录 | 内容与同步方式 |
-| --- | --- |
-| `docs/` | 当前规范、历史修订和文档检查脚本，纳入 Git |
-| `design/` | 原型、测试、高保真稿及引用的概念资产，纳入 Git |
-| `research/` | 用户原画板、研究依据、原始图片和离线索引，当前阶段保留同步 |
-| `output/` | 已交付页面图及被文档引用的验收素材保留；临时复测图按忽略规则排除 |
-| `.playwright-cli/` | 本机自动化会话和日志，忽略 |
+`design/` 保存运行代码、设计稿与必要素材；`docs/` 保存规范与历史记录；`research/` 保存原画板和研究依据；`reviews/` 区分已确认及未采用设计；`output/` 保存被交付或引用的证据。各组处理依据见[资料整理记录](docs/项目复盘与资料整理记录.md)。
 
-角色概念图和原始参考均已保存到项目目录，正常查看无需依赖旧电脑的 generated_images 路径。正式美术、服务接入及技术选型的状态见 HANDOFF，不根据文件存在推断它们已经完成。
+`design/hifi/`、`output/` 均有当前页面实际依赖，不能按旧文件或输出目录批量移除。凭证、浏览器个人存档、缓存和本机环境不提交；正式素材生产及服务方案仍待验证。

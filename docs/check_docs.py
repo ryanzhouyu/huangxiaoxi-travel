@@ -1,27 +1,31 @@
 """Check documentation references and its correspondence to the local prototype.
 
-Run from any directory: python docs/check_docs.py
-Only the report in output/docs is written; application state is never touched.
+Run from any directory: python docs/check_docs.py [--report repository/path.json]
+The default report is ignored local output; historical evidence is not overwritten.
 """
 
+import argparse
 from datetime import datetime, timezone
 import json
 from pathlib import Path
 import re
+import subprocess
 import sys
 from urllib.parse import unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / 'docs'
-REPORT = ROOT / 'output' / 'docs' / '文档自动检查.json'
+REPORT = ROOT / '.codex' / 'local-deploy' / 'docs-check.json'
 
 
 def main():
-    files = [ROOT / 'AGENTS.md', ROOT / 'design' / 'README.md']
-    files += sorted(DOCS.glob('*.md'))
-    archive = DOCS / 'history' / '2026-10-19-structure-v0.1' / '页面模块与初始化范围.md'
-    files.append(archive)
+    # Include root handoff, all historical notes, research and asset READMEs.
+    # Respect .gitignore so temporary clones and local sessions are never audited or uploaded.
+    names = subprocess.check_output(
+        ['git', 'ls-files', '--cached', '--others', '--exclude-standard', '-z'], cwd=ROOT
+    ).decode('utf-8').split('\0')
+    files = sorted({ROOT / name for name in names if name.endswith('.md')})
     checks = []
 
     def add(name, errors, **details):
@@ -47,7 +51,7 @@ def main():
             if resolved != REPORT.resolve() and not resolved.exists():
                 broken.append({'file': path.relative_to(ROOT).as_posix(), 'target': target})
     add('local_markdown_links', broken, count=count,
-        scope='Current root documents and the newly archived structure. No remote URL or legacy-history audit.')
+        scope='All tracked and non-ignored Markdown, including root handoff, history, research and reviews. File existence only; no remote or anchor validation.')
 
     format_errors = []
     for path, text in texts.items():
@@ -68,6 +72,10 @@ def main():
     ids = re.findall(r'^\| (C\d{2}) \|', rules, re.M)
     expected = [f'C{i:02d}' for i in range(1, 37)]
     add('confirmed_rule_ids', [] if ids == expected else [{'actual': ids, 'expected': expected}], count=len(ids))
+
+    phase_ids = re.findall(r'^\| (P\d{2}) \|', rules, re.M)
+    add('confirmed_product_phase_ids', [] if phase_ids == ['P01', 'P02', 'P03']
+        else [{'actual': phase_ids, 'expected': ['P01', 'P02', 'P03']}])
 
     app = (ROOT / 'design' / 'app.mjs').read_text(encoding='utf-8')
     title_match = re.search(r'const titles=\{(.*?)\};', app, re.S)
@@ -121,7 +129,7 @@ def main():
         'applicationVersion': pkg['version'],
         'passed': all(c['passed'] for c in checks),
         'checks': checks,
-        'limits': ['No application tests were rerun.', 'Semantic and implementation review is recorded separately.',
+        'limits': ['This checker does not run application tests.', 'Semantic and implementation review is recorded separately.',
                    'Hash parameters, remote URLs and Mermaid rendering are not executed by this checker.'],
     }
     REPORT.parent.mkdir(parents=True, exist_ok=True)
@@ -135,4 +143,11 @@ def main():
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--report', help='Report path inside this repository; defaults to ignored local output.')
+    args = parser.parse_args()
+    if args.report:
+        REPORT = (ROOT / args.report).resolve()
+        if not REPORT.is_relative_to(ROOT) or REPORT.suffix.lower() != '.json':
+            parser.error('--report must be a JSON path inside this repository')
     sys.exit(main())
