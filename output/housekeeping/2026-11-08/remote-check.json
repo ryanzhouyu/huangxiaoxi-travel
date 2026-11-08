@@ -1,0 +1,105 @@
+{
+  "checkedAt": "2026-11-08T12:37:38.811928+00:00",
+  "passed": true,
+  "source": "Fresh shallow clone from GitHub, not a local copy or worktree",
+  "testedCommit": "66c5d49554316e005dab7b84a45dbf8d2ab579e1",
+  "branch": "codex/project-housekeeping-20261108",
+  "previewPort": 8876,
+  "runtimeCodeChangesSinceDemo": [],
+  "commands": [
+    {
+      "command": ".\\Start-Local.ps1 -Port 8876",
+      "result": "Started independent preview from cloned checkout"
+    },
+    {
+      "command": "npm --prefix design run check",
+      "result": "passed; seven shared modules"
+    },
+    {
+      "command": "npm --prefix design test",
+      "result": "14 passed, 0 failed"
+    },
+    {
+      "command": "python docs/check_docs.py",
+      "result": "10 checks passed; 47 Markdown files"
+    },
+    {
+      "command": "node .codex/local-deploy/stage-isolated.mjs",
+      "result": "passed",
+      "note": "Exact copy of design/demo/tests/stage.mjs with only localhost port 8765 replaced by 8876; HXX_PLAYWRIGHT points to installed test package. No --record flag."
+    }
+  ],
+  "browserChecks": {
+    "balances": [
+      0,
+      0,
+      2,
+      1,
+      3,
+      4,
+      6,
+      5,
+      15
+    ],
+    "viewports": [
+      [
+        1280,
+        720
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1920,
+        1080
+      ],
+      [
+        360,
+        640
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        430,
+        932
+      ]
+    ],
+    "errors": [],
+    "downloadedPng": "remote-smoke/三栏演示纪念.png",
+    "imageOpenedAndReviewed": true,
+    "desktopAndMobileScreenshotsReviewed": true
+  },
+  "protectedRemoteRefs": {
+    "refs/heads/main": "4d2c933ff10aa8206a06cc459a4178c1d5d6ea95",
+    "refs/heads/codex/client-demo-20261106": "48dfc4f32ee1a60cf865ba337e61ed1fad892be7",
+    "refs/heads/codex/presenter-console-20261106": "68d9f33d72f92fecdde7fa9a072816207b6e5510",
+    "refs/tags/demo-20261106-stage-v1^{}": "68d9f33d72f92fecdde7fa9a072816207b6e5510"
+  },
+  "checkoutCleanAfterTests": true,
+  "limits": [
+    "A fresh checkout on this Windows computer, not verification on another physical device.",
+    "Static demo only; no real authentication, cloud progress, continuous character animation or native mobile camera/share verification.",
+    "This is transfer and demo smoke validation, not a new complete visual acceptance against every design state."
+  ],
+  "artifacts": [
+    {
+      "path": "remote-smoke/checks.json",
+      "sha256": "c3ff197b8518cc648a6ed86c973787127bec346c9b5f519533077a7fede88432"
+    },
+    {
+      "path": "remote-smoke/三栏投屏.jpg",
+      "sha256": "e679adc103d5a0c358513026bb7fd6ee711157c05fdc2efef2747df4ff9d3ce3"
+    },
+    {
+      "path": "remote-smoke/三栏演示纪念.png",
+      "sha256": "4dded4b546c3513ae7027c8c1d5c025c4fedfac1148b387f1b94060d5346b34c"
+    },
+    {
+      "path": "remote-smoke/手机侧栏.jpg",
+      "sha256": "aafc8c13a544c2de87141cbec47d2b8b138a3c3fe54f00b423005e1f3511a35b"
+    }
+  ]
+}
