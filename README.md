@@ -6,10 +6,10 @@
 
 ## 启动当前成果
 
-首次获取已完成 R00 准备与验收的工作基线：
+首次获取当前账号／动画设计与契约验证分支：
 
 ```powershell
-git clone -b codex/internal-alpha-r00-20261108 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
+git clone -b codex/account-animation-design-20261108 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
 cd huangxiaoxi-travel
 .\Start-Local.ps1
 ```
@@ -32,7 +32,8 @@ cd huangxiaoxi-travel
 - [HANDOFF](HANDOFF.md)：当前状态、分支、能力边界和下一步。
 - [文档索引](docs/README.md)：现行规则、工程草案、视觉基线和历史证据。
 - [详细实施计划](docs/开发实施任务与里程碑.md)：下一阶段目标、45 项任务、61 项未来验收用例与阶段关口；真实账号、云端与动画尚未实施。
-- [R00 阶段结果](docs/R00阶段验收记录.md)：范围确认、素材盘点、隔离设计与实际证据；G0 已通过，后续阶段尚未开始。
+- [R00 阶段结果](docs/R00阶段验收记录.md)：范围确认、素材盘点、隔离设计与实际证据；G0 已通过；后续接续进度见下项。
+- [账号与动画接续结果](docs/账号动画接续执行记录.md)：账号状态与接口、动画制作规格、演示迁移设计、23 项验证及资源缺口；G1/G2 尚未通过。
 - [项目复盘与资料整理记录](docs/项目复盘与资料整理记录.md)：经验教训、保留／归档／精简清单及本轮验收。
 - [运行说明](design/README.md)：模块位置、环境与检查；[演示者说明](design/demo/README.md)：复演顺序。
 - [双机协作](docs/GitHub与双机协作.md)：克隆、日常同步、证据及存档迁移边界。
@@ -49,6 +50,6 @@ python docs/check_docs.py
 
 ## 仓库范围
 
-`design/` 保存运行代码、设计稿与必要素材；`docs/` 保存规范与历史记录；`research/` 保存原画板和研究依据；`reviews/` 区分已确认及未采用设计；`output/` 保存被交付或引用的证据。各组处理依据见[资料整理记录](docs/项目复盘与资料整理记录.md)。
+`design/` 保存运行代码、设计稿与必要素材；`docs/` 保存规范与历史记录；`research/` 保存原画板和研究依据；`reviews/` 区分已确认及未采用设计；`output/` 保存被交付或引用的证据；`specs/alpha/` 保存未接入运行时的候选可执行契约及隔离实验。各组处理依据见[资料整理记录](docs/项目复盘与资料整理记录.md)。
 
 `design/hifi/`、`output/` 均有当前页面实际依赖，不能按旧文件或输出目录批量移除。凭证、浏览器个人存档、缓存和本机环境不提交；正式素材生产及服务方案仍待验证。

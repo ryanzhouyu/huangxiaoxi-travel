@@ -7,7 +7,7 @@
 安装 Git、Python 3；执行检查还需要 Node.js／npm。克隆需要当前 GitHub 账号有仓库权限。
 
 ```powershell
-git clone -b codex/internal-alpha-r00-20261108 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
+git clone -b codex/account-animation-design-20261108 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
 cd huangxiaoxi-travel
 git status -sb
 git log -1 --oneline
