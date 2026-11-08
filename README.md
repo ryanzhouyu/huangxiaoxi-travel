@@ -6,10 +6,10 @@
 
 ## 启动当前成果
 
-首次获取包含详细实施计划的工作基线：
+首次获取已完成 R00 准备与验收的工作基线：
 
 ```powershell
-git clone -b codex/internal-alpha-plan-20261108 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
+git clone -b codex/internal-alpha-r00-20261108 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
 cd huangxiaoxi-travel
 .\Start-Local.ps1
 ```
@@ -32,6 +32,7 @@ cd huangxiaoxi-travel
 - [HANDOFF](HANDOFF.md)：当前状态、分支、能力边界和下一步。
 - [文档索引](docs/README.md)：现行规则、工程草案、视觉基线和历史证据。
 - [详细实施计划](docs/开发实施任务与里程碑.md)：下一阶段目标、45 项任务、61 项未来验收用例与阶段关口；真实账号、云端与动画尚未实施。
+- [R00 阶段结果](docs/R00阶段验收记录.md)：范围确认、素材盘点、隔离设计与实际证据；G0 已通过，后续阶段尚未开始。
 - [项目复盘与资料整理记录](docs/项目复盘与资料整理记录.md)：经验教训、保留／归档／精简清单及本轮验收。
 - [运行说明](design/README.md)：模块位置、环境与检查；[演示者说明](design/demo/README.md)：复演顺序。
 - [双机协作](docs/GitHub与双机协作.md)：克隆、日常同步、证据及存档迁移边界。

@@ -1,0 +1,269 @@
+{
+  "date": "2026-11-08",
+  "baseCommit": "8c5ba355b4b60708ea8210c238ebfd563b896bde",
+  "browser": "157.0.8103.38",
+  "outputDirectory": ".codex/local-deploy/r00-20261108/rebuilt",
+  "records": [
+    {
+      "outfitId": "start-b",
+      "framesMatch": true,
+      "files": [
+        "start-b.webp",
+        "start-b-hair.webp",
+        "start-b-top.webp",
+        "start-b-bottom.webp",
+        "start-b-shoes.webp"
+      ]
+    },
+    {
+      "outfitId": "flower",
+      "framesMatch": true,
+      "files": [
+        "flower.webp",
+        "flower-hair.webp",
+        "flower-top.webp",
+        "flower-bottom.webp",
+        "flower-shoes.webp"
+      ]
+    }
+  ],
+  "method": "Original buildSet and runtime renderer; only output redirected; frame coordinates asserted against tracked manifest. Pixel comparison recorded separately.",
+  "limitations": [
+    "static reconstruction only",
+    "no animation or mobile certification"
+  ],
+  "pixelChecks": [
+    {
+      "file": "start-b.webp",
+      "size": [
+        1080,
+        676
+      ],
+      "decodedPixelsEqual": false,
+      "originalSha256": "27772125572c9e93fbf1ac521f157034783baa7de0cfc204c2e52d757f780e36",
+      "rebuiltSha256": "6fa1f92dbfc3e0fc70af7b237d3c94e8e7f819a0724e998130f90d9ebd20cb56",
+      "meanAbsoluteDifferenceRgba": [
+        0.13929432390970853,
+        0.139439513477975,
+        0.13969428007889545,
+        0.0
+      ],
+      "maxDifferenceRgba": [
+        7,
+        7,
+        8,
+        0
+      ],
+      "alphaPixelsEqual": true
+    },
+    {
+      "file": "start-b-hair.webp",
+      "size": [
+        256,
+        256
+      ],
+      "decodedPixelsEqual": false,
+      "originalSha256": "6ba9d23396bbed54eb90d821e3d4675dc20c0a806e08caeb91d94dc71c3bb4a8",
+      "rebuiltSha256": "c1684e96b44afd73e6cc858b1a03d8cf54eda677c04473605506c86ac0ff6572",
+      "meanAbsoluteDifferenceRgba": [
+        0.09112548828125,
+        0.093902587890625,
+        0.093597412109375,
+        0.0
+      ],
+      "maxDifferenceRgba": [
+        8,
+        9,
+        8,
+        0
+      ],
+      "alphaPixelsEqual": true
+    },
+    {
+      "file": "start-b-top.webp",
+      "size": [
+        256,
+        256
+      ],
+      "decodedPixelsEqual": false,
+      "originalSha256": "4a75f05c21d761ecf172e5182114501977a840c2c42e743c7188731454134e63",
+      "rebuiltSha256": "50b71b8e8e8c7f42d08cb4fe3eec37f1f0b8a0f6c20b1b1cff6fe43e905ae7b2",
+      "meanAbsoluteDifferenceRgba": [
+        0.0201568603515625,
+        0.020294189453125,
+        0.0364532470703125,
+        0.0
+      ],
+      "maxDifferenceRgba": [
+        6,
+        7,
+        8,
+        0
+      ],
+      "alphaPixelsEqual": true
+    },
+    {
+      "file": "start-b-bottom.webp",
+      "size": [
+        256,
+        256
+      ],
+      "decodedPixelsEqual": true,
+      "originalSha256": "3eeca75c27c90da986e7343f569105a24d1e47e3c3d94cbb2c1a47ab28abde31",
+      "rebuiltSha256": "f3f3f61eb7ccb1a9927c98f0f06d67751c1ec2fd94fc2c649be4b942e010f8dd",
+      "meanAbsoluteDifferenceRgba": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "maxDifferenceRgba": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "alphaPixelsEqual": true
+    },
+    {
+      "file": "start-b-shoes.webp",
+      "size": [
+        256,
+        256
+      ],
+      "decodedPixelsEqual": false,
+      "originalSha256": "2f5490438161b4271120ce3a43758e51b78324cee4753cf51357051001442e2c",
+      "rebuiltSha256": "19283930af340849c2a4f29c064af27ffe7fde5c68ce689a9bbb9f4598df6eee",
+      "meanAbsoluteDifferenceRgba": [
+        0.023956298828125,
+        0.0241546630859375,
+        0.0240020751953125,
+        0.0
+      ],
+      "maxDifferenceRgba": [
+        5,
+        5,
+        5,
+        0
+      ],
+      "alphaPixelsEqual": true
+    },
+    {
+      "file": "flower.webp",
+      "size": [
+        1080,
+        755
+      ],
+      "decodedPixelsEqual": false,
+      "originalSha256": "e3bf959f8d16366948471ef2f65657b93522c2c03123834eb311e68a0760d661",
+      "rebuiltSha256": "94c01ae0f8c8d835d6913c0db373e20f50c20c0b684566ccaba59e19bcd21655",
+      "meanAbsoluteDifferenceRgba": [
+        0.10579470198675496,
+        0.11117243070885455,
+        0.11170713760117734,
+        0.0
+      ],
+      "maxDifferenceRgba": [
+        7,
+        7,
+        7,
+        0
+      ],
+      "alphaPixelsEqual": true
+    },
+    {
+      "file": "flower-hair.webp",
+      "size": [
+        256,
+        256
+      ],
+      "decodedPixelsEqual": false,
+      "originalSha256": "9b299de7dab0aeafdb4f59b774c9e5b41b4468ec7483e8e5e2a388b38be17fce",
+      "rebuiltSha256": "99ad03b75711e30358fa5a4d77c54a8a7519eb1f5986a458b37d1aabe06fb37a",
+      "meanAbsoluteDifferenceRgba": [
+        0.009979248046875,
+        0.0109405517578125,
+        0.01123046875,
+        0.0
+      ],
+      "maxDifferenceRgba": [
+        6,
+        6,
+        6,
+        0
+      ],
+      "alphaPixelsEqual": true
+    },
+    {
+      "file": "flower-top.webp",
+      "size": [
+        256,
+        256
+      ],
+      "decodedPixelsEqual": true,
+      "originalSha256": "ff1a1933e251f667511cc9b858a0303e810ff1f01c74091cd38e39b70c9d6950",
+      "rebuiltSha256": "3a31b4d9c5be6ff8a1a35a4bf8a359ef5230fd05817dab27751692e34c1780c1",
+      "meanAbsoluteDifferenceRgba": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "maxDifferenceRgba": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "alphaPixelsEqual": true
+    },
+    {
+      "file": "flower-bottom.webp",
+      "size": [
+        256,
+        256
+      ],
+      "decodedPixelsEqual": false,
+      "originalSha256": "bdd6700b788f8f05feae974558a35c3d0500aaad1df6fa4a8a901091b1a773b6",
+      "rebuiltSha256": "0e5ebcc5d895abbb1059f3ae1787692fe59dd87061f44adce11af2f4fcb0fa96",
+      "meanAbsoluteDifferenceRgba": [
+        4.57763671875e-05,
+        6.103515625e-05,
+        6.103515625e-05,
+        0.0
+      ],
+      "maxDifferenceRgba": [
+        1,
+        2,
+        2,
+        0
+      ],
+      "alphaPixelsEqual": true
+    },
+    {
+      "file": "flower-shoes.webp",
+      "size": [
+        256,
+        256
+      ],
+      "decodedPixelsEqual": true,
+      "originalSha256": "271f06cde5bed8c06fb9bd26c69de0b027b5048354b342052ccbe4f091a2a7d9",
+      "rebuiltSha256": "d5d405dae284210f5ddea475635541cc2274a4c7b8d3c38491b6fd29b108d4b1",
+      "meanAbsoluteDifferenceRgba": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "maxDifferenceRgba": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "alphaPixelsEqual": true
+    }
+  ],
+  "allDecodedPixelsMatch": false,
+  "assessment": "Frame geometry and alpha match; some decoded RGB values differ slightly. Cause unconfirmed. Visual preview reviewed; exact reproducibility not certified. Freeze toolchain and compare before replacement in R02."
+}
