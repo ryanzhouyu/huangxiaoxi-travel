@@ -7,7 +7,7 @@
 安装 Git、Python 3；执行检查还需要 Node.js／npm。克隆需要当前 GitHub 账号有仓库权限。
 
 ```powershell
-git clone -b codex/project-housekeeping-20261108 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
+git clone -b codex/internal-alpha-plan-20261108 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
 cd huangxiaoxi-travel
 git status -sb
 git log -1 --oneline
@@ -49,7 +49,7 @@ git ls-remote origin refs/heads/当前分支名
 
 命令中的“本次文件路径”“当前分支名”为需替换的示意。只有远端提交与本地一致才记录同步完成；commit 本身只保存本地。按可独立回退的目标提交，不把用户其他改动混入。
 
-新任务用 `codex/` 前缀分支。整理后的正式开发应从已验收的整理提交派生，冻结演示标签只用于复演／回溯。主线合并单独决定；不移动标签、强推或重写历史。换电脑继续同一任务时沿用该分支，不靠复制目录搬修改。
+新任务用 `codex/` 前缀分支。正式开发应从 HANDOFF 指定的已验收计划提交派生，冻结演示标签只用于复演／回溯。主线合并单独决定；不移动标签、强推或重写历史。换电脑继续同一任务时沿用该分支，不靠复制目录搬修改。
 
 ## 文件保存与资料策略
 
