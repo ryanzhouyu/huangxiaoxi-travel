@@ -1,13 +1,13 @@
 # GitHub 与双机协作
 
-更新日期：2026-11-08。私有仓库为 [ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel)。当前分支与冻结版本以 [HANDOFF](../HANDOFF.md) 为唯一入口，不能把默认 main 当成最新交付。
+更新日期：2026-11-12。私有仓库为 [ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel)。当前分支与冻结版本以 [HANDOFF](../HANDOFF.md) 为唯一入口，不能把默认 main 当成最新交付。
 
 ## 新电脑接手
 
 安装 Git、Python 3；执行检查还需要 Node.js／npm。克隆需要当前 GitHub 账号有仓库权限。
 
 ```powershell
-git clone -b codex/account-animation-design-20261108 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
+git clone -b codex/production-frontend-plan-20261112 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
 cd huangxiaoxi-travel
 git status -sb
 git log -1 --oneline

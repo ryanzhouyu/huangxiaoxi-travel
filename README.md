@@ -6,10 +6,10 @@
 
 ## 启动当前成果
 
-首次获取当前账号／动画设计与契约验证分支：
+首次获取当前正式前端协作方案分支（可运行页面仍是旧演示，正式工程尚未提取）：
 
 ```powershell
-git clone -b codex/account-animation-design-20261108 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
+git clone -b codex/production-frontend-plan-20261112 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
 cd huangxiaoxi-travel
 .\Start-Local.ps1
 ```
@@ -31,6 +31,7 @@ cd huangxiaoxi-travel
 - [AGENTS](AGENTS.md)：工作方法、模块化、视觉检查和交付标准。
 - [HANDOFF](HANDOFF.md)：当前状态、分支、能力边界和下一步。
 - [文档索引](docs/README.md)：现行规则、工程草案、视觉基线和历史证据。
+- [正式前端与后端协作方案](docs/正式前端拆分与后端协作方案.md)：2026-11-12 最新协作分工、正式首发免费范围、工程提取与交付验收；本轮为研判，未生成生产包。
 - [详细实施计划](docs/开发实施任务与里程碑.md)：下一阶段目标、45 项任务、61 项未来验收用例与阶段关口；真实账号、云端与动画尚未实施。
 - [R00 阶段结果](docs/R00阶段验收记录.md)：范围确认、素材盘点、隔离设计与实际证据；G0 已通过；后续接续进度见下项。
 - [账号与动画接续结果](docs/账号动画接续执行记录.md)：账号状态与接口、动画制作规格、演示迁移设计、23 项验证及资源缺口；G1/G2 尚未通过。

@@ -74,8 +74,9 @@ def main():
     add('confirmed_rule_ids', [] if ids == expected else [{'actual': ids, 'expected': expected}], count=len(ids))
 
     phase_ids = re.findall(r'^\| (P\d{2}) \|', rules, re.M)
-    add('confirmed_product_phase_ids', [] if phase_ids == ['P01', 'P02', 'P03']
-        else [{'actual': phase_ids, 'expected': ['P01', 'P02', 'P03']}])
+    expected_phase_ids = ['P01', 'P02', 'P03', 'P04']
+    add('confirmed_product_phase_ids', [] if phase_ids == expected_phase_ids
+        else [{'actual': phase_ids, 'expected': expected_phase_ids}])
 
     app = (ROOT / 'design' / 'app.mjs').read_text(encoding='utf-8')
     title_match = re.search(r'const titles=\{(.*?)\};', app, re.S)
