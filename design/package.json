@@ -1,11 +1,11 @@
 {
-  "name": "huangxiaoxi-travel-wardrobe-prototype",
-  "version": "0.3.1",
+  "name": "huangxiaoxi-backend-review",
+  "version": "0.3.2-review",
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "python -m http.server 8765 --bind 127.0.0.1 --directory ..",
-    "test": "node --test tests/domain.test.mjs",
-    "check": "node --check app.mjs && node --check data.mjs && node --check store.mjs && node --check visual.mjs && node --check world.mjs && node --check game-ui.mjs && node --check postcard.mjs"
+    "start": "python -m http.server 8767 --bind 127.0.0.1 --directory ..",
+    "check": "node ../scripts/check.mjs",
+    "test": "node --test tests/domain.test.mjs"
   }
 }

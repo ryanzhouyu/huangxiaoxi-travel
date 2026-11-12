@@ -1,56 +1,58 @@
-# 黄晓西换装与旅行回忆体验
+# 黄晓西 · 后端研判交接版
 
-以黄晓西数字伙伴承载游客的贵州游玩经历，通过到访、收集、换装和纪念图形成陪伴体验。当前可运行成果是采用「黔山同行」视觉的游客演示与三栏投屏台；进度保存在本浏览器。真实账号、云端进度和连续角色动画是已确认的下一阶段目标，尚未实现。
+这是可运行的游客端源码，用于理解业务、评估后端架构并讨论接口。已删除过程设计稿、研究材料、录像、旧版页面、投屏控制台和模拟购买支线。**当前仍用本地账号与模拟核验，没有真实后端；不是上线包。**
 
-私有仓库：[ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel)。**最新接手分支、冻结演示版本及验收状态只看 [HANDOFF](HANDOFF.md)**，默认分支 `main` 暂不代表最新演示成果。
+## 启动
 
-## 启动当前成果
-
-首次获取当前正式前端协作方案分支（可运行页面仍是旧演示，正式工程尚未提取）：
+运行仅需 Python 3 和现代浏览器，无需安装前端依赖。
 
 ```powershell
-git clone -b codex/production-frontend-plan-20261112 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
-cd huangxiaoxi-travel
 .\Start-Local.ps1
 ```
 
-已有工作目录先按[双机协作](docs/GitHub与双机协作.md)核对分支和改动，不能直接覆盖。Windows 脚本会查找 Python 3，已有本项目服务时复用，新启动时保持终端打开；端口冲突可传 `-Port 8766`。其他系统或已配置 Python 的环境可在根目录运行 `python -m http.server 8765 --bind 127.0.0.1`。
+其他系统或不使用启动脚本时，在本目录运行：
 
-| 用途 | 入口 |
-| --- | --- |
-| 当前游客演示 | [打开游客页](http://127.0.0.1:8765/design/demo/index.html) |
-| 电脑三栏投屏与存档备份 | [打开演示台](http://127.0.0.1:8765/design/demo/stage.html) |
-| 已确认整套视觉 | [黔山同行设计说明](docs/高保真设计说明.md) |
-| 已确认六套服装与重建来源 | [拆件说明](reviews/2026-11-05-wardrobe/selected/README.md) |
-| 早期业务原型／独立高保真稿 | [历史入口与依赖说明](design/README.md) |
-
-不能双击 HTML 运行 ES modules。本机地址仅供本机访问；新电脑需独立启动服务。演示 A/B 手账不是正式账号，浏览器存档不随 Git 迁移；可由演示台手动备份／载入。
-
-## 工作与资料入口
-
-- [AGENTS](AGENTS.md)：工作方法、模块化、视觉检查和交付标准。
-- [HANDOFF](HANDOFF.md)：当前状态、分支、能力边界和下一步。
-- [文档索引](docs/README.md)：现行规则、工程草案、视觉基线和历史证据。
-- [正式前端与后端协作方案](docs/正式前端拆分与后端协作方案.md)：2026-11-12 最新协作分工、正式首发免费范围、工程提取与交付验收；本轮为研判，未生成生产包。
-- [详细实施计划](docs/开发实施任务与里程碑.md)：下一阶段目标、45 项任务、61 项未来验收用例与阶段关口；真实账号、云端与动画尚未实施。
-- [R00 阶段结果](docs/R00阶段验收记录.md)：范围确认、素材盘点、隔离设计与实际证据；G0 已通过；后续接续进度见下项。
-- [账号与动画接续结果](docs/账号动画接续执行记录.md)：账号状态与接口、动画制作规格、演示迁移设计、23 项验证及资源缺口；G1/G2 尚未通过。
-- [项目复盘与资料整理记录](docs/项目复盘与资料整理记录.md)：经验教训、保留／归档／精简清单及本轮验收。
-- [运行说明](design/README.md)：模块位置、环境与检查；[演示者说明](design/demo/README.md)：复演顺序。
-- [双机协作](docs/GitHub与双机协作.md)：克隆、日常同步、证据及存档迁移边界。
-
-应用运行没有第三方包依赖，无需安装应用依赖或打包；Node.js／npm 用于语法及规则检查，Python 用于静态服务和文档检查。二维码或素材维护工具另见 `requirements-tools.txt`。具体环境以本次验收报告为准，历史版本观察值不是兼容性保证。
-
-```powershell
-npm --prefix design run check
-npm --prefix design test
-python docs/check_docs.py
+```sh
+python -m http.server 8767 --bind 127.0.0.1
 ```
 
-浏览器验收另需 Playwright 和 Chrome，准备及脚本见运行说明。历史 JSON 和录屏只证明当时版本的结果，不代替新环境验证。
+打开 [游客端](http://127.0.0.1:8767/design/demo/index.html)。默认端口 8767，与原项目 8765 的服务及浏览器进度隔离。design/demo 是保留的历史路径，不代表已接真实服务。不要双击 HTML，也不要只复制该子目录。
 
-## 仓库范围
+## 阅读顺序
 
-`design/` 保存运行代码、设计稿与必要素材；`docs/` 保存规范与历史记录；`research/` 保存原画板和研究依据；`reviews/` 区分已确认及未采用设计；`output/` 保存被交付或引用的证据；`specs/alpha/` 保存未接入运行时的候选可执行契约及隔离实验。各组处理依据见[资料整理记录](docs/项目复盘与资料整理记录.md)。
+1. 从新本地账号开始：初始搭配 → 游玩地图 → 领取见面礼 → 地点测试打卡 → 抽取 → 试穿并保存 → 制作、保存及导出纪念图。
+2. [业务规则](docs/业务规则.md)：正式目标与测试配置。
+3. [后端研判说明](docs/后端研判说明.md)：对照代码和数据，提出服务边界及接口建议。
+4. [HANDOFF](HANDOFF.md)说明版本；[精简与验收](docs/精简与验收.md)说明删除范围及本轮检查。
 
-`design/hifi/`、`output/` 均有当前页面实际依赖，不能按旧文件或输出目录批量移除。凭证、浏览器个人存档、缓存和本机环境不提交；正式素材生产及服务方案仍待验证。
+## 代码入口
+
+| 路径 | 职责 |
+| --- | --- |
+| [app.mjs](design/app.mjs) | 路由、守卫、用户动作、草稿与异步恢复 |
+| [store.mjs](design/store.mjs) | 本地业务与存档；后端需要接管的主要位置 |
+| [data.mjs](design/data.mjs) | 固定测试配置和稳定 ID；正式改由后端目录提供 |
+| [game-ui.mjs](design/game-ui.mjs) | 地图、卡池、衣橱、图鉴、制作页和抽取反馈 |
+| [visual/pages.mjs](design/demo/visual/pages.mjs) | 当前入口、初始选择、伙伴、探索、地点与手账装配 |
+| [views.mjs](design/demo/views.mjs) | 打卡、活动、账号与次数明细 |
+| [renderer.mjs](design/demo/renderer.mjs) | 伙伴和场景；静态渲染，不是连续动画 |
+| [postcard.mjs](design/demo/postcard.mjs) | PNG 合成；实际绘制在 visual/print.mjs |
+| design/demo/assets/、visual/*.css | 正在使用的图片与样式，不能当作过程稿删除 |
+
+## 检查
+
+检查需要 Node.js 22 或更高版本及 npm；运行页面本身不需要 Node。
+
+```sh
+npm --prefix design run check
+npm --prefix design test
+```
+
+第一条检查语法、导入／素材、文档链接及禁止交付项；第二条检查免费规则、排重、失败保护和旧数据兼容。浏览器实测见验收记录。没有生产构建命令；后端框架、真实认证和 API 尚未选定。
+
+## 交付边界
+
+- 保留 A/B 本地身份、测试码及明确标识的定位／店员模拟，便于独立研究业务；正式接入必须替换为真实服务。
+- 已移除购买入口、价格套餐、订单页、新增订单与模拟结算；旧 orders 字段仅兼容读取，不清空历史数据。
+- ZIP 只含当前文件快照，不含 Git 历史、浏览器存档、凭证或本机环境。Git 分支仍能追溯旧历史，没有重写历史。
+- 原始设计与制作来源见[素材清单](docs/素材清单.md)。未改人物图片、奖励数值或既有素材 ID。

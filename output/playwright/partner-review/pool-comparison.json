@@ -1,7 +1,0 @@
-{
-  "page": "pool",
-  "method": "fresh isolated contexts, original pages.mjs versus current pages.mjs",
-  "baseline": "9A0F4C3D8E776179FE6CBDAB1EBB96D36CEFEE9ED21F1269006A002138B02BEF",
-  "current": "9A0F4C3D8E776179FE6CBDAB1EBB96D36CEFEE9ED21F1269006A002138B02BEF",
-  "identical": true
-}

@@ -370,10 +370,10 @@
   height: clamp(82px, 15dvh, 160px);
   margin: 12px auto;
 }
-.order-receipt {
+.wallet-summary {
   padding: 22px;
 }
-.receipt-amount {
+.wallet-balance {
   font:
     43px Georgia,
     serif;
@@ -402,13 +402,6 @@
 }
 [data-page='account'] .content > h1 {
   margin-top: 6dvh;
-}
-[data-page='order'] .order-receipt {
-  margin: 5dvh 0 18px;
-  min-height: 35dvh;
-  display: grid;
-  align-content: center;
-  gap: 5px;
 }
 .result-mark {
   align-self: center;
@@ -653,10 +646,10 @@
   position: relative;
   min-height: 18dvh;
 }
-.wallet-ticket .receipt-amount {
+.wallet-ticket .wallet-balance {
   padding-left: 55px;
 }
-.wallet-ticket .receipt-amount::before {
+.wallet-ticket .wallet-balance::before {
   content: '✧';
   position: absolute;
   left: 20px;
@@ -671,11 +664,6 @@
   background: var(--moss);
   align-self: flex-start;
 }
-[data-page='order'] .order-receipt {
-  min-height: 48dvh;
-  justify-content: start;
-}
-
 .journal-print .location-view {
   width: 100%;
   height: 100%;
@@ -774,7 +762,6 @@
   padding: 0 5px;
 }
 #sheet:has([data-action='dirty-save']),
-#sheet:has([data-action='order']),
 #sheet:has([data-action='pay']),
 #sheet:has([data-action='download']) {
   min-height: min(41dvh, 345px);

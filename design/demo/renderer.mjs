@@ -1,5 +1,5 @@
-import {icon as sketchIcon} from '../world.mjs';
-import {icon as paintedIcon} from '../hifi/art.mjs';
+import {icon as sketchIcon} from './symbols.mjs';
+import {icon as paintedIcon} from './icons.mjs';
 import {itemThumbnail} from './item-thumbnails.mjs';
 import {locationBanner} from './map-art.mjs';
 import {prepareWardrobe, renderedLook, thumbnailUrl} from './wardrobe-art.mjs';
@@ -7,7 +7,7 @@ export {renderedLook};
 export {mapPins, mapPlane} from './map-art.mjs';
 
 const picture = (name) =>
-  new URL('../hifi/assets/' + name + '.png', import.meta.url).href;
+  new URL('./assets/shared/' + name + '.png', import.meta.url).href;
 const textures = {};
 export async function prepareArtwork() {
   await Promise.all([

@@ -22,7 +22,6 @@ Desktop.ini
 *.pem
 *.key
 
-# 响应式复测截图可由 verify.js 重建，不影响逐页总览。
-# 默认页面、关键状态、文档引用的图片和正式验收记录仍保留。
-/output/playwright/hifi/check-*.png
-/output/playwright/*-qa-failure.png
+
+# 本轮浏览器验收和临时导出不进入交接包
+/output/

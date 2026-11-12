@@ -1,55 +1,150 @@
-import * as D from './data.mjs';
-import * as S from './store.mjs?v=3.1';
-import * as prototypeArt from './world.mjs';
-const {flourish} = prototypeArt;
+import * as D from "./data.mjs";
+import * as S from "./store.mjs?v=3.1";
+import { flourish } from "./demo/symbols.mjs";
 
-export function renderGamePage(F){
- const {world,icon,stageFigure,itemArt}=F.art||prototypeArt;
- const {route,a,ui,button:B,link:L,esc,fmt,dirty,ownedCount,assetCard,pointCard,poolCard,workCard,filteredByRange,rangeFields}=F;
- const r=route.name,id=route.params.get('id'),p=D.point(id)||D.POINTS[0],pool=D.pool(id)||D.POOLS[0];
- const plaque=(text,sub='')=>`<div class="title-plaque">${flourish()}<h1>${text}</h1>${sub?`<p>${sub}</p>`:''}</div>`;
- const orb=(i,t,act,attrs='')=>B(`${icon(i)}<span>${t}</span>`,act,'hud-orb',attrs);
- const assetShelf=(ids,action='source')=>`<div class="asset-grid reward-shelf">${ids.map(x=>assetCard(D.asset(x),action)).join('')}</div>`;
- const pinPositions=F.art?.mapPins||{gate:[31,70],ridge:[61,28],brook:[67,51],shop:[35,45]};
- const atlas=()=>{
-  const points=D.POINTS.filter(x=>ui.filter==='全部'||x.kind===ui.filter||(ui.filter==='活动'&&x.id==='shop'));
-  const pins=points.map(x=>{
-    const visited=a.events.some(e=>e.pointId===x.id);
-    const [px,py]=pinPositions[x.id];
-    return `<button class="map-pin ${visited?'visited':''} ${x.kind==='商家'?'merchant':''}" style="--x:${px}%;--y:${py}%" data-action="go" data-target="${ui.filter==='活动'?'activity':'point?id='+x.id}"><span class="pin-medal">${icon(visited?'check':x.kind==='商家'?'shop':'pin')}</span><span class="pin-label">${ui.filter==='活动'?'一枚旅行手作':x.name}<small>${visited?'已留足迹':`首次 +${x.reward} 次`}</small></span></button>`;
-  }).join('');
-  const background=world('map');
-  return `<div class="atlas-map" aria-label="黔山漫游示意地图">${F.art?.mapPlane?F.art.mapPlane(background,pins):background+pins}<span class="map-caption">黔山漫游 · 示意导览</span></div>`;
- };
- const visitorPage=F.presentation?.pages[r];
- if(visitorPage)return visitorPage(F);
- switch(r){
- case 'entry':return `<div class="arrival-stage">${world('night')}<div class="arrival-logo"><span>黔 山 纪 游</span><h1>黄晓西</h1><p>换一身风景，藏一路回忆</p>${flourish()}</div><div class="arrival-companion">${stageFigure(D.lookFor('start-a'))}</div><div class="arrival-panel"><h2>选一本旅行手账，继续出发</h2>${['A','B'].map(n=>{const x=F.accounts[n];return B(`<span class="account-seal">${icon('book')} ${n}</span><span><strong>游客 ${n}</strong><small>${x?.initialized?`${x.events.length} 枚足迹 · 继续上次旅行`:'新手账 · 和伙伴初次见面'}</small></span><b>进入 ›</b>`,'login','account-choice',`data-id="${n}"`);}).join('')}<p class="fine">演示账号 · 进度仅保存在当前浏览器</p></div></div>`;
- case 'onboarding':return `<div class="first-meeting">${world('night')}<div class="meeting-heading">${plaque('初次见面','为黄晓西选一身出发的装扮')}</div><div class="meeting-character">${stageFigure(D.lookFor(ui.starter))}</div><span class="art-caption">角色为部件示意</span><div class="meeting-bottom"><div class="starter-list">${D.STARTERS.map(o=>B(`${itemArt(D.asset(o.id+'-top'))}<span>${o.name}</span>`,'starter','starter '+(o.id===ui.starter?'selected':''),`data-id="${o.id}" aria-pressed="${o.id===ui.starter}"`)).join('')}</div><p>三套都免费拥有，以后随时换着穿。</p>${B('就这一身，一起出发','initialize','gold full')}${B('换一个演示账号','logout','text full')}</div></div>`;
- case 'partner':{
-  const lines=a.events.length?['刚才走过的地方，我都记住啦。要做一张纪念吗？','想换一身去走走吗？衣橱里藏着这一路的颜色。','今天还想去哪里？我陪你慢慢逛。']:['你来啦！今天想和我去哪里逛逛？','听说花溪边有一家手作铺，我们去看看吧。','换上一身喜欢的装扮，出发的心情也会不一样呢。'];
-  return `<div class="companion-world">${world('night',a.look)}<div class="world-vignette"></div><div class="home-hud"><div class="identity-medal">${L(`${icon('partner')}<span>黄晓西<small>你的旅行搭档</small></span>`,'account','identity-button')}</div><div class="hud-ticket">${L(`${icon('ticket')}<b>${a.balance}</b>`,'wallet','text')}<small>景区通用</small></div></div><div class="world-location">${L(`${icon('pin')} 黔山漫游 <span>›</span>`,'scene','location-plaque')}<small>测试景区 · 角色与场景示意</small></div><div class="home-tools">${orb('bag','衣橱','home-dress')}${orb('book','图鉴','home-catalog')}${orb('scan','打卡','go','data-target="checkin"')}</div><div class="home-side-tools">${orb('pose','动作','home-pose')}${!a.gifts.includes('demo')?orb('gift','初见礼','go','data-target="scene"'):''}</div><button class="companion-character ${ui.greeting?'greeting':''}" data-action="greet" aria-label="和黄晓西打招呼">${stageFigure(a.look)}<span class="character-sparks" aria-hidden="true">✧<i>✦</i>✧</span></button><div class="companion-dialogue"><span class="speaker">黄晓西</span><button class="dialogue-line" data-action="greet">${lines[(ui.lineIndex||0)%lines.length]}<span class="dialogue-next">◆</span></button></div></div>`;
- }
- case 'explore':return `<div class="travel-atlas">${world('map')}<div class="atlas-heading">${plaque('想去哪里逛逛？','山水之间，等你留下新的足迹')}</div><div class="region-label">贵 州</div><div class="destination-island"><span class="island-pin">${icon('pin')}</span><h2>黔山漫游</h2><p>山门 · 花溪 · 山间手作</p>${L('翻开这片风景','scene','gold full')}</div><div class="atlas-footer">${a.events.length?`<span class="stamp">${new Set(a.events.map(e=>e.pointId)).size} 枚足迹</span><p>你和黄晓西的故事，正在这里发生。</p>`:'<p>第一次来？这里有一套免费的见面礼。</p>'}<small>测试景区 · 示意地图不用于真实导航</small></div></div>`;
- case 'scene':return `<div class="scenic-play">${atlas()}<div class="map-heading">${plaque('黔山漫游','不赶路，慢慢收集沿途风景')}</div><div class="map-filter" role="group" aria-label="地点分类">${[['全部','map'],['景点','pin'],['商家','shop'],['活动','flower']].map(([f,i])=>B(`${icon(i)}<span>${f}</span>`,'filter',ui.filter===f?'selected':'',`data-value="${f}"`)).join('')}</div><div class="map-gift">${B(`${icon('gift')}<span>黔山初见<small>${a.gifts.includes('demo')?'已领取 · 试穿':'免费见面礼'}</small></span>`,a.gifts.includes('demo')?'try-gift':'gift','gift-medal')}</div><div class="map-bottom"><div class="footprint-counter">${icon('foot')}<span>已留足迹 <b>${new Set(a.events.map(e=>e.pointId)).size}</b> / 4</span>${B('地点一览','map-list','text')}</div><div class="map-pools">${D.POOLS.map(p=>L(`${F.presentation ? stageFigure(D.lookFor(p.outfits[0])) : icon('wardrobe')}<span>${p.name}<small>${S.eligible(a,p.id).length===0?'已收齐':a.unlocked.includes(p.id)?'已解锁 · 去收集':'到访后解锁'}</small></span>`,'pool?id='+p.id,'pool-charm')).join('')}</div><small>点地点看故事与奖励 · 测试点位</small></div></div>`;
- case 'point':return `<div class="location-story"><div class="location-portrait">${world('map',undefined,p.id)}<div class="location-sign">${icon(p.kind==='商家'?'shop':'pin')}<h1>${p.name}</h1><span>${p.kind} · 黔山漫游</span></div></div><div class="story-paper">${flourish()}<p class="place-story">${p.desc}</p><div class="location-line">${icon('pin')} ${p.spot}</div><div class="checkin-reward">${icon('ticket')}<strong>${a.claimed.includes('point:'+p.id)?'首次奖励已领':`首次到访 +${p.reward} 次`}</strong><small>${a.claimed.includes('point:'+p.id)?'再来依然记得，只是不重复发奖。':'打卡后，也会解锁这里的装扮卡池。'}</small></div>${B(`${icon('scan')} 扫码，留下一枚足迹`,'open-checkin','gold full',`data-id="${p.id}"`)}${B('定位打卡 · 模拟','geo','text full',`data-id="${p.id}"`)}<h2 class="ribbon-heading">这里藏着的装扮</h2>${p.pools.map(x=>poolCard(D.pool(x))).join('')}${p.kind==='商家'?`<h2 class="ribbon-heading">在店里玩一会儿</h2><p class="fine">到店与完成体验分别领取奖励。</p>${L(`${icon('flower')} 一枚旅行手作 · 了解活动`,'activity','secondary full')}`:''}<p class="fine">测试点位码仅核验内容；定位和店员核验为模拟。</p></div></div>`;
- case 'pool':{const unlocked=a.unlocked.includes(pool.id),remaining=S.eligible(a,pool.id),collected=pool.assets.length-remaining.length;return `<div class="collection-pavilion" data-pool="${pool.id}"><div class="pool-ambience">${world('night')}</div><div class="pool-paper"><div class="pool-title">${plaque(pool.name,pool.subtitle)}<div class="pool-currency">${icon('ticket')}<strong>${a.balance}</strong>${L('明细','wallet','text')}</div></div><div class="outfit-showcase"><div class="showcase-ring"></div><div class="showcase-character">${stageFigure(D.lookFor(pool.outfits[0]))}</div><div class="showcase-note"><span>本期装扮</span><h2>${D.OUTFITS.find(o=>o.id===pool.outfits[0]).name}</h2><p>服装 · 表情 · 姿势 · 背景</p>${F.poolProgress?.(pool,collected) ?? `<div class="collection-count"><b>${collected}</b> / ${pool.assets.length}<small>已收集</small></div>`}${L('查看套装图鉴','collection?id='+pool.outfits[0],'text')}</div></div><h2 class="ribbon-heading">把喜欢的，一件件收进衣橱</h2>${F.presentation?.poolInventory(pool,collected,assetShelf) ?? assetShelf(pool.assets)}<p class="pool-rules">已拥有奖励跨池排除 · 剩余 ${remaining.length} 件等概率${remaining.length?`，各约 ${(100/remaining.length).toFixed(1)}%`:''}</p>${remaining.length===0?`<div class="collection-complete">${icon('check')}<h2>这一份风景，收齐啦。</h2><p>这个卡池已收齐，不再扣次。</p>${L('看看其他装扮','scene','secondary full')}</div>`:!unlocked?`<div class="unlock-note"><h3>去过这里，才解锁这份相遇</h3><p>到访以下任意一处即可解锁，购买次数不能跳过。</p><div>${pool.points.map(x=>L(D.point(x).name,'point?id='+x,'secondary')).join('')}</div></div>`:`<div class="gacha-dock">${B(`${icon('star')}<span>${a.balance?(F.customerDemo?'抽取一次':'开启一次相遇'):'次数不足，去找找机会'}<small>${a.balance?'消耗 1 次景区通用次数':'打卡或模拟购买获得次数'}</small></span>`,a.balance?'draw':'no-balance','gacha-button',`data-id="${pool.id}"`)}${B('购买通用次数 · 模拟支付','purchase','text full',`data-id="${pool.id}"`)}</div>`}${F.customerDemo?'<div class="pool-exits">'+L('继续游玩','scene','secondary')+L('翻开旅行手账','memories','secondary')+'</div>':''}</div></div>`;}
- case 'wardrobe':{
-  if(!ui.draft)ui.draft=structuredClone(a.look);ui.returnTo=route.params.get('from')||ui.returnTo||'partner';
-  const catalog=ui.wardrobeTab==='catalog';return `<div class="dressroom" data-background="${esc(ui.draft.background)}">${world('night',ui.draft)}<div class="dressing-top"><div class="dressing-plaque">${icon(catalog?'book':'bag')}<h1>${catalog?'旅行图鉴':'旅行衣橱'}</h1></div><div class="segmented">${B('换装','wardrobe-tab',!catalog?'selected':'','data-value="dress"')}${B('图鉴','wardrobe-tab',catalog?'selected':'','data-value="catalog"')}</div></div>${catalog?`<div class="catalog-album"><p>把走过的风景，收成喜欢的模样。</p><div class="catalog-grid">${D.OUTFITS.map(o=>`<button class="catalog-outfit" data-action="go" data-target="collection?id=${o.id}"><span class="catalog-figure">${stageFigure(D.lookFor(o.id))}</span><strong>${o.name}</strong><small>${o.source} · ${ownedCount(o.id)}/4 件</small><span class="collection-dots">${Array.from({length:4},(_,i)=>`<i class="${i<ownedCount(o.id)?'owned':''}"></i>`).join('')}</span></button>`).join('')}</div></div>`:`<div class="dressing-workspace"><div class="dressing-actor"><div class="dressing-platform"></div><div class="dressed-character">${stageFigure(ui.draft)}</div><div class="dressing-state">${dirty()?'试穿中 · 尚未保存':'当前已保存搭配'}</div><div class="dressing-tools">${B(`${icon('pose')} 动作`,'quick-category',ui.category==='pose'?'selected':'','data-value="pose"')}${B(`${icon('flower')} 表情`,'quick-category',ui.category==='expression'?'selected':'','data-value="expression"')}</div></div><div class="wardrobe-cabinet"><div class="cabinet-categories" role="group" aria-label="装扮分类">${Object.entries(D.SLOTS).map(([k,v])=>B(v,'category',ui.category===k?'selected':'',`data-value="${k}"`)).join('')}</div><div class="inventory-scroll"><div class="asset-grid">${D.ASSETS.filter(x=>x.slot===ui.category&&a.owned.includes(x.id)).map(x=>assetCard(x,'equip',ui.draft[x.slot]===x.id)).join('')}</div></div><div class="chosen-item"><small>正在搭配 · ${D.SLOTS[ui.category]}</small><strong>${esc(D.asset(ui.draft[ui.category])?.name)}</strong><p>选择部件立即试穿，保存才会更新伙伴。</p></div></div></div><div class="dressing-save">${B(`${icon('check')} ${ui.returnTo?'保存并返回':'保存搭配'}`,'save-look','gold')}${ui.returnTo?B('取消并返回','wardrobe-return','text'):B('恢复原搭配','restore-look','text',dirty()?'':'disabled')}</div>`}</div>`;
- }
- case 'collection':{const o=D.OUTFITS.find(x=>x.id===id)||D.OUTFITS[4],ids=D.ASSETS.filter(x=>x.outfit===o.id).map(x=>x.id),count=ownedCount(o.id);return `<div class="outfit-folio" data-outfit="${o.id}">${plaque(o.name,o.source)}<div class="folio-display"><div class="folio-sun"></div>${stageFigure(D.lookFor(o.id))}<div class="folio-stamp">${count===ids.length?'收 齐':'收 集 中'}<small>${count} / ${ids.length}</small></div></div>${F.presentation ? `<div class="folio-progress"><strong>${o.name}的四件套</strong><b>${count} / ${ids.length}</b><progress value="${count}" max="${ids.length}" aria-label="套装收集进度"></progress></div>` : ''}${assetShelf(ids)}${count===ids.length?B('试穿这套搭配','try-outfit','gold full',`data-id="${o.id}"`):'<p class="fine center">点未获得的部件，看看去哪儿能遇见它。</p>'}${F.collectionExtras?.(o,a,assetShelf)||''}</div>`;}
- case 'memories':{
-  const events=filteredByRange().slice().reverse(),works=ui.memoryTab==='works';return `<div class="travel-journal"><div class="journal-heading">${plaque('我们的旅行手账','风景会远去，和你的故事会留下。')}<span class="journal-ribbon">黔山纪游</span></div><div class="segmented">${B('一路足迹','memory-tab',!works?'selected':'','data-value="events"')}${B('纪念作品','memory-tab',works?'selected':'','data-value="works"')}</div>${works?(a.works.length?`<div class="work-grid">${a.works.map(workCard).join('')}</div>`:`<div class="journal-empty">${icon('camera')}<h2>把第一段经历，装进相片里。</h2><p>纪念作品会一张张保存在这里。</p>${L(a.events.length?'制作第一张纪念图':'先去看看游玩地点',a.events.length?'compose':'scene','gold full')}</div>`):a.events.length?`<div class="journal-summary"><span class="stamp">${new Set(a.events.map(e=>e.pointId)).size} 枚足迹</span><p>不用走完所有地方，<br>这一刻就值得纪念。</p></div>${rangeFields()}<div class="journal-trail">${events.map((e,i)=>`<button class="journal-event" data-action="event" data-id="${e.id}"><span class="event-medallion">${icon(e.kind==='商家'?'shop':e.kind==='体验活动'?'flower':'pin')}</span><span class="event-story"><small>${fmt(e.at)}</small><strong>${e.name}</strong><span>${e.reward?`收获 ${e.reward} 次相遇机会`:'又来过一次，记得。'}</span></span><span class="event-number">${String(events.length-i).padStart(2,'0')}</span></button>`).join('')||'<p class="fine">这个日期没有足迹，换个日期看看。</p>'}</div>${B(`${icon('camera')} 用这些经历做一张纪念`,'begin-compose','gold full',events.length?'':'disabled')}`:`<div class="journal-empty">${icon('foot')}<h2>第一条足迹，等你来。</h2><p>从山门的一次相遇，<br>开始我们这一页的故事。</p>${L('去游玩，留下第一枚足迹','scene','gold full')}</div>`}</div>`;
- }
- case 'compose':{
-  if(!a.events.length)return `<div class="journal-empty">${icon('camera')}<h1>等一段属于你的经历。</h1><p>先完成一次测试打卡，再把伙伴与足迹做成纪念。</p>${L('去打卡','scene','gold full')}</div>`;
-  if(ui.selected===null)ui.selected=a.events.map(e=>e.id);const chosen=filteredByRange().filter(e=>ui.selected.includes(e.id));
-  return `<div class="photo-studio">${plaque('回忆照相馆','留下这一刻的你和黄晓西')}<div class="studio-preview compose-preview"><div class="photo-corners"></div>${ui.preview?`<img src="${ui.preview}" alt="待保存的纪念图预览">`:F.draftMarkup?F.draftMarkup:studioPreview(a.look,ui.title||'把黔山带回去',F.art,chosen.at(-1)?.pointId)}</div>${ui.preview && F.presentation ? F.presentation.composeSummary(chosen) : ''}${B(`${icon('wardrobe')} 给伙伴换一身`,'compose-dress','secondary full')}<div class="studio-controls"><div class="two-actions">${B('单页纪念','template',ui.template==='postcard'?'selected secondary':'secondary','data-value="postcard"')}${B('足迹长图','template',ui.template==='trail'?'selected secondary':'secondary','data-value="trail"')}</div><label class="field">写在相片上的话<input id="work-title" maxlength="16" value="${esc(ui.title||'把黔山带回去')}" placeholder="最多 16 个字"></label>${rangeFields()}<fieldset class="event-picker"><legend>带上哪几段经历？ · ${chosen.length} 条</legend>${filteredByRange().map(e=>`<label><input type="checkbox" data-event="${e.id}" ${ui.selected.includes(e.id)?'checked':''}><span><strong>${e.name}</strong><small>${fmt(e.at)}</small></span></label>`).join('')||'<p>这段日期没有经历。</p>'}</fieldset></div><div class="sticky-action">${B(ui.preview?'收进我的纪念册':'生成纪念图预览',ui.preview?'save-work':'preview-work','gold full',chosen.length?'':'disabled')}${ui.preview?B('重新生成预览','preview-work','text full'):''}</div></div>`;
- }
- default:return null;
- }
+export function renderGamePage(F) {
+  const { world, icon, stageFigure, itemArt } = F.art;
+  const {
+    route,
+    a,
+    ui,
+    button: B,
+    link: L,
+    esc,
+    fmt,
+    dirty,
+    ownedCount,
+    assetCard,
+    pointCard,
+    poolCard,
+    workCard,
+    filteredByRange,
+    rangeFields,
+  } = F;
+  const r = route.name,
+    id = route.params.get("id"),
+    p = D.point(id) || D.POINTS[0],
+    pool = D.pool(id) || D.POOLS[0];
+  const plaque = (text, sub = "") =>
+    `<div class="title-plaque">${flourish()}<h1>${text}</h1>${sub ? `<p>${sub}</p>` : ""}</div>`;
+  const assetShelf = (ids, action = "source") =>
+    `<div class="asset-grid reward-shelf">${ids.map((x) => assetCard(D.asset(x), action)).join("")}</div>`;
+  const pinPositions = F.art?.mapPins || {
+    gate: [31, 70],
+    ridge: [61, 28],
+    brook: [67, 51],
+    shop: [35, 45],
+  };
+  const atlas = () => {
+    const points = D.POINTS.filter(
+      (x) =>
+        ui.filter === "全部" ||
+        x.kind === ui.filter ||
+        (ui.filter === "活动" && x.id === "shop"),
+    );
+    const pins = points
+      .map((x) => {
+        const visited = a.events.some((e) => e.pointId === x.id);
+        const [px, py] = pinPositions[x.id];
+        return `<button class="map-pin ${visited ? "visited" : ""} ${x.kind === "商家" ? "merchant" : ""}" style="--x:${px}%;--y:${py}%" data-action="go" data-target="${ui.filter === "活动" ? "activity" : "point?id=" + x.id}"><span class="pin-medal">${icon(visited ? "check" : x.kind === "商家" ? "shop" : "pin")}</span><span class="pin-label">${ui.filter === "活动" ? "一枚旅行手作" : x.name}<small>${visited ? "已留足迹" : `首次 +${x.reward} 次`}</small></span></button>`;
+      })
+      .join("");
+    const background = world("map");
+    return `<div class="atlas-map" aria-label="黔山漫游示意地图">${F.art?.mapPlane ? F.art.mapPlane(background, pins) : background + pins}<span class="map-caption">黔山漫游 · 示意导览</span></div>`;
+  };
+  const visitorPage = F.presentation?.pages[r];
+  if (visitorPage) return visitorPage(F);
+  switch (r) {
+    case "scene":
+      return `<div class="scenic-play">${atlas()}<div class="map-heading">${plaque("黔山漫游", "不赶路，慢慢收集沿途风景")}</div><div class="map-filter" role="group" aria-label="地点分类">${[
+        ["全部", "map"],
+        ["景点", "pin"],
+        ["商家", "shop"],
+        ["活动", "flower"],
+      ]
+        .map(([f, i]) =>
+          B(
+            `${icon(i)}<span>${f}</span>`,
+            "filter",
+            ui.filter === f ? "selected" : "",
+            `data-value="${f}"`,
+          ),
+        )
+        .join(
+          "",
+        )}</div><div class="map-gift">${B(`${icon("gift")}<span>黔山初见<small>${a.gifts.includes("demo") ? "已领取 · 试穿" : "免费见面礼"}</small></span>`, a.gifts.includes("demo") ? "try-gift" : "gift", "gift-medal")}</div><div class="map-bottom"><div class="footprint-counter">${icon("foot")}<span>已留足迹 <b>${new Set(a.events.map((e) => e.pointId)).size}</b> / 4</span>${B("地点一览", "map-list", "text")}</div><div class="map-pools">${D.POOLS.map((p) => L(`${F.presentation ? stageFigure(D.lookFor(p.outfits[0])) : icon("wardrobe")}<span>${p.name}<small>${S.eligible(a, p.id).length === 0 ? "已收齐" : a.unlocked.includes(p.id) ? "已解锁 · 去收集" : "到访后解锁"}</small></span>`, "pool?id=" + p.id, "pool-charm")).join("")}</div><small>点地点看故事与奖励 · 测试点位</small></div></div>`;
+    case "pool": {
+      const unlocked = a.unlocked.includes(pool.id),
+        remaining = S.eligible(a, pool.id),
+        collected = pool.assets.length - remaining.length;
+      return `<div class="collection-pavilion" data-pool="${pool.id}"><div class="pool-ambience">${world("night")}</div><div class="pool-paper"><div class="pool-title">${plaque(pool.name, pool.subtitle)}<div class="pool-currency">${icon("ticket")}<strong>${a.balance}</strong>${L("明细", "wallet", "text")}</div></div><div class="outfit-showcase"><div class="showcase-ring"></div><div class="showcase-character">${stageFigure(D.lookFor(pool.outfits[0]))}</div><div class="showcase-note"><span>本期装扮</span><h2>${D.OUTFITS.find((o) => o.id === pool.outfits[0]).name}</h2><p>服装 · 表情 · 姿势 · 背景</p>${F.poolProgress?.(pool, collected) ?? `<div class="collection-count"><b>${collected}</b> / ${pool.assets.length}<small>已收集</small></div>`}${L("查看套装图鉴", "collection?id=" + pool.outfits[0], "text")}</div></div><h2 class="ribbon-heading">把喜欢的，一件件收进衣橱</h2>${F.presentation?.poolInventory(pool, collected, assetShelf) ?? assetShelf(pool.assets)}<p class="pool-rules">已拥有奖励跨池排除 · 剩余 ${remaining.length} 件等概率${remaining.length ? `，各约 ${(100 / remaining.length).toFixed(1)}%` : ""}</p>${remaining.length === 0 ? `<div class="collection-complete">${icon("check")}<h2>这一份风景，收齐啦。</h2><p>这个卡池已收齐，不再扣次。</p>${L("看看其他装扮", "scene", "secondary full")}</div>` : !unlocked ? `<div class="unlock-note"><h3>去过这里，才解锁这份相遇</h3><p>到访以下任意一处即可解锁。</p><div>${pool.points.map((x) => L(D.point(x).name, "point?id=" + x, "secondary")).join("")}</div></div>` : `<div class="gacha-dock">${B(`${icon("star")}<span>${a.balance ? "抽取一次" : "次数不足，去找找机会"}<small>${a.balance ? "消耗 1 次景区通用次数" : "打卡或完成活动获得次数"}</small></span>`, a.balance ? "draw" : "no-balance", "gacha-button", `data-id="${pool.id}"`)}</div>`}${'<div class="pool-exits">' + L("继续游玩", "scene", "secondary") + L("翻开旅行手账", "memories", "secondary") + "</div>"}</div></div>`;
+    }
+    case "wardrobe": {
+      if (!ui.draft) ui.draft = structuredClone(a.look);
+      ui.returnTo = route.params.get("from") || ui.returnTo || "partner";
+      const catalog = ui.wardrobeTab === "catalog";
+      return `<div class="dressroom" data-background="${esc(ui.draft.background)}">${world("night", ui.draft)}<div class="dressing-top"><div class="dressing-plaque">${icon(catalog ? "book" : "bag")}<h1>${catalog ? "旅行图鉴" : "旅行衣橱"}</h1></div><div class="segmented">${B("换装", "wardrobe-tab", !catalog ? "selected" : "", 'data-value="dress"')}${B("图鉴", "wardrobe-tab", catalog ? "selected" : "", 'data-value="catalog"')}</div></div>${
+        catalog
+          ? `<div class="catalog-album"><p>把走过的风景，收成喜欢的模样。</p><div class="catalog-grid">${D.OUTFITS.map((o) => `<button class="catalog-outfit" data-action="go" data-target="collection?id=${o.id}"><span class="catalog-figure">${stageFigure(D.lookFor(o.id))}</span><strong>${o.name}</strong><small>${o.source} · ${ownedCount(o.id)}/4 件</small><span class="collection-dots">${Array.from({ length: 4 }, (_, i) => `<i class="${i < ownedCount(o.id) ? "owned" : ""}"></i>`).join("")}</span></button>`).join("")}</div></div>`
+          : `<div class="dressing-workspace"><div class="dressing-actor"><div class="dressing-platform"></div><div class="dressed-character">${stageFigure(ui.draft)}</div><div class="dressing-state">${dirty() ? "试穿中 · 尚未保存" : "当前已保存搭配"}</div><div class="dressing-tools">${B(`${icon("pose")} 动作`, "quick-category", ui.category === "pose" ? "selected" : "", 'data-value="pose"')}${B(`${icon("flower")} 表情`, "quick-category", ui.category === "expression" ? "selected" : "", 'data-value="expression"')}</div></div><div class="wardrobe-cabinet"><div class="cabinet-categories" role="group" aria-label="装扮分类">${Object.entries(
+              D.SLOTS,
+            )
+              .map(([k, v]) =>
+                B(
+                  v,
+                  "category",
+                  ui.category === k ? "selected" : "",
+                  `data-value="${k}"`,
+                ),
+              )
+              .join(
+                "",
+              )}</div><div class="inventory-scroll"><div class="asset-grid">${D.ASSETS.filter(
+              (x) => x.slot === ui.category && a.owned.includes(x.id),
+            )
+              .map((x) => assetCard(x, "equip", ui.draft[x.slot] === x.id))
+              .join(
+                "",
+              )}</div></div><div class="chosen-item"><small>正在搭配 · ${D.SLOTS[ui.category]}</small><strong>${esc(D.asset(ui.draft[ui.category])?.name)}</strong><p>选择部件立即试穿，保存才会更新伙伴。</p></div></div></div><div class="dressing-save">${B(`${icon("check")} ${ui.returnTo ? "保存并返回" : "保存搭配"}`, "save-look", "gold")}${ui.returnTo ? B("取消并返回", "wardrobe-return", "text") : B("恢复原搭配", "restore-look", "text", dirty() ? "" : "disabled")}</div>`
+      }</div>`;
+    }
+    case "collection": {
+      const o = D.OUTFITS.find((x) => x.id === id) || D.OUTFITS[4],
+        ids = D.ASSETS.filter((x) => x.outfit === o.id).map((x) => x.id),
+        count = ownedCount(o.id);
+      return `<div class="outfit-folio" data-outfit="${o.id}">${plaque(o.name, o.source)}<div class="folio-display"><div class="folio-sun"></div>${stageFigure(D.lookFor(o.id))}<div class="folio-stamp">${count === ids.length ? "收 齐" : "收 集 中"}<small>${count} / ${ids.length}</small></div></div>${F.presentation ? `<div class="folio-progress"><strong>${o.name}的四件套</strong><b>${count} / ${ids.length}</b><progress value="${count}" max="${ids.length}" aria-label="套装收集进度"></progress></div>` : ""}${assetShelf(ids)}${count === ids.length ? B("试穿这套搭配", "try-outfit", "gold full", `data-id="${o.id}"`) : '<p class="fine center">点未获得的部件，看看去哪儿能遇见它。</p>'}${F.collectionExtras?.(o, a, assetShelf) || ""}</div>`;
+    }
+    case "compose": {
+      if (!a.events.length)
+        return `<div class="journal-empty">${icon("camera")}<h1>等一段属于你的经历。</h1><p>先完成一次测试打卡，再把伙伴与足迹做成纪念。</p>${L("去打卡", "scene", "gold full")}</div>`;
+      if (ui.selected === null) ui.selected = a.events.map((e) => e.id);
+      const chosen = filteredByRange().filter((e) =>
+        ui.selected.includes(e.id),
+      );
+      return `<div class="photo-studio">${plaque("回忆照相馆", "留下这一刻的你和黄晓西")}<div class="studio-preview compose-preview"><div class="photo-corners"></div>${ui.preview ? `<img src="${ui.preview}" alt="待保存的纪念图预览">` : F.draftMarkup ? F.draftMarkup : studioPreview(a.look, ui.title || "把黔山带回去", F.art, chosen.at(-1)?.pointId)}</div>${ui.preview && F.presentation ? F.presentation.composeSummary(chosen) : ""}${B(`${icon("wardrobe")} 给伙伴换一身`, "compose-dress", "secondary full")}<div class="studio-controls"><div class="two-actions">${B("单页纪念", "template", ui.template === "postcard" ? "selected secondary" : "secondary", 'data-value="postcard"')}${B("足迹长图", "template", ui.template === "trail" ? "selected secondary" : "secondary", 'data-value="trail"')}</div><label class="field">写在相片上的话<input id="work-title" maxlength="16" value="${esc(ui.title || "把黔山带回去")}" placeholder="最多 16 个字"></label>${rangeFields()}<fieldset class="event-picker"><legend>带上哪几段经历？ · ${chosen.length} 条</legend>${
+        filteredByRange()
+          .map(
+            (e) =>
+              `<label><input type="checkbox" data-event="${e.id}" ${ui.selected.includes(e.id) ? "checked" : ""}><span><strong>${e.name}</strong><small>${fmt(e.at)}</small></span></label>`,
+          )
+          .join("") || "<p>这段日期没有经历。</p>"
+      }</fieldset></div><div class="sticky-action">${B(ui.preview ? "收进我的纪念册" : "生成纪念图预览", ui.preview ? "save-work" : "preview-work", "gold full", chosen.length ? "" : "disabled")}${ui.preview ? B("重新生成预览", "preview-work", "text full") : ""}</div></div>`;
+    }
+    default:
+      return null;
+  }
 }
 
-export function rewardPresentation(a,{itemArt}=prototypeArt){return `<div class="reward-reveal"><span class="reveal-kicker">旅 途 的 新 相 遇</span><div class="reveal-rays"></div><div class="reward-art">${itemArt(a)}</div><span class="reward-kind">${D.SLOTS[a.slot]}</span><h3>${a.name}</h3><span class="reward-spark s1">✧</span><span class="reward-spark s2">✧</span></div>`;}
-export function studioPreview(look,title,{world,stageFigure}=prototypeArt,pointId){const safe=String(title).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));return `<div class="studio-scene">${world('map',look,pointId)}${stageFigure(look)}<span>${safe}</span></div>`;}
+export function rewardPresentation(a, { itemArt }) {
+  return `<div class="reward-reveal"><span class="reveal-kicker">旅 途 的 新 相 遇</span><div class="reveal-rays"></div><div class="reward-art">${itemArt(a)}</div><span class="reward-kind">${D.SLOTS[a.slot]}</span><h3>${a.name}</h3><span class="reward-spark s1">✧</span><span class="reward-spark s2">✧</span></div>`;
+}
+export function studioPreview(look, title, { world, stageFigure }, pointId) {
+  const safe = String(title).replace(
+    /[&<>"']/g,
+    (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+        c
+      ],
+  );
+  return `<div class="studio-scene">${world("map", look, pointId)}${stageFigure(look)}<span>${safe}</span></div>`;
+}

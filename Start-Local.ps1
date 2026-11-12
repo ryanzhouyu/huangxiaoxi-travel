@@ -1,23 +1,22 @@
 [CmdletBinding()]
 param(
     [ValidateRange(1024, 65535)]
-    [int]$Port = 8765
+    [int]$Port = 8767
 )
 
 $ErrorActionPreference = 'Stop'
 $taskBaseUrl = "http://127.0.0.1:$Port"
-$taskEntryPath = Join-Path $PSScriptRoot 'design\hifi\index.html'
+$taskEntryPath = Join-Path $PSScriptRoot 'design\demo\index.html'
 $taskListener = Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue
 
 if ($taskListener) {
-    $taskResponse = Invoke-WebRequest -UseBasicParsing -Uri "$taskBaseUrl/design/hifi/index.html" -TimeoutSec 5
+    $taskResponse = Invoke-WebRequest -UseBasicParsing -Uri "$taskBaseUrl/design/demo/index.html" -TimeoutSec 5
     $taskExpected = Get-Content -Raw -Encoding UTF8 -LiteralPath $taskEntryPath
     if ($taskResponse.Content.Trim() -ne $taskExpected.Trim()) {
         throw "Port $Port is used by another service. Choose another port with -Port."
     }
-    Write-Host "Customer demo: $taskBaseUrl/design/demo/index.html"
-    Write-Host "Presentation stage: $taskBaseUrl/design/demo/stage.html"
-    Write-Host "Project preview is already running: $taskBaseUrl/design/hifi/index.html#partner"
+    Write-Host "Review frontend: $taskBaseUrl/design/demo/index.html"
+    Write-Host "Project preview is already running: $taskBaseUrl/design/demo/index.html#partner"
     return
 }
 
@@ -39,11 +38,7 @@ foreach ($taskCandidate in ($taskCandidates | Select-Object -Unique)) {
 if (!$taskPython) { throw 'Python 3 was not found. Install Python 3 and run this script again.' }
 
 Write-Host "Python: $taskPython"
-Write-Host "Customer demo: $taskBaseUrl/design/demo/index.html"
-Write-Host "Presentation stage: $taskBaseUrl/design/demo/stage.html"
-Write-Host "Design: $taskBaseUrl/design/hifi/index.html#partner"
-Write-Host "Overview: $taskBaseUrl/design/hifi/overview.html"
-Write-Host "Prototype: $taskBaseUrl/design/index.html?v=3.1#partner"
+Write-Host "Review frontend: $taskBaseUrl/design/demo/index.html"
 Write-Host 'Keep this terminal open. Press Ctrl+C to stop the preview.'
 & $taskPython -m http.server $Port --bind 127.0.0.1 --directory $PSScriptRoot
 if ($LASTEXITCODE -ne 0) { throw "Preview server exited with code $LASTEXITCODE." }

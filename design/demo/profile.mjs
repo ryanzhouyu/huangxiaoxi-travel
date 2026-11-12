@@ -22,6 +22,5 @@ export async function loadDemo() {
     epochKey,
     sessionPrefix:
       sessionPrefix + (localStorage.getItem(epochKey) || 'initial') + '.',
-    orderPages: true,
   };
 }

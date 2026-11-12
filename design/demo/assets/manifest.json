@@ -1,0 +1,257 @@
+{
+  "sourceCommit": "e5fb44a52c8b63fb6d0b3566e2f4094e08d134d7",
+  "assets": [
+    {
+      "path": "design/demo/assets/scenes/cloud-pavilion.webp",
+      "source": "design/demo/assets/scenes/cloud-pavilion.webp",
+      "sha256": "c3c171ba880e8139efcb2639b31b5797dd63487266788520c1a443e1c6df8f4c",
+      "bytes": 162474
+    },
+    {
+      "path": "design/demo/assets/scenes/flower-creek.webp",
+      "source": "design/demo/assets/scenes/flower-creek.webp",
+      "sha256": "fa2afe723701fff31c9ffe82fe48a537fc8eb97b231ea3f26a8e1e3da56612c2",
+      "bytes": 204424
+    },
+    {
+      "path": "design/demo/assets/scenes/gift-box.webp",
+      "source": "design/demo/assets/scenes/gift-box.webp",
+      "sha256": "21579f32a6a25244d099f711a1d6e3196c8f87bdbd5c9db2243d20ddad0ba3af",
+      "bytes": 127266
+    },
+    {
+      "path": "design/demo/assets/scenes/letter-desk.webp",
+      "source": "design/demo/assets/scenes/letter-desk.webp",
+      "sha256": "3147e5a646bbdbd9412ec0ef36a349acbea45f203184cbb0a4d462d71b26e116",
+      "bytes": 161574
+    },
+    {
+      "path": "design/demo/assets/scenes/photo-studio.webp",
+      "source": "design/demo/assets/scenes/photo-studio.webp",
+      "sha256": "9e372c94c1daa799b4c639c3b50d07ebac189da83150f9ec7dca9e7aa94f7e1f",
+      "bytes": 140484
+    },
+    {
+      "path": "design/demo/assets/scenes/travel-journal.webp",
+      "source": "design/demo/assets/scenes/travel-journal.webp",
+      "sha256": "07626eb74401241e7459cea83f4c6339044ab02fb153fdf0b3874b03d5c4db89",
+      "bytes": 123628
+    },
+    {
+      "path": "design/demo/assets/scenes/village-post.webp",
+      "source": "design/demo/assets/scenes/village-post.webp",
+      "sha256": "31ca90b525175fed7d3d6b6966238e366262e47ff33467f0622c15bcda7db81a",
+      "bytes": 172928
+    },
+    {
+      "path": "design/demo/assets/scenes/wardrobe-studio.webp",
+      "source": "design/demo/assets/scenes/wardrobe-studio.webp",
+      "sha256": "dc7f1077901cae4c73d9b0ac5ae9c91061611c692a7f1515bf0f20fc697476a4",
+      "bytes": 196344
+    },
+    {
+      "path": "design/demo/assets/shared/inventory.png",
+      "source": "design/hifi/assets/inventory.png",
+      "sha256": "9c2a84dc35325781073016e401cd1f7e15106e2e945c290a95a315bd7b42e479",
+      "bytes": 2354352
+    },
+    {
+      "path": "design/demo/assets/shared/map.png",
+      "source": "design/hifi/assets/map.png",
+      "sha256": "3188abf8b22881bccc632b78b63f2d59f8401dc7f9aec203153de8b6e43fd78d",
+      "bytes": 3812676
+    },
+    {
+      "path": "design/demo/assets/shared/night.png",
+      "source": "design/hifi/assets/night.png",
+      "sha256": "42e168b0c93cba49b2c38d814a8e75da3bb51b5ee00450f005b8ba7afbffb084",
+      "bytes": 3109920
+    },
+    {
+      "path": "design/demo/assets/wardrobe/cameo.webp",
+      "source": "design/demo/assets/wardrobe/cameo.webp",
+      "sha256": "5a5e7b2f024165b3f7f66c98f023e58361bb1ac9feb56db9c024bba5bf75049d",
+      "bytes": 28076
+    },
+    {
+      "path": "design/demo/assets/wardrobe/flower-bottom.webp",
+      "source": "design/demo/assets/wardrobe/flower-bottom.webp",
+      "sha256": "bdd6700b788f8f05feae974558a35c3d0500aaad1df6fa4a8a901091b1a773b6",
+      "bytes": 19168
+    },
+    {
+      "path": "design/demo/assets/wardrobe/flower-hair.webp",
+      "source": "design/demo/assets/wardrobe/flower-hair.webp",
+      "sha256": "9b299de7dab0aeafdb4f59b774c9e5b41b4468ec7483e8e5e2a388b38be17fce",
+      "bytes": 19806
+    },
+    {
+      "path": "design/demo/assets/wardrobe/flower-shoes.webp",
+      "source": "design/demo/assets/wardrobe/flower-shoes.webp",
+      "sha256": "271f06cde5bed8c06fb9bd26c69de0b027b5048354b342052ccbe4f091a2a7d9",
+      "bytes": 19872
+    },
+    {
+      "path": "design/demo/assets/wardrobe/flower-top.webp",
+      "source": "design/demo/assets/wardrobe/flower-top.webp",
+      "sha256": "ff1a1933e251f667511cc9b858a0303e810ff1f01c74091cd38e39b70c9d6950",
+      "bytes": 16650
+    },
+    {
+      "path": "design/demo/assets/wardrobe/flower.webp",
+      "source": "design/demo/assets/wardrobe/flower.webp",
+      "sha256": "e3bf959f8d16366948471ef2f65657b93522c2c03123834eb311e68a0760d661",
+      "bytes": 172328
+    },
+    {
+      "path": "design/demo/assets/wardrobe/gift-bottom.webp",
+      "source": "design/demo/assets/wardrobe/gift-bottom.webp",
+      "sha256": "362b6175bf777f41b3ce74203ce6e3d491c854a70f0c84343d1327518f31cc30",
+      "bytes": 21578
+    },
+    {
+      "path": "design/demo/assets/wardrobe/gift-hair.webp",
+      "source": "design/demo/assets/wardrobe/gift-hair.webp",
+      "sha256": "fd443fc876370db0405880ca777a21f9263893d6e924abd75ac9321e65aebb48",
+      "bytes": 26590
+    },
+    {
+      "path": "design/demo/assets/wardrobe/gift-shoes.webp",
+      "source": "design/demo/assets/wardrobe/gift-shoes.webp",
+      "sha256": "4f0c1c8d9647bf9db6655315b19ca8f0136e84182197e9395344e398f0186345",
+      "bytes": 20974
+    },
+    {
+      "path": "design/demo/assets/wardrobe/gift-top.webp",
+      "source": "design/demo/assets/wardrobe/gift-top.webp",
+      "sha256": "0720e9cd914324074207c61f88ca015e3749199feb6e1d2c1f0ed299f40300c2",
+      "bytes": 17082
+    },
+    {
+      "path": "design/demo/assets/wardrobe/gift.webp",
+      "source": "design/demo/assets/wardrobe/gift.webp",
+      "sha256": "aa244b602f94d5c7dcb34d1cd86a42fc7a56bbb23cd12fefeb2cfc7c7ef0e6af",
+      "bytes": 192536
+    },
+    {
+      "path": "design/demo/assets/wardrobe/mountain-bottom.webp",
+      "source": "design/demo/assets/wardrobe/mountain-bottom.webp",
+      "sha256": "c8ca6edceb58cfa4e6a3165a1e17856c87630c2c73715229da4d578bb9007fee",
+      "bytes": 19094
+    },
+    {
+      "path": "design/demo/assets/wardrobe/mountain-hair.webp",
+      "source": "design/demo/assets/wardrobe/mountain-hair.webp",
+      "sha256": "16f06fefbb3800bdb94a4ae4d250ac590cf7cec390a539935ec70eae360af258",
+      "bytes": 17862
+    },
+    {
+      "path": "design/demo/assets/wardrobe/mountain-shoes.webp",
+      "source": "design/demo/assets/wardrobe/mountain-shoes.webp",
+      "sha256": "fb0f200d03a5c5e5106f59fb07d0726c3f6067bd5377a95b61d89f2d943d37c6",
+      "bytes": 15052
+    },
+    {
+      "path": "design/demo/assets/wardrobe/mountain-top.webp",
+      "source": "design/demo/assets/wardrobe/mountain-top.webp",
+      "sha256": "8b201313d34e98e737e449c2273ef948fea3d902c058519c7ad88803f3d7c681",
+      "bytes": 16718
+    },
+    {
+      "path": "design/demo/assets/wardrobe/mountain.webp",
+      "source": "design/demo/assets/wardrobe/mountain.webp",
+      "sha256": "4964dcfb0de3b112227e08639ccbb42d0a3ac37d947c8619d69fd86879442d76",
+      "bytes": 201394
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-a-bottom.webp",
+      "source": "design/demo/assets/wardrobe/start-a-bottom.webp",
+      "sha256": "1799fc4351dc5a39a6e81a1037ed3afece0e478f48b848b471266138c3b72987",
+      "bytes": 14734
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-a-hair.webp",
+      "source": "design/demo/assets/wardrobe/start-a-hair.webp",
+      "sha256": "5fdac3387090c716a59af8205eb6405de7b315200d2a715bb963a804e4da70b0",
+      "bytes": 15128
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-a-shoes.webp",
+      "source": "design/demo/assets/wardrobe/start-a-shoes.webp",
+      "sha256": "3a79fd91b9ec1b229f8239fbf38cc9496a994ab0c12a37760801d1510890f5fb",
+      "bytes": 20540
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-a-top.webp",
+      "source": "design/demo/assets/wardrobe/start-a-top.webp",
+      "sha256": "417a15b43bc4014a6a40cee9302f535161dd15213a290e068c84f19af93d88ee",
+      "bytes": 20300
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-a.webp",
+      "source": "design/demo/assets/wardrobe/start-a.webp",
+      "sha256": "9c1e3f1dc73d3fb1c85e575e25e913f6ff7173cd4cb6ec285eae7701743b7b89",
+      "bytes": 223780
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-b-bottom.webp",
+      "source": "design/demo/assets/wardrobe/start-b-bottom.webp",
+      "sha256": "3eeca75c27c90da986e7343f569105a24d1e47e3c3d94cbb2c1a47ab28abde31",
+      "bytes": 18680
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-b-hair.webp",
+      "source": "design/demo/assets/wardrobe/start-b-hair.webp",
+      "sha256": "6ba9d23396bbed54eb90d821e3d4675dc20c0a806e08caeb91d94dc71c3bb4a8",
+      "bytes": 19060
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-b-shoes.webp",
+      "source": "design/demo/assets/wardrobe/start-b-shoes.webp",
+      "sha256": "2f5490438161b4271120ce3a43758e51b78324cee4753cf51357051001442e2c",
+      "bytes": 18564
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-b-top.webp",
+      "source": "design/demo/assets/wardrobe/start-b-top.webp",
+      "sha256": "4a75f05c21d761ecf172e5182114501977a840c2c42e743c7188731454134e63",
+      "bytes": 17984
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-b.webp",
+      "source": "design/demo/assets/wardrobe/start-b.webp",
+      "sha256": "27772125572c9e93fbf1ac521f157034783baa7de0cfc204c2e52d757f780e36",
+      "bytes": 172908
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-c-bottom.webp",
+      "source": "design/demo/assets/wardrobe/start-c-bottom.webp",
+      "sha256": "d5cf9d0978daae693e3f8122d49d653207c5270a00fe9120a5d50a43f0d3e339",
+      "bytes": 17492
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-c-hair.webp",
+      "source": "design/demo/assets/wardrobe/start-c-hair.webp",
+      "sha256": "7fe8bbec5543f81ec5cf194c596f188df76adf2cf108da0504c9f9e6e8c6b409",
+      "bytes": 15526
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-c-shoes.webp",
+      "source": "design/demo/assets/wardrobe/start-c-shoes.webp",
+      "sha256": "0ed10d1e37bb791e15dcf4643602d3049b61bcf909d5575d3157acdcd5083428",
+      "bytes": 16546
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-c-top.webp",
+      "source": "design/demo/assets/wardrobe/start-c-top.webp",
+      "sha256": "b3da9a00478d42bb29fca978a32fb4b95fb4400af5d4dce3d9e1f624cc74561d",
+      "bytes": 14164
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-c.webp",
+      "source": "design/demo/assets/wardrobe/start-c.webp",
+      "sha256": "30d9863b7db99cab1ac5cdf5ea854a7d0e4c641ec7c1a745debfa3a6d5d1f4d6",
+      "bytes": 173650
+    }
+  ]
+}

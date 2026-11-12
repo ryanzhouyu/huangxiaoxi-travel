@@ -2,12 +2,6 @@ import {asset, point, POINTS, POOLS, ACTIVITY} from '../data.mjs';
 
 import {visitPhoto,companionNote} from './visual/pages.mjs';
 
-const orderStatus = {
-  pending: '待模拟支付',
-  paid: '已到账',
-  cancelled: '已取消',
-  failed: '支付失败',
-};
 
 export function renderDetails({route, a, button, link, esc, fmt}) {
   const id = route.params.get('id');
@@ -70,47 +64,15 @@ export function renderDetails({route, a, button, link, esc, fmt}) {
       ' 件装扮 · ' +
       a.works.length +
       ' 张作品</p></div></section>' +
-      link('查看次数与订单', 'wallet', 'secondary full') +
+      link('查看次数明细', 'wallet', 'secondary full') +
       button('切换演示身份', 'logout', 'text full')
-    );
-  }
-  if (route.name === 'order') {
-    const order = a.orders.find((o) => o.id === id);
-    if (!order)
-      return '<h1>未找到这笔订单</h1>' + link('返回收支手账', 'wallet', 'full');
-    return (
-      '<div class="order-receipt"><small>黔山漫游 · 模拟订单</small><h1>' +
-      orderStatus[order.status] +
-      '</h1><div class="receipt-amount">¥' +
-      esc(order.price) +
-      '</div><h2>' +
-      order.count +
-      ' 次景区通用次数</h2><p>' +
-      fmt(order.at) +
-      ' · ' +
-      esc(order.id.slice(0, 8)) +
-      '</p></div>' +
-      (order.status === 'pending'
-        ? button(
-            '继续模拟支付',
-            'resume-order',
-            'gold full',
-            'data-id="' + esc(id) + '"',
-          )
-        : '') +
-      link('查看收支与订单', 'wallet', 'secondary full') +
-      (order.sourcePool
-        ? link('回到来源卡池', 'pool?id=' + order.sourcePool, 'text full')
-        : '') +
-      '<p class="fine">不产生真实扣款。购买次数不会解锁卡池。</p>'
     );
   }
   if (route.name === 'wallet') {
     return (
-      '<section class="order-receipt wallet-ticket"><span class="ribbon">景区通用次数</span><div class="receipt-amount">' +
+      '<section class="wallet-summary wallet-ticket"><span class="ribbon">景区通用次数</span><div class="wallet-balance">' +
       a.balance +
       ' 次</div>' +
-      button('模拟购买次数', 'purchase-wallet', 'secondary') +
       '</section><h2>收支记录</h2>' +
       (a.ledger
         .map(
@@ -124,17 +86,7 @@ export function renderDetails({route, a, button, link, esc, fmt}) {
             l.delta +
             '</b></div>',
         )
-        .join('') || '<p class="fine">有效到访后，在这里查看获得的次数。</p>') +
-      '<h2>模拟订单</h2>' +
-      (a.orders
-        .map((o) =>
-          link(
-            o.count + ' 次 · ¥' + o.price + '　' + orderStatus[o.status],
-            'order?id=' + o.id,
-            'secondary full',
-          ),
-        )
-        .join('') || '<p class="fine">还没有模拟订单。</p>')
+        .join('') || '<p class="fine">有效到访后，在这里查看获得的次数。</p>')
     );
   }
   return null;
