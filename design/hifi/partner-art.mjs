@@ -3,6 +3,10 @@ let artworkInstance = 0;
 export function partnerIcon(name) {
   const id = `painted-${name}-${++artworkInstance}`;
   const shapes = {
+    companion: `
+      <ellipse cx="32" cy="32" rx="24" ry="27" fill="url(#${id}-green)" stroke="#d2b37c" stroke-width="2"/>
+      <defs><clipPath id="${id}-portrait"><ellipse cx="32" cy="32" rx="22" ry="25"/></clipPath></defs>
+      <image href="assets/companion.png" x="-3" y="7" width="70" height="105" clip-path="url(#${id}-portrait)"/>`,
     shield: `
       <path d="m32 5 23 9v18c-2 13-13 22-23 27C22 54 11 45 9 32V14Z" fill="url(#${id}-gold)" stroke="#987344" stroke-width="1.3"/>
       <path d="m32 11 17 7v14c-2 9-9 17-17 21-8-4-15-12-17-21V18Z" fill="url(#${id}-green)"/>

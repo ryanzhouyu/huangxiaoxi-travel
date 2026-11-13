@@ -1,548 +1,455 @@
 {
-  "checkedAt": "2026-11-12T17:50:26.923161+08:00",
-  "sourceCommit": "e5fb44a52c8b63fb6d0b3566e2f4094e08d134d7",
-  "branch": "codex/backend-review-lite-20261112",
-  "purpose": "Architecture review snapshot, not production release",
+  "date": "2026-11-13",
+  "purpose": "Verify slim visitor frontend against latest complete development source; no product changes",
   "passed": true,
+  "sourceBranch": "codex/production-frontend-plan-20261112",
+  "sourceCommit": "e5fb44a52c8b63fb6d0b3566e2f4094e08d134d7",
+  "reviewBranch": "codex/backend-review-lite-20261112",
   "environment": {
-    "node": "v24.12.0",
-    "python": "Python 3.14.2",
-    "browser": "157.0.8103.51",
-    "system": "Windows desktop",
-    "port": 8767
+    "os": "Windows",
+    "node": "24.12.0",
+    "python": "3.14.2",
+    "browser": "Chromium 157.0.8103.51"
   },
-  "static": {
+  "independentGitComparison": {
+    "exactFiles": 73,
+    "method": "Read each original git blob and compare raw bytes, independently of runtime-baseline.json",
+    "allMatched": true
+  },
+  "staticCheck": {
     "passed": true,
-    "files": 85,
-    "syntaxModules": 23,
-    "runtimeModules": 21,
-    "localReferences": 121,
+    "files": 89,
+    "syntaxModules": 26,
+    "runtimeModules": 24,
+    "localReferences": 122,
+    "exactSourceFiles": 73,
     "verifiedImages": 42,
+    "optionalReferences": [
+      {
+        "file": "design/app.mjs",
+        "ref": "./demo/stage.html",
+        "reason": "external presentation host excluded"
+      }
+    ],
     "errors": []
   },
-  "domain": {
-    "command": "node --test design/tests/domain.test.mjs",
-    "passed": 15,
+  "domainTests": {
+    "command": "npm --prefix design test",
+    "originalTests": 14,
+    "passed": 14,
     "failed": 0
   },
-  "browserFlow": {
-    "passed": true,
-    "results": [
-      {
-        "id": "guards",
-        "passed": true
-      },
-      {
-        "id": "gift-and-draft",
-        "passed": true
-      },
-      {
-        "id": "visit-draw-equip",
-        "passed": true
-      },
-      {
-        "id": "repeat-merchant-activity",
-        "passed": true
-      },
-      {
-        "id": "complete-dedup-free-only",
-        "passed": true
-      },
-      {
-        "id": "compose-save-download-reload",
-        "passed": true,
-        "image": {
-          "loaded": true,
-          "w": 680,
-          "h": 930
-        }
-      },
-      {
-        "id": "responsive",
-        "passed": true,
-        "checked": 45
-      },
-      {
-        "id": "account-isolation",
-        "passed": true
-      }
+  "browserComparison": {
+    "sourceUrl": "http://127.0.0.1:8765/design/demo/index.html",
+    "reviewUrl": "http://127.0.0.1:8767/design/demo/index.html",
+    "isolatedContexts": true,
+    "sameInputs": "Fixed time, randomness and UUID; UI actions only, no injected business state",
+    "identicalCompleteCheckpointStates": true,
+    "checkpoints": [
+      "initialized",
+      "gift",
+      "cancel-draft",
+      "save-look",
+      "wrong-code",
+      "visit",
+      "draw",
+      "equip-reward",
+      "simulated-payment",
+      "repeat-visit",
+      "activity-fail",
+      "activity-success",
+      "saved-work"
     ],
-    "layouts": [
-      {
-        "viewport": {
-          "width": 360,
-          "height": 640
-        },
-        "route": "partner",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 360,
-          "height": 640
-        },
-        "route": "explore",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 360,
-          "height": 640
-        },
-        "route": "scene",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 360,
-          "height": 640
-        },
-        "route": "pool?id=bloom",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 360,
-          "height": 640
-        },
-        "route": "wardrobe",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 360,
-          "height": 640
-        },
-        "route": "collection?id=gift",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 360,
-          "height": 640
-        },
-        "route": "memories",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 360,
-          "height": 640
-        },
-        "route": "compose",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 360,
-          "height": 640
-        },
-        "route": "wallet",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "route": "partner",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "route": "explore",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "route": "scene",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "route": "pool?id=bloom",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "route": "wardrobe",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "route": "collection?id=gift",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "route": "memories",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "route": "compose",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "route": "wallet",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 430,
-          "height": 932
-        },
-        "route": "partner",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 430,
-          "height": 932
-        },
-        "route": "explore",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 430,
-          "height": 932
-        },
-        "route": "scene",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 430,
-          "height": 932
-        },
-        "route": "pool?id=bloom",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 430,
-          "height": 932
-        },
-        "route": "wardrobe",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 430,
-          "height": 932
-        },
-        "route": "collection?id=gift",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 430,
-          "height": 932
-        },
-        "route": "memories",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 430,
-          "height": 932
-        },
-        "route": "compose",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 430,
-          "height": 932
-        },
-        "route": "wallet",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1440,
-          "height": 1000
-        },
-        "route": "partner",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1440,
-          "height": 1000
-        },
-        "route": "explore",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1440,
-          "height": 1000
-        },
-        "route": "scene",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1440,
-          "height": 1000
-        },
-        "route": "pool?id=bloom",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1440,
-          "height": 1000
-        },
-        "route": "wardrobe",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1440,
-          "height": 1000
-        },
-        "route": "collection?id=gift",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1440,
-          "height": 1000
-        },
-        "route": "memories",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1440,
-          "height": 1000
-        },
-        "route": "compose",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1440,
-          "height": 1000
-        },
-        "route": "wallet",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1280,
-          "height": 720
-        },
-        "route": "partner",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1280,
-          "height": 720
-        },
-        "route": "explore",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1280,
-          "height": 720
-        },
-        "route": "scene",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1280,
-          "height": 720
-        },
-        "route": "pool?id=bloom",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1280,
-          "height": 720
-        },
-        "route": "wardrobe",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1280,
-          "height": 720
-        },
-        "route": "collection?id=gift",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1280,
-          "height": 720
-        },
-        "route": "memories",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1280,
-          "height": 720
-        },
-        "route": "compose",
-        "passed": true
-      },
-      {
-        "viewport": {
-          "width": 1280,
-          "height": 720
-        },
-        "route": "wallet",
-        "passed": true
-      }
+    "savedPngUnchangedAfterReload": true,
+    "pageErrors": [],
+    "failedHttpResponses": [],
+    "viewports": [
+      [
+        360,
+        640
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        430,
+        932
+      ],
+      [
+        1440,
+        1000
+      ],
+      [
+        1280,
+        720
+      ]
     ],
-    "errors": [],
-    "badResponses": [],
-    "export": ".codex/review/exported-memory.png"
+    "screenshotsPerVersion": 27,
+    "horizontalOverflows": 0,
+    "brokenImages": 0
   },
-  "recovery": {
-    "passed": true,
-    "results": [
+  "visualComparison": {
+    "imagePairs": 28,
+    "exactPixelPairs": 13,
+    "maxChannelDelta": 12,
+    "pixelsOver20": 0,
+    "note": "Minor raster differences are recorded, not claimed as exact screenshot equivalence. Exported PNG is byte-identical.",
+    "pairs": [
       {
-        "id": "draft-refresh-save-failure-retry",
-        "passed": true
+        "name": "1280-partner.png",
+        "size": [
+          1280,
+          720
+        ],
+        "exactPixels": true,
+        "differentPixels": 0,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 0,
+        "byteIdentical": true
       },
       {
-        "id": "invalid-links-and-memory-guard",
-        "passed": true
+        "name": "1280-pool-id-bloom.png",
+        "size": [
+          1265,
+          999
+        ],
+        "exactPixels": true,
+        "differentPixels": 0,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 0,
+        "byteIdentical": true
       },
       {
-        "id": "cross-tab-owner-switch",
-        "passed": true
+        "name": "1280-scene.png",
+        "size": [
+          1280,
+          720
+        ],
+        "exactPixels": false,
+        "differentPixels": 7,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 1,
+        "byteIdentical": false
       },
       {
-        "id": "corrupt-storage-preserved",
-        "passed": true
+        "name": "1280-wardrobe.png",
+        "size": [
+          1280,
+          720
+        ],
+        "exactPixels": true,
+        "differentPixels": 0,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 0,
+        "byteIdentical": true
       },
       {
-        "id": "visual-baseline-captured",
-        "passed": true
+        "name": "1440-partner.png",
+        "size": [
+          1440,
+          1000
+        ],
+        "exactPixels": false,
+        "differentPixels": 515,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 2,
+        "byteIdentical": false
+      },
+      {
+        "name": "1440-pool-id-bloom.png",
+        "size": [
+          1425,
+          1222
+        ],
+        "exactPixels": false,
+        "differentPixels": 655,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 2,
+        "byteIdentical": false
+      },
+      {
+        "name": "1440-scene.png",
+        "size": [
+          1440,
+          1000
+        ],
+        "exactPixels": false,
+        "differentPixels": 524,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 2,
+        "byteIdentical": false
+      },
+      {
+        "name": "1440-wardrobe.png",
+        "size": [
+          1440,
+          1000
+        ],
+        "exactPixels": false,
+        "differentPixels": 450,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 2,
+        "byteIdentical": false
+      },
+      {
+        "name": "360-partner.png",
+        "size": [
+          360,
+          640
+        ],
+        "exactPixels": true,
+        "differentPixels": 0,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 0,
+        "byteIdentical": true
+      },
+      {
+        "name": "360-pool-id-bloom.png",
+        "size": [
+          345,
+          917
+        ],
+        "exactPixels": false,
+        "differentPixels": 2394,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 2,
+        "byteIdentical": false
+      },
+      {
+        "name": "360-scene.png",
+        "size": [
+          360,
+          640
+        ],
+        "exactPixels": false,
+        "differentPixels": 165,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 1,
+        "byteIdentical": false
+      },
+      {
+        "name": "360-wardrobe.png",
+        "size": [
+          360,
+          640
+        ],
+        "exactPixels": true,
+        "differentPixels": 0,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 0,
+        "byteIdentical": true
+      },
+      {
+        "name": "390-partner.png",
+        "size": [
+          390,
+          844
+        ],
+        "exactPixels": false,
+        "differentPixels": 4703,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 2,
+        "byteIdentical": false
+      },
+      {
+        "name": "390-pool-id-bloom.png",
+        "size": [
+          375,
+          1118
+        ],
+        "exactPixels": true,
+        "differentPixels": 0,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 0,
+        "byteIdentical": true
+      },
+      {
+        "name": "390-scene.png",
+        "size": [
+          390,
+          844
+        ],
+        "exactPixels": false,
+        "differentPixels": 339,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 3,
+        "byteIdentical": false
+      },
+      {
+        "name": "390-wardrobe.png",
+        "size": [
+          390,
+          844
+        ],
+        "exactPixels": true,
+        "differentPixels": 0,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 0,
+        "byteIdentical": true
+      },
+      {
+        "name": "430-partner.png",
+        "size": [
+          430,
+          932
+        ],
+        "exactPixels": true,
+        "differentPixels": 0,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 0,
+        "byteIdentical": true
+      },
+      {
+        "name": "430-pool-id-bloom.png",
+        "size": [
+          415,
+          1178
+        ],
+        "exactPixels": true,
+        "differentPixels": 0,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 0,
+        "byteIdentical": true
+      },
+      {
+        "name": "430-scene.png",
+        "size": [
+          430,
+          932
+        ],
+        "exactPixels": false,
+        "differentPixels": 1497,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 3,
+        "byteIdentical": false
+      },
+      {
+        "name": "430-wardrobe.png",
+        "size": [
+          430,
+          932
+        ],
+        "exactPixels": true,
+        "differentPixels": 0,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 0,
+        "byteIdentical": true
+      },
+      {
+        "name": "compose.png",
+        "size": [
+          375,
+          1231
+        ],
+        "exactPixels": false,
+        "differentPixels": 119,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 2,
+        "byteIdentical": false
+      },
+      {
+        "name": "entry.png",
+        "size": [
+          390,
+          844
+        ],
+        "exactPixels": false,
+        "differentPixels": 3769,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 11,
+        "byteIdentical": false
+      },
+      {
+        "name": "memory.png",
+        "size": [
+          680,
+          858
+        ],
+        "exactPixels": true,
+        "differentPixels": 0,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 0,
+        "byteIdentical": true
+      },
+      {
+        "name": "onboarding.png",
+        "size": [
+          390,
+          844
+        ],
+        "exactPixels": false,
+        "differentPixels": 2714,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 11,
+        "byteIdentical": false
+      },
+      {
+        "name": "order.png",
+        "size": [
+          390,
+          844
+        ],
+        "exactPixels": false,
+        "differentPixels": 101372,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 12,
+        "byteIdentical": false
+      },
+      {
+        "name": "pool.png",
+        "size": [
+          375,
+          1118
+        ],
+        "exactPixels": true,
+        "differentPixels": 0,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 0,
+        "byteIdentical": true
+      },
+      {
+        "name": "wallet.png",
+        "size": [
+          390,
+          844
+        ],
+        "exactPixels": false,
+        "differentPixels": 119315,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 12,
+        "byteIdentical": false
+      },
+      {
+        "name": "work.png",
+        "size": [
+          375,
+          1142
+        ],
+        "exactPixels": true,
+        "differentPixels": 0,
+        "pixelsOver20": 0,
+        "maxChannelDelta": 0,
+        "byteIdentical": true
       }
     ],
-    "errors": [],
-    "browser": "157.0.8103.51"
+    "humanViewed": [
+      "review-memory.png",
+      "review-390-scene.png",
+      "review-360-wardrobe.png",
+      "source-360-wardrobe.png"
+    ]
   },
-  "visualComparison": [
-    {
-      "page": "entry",
-      "size": [
-        390,
-        844
-      ],
-      "differentPixels": 56,
-      "ratio": 0.00017,
-      "pixelsDeltaOver20": 0,
-      "meanAbsoluteChannelDifference": 0.000159
-    },
-    {
-      "page": "partner",
-      "size": [
-        390,
-        844
-      ],
-      "differentPixels": 4613,
-      "ratio": 0.014014,
-      "pixelsDeltaOver20": 0,
-      "meanAbsoluteChannelDifference": 0.005394
-    },
-    {
-      "page": "scene",
-      "size": [
-        390,
-        844
-      ],
-      "differentPixels": 0,
-      "ratio": 0.0,
-      "pixelsDeltaOver20": 0,
-      "meanAbsoluteChannelDifference": 0.0
-    },
-    {
-      "page": "wardrobe",
-      "size": [
-        390,
-        844
-      ],
-      "differentPixels": 627,
-      "ratio": 0.001905,
-      "pixelsDeltaOver20": 0,
-      "meanAbsoluteChannelDifference": 0.000709
-    }
+  "deliveryArchive": "Checked separately against the final committed Git tree and re-tested after extraction; receipt retained in ignored .codex/parity-20261113.",
+  "allowedDifferences": [
+    "Handoff documentation",
+    "Start port and package/check commands",
+    "Excluded process assets, research, old page entries and external presentation host"
   ],
-  "visualReview": "Opened PNG export and mobile wardrobe/map/wallet, desktop pool, and before/after partner captures. No lost material or layout regression observed. Pixel comparison covers four pages only.",
-  "bugFixed": "After another tab completes initialization, rerun route guard even when account ID is unchanged.",
-  "codeHashes": {
-    "design/app.mjs": "23f12b90486c202e8c253a92d49b4d6629f30e23f175d3f4678a59cd8547ca19",
-    "design/data.mjs": "d177b632b68852d83357cf33d6ec08b73053a742fa0c2db09939cb48f1930e73",
-    "design/demo/assets/wardrobe/frames.mjs": "4e8168990bbab1f86d5e5d475aac1fd0edfd1e699a14aaa46d2942398d08935f",
-    "design/demo/collection-preview.mjs": "bba338d55f32082a0f4140ab85c74b6ca512cdf42ce9cb1a4c8fe214da4a6db2",
-    "design/demo/icons.mjs": "ffe2185a28fea8eb05bf9f147bea1b9b1dbce72e1a2d564645ada0999a972632",
-    "design/demo/index.html": "e41f8211b1c2a25d9c151b600949027842bbfec38de43f9c69d7fc815c9be8e8",
-    "design/demo/item-thumbnails.mjs": "4bf1e4c3b04d1e247258ee5903bd3b01fa2ecf385bf6e0c88b61f5cff3fc85f0",
-    "design/demo/map-art.mjs": "089ffa19a4cb1541db42b087c20b633553d9f8cbd6d78a5e853ec281e8174361",
-    "design/demo/painted-icons.mjs": "532a69b6cc563e23d2163ffd191237e153c3a7b3de2a6d1333c4da164dbab43f",
-    "design/demo/postcard.mjs": "dc74af64768f063c6b28c18b19fc17a16cc6519b40f57aa2b902088d3dec72a4",
-    "design/demo/profile.mjs": "b40dec70aa6942617c55e3cf0ce3add00af8823f9d9ea19f8dae85fe2a648aac",
-    "design/demo/renderer.mjs": "a9dbb321f3afea5869a059b637c2559f648ce264e4f21a921494b2a7753a1267",
-    "design/demo/start.mjs": "58809a17c6981d9c3eb0709fbadd70f4c2949ed6f002637c575bc0774bb94a7e",
-    "design/demo/storage.mjs": "938938bd07e6366c4e73ac7028ed99024079f83cfdcc4e0ca382c0037b1da1b1",
-    "design/demo/symbols.mjs": "1df4ef52fd4211b32249200cab5cbe6f124992e8bbacfe9d2856f1e1a0469c40",
-    "design/demo/views.mjs": "e0bd640274c152cf91de053e4fb1f2260402152a07104454258a9a68124328cf",
-    "design/demo/visual/journal.css": "805d039e0e943b39695264b1eee4c3fb0ab0564ed3030fa96a6cf3a7a168357a",
-    "design/demo/visual/journal.mjs": "827050593ec60bba5c15015dd04697c83aace5f1b2d50b96d8c28900dbc963bb",
-    "design/demo/visual/journey.css": "3b4333c63c15fbf2ad59e7fe939fa47fc396d773578074d8e192ea29d9459e23",
-    "design/demo/visual/pages.mjs": "209e2dabf011b3be40d61329eeff8c5787c7365117e4a560286810bdd9ad21bb",
-    "design/demo/visual/print.mjs": "e35ee2d22795dd1ea69511a96c99a2685f81a6bc26b229afefd0acfccd05d0e3",
-    "design/demo/visual/theme.css": "cca95db9a3089da4d11c1ebe3e288023c584d8b96acf30ccba4389953f0d7de1",
-    "design/demo/visual/wardrobe.css": "fa5c0b3c93aecc207b1f42a04d5b01db993a0bfda5fa07f686f54d52fb06f6c8",
-    "design/demo/wardrobe-art.mjs": "d735539a039154122c04e178c705b7f60c7e4d7b65e442ff7c083eeb17bb4d4b",
-    "design/game-ui.mjs": "da64f7b3e7e0170346b12e727059ca46af7aff39d07aef82f00b7858c0f13067",
-    "design/store.mjs": "38bb8d45e506f02872acf66cb6a6d3f7facdb32f27968fe5fecaec66cba5f7b2",
-    "design/tests/domain.test.mjs": "098e6c7bf806a48cb25084ab796b158ebb372746516f3930273056821ed64d61",
-    "scripts/check.mjs": "36af96ae3f3bac8940837f0409da0c818f0f4083e52206ff45e34cdda6d43991"
-  },
   "limits": [
-    "Local A/B identity and simulated verification remain; no real backend",
-    "Desktop browser sizes do not replace phone or WeChat testing",
-    "No animation engine or production authorization certification",
-    "Screenshots and exported test PNG stay in ignored local QA directory; do not bundle design history",
-    "Git history remains available through original repository; ZIP contains current snapshot only"
+    "Current mock identity, verification and purchase retained for source parity; not production ready. First launch remains free with purchase disabled as a future implementation target.",
+    "Existing cross-tab initialization routing issue remains in baseline; slim-only fix was reverted to avoid divergence.",
+    "No real authentication, cloud, animation, mobile device or WeChat production certification.",
+    "Screenshots and full browser logs remain local; compact acceptance and source hashes are included."
   ]
 }

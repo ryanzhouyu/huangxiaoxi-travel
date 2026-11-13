@@ -15,8 +15,8 @@
   --nav-space: calc(var(--nav) + var(--safe-bottom));
   --hand: KaiTi, STKaiti, 'Kaiti SC', 'Songti SC', SimSun, serif;
   --body: 'Microsoft YaHei', 'PingFang SC', system-ui, sans-serif;
-  --night: url('../assets/shared/night.png');
-  --map: url('../assets/shared/map.png');
+  --night: url('../../hifi/assets/night.png');
+  --map: url('../../hifi/assets/map.png');
   --post: url('../assets/scenes/village-post.webp');
   --studio: url('../assets/scenes/wardrobe-studio.webp');
   --cloud: url('../assets/scenes/cloud-pavilion.webp');

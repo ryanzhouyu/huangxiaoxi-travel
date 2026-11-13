@@ -1,0 +1,446 @@
+{
+  "sourceCommit": "e5fb44a52c8b63fb6d0b3566e2f4094e08d134d7",
+  "sourceBranch": "codex/production-frontend-plan-20261112",
+  "scope": "Current visitor entry, all imported runtime modules, images, styles and original domain tests. No behavior edits.",
+  "excludedEntry": "design/demo/stage.html is an optional external presentation host, not part of visitor handoff. Its bridge module remains identical to the source.",
+  "files": [
+    {
+      "path": "design/app.mjs",
+      "bytes": 36980,
+      "gitBlob": "b0e5a64f5761405c6c8764ac037c2498a92eef10",
+      "sha256": "4ff99bb7d8fd1aba9c6324d552700a02885d55f84b82b476ebc29d384d8b584e"
+    },
+    {
+      "path": "design/data.mjs",
+      "bytes": 3871,
+      "gitBlob": "e8c751085d9fbb536f265f71ea2cffa9d72f0635",
+      "sha256": "187635e00692283185acf745e97574a54f9d0d4e338e6b8ce38db914fe576794"
+    },
+    {
+      "path": "design/demo/assets/scenes/cloud-pavilion.webp",
+      "bytes": 162474,
+      "gitBlob": "a39de44b2512e5e732af32f197efad0cf4cae647",
+      "sha256": "c3c171ba880e8139efcb2639b31b5797dd63487266788520c1a443e1c6df8f4c"
+    },
+    {
+      "path": "design/demo/assets/scenes/flower-creek.webp",
+      "bytes": 204424,
+      "gitBlob": "725a2eef26e9602617fb753218d72ebc7b2f22aa",
+      "sha256": "fa2afe723701fff31c9ffe82fe48a537fc8eb97b231ea3f26a8e1e3da56612c2"
+    },
+    {
+      "path": "design/demo/assets/scenes/gift-box.webp",
+      "bytes": 127266,
+      "gitBlob": "97ea142e6fa0389ff4dc205a69f8057f747604c1",
+      "sha256": "21579f32a6a25244d099f711a1d6e3196c8f87bdbd5c9db2243d20ddad0ba3af"
+    },
+    {
+      "path": "design/demo/assets/scenes/letter-desk.webp",
+      "bytes": 161574,
+      "gitBlob": "432e13050ca72d97bf5ab4dcaf8432d1e0e7e48b",
+      "sha256": "3147e5a646bbdbd9412ec0ef36a349acbea45f203184cbb0a4d462d71b26e116"
+    },
+    {
+      "path": "design/demo/assets/scenes/photo-studio.webp",
+      "bytes": 140484,
+      "gitBlob": "9225657e0198c07f36c7ff65306b4158bbf8fee3",
+      "sha256": "9e372c94c1daa799b4c639c3b50d07ebac189da83150f9ec7dca9e7aa94f7e1f"
+    },
+    {
+      "path": "design/demo/assets/scenes/travel-journal.webp",
+      "bytes": 123628,
+      "gitBlob": "10a11a727751dc906b6b1cef5dca59a9188b74f1",
+      "sha256": "07626eb74401241e7459cea83f4c6339044ab02fb153fdf0b3874b03d5c4db89"
+    },
+    {
+      "path": "design/demo/assets/scenes/village-post.webp",
+      "bytes": 172928,
+      "gitBlob": "881bce6b9378e803dade4632133f0e5ac4ad79c5",
+      "sha256": "31ca90b525175fed7d3d6b6966238e366262e47ff33467f0622c15bcda7db81a"
+    },
+    {
+      "path": "design/demo/assets/scenes/wardrobe-studio.webp",
+      "bytes": 196344,
+      "gitBlob": "9ce00ac2a375f5410376d07cd37932c2be6bfb07",
+      "sha256": "dc7f1077901cae4c73d9b0ac5ae9c91061611c692a7f1515bf0f20fc697476a4"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/cameo.webp",
+      "bytes": 28076,
+      "gitBlob": "4f29adcbd66a42275bc66397309f2107232f6238",
+      "sha256": "5a5e7b2f024165b3f7f66c98f023e58361bb1ac9feb56db9c024bba5bf75049d"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/flower-bottom.webp",
+      "bytes": 19168,
+      "gitBlob": "c12a28ffaffeecb7802f2df9a51c4afa1cb52f9e",
+      "sha256": "bdd6700b788f8f05feae974558a35c3d0500aaad1df6fa4a8a901091b1a773b6"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/flower-hair.webp",
+      "bytes": 19806,
+      "gitBlob": "21ef19175cc3267b429b8635e0685561944707df",
+      "sha256": "9b299de7dab0aeafdb4f59b774c9e5b41b4468ec7483e8e5e2a388b38be17fce"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/flower-shoes.webp",
+      "bytes": 19872,
+      "gitBlob": "d01754004972ecade92aae2e2d6ae879425a105e",
+      "sha256": "271f06cde5bed8c06fb9bd26c69de0b027b5048354b342052ccbe4f091a2a7d9"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/flower-top.webp",
+      "bytes": 16650,
+      "gitBlob": "d472aeaa2991cf659d186fd36d65dc5ca19787b2",
+      "sha256": "ff1a1933e251f667511cc9b858a0303e810ff1f01c74091cd38e39b70c9d6950"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/flower.webp",
+      "bytes": 172328,
+      "gitBlob": "3fd046a6082b911c96598635306f235301a40dc5",
+      "sha256": "e3bf959f8d16366948471ef2f65657b93522c2c03123834eb311e68a0760d661"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/frames.mjs",
+      "bytes": 3578,
+      "gitBlob": "099fdf14e0fe3de09fd7faa1f8a41be0cdd8549e",
+      "sha256": "4e8168990bbab1f86d5e5d475aac1fd0edfd1e699a14aaa46d2942398d08935f"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/gift-bottom.webp",
+      "bytes": 21578,
+      "gitBlob": "2207bec4388b5324bed634196a632b53573c5d32",
+      "sha256": "362b6175bf777f41b3ce74203ce6e3d491c854a70f0c84343d1327518f31cc30"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/gift-hair.webp",
+      "bytes": 26590,
+      "gitBlob": "fcab5d81ce6488d87b3002583cfef16b696464f7",
+      "sha256": "fd443fc876370db0405880ca777a21f9263893d6e924abd75ac9321e65aebb48"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/gift-shoes.webp",
+      "bytes": 20974,
+      "gitBlob": "3db28c010fcc62a60881ce3361480424c53db7f9",
+      "sha256": "4f0c1c8d9647bf9db6655315b19ca8f0136e84182197e9395344e398f0186345"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/gift-top.webp",
+      "bytes": 17082,
+      "gitBlob": "349d8581d577547f1341738684ad3156cdd69f29",
+      "sha256": "0720e9cd914324074207c61f88ca015e3749199feb6e1d2c1f0ed299f40300c2"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/gift.webp",
+      "bytes": 192536,
+      "gitBlob": "eab84c3f6392b2a756cb467129bbc0fc13e9222c",
+      "sha256": "aa244b602f94d5c7dcb34d1cd86a42fc7a56bbb23cd12fefeb2cfc7c7ef0e6af"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/mountain-bottom.webp",
+      "bytes": 19094,
+      "gitBlob": "8183b2ffd03e83dd3b1a3fcd6b01549f98a5f137",
+      "sha256": "c8ca6edceb58cfa4e6a3165a1e17856c87630c2c73715229da4d578bb9007fee"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/mountain-hair.webp",
+      "bytes": 17862,
+      "gitBlob": "f0cd441c43eaf9f8c8336152b8611de99f38f935",
+      "sha256": "16f06fefbb3800bdb94a4ae4d250ac590cf7cec390a539935ec70eae360af258"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/mountain-shoes.webp",
+      "bytes": 15052,
+      "gitBlob": "af8c3aaa9307b129a98675a8930132f0e80393d8",
+      "sha256": "fb0f200d03a5c5e5106f59fb07d0726c3f6067bd5377a95b61d89f2d943d37c6"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/mountain-top.webp",
+      "bytes": 16718,
+      "gitBlob": "869d188f0b85b8f9019c9e671f9308d41ac6e4e2",
+      "sha256": "8b201313d34e98e737e449c2273ef948fea3d902c058519c7ad88803f3d7c681"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/mountain.webp",
+      "bytes": 201394,
+      "gitBlob": "f4e2be3afe6949c06b03b9961b434a0fe5044ded",
+      "sha256": "4964dcfb0de3b112227e08639ccbb42d0a3ac37d947c8619d69fd86879442d76"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-a-bottom.webp",
+      "bytes": 14734,
+      "gitBlob": "486faf9a1bc87c656776025051940ed2ef044403",
+      "sha256": "1799fc4351dc5a39a6e81a1037ed3afece0e478f48b848b471266138c3b72987"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-a-hair.webp",
+      "bytes": 15128,
+      "gitBlob": "509ff0d365b378f0188402c38ec1d2fa7e2e7bb4",
+      "sha256": "5fdac3387090c716a59af8205eb6405de7b315200d2a715bb963a804e4da70b0"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-a-shoes.webp",
+      "bytes": 20540,
+      "gitBlob": "3b5aa053c35c5570fa03128e831d4f5e3fcaab18",
+      "sha256": "3a79fd91b9ec1b229f8239fbf38cc9496a994ab0c12a37760801d1510890f5fb"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-a-top.webp",
+      "bytes": 20300,
+      "gitBlob": "b5a1562e286595e1408cc9bbe101686e6a4f23d3",
+      "sha256": "417a15b43bc4014a6a40cee9302f535161dd15213a290e068c84f19af93d88ee"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-a.webp",
+      "bytes": 223780,
+      "gitBlob": "59e188b9424f3d19c56ccf25ea479f9dc9b9bbac",
+      "sha256": "9c1e3f1dc73d3fb1c85e575e25e913f6ff7173cd4cb6ec285eae7701743b7b89"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-b-bottom.webp",
+      "bytes": 18680,
+      "gitBlob": "ca4092e5795453ccf213fbf12a5c860f2601fb02",
+      "sha256": "3eeca75c27c90da986e7343f569105a24d1e47e3c3d94cbb2c1a47ab28abde31"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-b-hair.webp",
+      "bytes": 19060,
+      "gitBlob": "e7fb0af09f49eafa0932dea77aa69f67328abd24",
+      "sha256": "6ba9d23396bbed54eb90d821e3d4675dc20c0a806e08caeb91d94dc71c3bb4a8"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-b-shoes.webp",
+      "bytes": 18564,
+      "gitBlob": "ccb310568a3c3dbdd52a2f1d24d13aee63bc3c86",
+      "sha256": "2f5490438161b4271120ce3a43758e51b78324cee4753cf51357051001442e2c"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-b-top.webp",
+      "bytes": 17984,
+      "gitBlob": "8db3bc64179a20885e091306762ce8bbf285eb3b",
+      "sha256": "4a75f05c21d761ecf172e5182114501977a840c2c42e743c7188731454134e63"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-b.webp",
+      "bytes": 172908,
+      "gitBlob": "2a4366cd8827d475a384af917139b09591b58b8a",
+      "sha256": "27772125572c9e93fbf1ac521f157034783baa7de0cfc204c2e52d757f780e36"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-c-bottom.webp",
+      "bytes": 17492,
+      "gitBlob": "de3c87377061a237f9b5d9bef559b68e4ae54a41",
+      "sha256": "d5cf9d0978daae693e3f8122d49d653207c5270a00fe9120a5d50a43f0d3e339"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-c-hair.webp",
+      "bytes": 15526,
+      "gitBlob": "74aa0029a5087ef28837fe396edd1385d3df93b9",
+      "sha256": "7fe8bbec5543f81ec5cf194c596f188df76adf2cf108da0504c9f9e6e8c6b409"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-c-shoes.webp",
+      "bytes": 16546,
+      "gitBlob": "b261ec10d6962b359adf1682d84971ead8cbf8b8",
+      "sha256": "0ed10d1e37bb791e15dcf4643602d3049b61bcf909d5575d3157acdcd5083428"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-c-top.webp",
+      "bytes": 14164,
+      "gitBlob": "19f34aec738274cabb59b644388316584bfd6dae",
+      "sha256": "b3da9a00478d42bb29fca978a32fb4b95fb4400af5d4dce3d9e1f624cc74561d"
+    },
+    {
+      "path": "design/demo/assets/wardrobe/start-c.webp",
+      "bytes": 173650,
+      "gitBlob": "32a344c0a49a40315358a084ca7432f24916b96d",
+      "sha256": "30d9863b7db99cab1ac5cdf5ea854a7d0e4c641ec7c1a745debfa3a6d5d1f4d6"
+    },
+    {
+      "path": "design/demo/collection-preview.mjs",
+      "bytes": 1322,
+      "gitBlob": "6b33c5dd1b30be979ede91b447ba7a636ba5b6c6",
+      "sha256": "bba338d55f32082a0f4140ab85c74b6ca512cdf42ce9cb1a4c8fe214da4a6db2"
+    },
+    {
+      "path": "design/demo/index.html",
+      "bytes": 1125,
+      "gitBlob": "d616da24b3d357dc208993847900fb731cbd821e",
+      "sha256": "e41f8211b1c2a25d9c151b600949027842bbfec38de43f9c69d7fc815c9be8e8"
+    },
+    {
+      "path": "design/demo/item-thumbnails.mjs",
+      "bytes": 1676,
+      "gitBlob": "e5355168f3b20aa61159ca3886b03282ef4e9cf1",
+      "sha256": "4bf1e4c3b04d1e247258ee5903bd3b01fa2ecf385bf6e0c88b61f5cff3fc85f0"
+    },
+    {
+      "path": "design/demo/map-art.mjs",
+      "bytes": 1048,
+      "gitBlob": "0e443ed8fee615170ad0e864cbac14b81ae23fb5",
+      "sha256": "089ffa19a4cb1541db42b087c20b633553d9f8cbd6d78a5e853ec281e8174361"
+    },
+    {
+      "path": "design/demo/postcard.mjs",
+      "bytes": 733,
+      "gitBlob": "51b189b7931943f019a0255ce2d5a6fe7ed79da8",
+      "sha256": "dc74af64768f063c6b28c18b19fc17a16cc6519b40f57aa2b902088d3dec72a4"
+    },
+    {
+      "path": "design/demo/profile.mjs",
+      "bytes": 800,
+      "gitBlob": "d9255f36a7af2c518a9306323f7350ced5446155",
+      "sha256": "2d6c5d86b40bfadef5c834e6198f6c7e06f64093510a6641466486881fa671ee"
+    },
+    {
+      "path": "design/demo/renderer.mjs",
+      "bytes": 2776,
+      "gitBlob": "53e3ef7cc2f8e9d9b42d71028d79123b0467660f",
+      "sha256": "1ec133ee82302b3a24976e09b7d31f749481ff4c2052defa0cf349b8f75836c6"
+    },
+    {
+      "path": "design/demo/stage/bridge.mjs",
+      "bytes": 3122,
+      "gitBlob": "5b98e1484aa78608080241065024803cd83cdbc9",
+      "sha256": "64661706ac4ee7c83d9424fa6e880376c58cc3cd539fb4b5f0846140fdc40786"
+    },
+    {
+      "path": "design/demo/start.mjs",
+      "bytes": 509,
+      "gitBlob": "a713163b574ac4a30d8a4156a34a5ef598291a9d",
+      "sha256": "58809a17c6981d9c3eb0709fbadd70f4c2949ed6f002637c575bc0774bb94a7e"
+    },
+    {
+      "path": "design/demo/storage.mjs",
+      "bytes": 1803,
+      "gitBlob": "5ea4392f7792157f7a22a92c506d3f3e38a7df3e",
+      "sha256": "7bf807718b15ace47c12ef42c350d6032ae82498523b5d454d9bac959c54dab3"
+    },
+    {
+      "path": "design/demo/views.mjs",
+      "bytes": 6046,
+      "gitBlob": "99a5eb82d5458ea0e2a28f41bfd5b8d8921a24ef",
+      "sha256": "a287aaff61026aa44be4d3f4096fa9a95789175ec975187f36ee9cf6cf894841"
+    },
+    {
+      "path": "design/demo/visual/blossom.svg",
+      "bytes": 893,
+      "gitBlob": "87b65e031dda8a0ce3c19d25d32d334b4994dbff",
+      "sha256": "0b479649117556a948cfa6fd7464ad8f80e41b34a832204a706292ca1d22eda4"
+    },
+    {
+      "path": "design/demo/visual/journal.css",
+      "bytes": 15127,
+      "gitBlob": "08d02ada6588f243c5679cfae2ece0d767dff5f7",
+      "sha256": "3f5caf6592711d4136a9f553d9502cf4bcd1dc4bde2746629ab89c1956723e61"
+    },
+    {
+      "path": "design/demo/visual/journal.mjs",
+      "bytes": 3494,
+      "gitBlob": "2edada31eb352a235a19602aba716c751828d1c5",
+      "sha256": "827050593ec60bba5c15015dd04697c83aace5f1b2d50b96d8c28900dbc963bb"
+    },
+    {
+      "path": "design/demo/visual/journey.css",
+      "bytes": 11979,
+      "gitBlob": "f207195a81340ed74bf3840e7682ac5d4c67f7cd",
+      "sha256": "3b4333c63c15fbf2ad59e7fe939fa47fc396d773578074d8e192ea29d9459e23"
+    },
+    {
+      "path": "design/demo/visual/pages.mjs",
+      "bytes": 7250,
+      "gitBlob": "eba8b6af92060ce7060618e8b17d3f3ed721b366",
+      "sha256": "209e2dabf011b3be40d61329eeff8c5787c7365117e4a560286810bdd9ad21bb"
+    },
+    {
+      "path": "design/demo/visual/print.mjs",
+      "bytes": 7297,
+      "gitBlob": "2efcbea6864f9f567a066706bdca07e20fe7d11b",
+      "sha256": "e35ee2d22795dd1ea69511a96c99a2685f81a6bc26b229afefd0acfccd05d0e3"
+    },
+    {
+      "path": "design/demo/visual/theme.css",
+      "bytes": 9638,
+      "gitBlob": "7b47123118f4e1004f9d14a7598e8efc609ebdde",
+      "sha256": "23068fc92975610e2fdc4ac014ba8f925eceffee341d0314779323cde1a99223"
+    },
+    {
+      "path": "design/demo/visual/wardrobe.css",
+      "bytes": 17758,
+      "gitBlob": "fad1c84735ad7325c939dfaf8f9fba4a41942633",
+      "sha256": "fa5c0b3c93aecc207b1f42a04d5b01db993a0bfda5fa07f686f54d52fb06f6c8"
+    },
+    {
+      "path": "design/demo/wardrobe-art.mjs",
+      "bytes": 1797,
+      "gitBlob": "a8284ee137c67090b4e61d5d95812d1e3f876434",
+      "sha256": "d735539a039154122c04e178c705b7f60c7e4d7b65e442ff7c083eeb17bb4d4b"
+    },
+    {
+      "path": "design/game-ui.mjs",
+      "bytes": 18867,
+      "gitBlob": "83fb666e0388fc769dd04014a13aee37187cb4c4",
+      "sha256": "829637ef36dcb0135cb07899fb198e808f4944df227ae91fef1943324e79cf53"
+    },
+    {
+      "path": "design/hifi/art.mjs",
+      "bytes": 6023,
+      "gitBlob": "d250f3aefb073e35721128841c23c6938fbd9d05",
+      "sha256": "f2e9592b8d9683e31ee9ef1a3d02d9bfda7bc489629d18b45382cab4b68acb08"
+    },
+    {
+      "path": "design/hifi/assets/inventory.png",
+      "bytes": 2354352,
+      "gitBlob": "6a6596d81ec79e507af5e994bc65661dfd6be617",
+      "sha256": "9c2a84dc35325781073016e401cd1f7e15106e2e945c290a95a315bd7b42e479"
+    },
+    {
+      "path": "design/hifi/assets/map.png",
+      "bytes": 3812676,
+      "gitBlob": "14d987a3f1a3f19c3b70fddb06d412921460527e",
+      "sha256": "3188abf8b22881bccc632b78b63f2d59f8401dc7f9aec203153de8b6e43fd78d"
+    },
+    {
+      "path": "design/hifi/assets/night.png",
+      "bytes": 3109920,
+      "gitBlob": "b8e59f12ff118f67435a171769d5ec34e1fd1adf",
+      "sha256": "42e168b0c93cba49b2c38d814a8e75da3bb51b5ee00450f005b8ba7afbffb084"
+    },
+    {
+      "path": "design/hifi/partner-art.mjs",
+      "bytes": 10731,
+      "gitBlob": "a3b0cc75d68f082cb9eedc37c322fefd3d4f038d",
+      "sha256": "84284459d061a75f0357702687f5e6ec5dd0800d75e7a735733f2094b7dd4e0b"
+    },
+    {
+      "path": "design/postcard.mjs",
+      "bytes": 3246,
+      "gitBlob": "41b5bb96c9613a0d18b9bd4da379cb0ba9bd2bf2",
+      "sha256": "d1f0ed44f75612fdfc9d04fa09d17b3e8f9784db7a79d159e26342812a6a9e5c"
+    },
+    {
+      "path": "design/store.mjs",
+      "bytes": 7768,
+      "gitBlob": "ef94b835ed1e6fc14cb9320f355a0a9f98dea675",
+      "sha256": "f7b7c6b82c2a56709e5d4488607718792b51573802f5e255127351b306ce4d3d"
+    },
+    {
+      "path": "design/tests/domain.test.mjs",
+      "bytes": 6092,
+      "gitBlob": "4022c50a57721dc6b0f7ff199873ccd419ad4799",
+      "sha256": "b71722657eed0a28b0a2e768b0f379f4be6e24530b3099f418e49a7adc694018"
+    },
+    {
+      "path": "design/visual.mjs",
+      "bytes": 2443,
+      "gitBlob": "4e74bf83900df00594e245155cbd4eb7a12d0c31",
+      "sha256": "3b8c7f7b6d83aaf3cd4084e9dfd5ad2d255f7fbcbef9e648fedd51cab89486b5"
+    },
+    {
+      "path": "design/world.mjs",
+      "bytes": 8573,
+      "gitBlob": "4a2b18246d983eb8302164dd9543e527b8931645",
+      "sha256": "70610650a9e6501bc527db53671e8c3c0bc2a857abb1bf08cce88ab4b9a00b92"
+    }
+  ]
+}

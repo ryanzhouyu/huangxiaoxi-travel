@@ -30,11 +30,17 @@ for (const p of sources) {
 
 const graph = new Map();
 let referenceCount = 0;
+const optionalReferences = [];
 async function reference(file, ref, module = false) {
   if (/^(?:[a-z]+:|#|\/\/)/i.test(ref) || ref.includes('${')) return;
   const clean = decodeURIComponent(ref.split(/[?#]/)[0]);
   if (!clean) return;
   const target = path.resolve(path.dirname(file), clean);
+  // 原控制器保留对独立投屏宿主页的条件判断；该入口不属于游客端交接范围。
+  if (relative(file) === 'design/app.mjs' && relative(target) === 'design/demo/stage.html') {
+    optionalReferences.push({file:relative(file),ref,reason:'external presentation host excluded'});
+    return;
+  }
   const location = path.relative(root, target);
   if (location.startsWith('..') || path.isAbsolute(location)) {
     errors.push({file: relative(file), kind: 'outside-package', ref});
@@ -73,12 +79,12 @@ for (const p of sources.filter(p => relative(p).startsWith('design/') && !relati
   if (!reached.has(p)) errors.push({file: relative(p), kind: 'unreachable-runtime-module'});
 }
 
-const manifest = JSON.parse(await readFile(path.join(root, 'design/demo/assets/manifest.json'), 'utf8'));
-for (const item of manifest.assets) {
+const manifest = JSON.parse(await readFile(path.join(root, 'docs/runtime-baseline.json'), 'utf8'));
+for (const item of manifest.files) {
   try {
     const raw = await readFile(path.join(root, item.path));
-    if (raw.length !== item.bytes || createHash('sha256').update(raw).digest('hex') !== item.sha256) errors.push({file:item.path, kind:'asset-changed'});
-  } catch { errors.push({file:item.path,kind:'missing-asset'}); }
+    if (raw.length !== item.bytes || createHash('sha256').update(raw).digest('hex') !== item.sha256) errors.push({file:item.path, kind:'differs-from-latest-source'});
+  } catch { errors.push({file:item.path,kind:'missing-source-file'}); }
 }
 // 动态 URL 无法靠文本扫描枚举，按当前配置和帧表查全所有衣服及部件。
 for (const outfit of OUTFITS) {
@@ -87,12 +93,11 @@ for (const outfit of OUTFITS) {
 }
 for (const asset of ASSETS.filter(a=>a.outfit)) await reference(path.join(root, 'design/demo/index.html'), 'assets/wardrobe/'+asset.id+'.webp');
 
-const forbiddenPaths = /^(?:research\/|reviews\/|specs\/|design\/(?:archive\/|hifi\/|index\.html|test-points\.html|(?:world|visual|postcard)\.mjs)|design\/demo\/(?:stage(?:\/|\.html)|presenter\.))/;
+const forbiddenPaths = /^(?:research\/|reviews\/|specs\/|design\/(?:archive\/|index\.html|test-points\.html)|design\/hifi\/.*\.html|design\/demo\/(?:stage\.html|presenter\.))/;
 for (const p of files) if (forbiddenPaths.test(relative(p))) errors.push({file:relative(p),kind:'excluded-content'});
 const runtime = sources.filter(p=>relative(p).startsWith('design/')&&!relative(p).includes('/tests/'));
 for (const p of runtime) {
-  const text = await readFile(p, 'utf8');
-  if (/export (?:function (?:createOrder|pay)\b|const PACKS\b)|case ["'](?:pay|purchase|order|reset|fail-next)["']|connectStage/.test(text)) errors.push({file:relative(p),kind:'excluded-behavior'});
+  if (!manifest.files.some(item=>item.path===relative(p))) errors.push({file:relative(p),kind:'runtime-not-in-baseline'});
 }
-console.log(JSON.stringify({passed:!errors.length,files:files.length,syntaxModules:sources.length,runtimeModules:runtime.length,localReferences:referenceCount,verifiedImages:manifest.assets.length,errors},null,2));
+console.log(JSON.stringify({passed:!errors.length,files:files.length,syntaxModules:sources.length,runtimeModules:runtime.length,localReferences:referenceCount,exactSourceFiles:manifest.files.length,verifiedImages:manifest.files.filter(i=>/\.(png|webp)$/.test(i.path)).length,optionalReferences,errors},null,2));
 if (errors.length) process.exitCode = 1;
