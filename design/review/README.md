@@ -5,7 +5,7 @@
 直接从磁盘打开游客入口时，使用页面上的「进入游客预览」跳转到本机的 8782 端口。预览服务停止时，可在仓库根目录运行 `.\Start-Local.ps1 -Port 8782` 再打开该链接。
 
 1. 用评审号码 `10000000001` 或 `10000000002` 进入，验证码为 `410625`。使用独立浏览器上下文重走新身份流程。
-2. 选一身初始装扮，打开游玩地图，领见面礼并试穿。评审工具提供四个点位链接及活动凭证。直接开点位链接可复查登录、初始化和回到原地点的过程。
+2. 选一身初始装扮，从「游玩 → 打开游玩地图」进入景区导览。点地标直接打开卡池及收集详情，底部概览可展开全部奖励。地图顶部可领初见礼及查看地点一览。评审工具提供四个点位链接及活动凭证，直接开点位链接可复查登录、初始化和回到原地点的过程。
 3. 确认有效到访，进卡池抽取，试穿并保存，选择经历和模板，生成、收藏并保存到设备。作品详情提供来源和分享回退。
 4. 要试故障，在评审工具设置一次失败或响应丢失，进入对应页面操作。响应丢失后可刷新再查原结果。
 
@@ -20,5 +20,7 @@
 衣橱独立评审以[完整网格确认稿](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=grid)为准。复验设 `HXX_STUDY_LAYOUT=grid` 后运行 `node design/review/tests/wardrobe-study.mjs`，默认输出目录为 `.codex/wardrobe-grid-study`。其他端口设 `HXX_STUDY_ORIGIN`，输出目录可用 `HXX_STUDY_OUT` 切换。附加 `profile=stress` 打开 30 件测试上装，包含试验配色。[网格确认及检查记录](../../output/wardrobe-grid-review/2026-11-18/index.html)
 
 游客入口已接入确认衣橱和旅行手账。主线、导出及恢复复验用 `node design/review/tests/experience.mjs`，五档视口的同数据图稿用 `node design/review/tests/integration-visual.mjs`。后者可通过 `HXX_VISUAL_OUT` 指定输出目录。[接入与实屏验收](../../docs/衣橱与回忆接入计划.md)
+
+景区导览由 `pages/scene-guide.mjs` 和 `scene-guide.css` 承载，`#scene?point=gate` 等地址可直接打开居中详情。点位与卡池仍由既有目录提供，练习凭证及本机存档沿用当前评审服务。主线浏览器复验覆盖打开、关闭与刷新、核验、抽取及回程。[导览接入与实屏](../../docs/景区导览主线接入.md)
 
 伙伴、游玩和回忆共用 `ui.mjs` 的主导航及 `main-scenes.css` 的样式，背景由各主场景延伸至屏底。运行 `node design/review/tests/main-scenes.mjs` 检查导航、首页动作、实际搭配与底部安全区。输出目录可通过 `HXX_MAIN_OUT` 指定。[首页构图与细节对照](../../output/partner-restored/2026-11-18/index.html)

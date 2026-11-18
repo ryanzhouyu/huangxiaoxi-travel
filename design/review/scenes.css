@@ -72,10 +72,10 @@
   font-weight: 600;
   letter-spacing: 0;
 }
-.app:is([data-page="scene"], [data-page="point"], [data-page="activity"], [data-page="gift"], [data-page="pool"], [data-page="outfit"], [data-page="compose"], [data-page="preview"], [data-page="work"]) .page-bar {
+.app:is([data-page="point"], [data-page="activity"], [data-page="gift"], [data-page="pool"], [data-page="outfit"], [data-page="compose"], [data-page="preview"], [data-page="work"]) .page-bar {
   background: linear-gradient(#2117188e 0%, #2f22232c 70%, transparent);
 }
-.page-bar + :is(.map-view, .place-hero, .activity-hero, .theater, .studio) {
+.page-bar + :is(.place-hero, .activity-hero, .theater, .studio) {
   margin-top: calc(-1 * var(--scene-bar-height));
 }
 .page-bar + .place-hero, .page-bar + .activity-hero { min-height: 285px; padding-top: calc(var(--scene-bar-height) + 35px); }
@@ -121,35 +121,6 @@
 .app[data-page=code] {
   background: linear-gradient(#64423028, #e9ce9950 70%, #4c332a44), var(--desk) center / cover;
 }
-/* 原画是地图的画布，布签、图钉和包里的收获浮在画面上。 */
-.app[data-page=scene] { background: #495244; }
-.map-view { height: clamp(calc(292px + min(57vw, 274px)), 71dvh, 695px); }
-.map-view::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  height: 22%;
-  z-index: 0;
-  background: linear-gradient(transparent, #495244);
-  pointer-events: none;
-}
-.map-view .map-tabs { top: calc(var(--scene-bar-height) + 7px); }
-.map-tabs .tabs { justify-content: center; gap: 5px; padding: 0 2px; }
-.map-tabs .tab {
-  flex: 1 0 0;
-  border-radius: 100px;
-  background: #f9e8bdf0;
-  border-color: #ba976a;
-  padding-inline: 2px;
-}
-.map-tabs .tab[aria-pressed=true] { background: #6d4734; border-color: #eed1a0; color: #fff0cc; }
-.map-pin { min-width: 48px; }
-.map-view .map-list { z-index: 1; bottom: 47px; }
-.map-paper { position: relative; z-index: 2; margin-top: -38px; padding-top: 0; }
-.map-paper .gift-row { padding: 8px 12px; }
-.map-paper .pool-card { border-radius: 9px 4px; background: #f4e1b6; }
-.map-paper .pool-mini { height: 79px; }
-
 /* 花溪与云山的木廊展台、礼盒和同时可见的衣橱。 */
 .page-bar + .theater {
   height: clamp(356px, 58dvh, 575px);

@@ -168,7 +168,8 @@ try {
   ]) {
     await first.getByRole('link',{name,exact:typeof name === 'string'}).click();
     await first.locator('#app[data-page=' + target + ']').waitFor();
-    assert.equal(await first.getByRole('navigation',{name:'主场景',exact:true}).count(),0);
+    if (target === 'scene') await inspectNav(first,'explore',30);
+    else assert.equal(await first.getByRole('navigation',{name:'主场景',exact:true}).count(),0);
     await first.getByRole('link',{name:'返回',exact:true}).click();
     await first.locator('#app[data-page=partner]').waitFor();
   }

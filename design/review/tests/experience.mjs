@@ -27,6 +27,8 @@ const next = name => page.getByRole('link', {name, exact: true}).click();
 const sheet = page.locator('#sheet');
 const note = name => page.getByRole('heading', {name, exact: true}).waitFor({state: 'visible'});
 const close = () => sheet.getByRole('button', {name: '关闭'}).click();
+const guidePoint = id => page.locator(`.level-marker[data-guide-point="${id}"]`);
+const guideDialog = page.locator('#guide-point-dialog[open]');
 const account = () => page.evaluate(key => {
   const db = JSON.parse(localStorage.getItem(key));
   return db.accounts[db.current];
@@ -87,8 +89,10 @@ async function enter(number, checkCode = false) {
 async function visit(pointId, expectedBalance, {testBad = false, capture = '', fromMap = false} = {}) {
   const point = catalog.points.find(item => item.id === pointId);
   if (fromMap) {
-    await page.locator('.map-pin').filter({hasText: point.name}).click();
-    await at('point');
+    const before = await account();
+    await guidePoint(pointId).click();
+    await guideDialog.getByRole('heading', {name: point.name, exact: true}).waitFor();
+    assert.deepEqual(await account(), before, '打开景点详情只读进度');
     await screenshot('point-' + pointId);
     await next(point.kind === '商家' ? '记录到店' : '记录到访');
   } else await go('checkin', {id: pointId, from: '#scene'});
@@ -166,13 +170,39 @@ try {
   await screenshot('explore');
   await next('打开游玩地图');
   await screenshot('scene');
-  await act('mapFilter', '商家');
-  assert.equal(await page.locator('.map-pin').count(), 1);
+  assert.equal(await page.locator('#guide-collection-count').innerText(), '0/2 套');
+  assert.equal(await page.locator('.chapter-map .reward-counts').innerText(), '表情 1 · 动作 1 · 背景 2');
+  assert.equal(await page.locator('.chapter-map .nav-tab[aria-current=page]').innerText(), '游玩');
+  const mapUrl = page.url();
+  await guidePoint('gate').click();
+  await guideDialog.getByRole('heading', {name: '山门入口'}).waitFor();
+  assert.ok((await guideDialog.innerText()).includes('山门入口或望山台首次有效到访后解锁'));
+  assert.equal(await guideDialog.locator('.guide-pool-action').count(), 0);
+  await page.reload();
+  await guideDialog.waitFor();
+  await guideDialog.getByRole('button', {name: '关闭详情'}).click();
+  await page.waitForURL(mapUrl);
+  await page.waitForFunction(() => document.activeElement.dataset.guidePoint === 'gate');
+  await guidePoint('ridge').click();
+  await guideDialog.waitFor();
+  await page.goBack();
+  await guideDialog.waitFor({state: 'hidden'});
+  await page.waitForFunction(() => document.activeElement.dataset.guidePoint === 'ridge');
+  await caption('全部奖励');
+  await page.locator('#guide-reward-list').waitFor();
+  assert.equal(await page.locator('#guide-reward-list a').count(), 2);
+  await page.keyboard.press('Escape');
+  await page.locator('#guide-reward-list').waitFor({state: 'hidden'});
   await act('places');
+  await act('mapFilter', '商家');
+  assert.equal(await sheet.locator('.guide-place-list a').count(), 1);
+  await act('mapFilter', '活动');
+  assert.equal(await sheet.locator('.guide-place-list a').innerText(), '一枚旅行手作');
+  await act('mapFilter', '全部');
   await screenshot('places');
   await close();
-  await act('mapFilter', '全部');
-  await page.locator('.gift-row').click();
+  pass('导览点位、直达刷新、回焦、玩法入口及共享奖品去重');
+  await next('初见礼');
   await screenshot('gift');
   await act('gift');
   await note('见面礼已收好');
@@ -208,6 +238,13 @@ try {
   await draw(0);
   await close();
   await screenshot('pool-empty-balance');
+  await page.locator('.back').click();
+  await guideDialog.getByRole('heading', {name: '山门入口'}).waitFor();
+  assert.equal(await guideDialog.locator('.point-visit').innerText(), '已打卡');
+  assert.equal(await guideDialog.locator('.point-pool-status').innerText(), '已解锁');
+  await guideDialog.getByRole('link', {name: '进入云山卡池'}).click();
+  await at('pool');
+  pass('核验与抽取返回原景点，已打卡和已解锁从存档刷新');
   await next('看看免费机会');
   await screenshot('opportunities');
   assert.ok(!(await page.locator('#app').innerText()).includes('山门入口'));
@@ -245,6 +282,14 @@ try {
   await screenshot('pool-complete', {fullPage: true});
   assert.equal(await page.locator('[data-action="draw"]').count(), 0);
   assert.equal((await account()).balance, 2);
+  await go('scene');
+  assert.equal(await page.locator('#guide-collection-count').innerText(), '1/2 套');
+  await guidePoint('brook').click();
+  await guideDialog.waitFor();
+  for (const id of ['joy', 'wave']) assert.equal(await guideDialog.locator(`[data-guide-prize="${id}"]`).getAttribute('data-collected'), 'true');
+  await guideDialog.getByRole('button', {name: '关闭详情'}).click();
+  await guideDialog.waitFor({state: 'hidden'});
+  pass('整套收集进度及另一卡池的共有奖品实时刷新');
   await go('pool', {id: 'bloom', from: '#scene'});
   assert.equal(await page.locator('progress').getAttribute('value'), '2');
   await draw(1);
@@ -488,11 +533,18 @@ try {
         assert.ok(categories && categories.y + categories.height <= rect.y, '衣橱的部件分类被保存区遮住');
       }
       if (name === 'scene') {
-        const pinsReachable = await page.locator('.map-pin').evaluateAll(pins => pins.every(pin => {
+        const pinsReachable = await page.locator('.level-marker').evaluateAll(pins => pins.length === 4 && pins.every(pin => {
           const bounds = pin.firstElementChild.getBoundingClientRect();
           return pin.contains(document.elementFromPoint(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2));
         }));
-        assert.ok(pinsReachable, '地图分类或地点列表盖住了点位');
+        assert.ok(pinsReachable, '地图点位被遮挡');
+        await guidePoint('shop').click();
+        await guideDialog.waitFor();
+        const rect = await guideDialog.boundingBox();
+        assert.ok(rect.y >= 0 && rect.y + rect.height <= height && Math.abs(rect.y + rect.height / 2 - height / 2) <= 1, '点位详情未在视口居中');
+        await screenshot('scene-point');
+        await page.keyboard.press('Escape');
+        await guideDialog.waitFor({state: 'hidden'});
       }
       if (['memories', 'compose', 'wallet'].includes(name)) {
         if (name === 'memories') await page.locator('.reading').evaluate(element => {element.scrollTop = element.scrollHeight;});
@@ -512,6 +564,81 @@ try {
   await screenshot('wardrobe-safe-area');
   pass('360×640 另模拟 30px 底部安全区');
   await page.evaluate(() => document.documentElement.style.removeProperty('--safe'));
+
+  const storageValue = await page.evaluate(key => localStorage.getItem(key), progressKey);
+  for (const [width, height, safe] of [[360, 640, 30], [390, 844, 0], [430, 932, 0]]) {
+    const mobile = await browser.newContext({viewport: {width, height}, hasTouch: true, isMobile: true, reducedMotion: 'reduce'});
+    await mobile.addInitScript(({key, value}) => localStorage.setItem(key, value), {key: progressKey, value: storageValue});
+    const screen = await mobile.newPage();
+    await screen.goto(base + href('scene', {from: '#explore'}));
+    await screen.locator('.chapter-map').waitFor();
+    await screen.evaluate(inset => document.documentElement.style.setProperty('--safe', inset + 'px'), safe);
+    const layout = await screen.locator('.chapter-map').evaluate(map => {
+      const rect = selector => map.querySelector(selector).getBoundingClientRect();
+      const frame = map.getBoundingClientRect();
+      const dock = rect('.guide-dock');
+      const nav = rect('.main-nav');
+      const heading = rect('.chapter-head');
+      return {
+        layers: dock.bottom <= nav.top && dock.top < frame.bottom && nav.bottom <= frame.bottom,
+        stamps: rect('.suit-progress .suit-stamp').height >= 18,
+        points: [...map.querySelectorAll('[data-guide-point]')].map(marker => {
+          const hit = marker.getBoundingClientRect();
+          const parts = [...marker.querySelectorAll('.map-prop, .trail-name, .reward-ticket, .marker-suits, .shop-visit-stamp')].filter(part => part.getClientRects().length);
+          return [marker.dataset.guidePoint, hit.width >= 44 && hit.height >= 44 && parts.every(part => {
+            const bounds = part.getBoundingClientRect();
+            return bounds.top >= heading.bottom && bounds.bottom <= dock.top && bounds.left >= frame.left && bounds.right <= frame.right;
+          })];
+        }),
+      };
+    });
+    assert.ok(layout.layers && layout.stamps && layout.points.length === 4 && layout.points.every(([, valid]) => valid), JSON.stringify({width, height, safe, layout}));
+    const modal = screen.locator('#guide-point-dialog[open]');
+    for (const point of catalog.points) {
+      const marker = screen.locator(`[data-guide-point="${point.id}"]`);
+      await marker.locator('.trail-name').tap();
+      await modal.getByRole('heading', {name: point.name, exact: true}).waitFor();
+      const rect = await modal.boundingBox();
+      assert.ok(Math.abs(rect.y + rect.height / 2 - (height - safe) / 2) <= 1);
+      assert.equal(await modal.locator('.point-pool').count(), point.pools.length);
+      await modal.getByRole('button', {name: '关闭详情'}).tap();
+      await modal.waitFor({state: 'hidden'});
+      await screen.waitForFunction(id => document.activeElement.dataset.guidePoint === id, point.id);
+    }
+    if (safe) {
+      await screen.screenshot({path: path.join(out, '360x640', 'scene-touch-safe.png'), animations: 'disabled'});
+      await screen.locator('[data-guide-point="shop"] .map-prop').tap();
+      await modal.waitFor();
+      await screen.setViewportSize({width: 360, height: 400});
+      const body = modal.locator('.point-dialog-scroll');
+      assert.ok(await body.evaluate(element => element.scrollHeight > element.clientHeight));
+      const bounds = await body.boundingBox();
+      const touch = await mobile.newCDPSession(screen);
+      const x = bounds.x + bounds.width / 2;
+      const y = bounds.y + bounds.height - 14;
+      const scrollBefore = await screen.evaluate(() => scrollY);
+      for (let swipe = 0; swipe < 3; swipe++) {
+        await touch.send('Input.dispatchTouchEvent', {type: 'touchStart', touchPoints: [{x, y}]});
+        for (let step = 1; step <= 5; step++) {
+          await touch.send('Input.dispatchTouchEvent', {type: 'touchMove', touchPoints: [{x, y: y - step * 30}]});
+        }
+        await touch.send('Input.dispatchTouchEvent', {type: 'touchEnd', touchPoints: []});
+      }
+      await touch.detach();
+      await screen.waitForFunction(() => {
+        const content = document.querySelector('.point-dialog-scroll');
+        return Math.abs(content.scrollHeight - content.clientHeight - content.scrollTop) < 2;
+      });
+      assert.equal(await screen.evaluate(() => scrollY), scrollBefore);
+      const closeButton = await modal.getByRole('button', {name: '关闭详情'}).boundingBox();
+      const checkin = await modal.getByRole('link', {name: '记录到店'}).boundingBox();
+      const activityEntry = await modal.getByRole('link', {name: '一枚旅行手作'}).boundingBox();
+      assert.ok(closeButton.y >= 0 && activityEntry.y + activityEntry.height <= checkin.y && checkin.y + checkin.height <= 400 - safe);
+      await screen.screenshot({path: path.join(out, '360x640', 'scene-touch-compact.png'), animations: 'disabled'});
+    }
+    await mobile.close();
+    pass('景区导览触屏打开、关闭回焦与地图图形', {width, height, safe});
+  }
 
   await go('account');
   await act('logoutAsk');

@@ -1,6 +1,6 @@
 # 黄果树景区导览与卡池详情确认稿
 
-2026-11-19 · 用户确认采用。此稿作为「游玩」景区章内的视觉与交互样板。[打开确认稿](http://127.0.0.1:8782/output/huangguoshu-chapter-guide/2026-11-19/index.html) · [游玩首层地图](../../explore-chapter-map/2026-11-18/README.md)
+2026-11-19 · 用户确认采用。此稿作为「游玩」景区章内的视觉与交互样板。[打开确认稿](http://127.0.0.1:8782/output/huangguoshu-chapter-guide/2026-11-19/index.html) · [游客主线接入和验收](../../../docs/景区导览主线接入.md) · [游玩首层地图](../../explore-chapter-map/2026-11-18/README.md)
 
 ## 已确认的交互
 
@@ -12,9 +12,9 @@
 
 ## 素材与打开方式
 
-[山水原画](./assets/huangguoshu-art.webp)和[地标与票券图集](./assets/landmark-props.png)是本章使用的生成概念素材，分别表现陡坡塘宽滩、大瀑布与天星桥石林水道，以及空心铜环、已打卡章、手作铺和金色票券。地图为景区示意图。服饰横图取自[六套已确认素材](../../../reviews/2026-11-05-wardrobe/selected/README.md)的 B5 云山拾光 `(60, 280, 540, 486)` 和 A6 花溪漫步 `(65, 264, 545, 470)`，范围为原图的左、上、右、下像素坐标。
+[山水原画](../../../design/review/guide-art/huangguoshu-art.webp)和[地标与票券图集](../../../design/review/guide-art/landmark-props.png)是本章使用的生成概念素材，分别表现陡坡塘宽滩、大瀑布与天星桥石林水道，以及空心铜环、已打卡章、手作铺和金色票券。地图为景区示意图。服饰横图取自[六套已确认素材](../../../reviews/2026-11-05-wardrobe/selected/README.md)的 B5 云山拾光 `(60, 280, 540, 486)` 和 A6 花溪漫步 `(65, 264, 545, 470)`，范围为原图的左、上、右、下像素坐标。
 
-仓库根目录运行 `python -m http.server 8782 --bind 127.0.0.1`，再打开上方入口。也可以直接在 Chrome 打开本目录的 `index.html`。原画、道具与服饰横图随本目录保存，共用导航样式和伙伴头像来自仓库 `design/review/`。
+仓库根目录运行 `python -m http.server 8782 --bind 127.0.0.1`，再打开上方入口。也可以直接在 Chrome 打开本目录的 `index.html`。原画、道具与服饰横图与游客主线共用 `design/review/guide-art/` 中的同一份文件，导航样式和伙伴头像也来自 `design/review/`。
 
 ## 归档复验
 

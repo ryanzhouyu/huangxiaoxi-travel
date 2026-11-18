@@ -1,10 +1,10 @@
 import {prepareArtwork} from '../demo/renderer.mjs';
 import {composeImage, paintDraft} from '../demo/postcard.mjs';
 import {catalog, progressKey, reviewService as service} from './review-service.mjs';
-import {isEntry, isRoute, ownsWardrobeContext, routeInfo} from './routes.mjs?v=home-icons-20261118';
+import {isEntry, isRoute, ownsWardrobeContext, routeInfo} from './routes.mjs?v=scene-guide-20261119';
 import {defaultFilter, readEditors, readTab, writeTab, makeCompose} from './drafts.mjs';
 import {filterEvents, eventContent, journalFilter, journalWork} from './pages/memory.mjs';
-import {placesContent} from './pages/travel.mjs';
+import {bindGuide, guideMapHref, guidePlaces} from './pages/scene-guide.mjs';
 import {sourceContent} from './pages/style.mjs';
 import {wardrobeControls} from './pages/wardrobe.mjs';
 import {h, href, link, button, icon, artifact, empty, note, day, time, dateKey, stageFigure, sceneNav} from './ui.mjs';
@@ -16,7 +16,7 @@ const sheetBody = document.querySelector('#sheet-body');
 const toast = document.querySelector('#toast');
 const ui = {
   phone: '', consent: false, challenge: readTab('challenge'), starter: 'start-a', line: 0, greet: false,
-  filter: '全部', memoryTab: 'events', memory: {...defaultFilter}, wardrobe: null, compose: null,
+  filter: '全部', guideFocus: null, memoryTab: 'events', memory: {...defaultFilter}, wardrobe: null, compose: null,
   preview: null, pending: null, proof: undefined, busy: false, error: '',
 };
 const scrollPositions = new Map();
@@ -60,6 +60,8 @@ function putDraft(name, value) {
 
 function draftsFor(next) {
   if (!next) return;
+  ui.guideFocus = null;
+  ui.filter = '全部';
   const drafts = readEditors(next);
   ui.wardrobe = drafts.wardrobe;
   ui.compose = drafts.compose;
@@ -137,10 +139,11 @@ function updateCooldown() {
   control.textContent = seconds ? `重新获取（${seconds} 秒）` : '重新获取';
 }
 
-function render({focus = false} = {}) {
+function render({focus = false, restorePoint} = {}) {
   if (!ready) return;
   const active = activeControl();
   closet.beforeRender();
+  app.querySelector('#guide-point-dialog[open]')?.close();
   const previousReading = app.querySelector('.reading[data-journal-key]');
   if (previousReading) journalPositions.set(previousReading.dataset.journalKey, previousReading.scrollTop);
   const codeValue = route.name === 'code' ? app.querySelector('[name="code"]')?.value : '';
@@ -160,7 +163,7 @@ function render({focus = false} = {}) {
   const invalidWork = route.name === 'work' && !progress?.works.some(item => item.id === route.id);
   const body = route.invalid || invalidWork ?
     '<div class="stack">' + empty('pin', '找不到这个页面', '此链接可能已经失效，或不属于当前手账。', link('返回', route.back, 'button primary')) + '</div>' :
-    route.render({...ctx(), nav: sceneNav(route.name)});
+    route.render({...ctx(), nav: sceneNav(route.name === 'scene' ? 'explore' : route.name)});
   const pending = ui.pending ? `<aside class="pending-note" role="status"><p>${h(ui.pending.message)}</p>${button('查询这次结果', 'recover', {disabled: ui.busy})}</aside>` : '';
   app.innerHTML = pending + body;
   closet.afterRender();
@@ -177,6 +180,7 @@ function render({focus = false} = {}) {
       heading.focus({preventScroll: true});
     }
   } else if (active) app.querySelector(active)?.focus({preventScroll: true});
+  bindGuide(app, {dismiss: dismissGuidePoint, restorePoint});
 }
 
 function openSheet(title, html, material = 'paper', trigger = document.activeElement) {
@@ -205,7 +209,14 @@ function closeSheet() {
 
 function show(value, {replace = false, pop = false, index, focus = true} = {}) {
   const previous = route.here;
+  const previousPoint = route.name === 'scene' && route.params.get('point');
   value = guard(value);
+  const next = routeInfo(value);
+  const point = next.name === 'scene' && catalog.points.find(item => item.id === next.params.get('point'));
+  const map = point && guideMapHref(value);
+  const guideParent = map && (previous === map || history.state?.guideParent === map && previous === value) ? map : undefined;
+  const restorePoint = previousPoint && guideMapHref(previous) === value ? previousPoint : null;
+  if (point) ui.guideFocus = point.id;
   if (previous !== value || pop) {
     scrollPositions.set(previous, scrollY);
     ui.error = '';
@@ -217,18 +228,24 @@ function show(value, {replace = false, pop = false, index, focus = true} = {}) {
     historyIndex = index;
     if (value !== location.hash) history.replaceState({hxxReview: historyIndex}, '', value);
   } else if (replace || previous === value) {
-    history.replaceState({hxxReview: historyIndex}, '', value);
+    history.replaceState({hxxReview: historyIndex, guideParent}, '', value);
   } else {
     historyIndex++;
-    history.pushState({hxxReview: historyIndex}, '', value);
+    history.pushState({hxxReview: historyIndex, guideParent}, '', value);
   }
-  route = routeInfo(value);
+  route = next;
   if (route.name === 'memories' && route.params.get('view') === 'works') ui.memoryTab = 'works';
   if (route.name === 'entry' && previous === '#code' && !ui.challenge) ui.consent = false;
   const preselected = prepare(previous);
-  render({focus});
+  render({focus: focus && !restorePoint, restorePoint});
   if (preselected) closet.reveal(preselected);
   window.scrollTo(0, scrollPositions.get(value) ?? 0);
+}
+
+function dismissGuidePoint() {
+  const map = guideMapHref(route.here);
+  if (history.state?.guideParent === map) history.back();
+  else navigate(map, {replace: true});
 }
 
 function navigate(value, options = {}) {
@@ -311,12 +328,15 @@ function send(action, fields = {}, continuation = {}) {
 
 function receipt(event, source) {
   const names = event.unlocked.map(id => catalog.pools.find(pool => pool.id === id)).filter(Boolean);
+  const origin = routeInfo(routeInfo(source).back);
+  const pointGuide = origin.name === 'scene' && origin.params.has('point') ? origin.here : null;
+  const travelMap = pointGuide ? guideMapHref(pointGuide) : href('scene', {from: '#explore'});
   return `<div class="receipt-stamp">${icon('check')}<strong>${h(event.name)}</strong></div>
     <p>${day(event.at)} · ${time(event.at)}</p>
     ${note(event.reward ? '获得 ' + event.reward + ' 次景区通用次数。' : '本次记录足迹，首次奖励已领。')}
-    ${names.map(pool => link('已解锁 · ' + pool.name, href('pool', {id: pool.id, from: source}))).join('')}
+    ${names.map(pool => link('已解锁 · ' + pool.name, href('pool', {id: pool.id, from: pointGuide || source}))).join('')}
     ${link('用这一段经历做纪念', href('compose', {visit: event.id, from: source}))}
-    ${button('继续游玩', 'continueTravel', {classes: 'button primary', value: href('scene', {from: '#explore'})})}`;
+    ${button('继续游玩', 'continueTravel', {classes: 'button primary', value: travelMap})}`;
 }
 
 function reveal(result, source) {
@@ -444,8 +464,12 @@ const actions = {
       show('#entry', {replace: true});
     });
   },
-  mapFilter: value => {ui.filter = value; render();},
-  places: () => openSheet('地点一览', placesContent(ctx())),
+  mapFilter: value => {
+    ui.filter = value;
+    openSheet('地点一览', guidePlaces(ctx()));
+    sheet.querySelector('[data-action="mapFilter"][aria-pressed="true"]')?.focus({preventScroll: true});
+  },
+  places: (value, control) => openSheet('地点一览', guidePlaces(ctx()), 'paper', control),
   unlockPlaces: () => {
     const region = document.querySelector('#unlock-places');
     region?.scrollIntoView({block: 'center'});

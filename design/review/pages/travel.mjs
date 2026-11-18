@@ -1,12 +1,10 @@
 import {catalog} from '../review-service.mjs';
-import {mapPins, mapPlane} from '../../demo/renderer.mjs';
-import {h, href, link, button, bar, section, header, icon, world, imageOf, stageFigure, artifact, note, status, pressed, empty, tabs, footer} from '../ui.mjs';
+import {pointRewardClaimed as claimed, pointVisited as seen} from './scene-guide.mjs';
+import {h, href, link, button, bar, section, header, icon, world, imageOf, stageFigure, artifact, note, status, empty, footer} from '../ui.mjs';
 
 const points = catalog.points;
 const pools = catalog.pools;
 const activityRecord = catalog.activity;
-const seen = (p, point) => p.events.some(event => event.pointId === point.id && event.kind !== '体验活动');
-const claimed = (p, point) => p.claimed.includes('point:' + point.id);
 const activityClaimed = p => p.claimed.includes('activity:' + activityRecord.id);
 const pointStatus = (p, point) => claimed(p, point) ? '已留足迹' : '首次 +' + point.reward + ' 次';
 const pointUrl = (point, from) => href('point', {id: point.id, from});
@@ -27,33 +25,6 @@ export function explore({p, nav}) {
     </div>
     ${nav}
   </section>`;
-}
-
-export function scene({p, ui, back, here}) {
-  const visible = points.filter(point => ui.filter === '全部' || point.kind === ui.filter);
-  const selection = ui.filter === '活动' ? [points.find(point => point.id === activityRecord.point)] : visible;
-  const pins = selection.map(point => {
-    const [x, y] = mapPins[point.id];
-    const isActivity = ui.filter === '活动';
-    return link(`${icon(isActivity ? 'flower' : seen(p, point) ? 'check' : point.kind === '商家' ? 'shop' : 'pin')}<span>${isActivity ? activityRecord.name : point.name}</span>`,
-      isActivity ? href('activity', {from: here}) : pointUrl(point, here), 'map-pin')
-      .replace('class="map-pin"', `class="map-pin" style="--x:${x}%;--y:${y}%"`);
-  }).join('');
-  return `${bar('黔山漫游', back, '<span class="small">示意地图</span>')}
-    <div class="map-view">
-      ${mapPlane(world('map'), pins)}
-      <div class="map-tabs">${tabs(['全部', '景点', '商家', '活动'].map(filter => button(filter, 'mapFilter', {value: filter, classes: 'tab', attrs: pressed(ui.filter === filter)})))}</div>
-      ${button('地点一览', 'places', {classes: 'light-chip map-list'})}
-    </div>
-    <div class="stack map-paper">
-      ${link(`${icon('gift')}<span><strong>黔山初见</strong><small>${p.gifts.includes('demo') ? '免费套装已收下' : '景区免费见面礼'}</small></span><span aria-hidden="true">›</span>`, href('gift', {from: here}), 'paper row gift-row')}
-      ${section(header('沿途装扮') + `<div class="pool-grid">${pools.map(pool => link(`<span class="pool-mini">${stageFigure(catalog.lookFor(pool.outfits[0]))}</span><strong>${pool.name}</strong><small>${p.unlocked.includes(pool.id) ? '已解锁' : '到访后解锁'}</small>`, poolUrl(pool, here), 'pool-card')).join('')}</div>`)}
-    </div>`;
-}
-
-export function placesContent({p, ui, here}) {
-  if (ui.filter === '活动') return link(icon('flower') + '一枚旅行手作', href('activity', {from: here}));
-  return points.filter(point => ui.filter === '全部' || point.kind === ui.filter).map(point => placeRow(point, p, here)).join('');
 }
 
 export function gift({p, ui, back, here}) {

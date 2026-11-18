@@ -2,6 +2,7 @@ import {catalog} from './review-service.mjs';
 import {href} from './ui.mjs';
 import * as arrival from './pages/arrival.mjs?v=home-icons-20261118';
 import * as travel from './pages/travel.mjs';
+import {sceneGuide} from './pages/scene-guide.mjs';
 import * as style from './pages/style.mjs';
 import * as memory from './pages/memory.mjs';
 import {wardrobe} from './pages/wardrobe.mjs';
@@ -12,7 +13,7 @@ const routes = {
   onboarding: [arrival.onboarding, '#entry'],
   partner: [arrival.partner, ''],
   explore: [travel.explore, ''],
-  scene: [travel.scene, '#explore'],
+  scene: [sceneGuide, '#explore'],
   gift: [travel.gift, '#scene'],
   point: [travel.place, '#scene', catalog.points],
   checkin: [travel.checkin, '#scene', catalog.points],

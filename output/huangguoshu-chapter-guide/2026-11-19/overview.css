@@ -1,6 +1,6 @@
 .overview-guide {
   --safe: env(safe-area-inset-bottom, 0px);
-  --art: url("./assets/huangguoshu-art.webp");
+  --art: url("../../../design/review/guide-art/huangguoshu-art.webp");
   --map-shade: linear-gradient(#203b2ea3, #243e2f32 25%, #243b3214 63%, #1d382b61 84%, #233227f6);
   --focus-land: 78% 55%;
   background: var(--map-shade), var(--art) center / cover;

@@ -1,7 +1,7 @@
 const suits = new Map([
-  ['flower', {name: '花溪漫步', art: './assets/outfit-A6-detail.webp'}],
+  ['flower', {name: '花溪漫步', art: '../../../design/review/guide-art/outfit-A6-detail.webp'}],
   ['d2', {name: '套装样例 2'}],
-  ['mountain', {name: '云山拾光', art: './assets/outfit-B5-detail.webp'}],
+  ['mountain', {name: '云山拾光', art: '../../../design/review/guide-art/outfit-B5-detail.webp'}],
   ['w2', {name: '套装样例 4'}],
   ['t1', {name: '套装样例 5'}],
   ['t2', {name: '套装样例 6'}],

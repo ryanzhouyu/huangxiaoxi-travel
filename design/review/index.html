@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="./wardrobe-study/grid.css">
   <link rel="stylesheet" href="./journal.css">
   <link rel="stylesheet" href="./main-scenes.css">
+  <link rel="stylesheet" href="./scene-guide.css?v=scene-guide-20261119">
 </head>
 <body>
   <main id="app" class="app" aria-label="黄晓西旅行手账">
@@ -33,14 +34,14 @@
       </section>
     </div>
   </template>
-  <!-- 首页入口、路由、首页模块和道具图稿的版本号一起更新，避免加载不同版本。 -->
+  <!-- 入口和路由按此次主线接入版本加载。 -->
   <script type="module">
     if (location.protocol === 'file:') {
       const notice = document.querySelector('#file-preview').content.cloneNode(true);
       if (location.hash) notice.querySelector('a').hash = location.hash;
       document.querySelector('#app').replaceChildren(notice);
     } else {
-      await import('./app.mjs?v=home-icons-20261118');
+      await import('./app.mjs?v=scene-guide-20261119');
     }
   </script>
 </body>

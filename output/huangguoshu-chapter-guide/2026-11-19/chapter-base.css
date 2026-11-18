@@ -165,7 +165,7 @@ a { color: inherit; }
 }
 
 /* 地标精灵图、地名、票券和收集印章。 */
-:root { --props: url("./assets/landmark-props.png"); }
+:root { --props: url("../../../design/review/guide-art/landmark-props.png"); }
 .game-guide .level-marker {
   --prop-size: 66px;
   min-width: 96px;
