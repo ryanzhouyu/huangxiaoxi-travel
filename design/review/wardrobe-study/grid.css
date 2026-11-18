@@ -1,3 +1,44 @@
+[data-grid][data-picker="detail"] .hanger {
+  grid-template-rows: 84px auto;
+}
+[data-grid][data-picker="detail"] .thumb,
+[data-grid][data-picker="detail"] .thumb.part-pose {
+  width: min(100%, 86px);
+  height: 84px;
+}
+[data-grid][data-picker="detail"] .thumb.part-background {
+  width: min(100%, 86px);
+  height: 82px;
+}
+[data-grid][data-picker="detail"] .thumb.part-expression {
+  width: min(100%, 78px);
+  height: 68px;
+}
+.saved-mark {
+  position: absolute;
+  z-index: 1;
+  top: 5px;
+  left: 5px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #f5eadb;
+  border-radius: 50%;
+  background: #405846;
+  color: #fff6e5;
+  pointer-events: none;
+}
+.saved-mark::after {
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  width: 5px;
+  height: 9px;
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  content: "";
+}
+
 [data-grid] dialog[data-panel="parts-grid"] {
   width: min(100%, 510px);
   max-width: 100%;
@@ -55,7 +96,7 @@
   width: 100%;
   height: 100%;
   min-height: 106px;
-  padding: 5px 4px 3px;
+  padding: 3px 4px;
   border: 1px solid transparent;
   border-radius: 6px;
   background: var(--linen-shadow);
@@ -64,22 +105,19 @@
 .grid-choice[aria-pressed="true"] { border-color: #956653; background: #eee1d1; }
 .grid-choice:focus-visible, .grid-detail:focus-visible { outline-offset: -2px; }
 .grid-choice img {
-  width: min(78%, 75px);
-  height: 65px;
-  margin-right: 8px;
+  width: min(94%, 88px);
+  height: 80px;
   object-fit: contain;
 }
 .all-parts[data-slot="background"] .grid-choice img {
   width: 100%;
-  height: 92px;
-  margin-right: 0;
+  height: 104px;
   border-radius: 4px;
   object-fit: cover;
   object-position: center 55%;
 }
-.all-parts[data-slot="expression"] .grid-choice img { height: 62px; }
+.all-parts[data-slot="expression"] .grid-choice img { height: 76px; }
 .grid-name { font-size: 13px; line-height: 1.25; overflow-wrap: anywhere; }
-.grid-wear { color: #644137; font-size: 11px; line-height: 1.22; }
 .grid-detail {
   position: absolute;
   display: grid;

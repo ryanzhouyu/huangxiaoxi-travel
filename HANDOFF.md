@@ -4,7 +4,7 @@
 
 ## 当前接手位置
 
-2026-11-18 已实现[完整网格候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=grid)，另有[30 件上装评审样本](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=grid&profile=stress)验证同类服饰增多时的翻找。快选保留当前搭配和已保存部件，三列服饰／两列背景按类别展开，支持单品大图和回到原浏览位置。[实屏与浏览器记录](output/wardrobe-grid-review/2026-11-18/index.html)。
+2026-11-18 已实现[完整网格候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=grid)，另有[30 件上装评审样本](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=grid&profile=stress)验证同类服饰增多时的翻找。快选保留当前搭配和已保存部件，三列服饰／两列背景按类别展开，支持单品大图和回到原浏览位置。最新缩略卡以左上勾标提示上次保存，以描边提示当前试穿，图片占用原状态文字的位置。[实屏与浏览器记录](output/wardrobe-grid-review/2026-11-18/index.html) · [最新快选截图](output/wardrobe-grid-review/2026-11-18/thumbnail-status/quick-selection.webp)。
 
 2026-11-18 用户认可下方选衣版的整体观感，并要求优化拥挤及缩略图辨识。[大图选衣候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=detail)在同一舞台上放大常驻缩略图，增加查看大图与同类翻阅。实际更换仍停留在试穿，关闭恢复横滑位置。[本轮实屏对照](output/wardrobe-detail-review/2026-11-18/index.html)。
 

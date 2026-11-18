@@ -153,7 +153,14 @@ try {
   const page = await open(mobile);
   const rail = page.locator('.hangers');
   assert.equal(await page.locator('.hanger').count(), 6);
-  assert.equal(await page.locator('.wear-state').allTextContents().then(items => items.join('/')), '已保存穿着');
+  if (gridPicker) {
+    const saved = page.getByRole('button', {name:'溪边薄荷 已保存穿着', exact:true, pressed:true});
+    assert.ok(await saved.locator('.saved-mark').isVisible());
+    assert.equal((await saved.locator('img').boundingBox()).height, 84);
+    assert.equal(await page.locator('.wear-state').count(), 0);
+  } else {
+    assert.equal(await page.locator('.wear-state').allTextContents().then(items => items.join('/')), '已保存穿着');
+  }
   if (detailPicker) assert.ok(await rail.evaluate(element => element.scrollWidth > element.clientWidth));
   else assert.ok(await page.locator('.more-cue').isVisible());
   if (atelier) {
@@ -167,7 +174,14 @@ try {
   assert.ok(endScroll > 0);
   await selectionVisible(page);
   assert.equal(await page.evaluate(() => document.activeElement.dataset.id), 'flower-top');
-  assert.equal(await equip(page,'flower-top').locator('.wear-state').innerText(), '正在试穿');
+  if (gridPicker) {
+    const trial = page.getByRole('button', {name:'花溪漫步 正在试穿', exact:true, pressed:true});
+    assert.ok(await trial.isVisible());
+    assert.equal(await trial.locator('.saved-mark').count(), 0);
+    assert.ok(await equip(page,'start-c-top').locator('.saved-mark').isVisible());
+  } else {
+    assert.equal(await equip(page,'flower-top').locator('.wear-state').innerText(), '正在试穿');
+  }
   assert.equal(await equip(page,'start-c-top').getAttribute('aria-pressed'), 'false');
   await capture(page,'study-360-last');
   await slot(page,'shoes');
@@ -346,6 +360,10 @@ try {
     assert.equal(await equip(stress,lastId).count(), 0);
     await browse();
     assert.equal(await dialog.locator('h2').innerText(), '全部上装 · 30 件');
+    const savedChoice = gridChoice('start-c-top');
+    assert.ok(await savedChoice.locator('.saved-mark').isVisible());
+    assert.equal((await savedChoice.locator('img').boundingBox()).height, 80);
+    assert.equal(await dialog.locator('.grid-wear').count(), 0);
     const breadth = await list.evaluate(element => {
       const frame = element.getBoundingClientRect();
       const inside = [...element.children].filter(card => {
@@ -395,6 +413,9 @@ try {
     await browse();
     assert.equal(await gridOffset(), end);
     assert.equal(await gridChoice(lastId).getAttribute('aria-pressed'), 'true');
+    assert.equal(await gridChoice(lastId).locator('.saved-mark').count(), 0);
+    assert.equal(await savedChoice.getAttribute('aria-pressed'), 'false');
+    assert.ok(await savedChoice.locator('.saved-mark').isVisible());
     await stress.keyboard.press('Escape');
     assert.ok(!await dialog.isVisible());
     await slot(stress,'background');
@@ -402,6 +423,7 @@ try {
     await browse();
     assert.equal(await dialog.locator('h2').innerText(), '全部背景 · 3 张');
     assert.equal(await list.evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length), 2);
+    assert.ok(await gridChoice('paper').locator('.saved-mark').isVisible());
     const lastBackground = await gridChoice('flower-bg').boundingBox();
     assert.ok(lastBackground.y + lastBackground.height <= 610);
     await capture(stress,'grid-360-background');
@@ -420,9 +442,14 @@ try {
     await view(stress,'source');
     assert.match(await look(stress,'data-saved'), /sample-night-flower-top\/.*\/mountain-bg$/);
     assert.equal(await stress.evaluate(() => localStorage.getItem('hxx.review.v1')), '隔离测试原值');
+    await action(stress,'wardrobe').click();
+    await slot(stress,'top');
+    assert.ok(await equip(stress,lastId).locator('.saved-mark').isVisible());
+    assert.equal(await equip(stress,'start-c-top').locator('.saved-mark').count(), 0);
     await stress.close();
     pass('30 件上装的底栏保留六件，360×640 网格首屏显示九件；模拟触摸可纵向浏览，末项查看和退出可恢复滚动与焦点，点选只改试穿且进入快选');
     pass('背景两列及原画大图通过，模拟 30px 安全区后末项可点击；测试配色草稿刷新和显式保存通过，原游客存档原值保留');
+    pass('快选与全量网格用勾标保留已保存状态，试穿描边与勾标独立，读屏名称保留状态，保存后勾标随保存项更新');
   }
   assert.deepEqual(errors, []);
   await writeFile(out + '/checks.json', JSON.stringify({chrome:browser.version(), checks, viewports, shots, errors}, null, 2) + '\n');

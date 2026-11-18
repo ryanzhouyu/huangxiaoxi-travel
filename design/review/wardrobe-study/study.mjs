@@ -3,7 +3,7 @@ import {prepareWardrobe, renderedLook, thumbnailUrl} from '../../demo/wardrobe-a
 import {saveLook} from '../../store.mjs';
 import {h} from '../ui.mjs';
 import {composeDraft, makeFixture, sources, stressTops} from './fixture.mjs';
-import {partGrid} from './grid.mjs';
+import {partGrid, partStatus} from './grid.mjs';
 
 const params = new URLSearchParams(location.search);
 const atelier = params.get('layout') === 'atelier';
@@ -127,8 +127,10 @@ function railCard(item) {
   const label = wearLabel(item);
   const partClass = atelier ? 'part-' + item.slot : item.slot;
   const filter = item.filter ? ` style="filter:${item.filter}"` : '';
-  return makeAction('equip', `<img src="${imageFor(item)}" class="thumb ${partClass}" alt=""${filter}><span class="piece">${h(term(item))}</span>${label ? `<span class="wear-state">${label}</span>` : ''}`,
-    'hanger', `data-id="${item.id}" data-saved="${saved}" aria-pressed="${selected}"`);
+  const status = gridPicker ? partStatus(label, saved) : label ? `<span class="wear-state">${label}</span>` : '';
+  const hint = gridPicker && saved ? ` title="${h(label)}"` : '';
+  return makeAction('equip', `<img src="${imageFor(item)}" class="thumb ${partClass}" alt=""${filter}><span class="piece">${h(term(item))}</span>${status}`,
+    'hanger', `data-id="${item.id}" data-saved="${saved}" aria-pressed="${selected}"${hint}`);
 }
 
 function wardrobe() {
@@ -332,7 +334,7 @@ function showPartGrid(trigger) {
   const items = availableParts();
   inspection = undefined;
   openSheet('全部' + SLOTS[slot] + ' · ' + items.length + (slot === 'background' ? ' 张' : ' 件'),
-    partGrid(items, {slot, nameFor:term, imageFor, labelFor:wearLabel, currentId:draft[slot], stress}),
+    partGrid(items, {slot, nameFor:term, imageFor, labelFor:wearLabel, currentId:draft[slot], savedId:savedLook[slot], stress}),
     {panel:'parts-grid',trigger});
   const position = gridBySlot.get(slot);
   if (position) {
