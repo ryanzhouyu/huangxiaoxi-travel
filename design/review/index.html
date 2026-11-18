@@ -24,7 +24,24 @@
     <div id="sheet-body" class="sheet-body"></div>
   </dialog>
   <div id="toast" role="status" aria-live="polite"></div>
+  <template id="file-preview">
+    <div class="stack">
+      <section class="paper" aria-labelledby="file-preview-title">
+        <h1 id="file-preview-title">打开本地预览</h1>
+        <p>当前打开的是磁盘文件。请通过本地预览地址进入黄晓西旅行手账。</p>
+        <a class="button primary" href="http://127.0.0.1:8782/design/review/index.html#partner">进入游客预览</a>
+      </section>
+    </div>
+  </template>
   <!-- 首页入口、路由、首页模块和道具图稿的版本号一起更新，避免加载不同版本。 -->
-  <script type="module" src="./app.mjs?v=home-icons-20261118"></script>
+  <script type="module">
+    if (location.protocol === 'file:') {
+      const notice = document.querySelector('#file-preview').content.cloneNode(true);
+      if (location.hash) notice.querySelector('a').hash = location.hash;
+      document.querySelector('#app').replaceChildren(notice);
+    } else {
+      await import('./app.mjs?v=home-icons-20261118');
+    }
+  </script>
 </body>
 </html>
