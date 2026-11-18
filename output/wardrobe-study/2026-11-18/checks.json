@@ -1,0 +1,293 @@
+{
+  "chrome": "157.0.8103.79",
+  "checks": [
+    "五档视口核对人物不透明边界、桌沿、安全触区、横竖溢出，检查实际场景图片与同数据对照",
+    "小屏可到第六件，完整显示选中状态；切换部位保留另一部位，图鉴返回恢复滚动、分类、焦点和试穿",
+    "刷新恢复试穿，继续试穿恢复焦点，恢复已保存后停留衣橱并禁用保存",
+    "新游客仅显示拥有的类别选项，图鉴展开展示未拥有部件且保持只读",
+    "30px 模拟底部安全区下保存失败保留草稿，重试后返回完整制作地址、标题、模板及所选经历，游客存档原值保留",
+    "见面礼和卡池只预选已拥有部件，放弃或保存后分别回到带参数的来源"
+  ],
+  "viewports": [
+    {
+      "initial": {
+        "width": 360,
+        "height": 640,
+        "contentWidth": 360,
+        "overflowY": 0,
+        "actor": {
+          "left": 55.20089613970588,
+          "right": 207.29563419117645,
+          "top": 107.49646139705888,
+          "bottom": 429.85425091911765,
+          "height": 322.3577895220588
+        },
+        "stageLabelBottom": 86.5,
+        "roomBottom": 454.984375,
+        "rackLeft": 257,
+        "deskTop": 454.984375,
+        "controlBottom": 634,
+        "minHeight": 44,
+        "minWidth": 44,
+        "clippedText": []
+      },
+      "mixed": {
+        "width": 360,
+        "height": 640,
+        "contentWidth": 360,
+        "overflowY": 0,
+        "actor": {
+          "left": 45.85719209558824,
+          "right": 213.5247702205882,
+          "top": 107.49646139705888,
+          "bottom": 429.85425091911765,
+          "height": 322.3577895220588
+        },
+        "stageLabelBottom": 86.5,
+        "roomBottom": 454.984375,
+        "rackLeft": 257,
+        "deskTop": 454.984375,
+        "controlBottom": 634,
+        "minHeight": 44,
+        "minWidth": 44,
+        "clippedText": []
+      }
+    },
+    {
+      "initial": {
+        "width": 390,
+        "height": 844,
+        "contentWidth": 390,
+        "overflowY": 0,
+        "actor": {
+          "left": 41.167294034090915,
+          "right": 239.76427556818183,
+          "top": 207.6996448863636,
+          "bottom": 628.616796875,
+          "height": 420.9171519886364
+        },
+        "stageLabelBottom": 86.5,
+        "roomBottom": 658.984375,
+        "rackLeft": 277.609375,
+        "deskTop": 658.984375,
+        "controlBottom": 838,
+        "minHeight": 44,
+        "minWidth": 44,
+        "clippedText": []
+      },
+      "mixed": {
+        "width": 390,
+        "height": 844,
+        "contentWidth": 390,
+        "overflowY": 0,
+        "actor": {
+          "left": 28.966796875,
+          "right": 247.8979403409091,
+          "top": 207.6996448863636,
+          "bottom": 628.616796875,
+          "height": 420.9171519886364
+        },
+        "stageLabelBottom": 86.5,
+        "roomBottom": 658.984375,
+        "rackLeft": 277.609375,
+        "deskTop": 658.984375,
+        "controlBottom": 838,
+        "minHeight": 44,
+        "minWidth": 44,
+        "clippedText": []
+      }
+    },
+    {
+      "initial": {
+        "width": 430,
+        "height": 932,
+        "contentWidth": 430,
+        "overflowY": 0,
+        "actor": {
+          "left": 44.70163352272728,
+          "right": 265.7626420454546,
+          "top": 245.5580965909091,
+          "bottom": 714.08671875,
+          "height": 468.52862215909096
+        },
+        "stageLabelBottom": 86.5,
+        "roomBottom": 746.984375,
+        "rackLeft": 307.203125,
+        "deskTop": 746.984375,
+        "controlBottom": 926,
+        "minHeight": 44,
+        "minWidth": 44,
+        "clippedText": []
+      },
+      "mixed": {
+        "width": 430,
+        "height": 932,
+        "contentWidth": 430,
+        "overflowY": 0,
+        "actor": {
+          "left": 31.12109375,
+          "right": 274.81633522727276,
+          "top": 245.5580965909091,
+          "bottom": 714.08671875,
+          "height": 468.52862215909096
+        },
+        "stageLabelBottom": 86.5,
+        "roomBottom": 746.984375,
+        "rackLeft": 307.203125,
+        "deskTop": 746.984375,
+        "controlBottom": 926,
+        "minHeight": 44,
+        "minWidth": 44,
+        "clippedText": []
+      }
+    },
+    {
+      "initial": {
+        "width": 1280,
+        "height": 720,
+        "contentWidth": 1280,
+        "overflowY": 0,
+        "actor": {
+          "left": 483.9067784926471,
+          "right": 670.4721047794118,
+          "top": 110.55528492647059,
+          "bottom": 505.9718979779412,
+          "height": 395.41661305147056
+        },
+        "stageLabelBottom": 86.5,
+        "roomBottom": 534.984375,
+        "rackLeft": 751,
+        "deskTop": 534.984375,
+        "controlBottom": 714,
+        "minHeight": 44,
+        "minWidth": 44,
+        "clippedText": []
+      },
+      "mixed": {
+        "width": 1280,
+        "height": 720,
+        "contentWidth": 1280,
+        "overflowY": 0,
+        "actor": {
+          "left": 472.4454273897059,
+          "right": 678.113005514706,
+          "top": 110.55528492647059,
+          "bottom": 505.9718979779412,
+          "height": 395.41661305147056
+        },
+        "stageLabelBottom": 86.5,
+        "roomBottom": 534.984375,
+        "rackLeft": 751,
+        "deskTop": 534.984375,
+        "controlBottom": 714,
+        "minHeight": 44,
+        "minWidth": 44,
+        "clippedText": []
+      }
+    },
+    {
+      "initial": {
+        "width": 1440,
+        "height": 1000,
+        "contentWidth": 1440,
+        "overflowY": 0,
+        "actor": {
+          "left": 529.9216264204546,
+          "right": 784.2260653409091,
+          "top": 239.3560369318182,
+          "bottom": 778.342578125,
+          "height": 538.9865411931818
+        },
+        "stageLabelBottom": 86.5,
+        "roomBottom": 814.984375,
+        "rackLeft": 831,
+        "deskTop": 814.984375,
+        "controlBottom": 994,
+        "minHeight": 44,
+        "minWidth": 44,
+        "clippedText": []
+      },
+      "mixed": {
+        "width": 1440,
+        "height": 1000,
+        "contentWidth": 1440,
+        "overflowY": 0,
+        "actor": {
+          "left": 514.298828125,
+          "right": 794.6412642045455,
+          "top": 239.3560369318182,
+          "bottom": 778.342578125,
+          "height": 538.9865411931818
+        },
+        "stageLabelBottom": 86.5,
+        "roomBottom": 814.984375,
+        "rackLeft": 831,
+        "deskTop": 814.984375,
+        "controlBottom": 994,
+        "minHeight": 44,
+        "minWidth": 44,
+        "clippedText": []
+      }
+    },
+    {
+      "safetyBottom": 30,
+      "failedSave": {
+        "width": 360,
+        "height": 640,
+        "contentWidth": 360,
+        "overflowY": 0,
+        "actor": {
+          "left": 62.17224264705882,
+          "right": 200.84338235294118,
+          "top": 105.40965073529412,
+          "bottom": 377.92477022058824,
+          "height": 272.5151194852941
+        },
+        "stageLabelBottom": 86.5,
+        "roomBottom": 400.40625,
+        "rackLeft": 257,
+        "deskTop": 400.40625,
+        "controlBottom": 609,
+        "minHeight": 44,
+        "minWidth": 44,
+        "clippedText": []
+      }
+    }
+  ],
+  "shots": [
+    "study-360-default",
+    "study-360-try",
+    "study-360-expression",
+    "study-360-pose",
+    "study-360-background",
+    "prior-360-default",
+    "prior-360-try",
+    "study-390-default",
+    "study-390-try",
+    "study-390-expression",
+    "study-390-pose",
+    "study-390-background",
+    "prior-390-default",
+    "prior-390-try",
+    "study-430-default",
+    "study-430-try",
+    "study-430-expression",
+    "study-430-pose",
+    "study-430-background",
+    "study-1280-default",
+    "study-1280-try",
+    "study-1280-expression",
+    "study-1280-pose",
+    "study-1280-background",
+    "study-1440-default",
+    "study-1440-try",
+    "study-1440-expression",
+    "study-1440-pose",
+    "study-1440-background",
+    "study-360-last",
+    "study-360-cancel",
+    "study-360-failure-safe",
+    "study-360-compose"
+  ],
+  "errors": []
+}
