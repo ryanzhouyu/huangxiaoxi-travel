@@ -14,10 +14,11 @@ const chapters = {
 };
 
 const atlas = document.querySelector('.atlas');
+const regionControl = document.querySelector('#region-control');
 const regionButton = document.querySelector('#region-filter');
 const regionLabel = document.querySelector('#region-label');
-const regionSheet = document.querySelector('#region-sheet');
-const regionOptions = [...regionSheet.querySelectorAll('.region-options button')];
+const regionMenu = document.querySelector('#region-options');
+const regionOptions = [...regionMenu.querySelectorAll('button')];
 const categoryOptions = [...document.querySelectorAll('.category-filter button')];
 const chapterPins = [...document.querySelectorAll('.chapter-pin')];
 const mapElements = [...document.querySelectorAll('#map-header, #filters, #map-labels, #map-caption')];
@@ -31,6 +32,7 @@ const stageStatus = document.querySelector('#stage-status');
 let region = 'all';
 let category = 'all';
 let sourcePin;
+let pendingPin;
 
 function showMatches() {
   for (const option of regionOptions) {
@@ -52,18 +54,30 @@ function showMatches() {
   resultCount.textContent = count ? `地图显示 ${count} 个景区` : '这组条件下暂无景区';
 }
 
-regionButton.addEventListener('click', () => {
-  regionSheet.returnValue = 'cancel';
-  regionSheet.showModal();
-  regionButton.setAttribute('aria-expanded', 'true');
-  regionOptions.find(option => option.value === region).focus();
+function setRegionMenu(open) {
+  regionMenu.hidden = !open;
+  regionButton.setAttribute('aria-expanded', String(open));
+}
+
+regionButton.addEventListener('click', () => setRegionMenu(regionMenu.hidden));
+for (const option of regionOptions) {
+  option.addEventListener('click', () => {
+    region = option.value;
+    showMatches();
+    setRegionMenu(false);
+    regionButton.focus();
+  });
+}
+regionControl.addEventListener('keydown', event => {
+  if (event.key !== 'Escape' || regionMenu.hidden) return;
+  setRegionMenu(false);
+  regionButton.focus();
 });
-regionSheet.addEventListener('close', () => {
-  regionButton.setAttribute('aria-expanded', 'false');
-  const selected = regionOptions.find(option => option.value === regionSheet.returnValue);
-  if (!selected) return;
-  region = selected.value;
-  showMatches();
+regionControl.addEventListener('focusout', event => {
+  if (event.relatedTarget && !regionControl.contains(event.relatedTarget)) setRegionMenu(false);
+});
+document.addEventListener('pointerdown', event => {
+  if (!regionMenu.hidden && !regionControl.contains(event.target)) setRegionMenu(false);
 });
 for (const option of categoryOptions) {
   option.addEventListener('click', () => {
@@ -99,6 +113,7 @@ function renderStage([name, seal]) {
 
 function openChapter(pin) {
   sourcePin = pin;
+  setRegionMenu(false);
   const id = pin.dataset.chapter;
   const chapter = chapters[id];
   atlas.dataset.chapter = id;
@@ -118,7 +133,23 @@ function returnToMap() {
   sourcePin.focus();
 }
 
-for (const pin of chapterPins) pin.addEventListener('click', () => openChapter(pin));
+for (const pin of chapterPins) {
+  pin.addEventListener('click', () => {
+    if (pendingPin || pin.hidden || !chapterView.hidden) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      openChapter(pin);
+      return;
+    }
+    pendingPin = pin;
+    pin.dataset.entering = '';
+    // 先让触屏用户看到地标亮起，再开始镜头切换。
+    setTimeout(() => {
+      delete pin.dataset.entering;
+      pendingPin = undefined;
+      if (!pin.hidden) openChapter(pin);
+    }, 180);
+  });
+}
 document.querySelector('#return-map').addEventListener('click', returnToMap);
 document.querySelector('#explore-tab').addEventListener('click', event => {
   if (chapterView.hidden) return;

@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="../../../design/review/review.css">
   <link rel="stylesheet" href="../../../design/review/main-scenes.css">
   <link rel="stylesheet" href="../../explore-destination-design/2026-11-18/study.css">
-  <link rel="stylesheet" href="./atlas.css">
-  <script src="./atlas.js" defer></script>
+  <link rel="stylesheet" href="./atlas.css?v=interactions-20261118">
+  <script src="./atlas.js?v=interactions-20261118" defer></script>
 </head>
 <body>
   <main class="app">
@@ -23,9 +23,17 @@
         </header>
 
         <div class="filters atlas-filters" id="filters">
-          <button class="region-filter" id="region-filter" type="button" aria-haspopup="dialog" aria-controls="region-sheet" aria-expanded="false">
-            <span class="sr">地市州</span><span id="region-label">全部市州</span><span class="caret" aria-hidden="true"></span>
-          </button>
+          <div class="region-control" id="region-control">
+            <button class="region-filter" id="region-filter" type="button" aria-controls="region-options" aria-expanded="false">
+              <span class="sr">地市州</span><span id="region-label">全部市州</span><span class="caret" aria-hidden="true"></span>
+            </button>
+            <div class="region-options region-dropdown" id="region-options" role="group" aria-label="按地市州筛选" hidden>
+              <button type="button" value="all" aria-pressed="true">全部市州</button>
+              <button type="button" value="anshun" aria-pressed="false">安顺市</button>
+              <button type="button" value="guiyang" aria-pressed="false">贵阳市</button>
+              <button type="button" value="qiannan" aria-pressed="false">黔南州</button>
+            </div>
+          </div>
           <div class="category-filter" role="group" aria-label="景区类别">
             <button type="button" data-category="all" aria-pressed="true">全部</button>
             <button type="button" data-category="nature" aria-pressed="false">自然风光</button>
@@ -35,14 +43,17 @@
 
         <div class="map-labels" role="group" aria-label="景区章节" id="map-labels">
           <button class="chapter-pin pin-jiaxiu" type="button" data-chapter="jiaxiu" data-region="guiyang" data-type="culture" aria-label="甲秀楼，贵阳市，打开景区章节">
+            <span class="landmark-cutout" aria-hidden="true"><span class="landmark-art"></span></span>
             <span class="pin-point" aria-hidden="true"></span>
             <span class="chapter-sign"><strong>甲秀楼</strong><small>贵阳市</small></span>
           </button>
           <button class="chapter-pin pin-huangguoshu" type="button" data-chapter="huangguoshu" data-region="anshun" data-type="nature" aria-label="黄果树，安顺市，打开景区章节">
+            <span class="landmark-cutout" aria-hidden="true"><span class="landmark-art"></span></span>
             <span class="pin-point" aria-hidden="true"></span>
             <span class="chapter-sign"><strong>黄果树</strong><small>安顺市</small></span>
           </button>
           <button class="chapter-pin pin-xiaoqikong" type="button" data-chapter="xiaoqikong" data-region="qiannan" data-type="nature" aria-label="小七孔，黔南州，打开景区章节">
+            <span class="landmark-cutout" aria-hidden="true"><span class="landmark-art"></span></span>
             <span class="pin-point" aria-hidden="true"></span>
             <span class="chapter-sign"><strong>小七孔</strong><small>黔南州</small></span>
           </button>
@@ -89,19 +100,5 @@
     </section>
   </main>
 
-  <dialog class="region-sheet" id="region-sheet" aria-labelledby="region-title">
-    <form method="dialog">
-      <header class="region-head">
-        <h2 id="region-title">按地市州筛选</h2>
-        <button class="close-sheet" type="submit" value="cancel" aria-label="关闭">×</button>
-      </header>
-      <div class="region-options">
-        <button type="submit" value="all" aria-pressed="true">全部市州</button>
-        <button type="submit" value="anshun" aria-pressed="false">安顺市</button>
-        <button type="submit" value="guiyang" aria-pressed="false">贵阳市</button>
-        <button type="submit" value="qiannan" aria-pressed="false">黔南州</button>
-      </div>
-    </form>
-  </dialog>
 </body>
 </html>

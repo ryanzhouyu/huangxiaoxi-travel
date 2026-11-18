@@ -1,5 +1,8 @@
 .atlas {
   --chapter-header: max(env(safe-area-inset-top, 0px), clamp(20px, 5dvh, 56px));
+  --atlas-image: url("./assets/guizhou-atlas.webp");
+  --map-width: max(100cqw, 56.28cqh);
+  --map-height: max(100cqh, 177.68cqw);
   --scene-light: linear-gradient(#193427a8, #243d2a42 21%, #19392a05 36% 70%, #19372b25 83%, #203129e8 100%);
   flex: none;
   height: 100dvh;
@@ -11,13 +14,13 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: max(100cqw, 56.28cqh);
-  height: max(100cqh, 177.68cqw);
+  width: var(--map-width);
+  height: var(--map-height);
   transform: translate(-50%, -50%);
 }
 .atlas-art {
   z-index: -2;
-  background: url("./assets/guizhou-atlas.webp") center / cover;
+  background: var(--atlas-image) center / cover;
   transition: transform 380ms ease;
 }
 .atlas-content { min-height: 0; }
@@ -28,13 +31,36 @@
 }
 .atlas-header h1 { margin-top: 4px; }
 .atlas-filters { position: relative; z-index: 2; }
+.region-control { position: relative; }
+.region-control > .region-filter { width: 100%; height: 100%; }
+.region-control > .region-filter[aria-expanded="true"] {
+  border-end-start-radius: 2px;
+  border-end-end-radius: 2px;
+}
+.region-filter[aria-expanded="true"] .caret { transform: translateY(2px) rotate(225deg); }
+.region-dropdown {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
+  width: 100%;
+  gap: 3px;
+  padding: 4px;
+  border: 1px solid #b99966;
+  border-radius: 0 4px 6px 9px;
+  background: linear-gradient(155deg, #fff1d3, #ebd5ac);
+  box-shadow: 0 6px 15px #262a1f55;
+}
+.region-dropdown > button { min-height: 44px; padding-inline: 9px; }
+.region-dropdown > button:hover { background: #f9e7c1; }
+.region-dropdown > button[aria-pressed="true"] { background: #e2e7ce; }
+.region-dropdown > button:focus-visible { outline: 2px solid #586854; outline-offset: -3px; }
 .atlas .main-nav { position: relative; z-index: 2; }
 .map-labels { z-index: 1; pointer-events: none; }
 
 .chapter-pin {
   position: absolute;
-  top: var(--pin-y);
-  left: var(--pin-x);
+  top: calc(var(--pin-y) * 100%);
+  left: calc(var(--pin-x) * 100%);
   display: grid;
   justify-items: center;
   min-width: 96px;
@@ -44,13 +70,74 @@
   background: none;
   transform: translate(-50%, -8px);
   pointer-events: auto;
-  transition: translate 150ms ease;
 }
-.chapter-pin:hover { translate: 0 -3px; }
+.chapter-pin:hover, .chapter-pin:focus-visible, .chapter-pin[data-entering] { z-index: 2; }
 .chapter-pin:focus-visible { outline: 2px solid #fff6ce; border-radius: 6px; outline-offset: 3px; }
-.pin-jiaxiu { --pin-x: 75%; --pin-y: 45.5%; --enamel: #a25543; }
-.pin-huangguoshu { --pin-x: 28%; --pin-y: 63.1%; --enamel: #446f73; }
-.pin-xiaoqikong { --pin-x: 67%; --pin-y: 75.6%; --enamel: #56775a; }
+
+/* 锚点与裁切框共用原图坐标，因此缩放后仍与底图同一位置。 */
+.pin-jiaxiu {
+  --pin-x: .75;
+  --pin-y: .455;
+  --enamel: #a25543;
+  --landmark-x: .565;
+  --landmark-y: .308;
+  --landmark-w: .289;
+  --landmark-h: .162;
+  --landmark-light: 1.13;
+  --landmark-feather: linear-gradient(#000 84%, transparent);
+  --silhouette: polygon(2% 81%, 12% 72%, 17% 64%, 25% 63%, 25% 58%, 21% 56%, 27% 48%, 29% 42%, 29% 34%, 32% 33%, 37% 25%, 48% 12%, 52% 2%, 56% 14%, 64% 22%, 73% 28%, 74% 34%, 71% 40%, 80% 47%, 79% 54%, 85% 57%, 87% 64%, 80% 72%, 97% 80%, 96% 92%, 69% 97%, 37% 99%, 12% 92%);
+}
+.pin-huangguoshu {
+  --pin-x: .28;
+  --pin-y: .631;
+  --enamel: #446f73;
+  --landmark-x: .01;
+  --landmark-y: .438;
+  --landmark-w: .53;
+  --landmark-h: .215;
+  --landmark-light: 1.06;
+  --landmark-feather: linear-gradient(transparent, #000 18% 74%, transparent 99%);
+  --silhouette: polygon(2% 48%, 7% 35%, 16% 22%, 25% 16%, 33% 13%, 38% 6%, 47% 13%, 56% 15%, 65% 16%, 71% 22%, 81% 23%, 85% 29%, 86% 52%, 90% 62%, 99% 76%, 93% 84%, 82% 88%, 64% 94%, 52% 91%, 39% 97%, 25% 91%, 12% 88%, 4% 73%);
+}
+.pin-xiaoqikong {
+  --pin-x: .67;
+  --pin-y: .756;
+  --enamel: #56775a;
+  --landmark-x: .328;
+  --landmark-y: .719;
+  --landmark-w: .672;
+  --landmark-h: .072;
+  --landmark-light: 1.11;
+  --landmark-feather: linear-gradient(transparent, #000 30% 63%, transparent 90%);
+  --silhouette: polygon(0 52%, 7% 42%, 18% 29%, 30% 22%, 40% 17%, 54% 15%, 67% 18%, 78% 23%, 90% 31%, 100% 45%, 100% 83%, 90% 85%, 78% 84%, 61% 83%, 44% 80%, 26% 85%, 9% 87%, 0 83%);
+}
+.landmark-cutout {
+  position: absolute;
+  top: calc(8px + (var(--landmark-y) - var(--pin-y)) * var(--map-height));
+  left: calc(50% + (var(--landmark-x) - var(--pin-x)) * var(--map-width));
+  width: calc(var(--landmark-w) * var(--map-width));
+  height: calc(var(--landmark-h) * var(--map-height));
+  pointer-events: none;
+  filter: drop-shadow(0 4px 6px #1f301b88) drop-shadow(0 0 8px #f9d1809c);
+}
+.landmark-art {
+  position: absolute;
+  inset: 0;
+  clip-path: var(--silhouette);
+  mask-image: var(--landmark-feather);
+  pointer-events: auto;
+  background: var(--atlas-image) no-repeat;
+  background-size: var(--map-width) var(--map-height);
+  background-position: calc(-1 * var(--landmark-x) * var(--map-width)) calc(-1 * var(--landmark-y) * var(--map-height));
+  filter: brightness(var(--landmark-light)) saturate(1.08);
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+.chapter-pin:is(:focus-visible, :active, [data-entering]) .landmark-art { opacity: 1; }
+@media (hover: hover) {
+  .chapter-pin:hover .landmark-art { opacity: 1; }
+  .chapter-pin:hover .chapter-sign { box-shadow: 0 4px 11px #17241f9c, inset 0 0 0 1px #fff6db; }
+}
 .pin-point {
   position: relative;
   z-index: 1;
@@ -83,6 +170,9 @@
   box-shadow: 0 3px 6px #17241f99, inset 0 0 0 1px #fff1cfbf;
   white-space: nowrap;
   text-align: left;
+}
+.chapter-pin:is(:focus-visible, :active, [data-entering]) .chapter-sign {
+  box-shadow: 0 4px 11px #17241f9c, inset 0 0 0 1px #fff6db;
 }
 .chapter-sign::after {
   content: "";
@@ -235,5 +325,5 @@
   .chapter-heading { gap: 9px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .atlas-art, .chapter-pin { transition: none; }
+  .atlas-art, .landmark-art { transition: none; }
 }
