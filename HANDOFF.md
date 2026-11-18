@@ -4,6 +4,8 @@
 
 ## 当前接手位置
 
+2026-11-18 根据衣橱评审反馈完成[竞品调研与视觉复验](docs/衣橱竞品调研与视觉复验.md)。新增[下方选衣候选稿](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier)及[同搭配对照](output/wardrobe-layout-review/2026-11-18/index.html)，用居中人物、分层工坊与同区选衣验证协调性，视觉待评审。原衣橱样板仍可从同目录的默认地址访问。
+
 2026-11-18 已整理[游客端设计资料取舍](docs/游客端设计资料取舍.md)，并在现版旁建立[独立衣橱样板](http://127.0.0.1:8782/design/review/wardrobe-study/)。继续采用确认工坊、六套拆件及草稿与来源规则。现版和历史原件保留。后续依据[衣橱验证设计](docs/衣橱验证设计.md)及实际对照，确定哪些可迁入游客入口。衣橱样板使用独立评审数据。
 
 2026-11-18 在 `codex/production-frontend` 完成黔山同行前端评审原型。根据用户反馈，视觉回到已确认的场景构图。直接打开[游客原型](http://127.0.0.1:8782/design/review/index.html)，凭证和故障设置在[评审工具](http://127.0.0.1:8782/design/review/desk.html)。启动及测试见[原型说明](design/review/README.md)，变化见[场景回调对照](output/frontend-review/2026-11-18/scene-revision/index.html)。原型能实际试穿与导出 PNG，身份、现场核验和结算来自隔离评审适配器。

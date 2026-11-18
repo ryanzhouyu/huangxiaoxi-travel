@@ -5,7 +5,8 @@ import {makeFixture, sources} from '../wardrobe-study/fixture.mjs';
 
 const {chromium} = createRequire(import.meta.url)(process.env.HXX_PLAYWRIGHT || 'playwright');
 const origin = process.env.HXX_STUDY_ORIGIN || 'http://127.0.0.1:8782';
-const out = process.env.HXX_STUDY_OUT || '.codex/wardrobe-study-20261118';
+const atelier = process.env.HXX_STUDY_LAYOUT === 'atelier';
+const out = process.env.HXX_STUDY_OUT || (atelier ? '.codex/wardrobe-layout-study' : '.codex/wardrobe-study-20261118');
 const browser = await chromium.launch({channel: 'chrome'});
 const checks = [], viewports = [], shots = [], errors = [];
 const mobile = {width: 360, height: 640};
@@ -17,9 +18,11 @@ const slot = (page, id) => page.locator('.slot[data-slot=' + id + ']').click();
 const look = (page, key = 'data-look') => page.locator('#study').getAttribute(key);
 const pass = label => checks.push(label);
 const hash = page => page.evaluate(() => location.hash);
+const railOffset = rail => rail.evaluate((element, horizontal) =>
+  horizontal ? element.scrollLeft : element.scrollTop, atelier);
 
-async function open(viewport, query = '', baseline = false) {
-  const page = await browser.newPage({viewport, reducedMotion: 'reduce'});
+async function open(viewport, query = '', baseline = false, touch = false) {
+  const page = await browser.newPage({viewport, reducedMotion: 'reduce', hasTouch: touch, isMobile: touch});
   page.setDefaultTimeout(9000);
   const key = 'hxx.review.v1';
   await page.addInitScript(({key, value}) => localStorage.setItem(key, value),
@@ -28,7 +31,9 @@ async function open(viewport, query = '', baseline = false) {
   page.on('response', response => {
     if (response.status() >= 400) errors.push(response.status() + ' ' + response.url());
   });
-  await page.goto(origin + '/design/review/' + (baseline ? 'index.html#wardrobe?from=%23partner' : 'wardrobe-study/' + query));
+  const url = new URL(baseline ? 'design/review/index.html#wardrobe?from=%23partner' : 'design/review/wardrobe-study/' + query, origin);
+  if (atelier && !baseline) url.searchParams.set('layout', 'atelier');
+  await page.goto(url.href);
   await (baseline ? page.locator('.wardrobe-stage').waitFor() : view(page));
   return page;
 }
@@ -54,12 +59,13 @@ async function selectionVisible(page) {
   const row = await page.locator('.hanger[aria-pressed=true]').boundingBox();
   const rail = await page.locator('.hangers').boundingBox();
   assert.ok(row.y >= rail.y && row.y + row.height <= rail.y + rail.height);
+  if (atelier) assert.ok(row.x >= rail.x && row.x + row.width <= rail.x + rail.width);
 }
 
 async function geometry(page, safe = 0) {
   await imagesReady(page);
   const result = await page.evaluate(() => {
-    const box = selector => document.querySelector(selector).getBoundingClientRect();
+    const box = selector => document.querySelector(selector)?.getBoundingClientRect();
     const image = document.querySelector('.doll img');
     const canvas = document.createElement('canvas');
     canvas.width = image.naturalWidth;
@@ -67,24 +73,29 @@ async function geometry(page, safe = 0) {
     const context = canvas.getContext('2d');
     context.drawImage(image, 0, 0);
     const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+    const frame = image.getBoundingClientRect();
+    const scale = Math.min(frame.width / canvas.width, frame.height / canvas.height);
+    const left = frame.left + (frame.width - canvas.width * scale) / 2;
+    const top = frame.bottom - canvas.height * scale;
+    const label = box('.stage-note');
+    let covered = 0;
     let minX = canvas.width, maxX = 0, minY = canvas.height, maxY = 0;
     for (let y = 0; y < canvas.height; y++) for (let x = 0; x < canvas.width; x++) {
       if (pixels[(y * canvas.width + x) * 4 + 3] < 24) continue;
       minX = Math.min(minX, x); maxX = Math.max(maxX, x);
       minY = Math.min(minY, y); maxY = Math.max(maxY, y);
+      const dx = left + x * scale, dy = top + y * scale;
+      if (dx >= label.left && dx <= label.right && dy >= label.top && dy <= label.bottom) covered++;
     }
-    const frame = image.getBoundingClientRect();
-    const scale = Math.min(frame.width / canvas.width, frame.height / canvas.height);
-    const left = frame.left + (frame.width - canvas.width * scale) / 2;
-    const top = frame.bottom - canvas.height * scale;
     const actor = {left: left + minX * scale, right: left + maxX * scale,
       top: top + minY * scale, bottom: top + maxY * scale, height: (maxY - minY) * scale};
     const controls = [...document.querySelectorAll('.slots button, .desk [data-action], .top button')];
     return {
       width: innerWidth, height: innerHeight, contentWidth: document.documentElement.scrollWidth,
       overflowY: document.documentElement.scrollHeight - innerHeight,
-      actor, stageLabelBottom: box('.stage-note').bottom, roomBottom: box('.room').bottom,
-      rackLeft: box('.rack').left, deskTop: box('.desk').top, controlBottom: box('.secondary-row').bottom,
+      actor, covered, roomBottom: box('.room').bottom,
+      actorRightLimit: box('.rack')?.left ?? box('.stage').right,
+      deskTop: box('.desk').top, controlBottom: box('.secondary-row, .finish').bottom,
       minHeight: Math.min(...controls.map(item => item.getBoundingClientRect().height)),
       minWidth: Math.min(...controls.map(item => item.getBoundingClientRect().width)),
       clippedText: [...controls, ...document.querySelectorAll('.hanger')].filter(item =>
@@ -92,8 +103,8 @@ async function geometry(page, safe = 0) {
     };
   });
   const {actor} = result;
-  assert.ok(actor.height >= 240 && actor.left >= 0 && actor.right < result.rackLeft &&
-    actor.top > result.stageLabelBottom && actor.bottom < result.deskTop, JSON.stringify(result));
+  assert.ok(actor.height >= 240 && actor.left >= 0 && actor.right < result.actorRightLimit &&
+    !result.covered && actor.bottom < result.deskTop, JSON.stringify(result));
   assert.ok(result.controlBottom <= result.height - safe && result.roomBottom === result.deskTop &&
     result.minHeight >= 44 && result.minWidth >= 44 && !result.overflowY &&
     result.contentWidth === result.width && !result.clippedText.length, JSON.stringify(result));
@@ -119,7 +130,9 @@ try {
     await equip(page,'mountain-bg').click();
     assert.match(await page.locator('.room').getAttribute('style'), /cloud-pavilion\.webp/);
     await capture(page,'study-' + width + '-background');
-    viewports.push({initial, mixed: await geometry(page)});
+    const mixed = await geometry(page);
+    if (atelier) assert.equal(mixed.deskTop, initial.deskTop);
+    viewports.push({initial, mixed});
     await page.close();
     if (width <= 390) {
       const baseline = await open({width,height}, '', true);
@@ -135,9 +148,14 @@ try {
   assert.equal(await page.locator('.hanger').count(), 6);
   assert.equal(await page.locator('.wear-state').allTextContents().then(items => items.join('/')), '已保存穿着');
   assert.ok(await page.locator('.more-cue').isVisible());
+  if (atelier) {
+    await rail.hover();
+    await page.mouse.wheel(0, 850);
+    await page.waitForFunction(() => document.querySelector('.hangers').scrollLeft > 0);
+  }
   await equip(page,'flower-top').click();
-  await page.waitForFunction(() => document.querySelector('.more-cue').hidden);
-  const endScroll = await rail.evaluate(element => element.scrollTop);
+  if (!atelier) await page.waitForFunction(() => document.querySelector('.more-cue').hidden);
+  const endScroll = await railOffset(rail);
   assert.ok(endScroll > 0);
   await selectionVisible(page);
   assert.equal(await page.evaluate(() => document.activeElement.dataset.id), 'flower-top');
@@ -150,14 +168,14 @@ try {
   const afterShoes = (await look(page)).split('/');
   assert.deepEqual(afterShoes, beforeShoes.map((part,index) => index === 3 ? 'start-a-shoes' : part));
   await slot(page,'top');
-  assert.equal(await rail.evaluate(element => element.scrollTop), endScroll);
+  assert.equal(await railOffset(rail), endScroll);
   await action(page,'catalog').click();
   await view(page,'catalog');
   await action(page,'outfit').filter({hasText:'花溪漫步'}).click();
   assert.equal(await page.locator('#sheet small').allTextContents().then(items => items.filter(item => item === '已拥有').length), 1);
   await button(page,'关闭').click();
   await action(page,'wardrobe').click();
-  assert.equal(await rail.evaluate(element => element.scrollTop), endScroll);
+  assert.equal(await railOffset(rail), endScroll);
   assert.equal(await page.evaluate(() => document.activeElement.dataset.action), 'catalog');
   assert.deepEqual((await look(page)).split('/'), afterShoes);
   pass('小屏可到第六件，完整显示选中状态；切换部位保留另一部位，图鉴返回恢复滚动、分类、焦点和试穿');
@@ -229,6 +247,24 @@ try {
   assert.equal(await hash(pool), sources.pool.hash);
   assert.match(await look(pool,'data-saved'), /mountain-top/);
   pass('见面礼和卡池只预选已拥有部件，放弃或保存后分别回到带参数的来源');
+  if (atelier) {
+    const touch = await open(mobile, '', false, true);
+    const touchRail = touch.locator('.hangers');
+    const area = await touchRail.boundingBox();
+    const session = await touch.context().newCDPSession(touch);
+    const y = Math.round(area.y + area.height / 2);
+    await session.send('Input.dispatchTouchEvent', {type:'touchStart', touchPoints:[{x:300,y}]});
+    for (const x of [270,235,200,165,130,95,60]) {
+      await session.send('Input.dispatchTouchEvent', {type:'touchMove', touchPoints:[{x,y}]});
+    }
+    await session.send('Input.dispatchTouchEvent', {type:'touchEnd', touchPoints:[]});
+    assert.ok(await railOffset(touchRail) > 0);
+    const chosen = await equip(touch,'flower-top').boundingBox();
+    await touch.touchscreen.tap(chosen.x + chosen.width / 2, chosen.y + chosen.height / 2);
+    assert.match(await look(touch), /flower-top/);
+    await touch.close();
+    pass('模拟手机触摸横滑可选末项，桌面滚轮可翻选。短列表与长列表切换时舞台高度一致');
+  }
   assert.deepEqual(errors, []);
   await writeFile(out + '/checks.json', JSON.stringify({chrome:browser.version(), checks, viewports, shots, errors}, null, 2) + '\n');
   console.log('Chrome ' + browser.version() + ' · ' + checks.length + ' 组检查 · ' + shots.length + ' 张截图。');

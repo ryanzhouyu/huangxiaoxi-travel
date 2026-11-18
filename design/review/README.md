@@ -16,3 +16,5 @@
 浏览器复验使用本机 Chrome。环境变量 `HXX_PLAYWRIGHT` 指向已安装的 Playwright 包，或使用 Node 可解析的 Playwright。启动 8782 后运行 `node design/review/tests/experience.mjs`。可用 `HXX_REVIEW_URL` 切换服务地址，用 `HXX_REVIEW_OUT` 切换输出路径。默认报告、截图和图片写入忽略目录 `.codex/frontend-review/after/`。
 
 衣橱验证使用[独立入口](http://127.0.0.1:8782/design/review/wardrobe-study/)、[设计及验收说明](../../docs/衣橱验证设计.md)和[同数据对照](../../output/wardrobe-study/2026-11-18/index.html)。启动同一服务后运行 `node design/review/tests/wardrobe-study.mjs`。若使用其他本地端口，可设 `HXX_STUDY_ORIGIN`，如 `http://127.0.0.1:8765`；用 `HXX_STUDY_OUT` 可切换验证输出目录。
+
+本轮[下方选衣候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier)见[竞品与同屏对照](../../docs/衣橱竞品调研与视觉复验.md)。复验命令与上面相同，另设 `HXX_STUDY_LAYOUT=atelier` 即检查候选及横滑。默认输出目录为 `.codex/wardrobe-layout-study`。

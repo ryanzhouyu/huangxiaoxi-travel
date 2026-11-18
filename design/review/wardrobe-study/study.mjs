@@ -5,6 +5,7 @@ import {h} from '../ui.mjs';
 import {composeDraft, makeFixture, sources} from './fixture.mjs';
 
 const params = new URLSearchParams(location.search);
+const atelier = params.get('layout') === 'atelier';
 const sourceId = Object.hasOwn(sources, params.get('source')) ? params.get('source') : 'partner';
 const source = sources[sourceId];
 const profile = params.get('profile') === 'starter' ? 'starter' : 'full';
@@ -16,6 +17,7 @@ const sourceDraft = sourceId === 'compose' ? {
     .filter(Boolean).map(event => event.name),
 } : null;
 const root = document.querySelector('#study');
+if (atelier) document.body.dataset.layout = 'atelier';
 const sheet = document.querySelector('#sheet');
 const title = document.querySelector('#sheet-title');
 const sheetBody = sheet.querySelector('.sheet-body');
@@ -23,7 +25,8 @@ const announcement = document.querySelector('#announcement');
 const thumbs = new Map();
 const wardrobeHome = '#wardrobe';
 const templateLabels = {single: '单页纪念', trail: '足迹长图'};
-const draftKey = 'hxx.wardrobe-study.v1.' + sourceId + '.' + profile + '.' + (requestedItem?.id || 'plain');
+const draftKey = 'hxx.wardrobe-study.v1.' + sourceId + '.' + profile + '.' + (requestedItem?.id || 'plain') +
+  (atelier ? '.atelier' : '');
 const scenes = {paper: 'travel-journal.webp', 'mountain-bg': 'cloud-pavilion.webp', 'flower-bg': 'flower-creek.webp'};
 const sceneUrl = filename => new URL('../../demo/assets/scenes/' + filename, import.meta.url);
 const owned = item => item && sample.owned.includes(item.id);
@@ -90,31 +93,46 @@ function railCard(item) {
   const saved = sample.look[slot] === item.id;
   const selected = draft[slot] === item.id;
   const label = saved ? '已保存穿着' : selected ? '正在试穿' : '';
-  return makeAction('equip', `<img src="${imageFor(item)}" class="thumb ${item.slot}" alt=""><span class="piece">${h(term(item))}</span>${label ? `<span class="wear-state">${label}</span>` : ''}`,
+  const partClass = atelier ? 'part-' + item.slot : item.slot;
+  return makeAction('equip', `<img src="${imageFor(item)}" class="thumb ${partClass}" alt=""><span class="piece">${h(term(item))}</span>${label ? `<span class="wear-state">${label}</span>` : ''}`,
     'hanger', `data-id="${item.id}" data-saved="${saved}" aria-pressed="${selected}"`);
 }
 
 function wardrobe() {
-  const active = Object.values(SLOTS);
   const available = ASSETS.filter(item => item.slot === slot && owned(item));
   const hasChange = dirty();
   const activeName = asset(draft[slot]).name;
   const stage = slot === 'background' ? scenes[draft.background] : 'wardrobe-studio.webp';
+  const categories = Object.entries(SLOTS).map(([part, name]) =>
+    makeAction('slot', name, 'slot', `aria-pressed="${part === slot}" data-slot="${part}"`)).join('');
+  const actions = {
+    save: makeAction('save', busy ? '正在保存…' : '保存搭配并返回', 'primary', !hasChange || busy ? 'disabled' : ''),
+    reset: makeAction('reset', '恢复上次保存', 'text', !hasChange || busy ? 'disabled' : ''),
+    leave: makeAction('leave', '取消并返回', 'text', busy ? 'disabled' : ''),
+  };
+  const rail = `<div class="hangers" data-slot="${slot}" aria-label="${SLOTS[slot]}部件">${available.map(railCard).join('')}</div>`;
+  const rack = atelier ? '' : `<aside class="rack" aria-label="${SLOTS[slot]}衣架">
+      <div class="rack-strip"><strong>${SLOTS[slot]}</strong><span>${available.length} 件</span></div>${rail}
+      <div class="rack-foot" aria-hidden="true"><span class="more-cue">继续下滑</span></div>
+    </aside>`;
+  const selection = atelier
+    ? `<div class="picked"><strong>${h(activeName)}</strong><span class="rail-count">${available.length} 件<span class="more-cue" aria-hidden="true"> · 左右滑动</span></span></div>${rail}`
+    : `<div class="picked"><span>${slot === 'background' ? '预览背景' : SLOTS[slot]}</span><strong>${h(activeName)}</strong></div>`;
+  const finish = atelier
+    ? `<div class="finish">${actions.leave}${actions.reset}${actions.save}</div>`
+    : `${actions.save}<div class="secondary-row">${actions.reset}${actions.leave}</div>`;
   return `<section class="room" style="--scene:url('${sceneUrl(stage).href}')">
     <header class="top"><div class="identity">${makeAction('leave', '‹<span class="sr">返回</span>', 'back') }<h1>旅行衣橱</h1></div>${makeAction('catalog','套装图鉴','wood-button')}</header>
     <div class="stage">
       <div class="doll"><p class="stage-note ${hasChange ? 'changed' : ''}">${hasChange ? '试穿中 · 尚未保存' : '当前搭配'}</p>${figure(draft)}</div>
-      <aside class="rack" aria-label="${SLOTS[slot]}衣架"><div class="rack-strip"><strong>${SLOTS[slot]}</strong><span>${available.length} 件</span></div>
-        <div class="hangers" data-slot="${slot}">${available.map(railCard).join('')}</div>
-        <div class="rack-foot" aria-hidden="true"><span class="more-cue">继续下滑</span></div></aside>
+      ${rack}
     </div>
   </section>
   <section class="desk" aria-label="搭配操作">
-    <div class="desk-inlay"><nav class="slots" aria-label="装扮分类">${Object.keys(SLOTS).map((part,i)=>makeAction('slot',active[i],'slot',`aria-pressed="${part===slot}" data-slot="${part}"`)).join('')}</nav>
-      <div class="picked"><span>${slot==='background' ? '预览背景' : SLOTS[slot]}</span><strong>${h(activeName)}</strong></div>
+    <div class="desk-inlay"><nav class="slots" aria-label="装扮分类">${categories}</nav>
+      ${selection}
       <div class="write-error" role="alert" ${error?'':'hidden'}>${h(error)}</div>
-      ${makeAction('save',busy?'正在保存…':'保存搭配并返回','primary',!hasChange || busy ? 'disabled' : '')}
-      <div class="secondary-row">${makeAction('reset','恢复上次保存','text',!hasChange || busy ? 'disabled' : '')}${makeAction('leave','取消并返回','text',busy ? 'disabled' : '')}</div>
+      ${finish}
     </div>
   </section>`;
 }
@@ -145,21 +163,37 @@ function showSource(result){
   render('source',{focus:true});
 }
 
+const axis = atelier
+  ? {size: 'scrollWidth', client: 'clientWidth', offset: 'scrollLeft', start: 'left', end: 'right'}
+  : {size: 'scrollHeight', client: 'clientHeight', offset: 'scrollTop', start: 'top', end: 'bottom'};
+
 function updateOverflow(){
-  const rack=root.querySelector('.hangers');
-  if(!rack)return;
-  root.querySelector('.more-cue').hidden=rack.scrollHeight-rack.clientHeight-rack.scrollTop<4;
+  const rack = root.querySelector('.hangers');
+  if (!rack) return;
+  const overflow = rack[axis.size] - rack[axis.client];
+  const remaining = atelier ? overflow : overflow - rack[axis.offset];
+  root.querySelector('.more-cue').hidden = remaining < 4;
 }
 function rememberRail(){
   const rack=root.querySelector('.hangers');
-  if(rack)scrollBySlot.set(rack.dataset.slot,rack.scrollTop);
+  if(rack)scrollBySlot.set(rack.dataset.slot,rack[axis.offset]);
 }
 function revealSelection(){
   const rack = root.querySelector('.hangers');
   const current = rack.querySelector('[aria-pressed=true]').getBoundingClientRect();
   const rail = rack.getBoundingClientRect();
-  if (current.bottom > rail.bottom) rack.scrollTop += Math.ceil(current.bottom - rail.bottom) + 2;
-  else if (current.top < rail.top) rack.scrollTop -= Math.ceil(rail.top - current.top) + 2;
+  const end = current[axis.end] - rail[axis.end];
+  const start = rail[axis.start] - current[axis.start];
+  if (end > 0) rack[axis.offset] += Math.ceil(end) + 2;
+  else if (start > 0) rack[axis.offset] -= Math.ceil(start) + 2;
+}
+function wheelRail(event) {
+  if (event.ctrlKey || Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
+  const rail = event.currentTarget;
+  const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? rail.clientWidth : 1;
+  const previous = rail.scrollLeft;
+  rail.scrollLeft += event.deltaY * unit;
+  if (rail.scrollLeft !== previous) event.preventDefault();
 }
 function render(next=view,{focus=false,control=null}={}){
   rememberRail();
@@ -171,8 +205,9 @@ function render(next=view,{focus=false,control=null}={}){
   root.innerHTML=view==='wardrobe'?wardrobe():view==='catalog'?catalog():sourcePage();
   const rack=root.querySelector('.hangers');
   if(rack){
-    rack.scrollTop=scrollBySlot.get(slot)||0;
+    rack[axis.offset]=scrollBySlot.get(slot)||0;
     rack.addEventListener('scroll',updateOverflow,{passive:true});
+    if (atelier) rack.addEventListener('wheel', wheelRail, {passive:false});
     updateOverflow();
   }
   if(control) root.querySelector(control)?.focus({preventScroll:true});
