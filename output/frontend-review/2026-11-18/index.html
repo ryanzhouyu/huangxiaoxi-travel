@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>黔山同行 · 前端视觉评审</title>
+  <link rel="icon" href="data:,">
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;background:#f3e7cf;color:#392b22;font:16px/1.55 "Microsoft YaHei","PingFang SC",sans-serif}
+    main{max-width:1000px;margin:auto;padding:22px 18px 36px}
+    h1,h2{font-family:KaiTi,STKaiti,serif;line-height:1.2}
+    h1{font-size:clamp(34px,6vw,53px);margin:4px 0 9px}
+    h2{margin:0 0 6px}
+    p{margin:5px 0 12px}
+    .kicker{font-weight:bold;color:#813d43;letter-spacing:.12em}
+    .lead{max-width:652px;color:#604c3c}
+    .toolbar,.controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+    .controls{margin:20px 0 10px;padding:12px;background:#faf1de;border:1px solid #cab194;border-radius:5px 13px}
+    .controls label{flex:1;min-width:135px;display:grid;gap:4px;font-weight:700}
+    button,select,.toolbar a{min-height:44px;padding:5px 10px;border:1px solid #ae9371;border-radius:5px;background:#fff9e9;color:inherit;font:inherit}
+    .toolbar a{display:inline-grid;place-items:center;text-decoration:none}
+    .toolbar a:first-child{background:#813d43;color:#fff9e9}
+    .controls button{align-self:end}
+    .pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    figure{margin:0;padding:10px;background:#f9f0dc;border:1px solid #d4bd9a;border-radius:5px 12px;text-align:center}
+    figcaption{padding:3px 0 9px;color:#5f4838;font-size:14px;font-weight:bold}
+    img{display:block;width:auto;max-width:100%;max-height:76dvh;margin:auto;border:1px solid #cab595;border-radius:3px}
+    a{color:#78343a}
+    #caption{min-height:44px;margin:14px 0;color:#674d3e}
+    @media(max-width:640px){.pair{grid-template-columns:1fr}.pair img{max-height:initial;width:min(100%,400px)} .controls{align-items:end}}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="kicker">黄晓西 · 黔山同行</div>
+    <h1>前端视觉评审</h1>
+    <p class="lead">选择页面和尺寸，看优化前后实际截图。点击画面可打开原尺寸。部分前后状态的内容来自不同测试手账。</p>
+    <div class="toolbar">
+      <a href="../../../design/review/desk.html">进入可玩原型</a>
+      <a href="./travel-keepsake.png">查看实际导出的 PNG</a>
+      <a href="./verification.json">验收记录</a>
+    </div>
+    <div class="controls">
+      <label>画面<select id="screen"></select></label>
+      <label>优化后尺寸<select id="size"></select></label>
+      <button type="button" id="previous" aria-label="上一张">‹</button>
+      <button type="button" id="next" aria-label="下一张">›</button>
+    </div>
+    <h2 id="title"></h2>
+    <p id="caption" role="status"></p>
+    <div class="pair">
+      <figure id="before">
+        <figcaption>优化前 · 390×844</figcaption>
+        <a target="_blank" rel="noopener"><img alt="原游客演示截图"></a>
+        <p id="no-before" hidden>本状态在此轮原型中新增，或没有可直接对比的基线截图。</p>
+      </figure>
+      <figure>
+        <figcaption id="after-title">优化后</figcaption>
+        <a id="after" target="_blank" rel="noopener"><img alt="优化后的前端评审截图"></a>
+      </figure>
+    </div>
+  </main>
+  <script type="module" src="./gallery.mjs"></script>
+</body>
+</html>

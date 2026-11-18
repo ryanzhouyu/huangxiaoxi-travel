@@ -6,6 +6,8 @@
 
 ## 启动当前成果
 
+评审新一轮的视觉、交互与流程，请打开[高保真原型的评审工具](http://127.0.0.1:8765/design/review/desk.html)。[原型说明](design/review/README.md)含评审身份、点位凭证和复验方式，[视觉画廊](output/frontend-review/2026-11-18/index.html)可逐页对照。
+
 首次获取当前正式前端开发分支（可运行页面仍是旧演示，正式工程尚未提取）：
 
 ```powershell

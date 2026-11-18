@@ -78,7 +78,7 @@ function timeRow(c, event, y, x = 45, w = 580) {
   c.fillText(event.name, x + 175, y, w - 175);
 }
 
-export function paintCard(paper, {look, events, template, title}, actor) {
+export function paintCard(paper, {look, events, template, title, dateLabel}, actor) {
   const trail = template === 'trail',
     count = trail ? events.length : Math.min(4, events.length);
   const w = 680;
@@ -94,7 +94,7 @@ export function paintCard(paper, {look, events, template, title}, actor) {
   c.strokeStyle = '#c9ac7f';
   c.strokeRect(7, 7, w - 14, h - 14);
   if (trail) {
-    paintTrail(c, {look, events, title}, actor, w, h);
+    paintTrail(c, {look, events, title, dateLabel}, actor, w, h);
     return;
   }
   const box = {x: 20, y: 20, w: w - 40, h: 480};
@@ -148,7 +148,7 @@ export function paintCard(paper, {look, events, template, title}, actor) {
 }
 
 let paperTexture;
-function paintTrail(c, {look, events, title}, actor, w, h) {
+function paintTrail(c, {look, events, title, dateLabel}, actor, w, h) {
   // 只给底纸做较疏的采样，避免纸纤维消耗本机作品存储。照片、人物和字仍按输出尺寸绘制。
   if (!paperTexture) {
     const original = journalPaper();
@@ -171,7 +171,7 @@ function paintTrail(c, {look, events, title}, actor, w, h) {
   c.fillStyle = colors.muted;
   const dates = [...new Set(events.map((e) => day.format(new Date(e.at))))];
   c.fillText(
-    (dates.length ? dates[0] + ' · ' : '') + events.length + ' 段经历',
+    (dateLabel ? dateLabel + ' · ' : dates.length ? dates[0] + ' · ' : '') + events.length + ' 段经历',
     pad,
     163,
   );

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>黔山同行 · 评审工具</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./review.css">
+</head>
+<body>
+  <main class="app">
+    <div class="stack">
+      <h1>黔山同行评审工具</h1>
+      <section class="paper">
+        <h2>从新手账开始</h2>
+        <p>在本浏览器使用评审用号码 <strong>10000000001</strong> 或 <strong>10000000002</strong>，验证码均为 <strong>410625</strong>。</p>
+        <p class="note">想重走首次流程时，可开无痕窗口。已有测试记录保留在原窗口。</p>
+        <a class="button primary" href="./index.html">打开高保真原型</a>
+      </section>
+      <section class="paper">
+        <h2>体验核验</h2>
+        <p>打开点位链接会带入对应评审凭证。点击确认后才记录到访。</p>
+        <div id="proof-links" class="two"></div>
+        <p>活动用店员凭证 <strong>HXX-CRAFT-REVIEW</strong>。</p>
+      </section>
+      <form class="paper" id="fault">
+        <h2>复查失败与恢复</h2>
+        <p>选择后在当前标签页进入原型。设置仅用于下次执行所选操作。</p>
+        <label class="field">操作<select name="action">
+          <option value="sendCode">请求评审验证码</option><option value="initialize">初始化</option>
+          <option value="gift">领取见面礼</option><option value="visit">核验点位</option>
+          <option value="activity">核验活动</option><option value="draw">抽取</option>
+          <option value="saveLook">保存搭配</option><option value="renderPrint">合成纪念图</option><option value="saveWork">保存作品</option>
+        </select></label>
+        <label class="field">结果<select name="fault"><option value="reject">请求失败，保持原状态</option>
+          <option value="unknown">已提交但响应丢失，需要查询</option>
+        </select></label>
+        <p id="fault-note" role="status" hidden></p>
+        <button class="button primary" type="submit">设置一次并进入原型</button>
+      </form>
+    </div>
+  </main>
+  <script type="module" src="./desk.mjs"></script>
+</body>
+</html>
