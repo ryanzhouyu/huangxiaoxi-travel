@@ -377,7 +377,7 @@ progress::-moz-progress-bar { background: var(--moss); border-radius: 6px; }
 .prize-look { height: 225px; }
 .prize-look.expression { overflow: hidden; }
 .prize-look.expression img { height: 630px; max-width: none; }
-.pose-option { display: grid; }
+.pose-option .artifact-art, .pose-option .artifact-art img { height: 112px; }
 
 /* 手账、照相馆及作品 */
 .date-fields { min-width: 0; }

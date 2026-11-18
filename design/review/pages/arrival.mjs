@@ -53,7 +53,7 @@ export function partner({p, ui, nav}) {
     ? ['刚才走过的地方，我都记住啦。', '要换一身再出门吗？', '有空一起翻翻手账吧。']
     : ['桥上的灯亮了，陪我走走吧。', '你也看见那盏小灯啦。', '听说山里有家手作铺。'];
   const tools = [
-    ['bag', '衣橱', href('wardrobe', {from: '#partner'})],
+    ['closet', '衣橱', href('wardrobe', {from: '#partner'})],
     ['catalog', '图鉴', href('collection', {from: '#partner'})],
     ['pin', '打卡', href('checkin', {from: '#partner'})],
   ];

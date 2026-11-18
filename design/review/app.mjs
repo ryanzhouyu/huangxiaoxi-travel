@@ -418,8 +418,13 @@ const actions = {
   starter: value => {ui.starter = value; render();},
   initialize: () => send('initialize', {starterId: ui.starter}),
   greet: () => {ui.line++; ui.greet = true; render();},
-  openPoses: () => openSheet('黄晓西的姿势', catalog.assets.filter(item => item.slot === 'pose' && progress.owned.includes(item.id)).map(item =>
-    link(artifact(item), href('wardrobe', {item: item.id, from: route.here}), 'artifact pose-option')).join('')),
+  openPoses: () => {
+    const poses = catalog.assets.filter(item => item.slot === 'pose' && progress.owned.includes(item.id));
+    openSheet('黄晓西的姿势', '<div class="artifact-grid">' + poses.map(item =>
+      link(`<span class="artifact-art" aria-hidden="true">${stageFigure({...progress.look, pose: item.id})}</span><strong>${h(item.name)}</strong>`,
+        href('wardrobe', {item: item.id, from: route.here}), 'artifact pose-option')
+    ).join('') + '</div>');
+  },
   logoutAsk: () => openSheet('退出这本手账？', note('已保存的内容仍可在同一评审身份中找到。未保存的编辑会留在当前标签页。') +
     button('确认退出', 'logout') + button('继续使用', 'close', {classes: 'button secondary'})),
   logout: () => {

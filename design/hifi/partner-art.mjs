@@ -34,11 +34,14 @@ export function partnerIcon(name) {
       <path d="M32 9c-11 0-18 8-18 17 0 10 12 23 18 28 6-5 18-18 18-28 0-9-7-17-18-17Z" fill="url(#${id}-green)"/>
       <circle cx="32" cy="26" r="9" fill="#fff0ca"/><circle cx="32" cy="26" r="5" fill="#b5ba91"/>`,
     gesture: `
-      <circle cx="31" cy="14" r="7" fill="url(#${id}-gold)" stroke="#99764c" stroke-width="1.6"/>
-      <path d="M29 25c-5 1-9 5-13 6l-7-4-3 6 11 6 10-5-1 9-8 11 6 4 10-14 6 14 7-3-8-17 1-12 4-5 7 1 2-6-11-4-8 12Z"
-        fill="url(#${id}-green)" stroke="#586949" stroke-width="1.7"/>
-      <path d="m51 9 4-3m2 11 5-1M10 22l-4-3" stroke="#a87d48" stroke-width="2"/>
-      <path d="m31 30-1 7" stroke="#dde0b6" stroke-width="2"/>`,
+      <path d="M23 40h17l-1 16c0 2-2 3-4 3h-2l-1-13-2 13h-3c-2 0-4-1-4-3Z"
+        fill="#677458" stroke="#536045" stroke-width="1.8"/>
+      <path d="M24 25h12l6-4 2-9 7 2-1 10c0 5-5 9-11 12v8H23v-9l-4 8c-2 3-8 1-7-3l4-10c1-3 4-5 8-5Z"
+        fill="url(#${id}-green)" stroke="#536045" stroke-width="1.8"/>
+      <circle cx="31" cy="14" r="8" fill="url(#${id}-gold)" stroke="#927045" stroke-width="1.8"/>
+      <path d="m44 15-2-5a2 2 0 0 1 3-2l2 2 1-5a2 2 0 0 1 4 1l-1 8Z"
+        fill="#edcc92" stroke="#927045" stroke-width="1.5"/>
+      <path d="M27 26q4 5 8 0" stroke="#e4ddac" stroke-width="2"/>`,
     flower: `
       <path d="M31 56c-2-14 0-27 7-37M30 49C12 51 6 39 8 34c12-1 20 4 22 15Zm5-8c17 1 22-11 20-17-12 0-19 6-20 17Z" fill="url(#${id}-green)" stroke="#69805b"/>
       <g fill="url(#${id}-paper)" stroke="#bfa16a" stroke-width="1"><ellipse cx="29" cy="21" rx="8" ry="15"/><ellipse cx="29" cy="21" rx="8" ry="15" transform="rotate(60 29 21)"/><ellipse cx="29" cy="21" rx="8" ry="15" transform="rotate(120 29 21)"/></g>
@@ -63,6 +66,15 @@ export function partnerIcon(name) {
       <path d="m14 32 7 10h22l7-10v20H14Z" fill="url(#${id}-green)"/>
       <path d="M26 5h12v19h10L32 41 16 24h10Z" fill="url(#${id}-green)" stroke="#61714e" stroke-width="1.2"/>
       <path d="M29 9v17h-5" stroke="#dce0be" stroke-width="2" fill="none"/>`,
+    closet: `
+      <path d="M16 54v5m32-5v5" stroke="#795437" stroke-width="4"/>
+      <rect x="11" y="10" width="42" height="45" rx="2" fill="url(#${id}-gold)" stroke="#795437" stroke-width="2"/>
+      <rect x="15" y="15" width="34" height="32" rx="1" fill="#74513b"/>
+      <path d="M28 23a4 4 0 0 1 8 0c0 2-4 2-4 5m0 0-11 7h22Z" stroke="#fae6b8" stroke-width="2.5"/>
+      <path d="m28 33 4 3 4-3 7 5-4 5-3-2 1 6H27l1-6-3 2-4-5Z" fill="url(#${id}-green)" stroke="#d0cea0" stroke-width="1.3"/>
+      <path d="M12 15 4 21v33l8-8Zm40 0 8 6v33l-8-8Z" fill="url(#${id}-gold)" stroke="#795437" stroke-width="2"/>
+      <path d="M8 32v6m48-6v6M29 51h6" stroke="#795437" stroke-width="2.4"/>
+      <rect x="8" y="6" width="48" height="6" rx="2" fill="url(#${id}-gold)" stroke="#795437" stroke-width="1.8"/>`,
     wardrobe: `
       <path d="M29 13c0-6 8-7 9-2 1 4-6 5-6 8" fill="none" stroke="url(#${id}-gold)" stroke-width="3" stroke-linecap="round"/>
       <path d="m32 18 23 12H9Z" fill="#e9c889" stroke="#997343" stroke-width="1.5" stroke-linejoin="round"/>

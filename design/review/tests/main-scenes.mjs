@@ -114,6 +114,11 @@ try {
         assert.ok(rail.every(item => item.x + item.width < actorBox.x + actorBox.width / 2));
         assert.ok(rail.slice(1).every((item,index) => item.y >= rail[index].y + rail[index].height));
         assert.ok(rail.at(-1).y + rail.at(-1).height < speechBox.y);
+        const art = await controls.evaluateAll(elements => elements.map(element => {
+          const gradientId = element.querySelector('svg defs linearGradient')?.id;
+          return [element.textContent.trim(), gradientId?.match(/^painted-([a-z]+)-/)?.[1]];
+        }));
+        assert.deepEqual(art,[['衣橱','closet'],['图鉴','catalog'],['打卡','pin'],['动作','gesture']]);
         const gift = await page.locator('.partner-play .gift-shortcut').boundingBox();
         assert.ok(gift.x >= actorBox.x + actorBox.width / 2);
         assert.ok(gift.y + gift.height < speechBox.y);
@@ -175,11 +180,23 @@ try {
   assert.notEqual(await still.getAttribute('src'),stillSource);
   assert.equal(await alternate.evaluate(key => localStorage.getItem(key),progressKey),persisted);
   await capture(alternate,'partner-wave');
+  await alternate.getByRole('button',{name:'动作',exact:true}).click();
+  const poses = alternate.getByRole('dialog',{name:'黄晓西的姿势'});
+  const standing = poses.getByRole('link',{name:'轻松站立',exact:true});
+  const waving = poses.getByRole('link',{name:'挥手问候',exact:true});
+  assert.equal(await standing.locator('img').getAttribute('src'),stillSource);
+  assert.equal(await waving.locator('img').getAttribute('src'),await still.getAttribute('src'));
+  await capture(alternate,'partner-poses');
+  await waving.click();
+  await alternate.locator('#app[data-page=wardrobe] .hangers[data-slot=pose]').waitFor();
+  assert.equal(await alternate.locator('.hanger[data-value=wave]').getAttribute('aria-pressed'),'true');
+  assert.equal(await alternate.evaluate(key => localStorage.getItem(key),progressKey),persisted);
+  await capture(alternate,'wardrobe-wave');
   await alternate.close();
 
   assert.deepEqual(errors,[]);
   await writeFile(out + '/review.json', JSON.stringify({
-    chrome:browser.version(), results, shots, homepage:'八个入口、左列道具、右侧见面礼、对白焦点和招手状态', errors,
+    chrome:browser.version(), results, shots, homepage:'左列图文对应、八个入口、站立及挥手预览、带姿势进衣橱试穿', errors,
   },null,2) + '\n');
   console.log('三页共用导航，' + results.length + ' 组视口，' + shots.length + ' 张截图，资源与页面错误 0。');
 } finally {
