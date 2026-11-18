@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>伙伴首页 · 构图对照</title>
+  <style>
+    * { box-sizing: border-box }
+    body { margin: 0; background: #ede5d7; color: #3c2d25; font: 15px/1.65 "Microsoft YaHei","PingFang SC",sans-serif }
+    main { width: min(100%, 940px); padding: 26px 16px 38px; margin: auto }
+    h1,h2 { margin: 0 0 10px; font-family: KaiTi,"Kaiti SC",SimSun,serif; line-height: 1.18 }
+    h1 { font-size: clamp(28px, 6vw, 39px) }
+    h2 { font-size: 24px }
+    p { margin: 0 0 12px }
+    header { border-bottom: 1px solid #bea98e; padding-bottom: 14px }
+    nav { display: flex; flex-wrap: wrap; gap: 6px 15px }
+    a { color: #713e35; text-underline-offset: 4px }
+    section { margin-top: 26px }
+    .comparison { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 13px; align-items: start }
+    figure { margin: 0; padding: 7px; background: #f9f0df; border: 1px solid #ccba9e }
+    figcaption { padding: 3px 4px 7px }
+    img { width: 100%; height: auto; display: block; background: #44362b }
+    @media(max-width:425px) { main { padding-inline: 12px } figure { padding: 4px } .comparison { gap: 7px } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>伙伴首页 · 构图对照</h1>
+    <p>同一身装扮、同一条到访记录和同一视口，对照人物舞台、对白与道具区。</p>
+    <nav aria-label="复验入口">
+      <a href="../../../design/review/index.html#partner">打开新首页</a>
+      <a href="review.json">实屏验收记录</a>
+      <a href="#references">竞品依据</a>
+    </nav>
+  </header>
+  <section>
+    <h2>首页前后对照 · 390×844</h2>
+    <div class="comparison">
+      <figure><figcaption>上一版 · 道具分布在人物两侧</figcaption><img src="before.webp" width="390" height="844" alt="上一版四张独立道具在左侧，见面礼在人物右侧，纸质对白横跨底部"></figure>
+      <figure><figcaption>新版 · 全身舞台与下方道具托架</figcaption><img src="after.webp" width="390" height="844" alt="新版抬头集中身份、景区和票券，道具全部在人物下方的暖纸托架"></figure>
+    </div>
+  </section>
+  <section>
+    <h2>从衣橱和手账复用的做法</h2>
+    <div class="comparison">
+      <figure><figcaption>衣橱 · 全身舞台和横排操作区</figcaption><img src="../../wardrobe-memory-integration/2026-11-18/wardrobe.webp" width="360" height="640" alt="确认衣橱的工坊舞台、居中人物和横向操作台"></figure>
+      <figure><figcaption>回忆 · 纸面过渡到木纹托架</figcaption><img src="../../wardrobe-memory-integration/2026-11-18/memory-tail.webp" width="360" height="640" alt="确认手账的书尾连续接到木纹托架"></figure>
+    </div>
+  </section>
+  <section>
+    <h2>小屏与换装后的真实状态</h2>
+    <div class="comparison">
+      <figure><figcaption>首次进入 · 360×640，模拟底部安全区</figcaption><img src="small.webp" width="360" height="640" alt="小屏首次进入状态，人物脚底可见，四项道具和导航完整"></figure>
+      <figure><figcaption>见面礼已领 · 变更背景并挥手</figcaption><img src="wave.webp" width="390" height="844" alt="实测换装后的招手，礼物入口消失，裙摆和帽饰在画面内"></figure>
+    </div>
+  </section>
+  <section id="references">
+    <h2>官方参考</h2>
+    <nav aria-label="竞品原始画面">
+      <a href="https://www.sixwingstudios.com/amaru-press-kit">Amaru 角色与底座</a>
+      <a href="https://help.finchcare.com/hc/en-us/articles/37780000231309-Exploring-the-Finch-Home-Page">Finch 首页互动</a>
+      <a href="https://www.pokemonsleep.net/wp/wp-content/uploads/2023/06/oneday_noon-1-2-4.png">Pokémon Sleep 营地画面</a>
+      <a href="https://outfit7.com/blog/stories/taking-virtual-pet-gameplay-to-new-heights-with-my-talking-hank-islands">Hank 树屋与岛屿</a>
+    </nav>
+  </section>
+</main>
+</body>
+</html>

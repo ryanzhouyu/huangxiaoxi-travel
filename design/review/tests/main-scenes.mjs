@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {mkdir, writeFile} from 'node:fs/promises';
-import {POINTS} from '../../data.mjs';
-import {account, checkin, initialize, initialDB} from '../../store.mjs';
+import {POINTS, lookFor} from '../../data.mjs';
+import {account, checkin, draw, gift, initialize, initialDB, saveLook} from '../../store.mjs';
 import {progressKey} from '../review-service.mjs';
 
 const {chromium} = createRequire(import.meta.url)(process.env.HXX_PLAYWRIGHT || 'playwright');
@@ -15,7 +15,7 @@ const results = [];
 const errors = [];
 const shots = [];
 
-function fixture(visited) {
+function fixture(visited, alternate) {
   const db = initialDB();
   db.current = 'test-main-scenes';
   const member = db.accounts[db.current] = account('导航复验');
@@ -24,16 +24,23 @@ function fixture(visited) {
     const gate = POINTS.find(point => point.id === 'gate');
     checkin(member, {pointId:gate.id, code:gate.code, now:'2026-11-18T02:03:00Z', requestId:'gate-first'});
   }
+  if (alternate) {
+    gift(member);
+    const obtained = ['background','wave'].map(part =>
+      draw(member,{poolId:'cloud',requestId:'fixture-' + part,random:() => .999,now:'2026-11-18T02:08:00Z'}).assetId);
+    assert.deepEqual(obtained,['mountain-bg','wave']);
+    saveLook(member, {...lookFor('gift'), background:obtained[0]});
+  }
   return db;
 }
 
-async function sample(width, height, {visited = true, safe = 0} = {}) {
+async function sample(width, height, {visited = true, safe = 0, alternate = false} = {}) {
   const page = await browser.newPage({viewport:{width,height}, timezoneId:'Asia/Shanghai', reducedMotion:'reduce'});
   page.on('pageerror',error => errors.push(error.message));
   page.on('response',response => {
     if (response.status() >= 400) errors.push(response.status() + ' ' + response.url());
   });
-  await page.addInitScript(({key, db}) => localStorage.setItem(key, JSON.stringify(db)), {key:progressKey, db:fixture(visited)});
+  await page.addInitScript(({key, db}) => localStorage.setItem(key, JSON.stringify(db)), {key:progressKey, db:fixture(visited, alternate)});
   await page.goto(base + '#partner');
   await page.locator('#app[data-page=partner] .main-nav').waitFor();
   if (safe) await page.evaluate(safe => document.documentElement.style.setProperty('--safe', safe + 'px'), safe);
@@ -96,7 +103,13 @@ try {
         const actor = page.locator('.companion-doll img');
         const [actorBox, speechBox] = await Promise.all([actor.boundingBox(), dialogue.boundingBox()]);
         assert.ok(actorBox.y + actorBox.height <= speechBox.y);
-        const gear = page.locator('.partner-head a, .satchel :is(a, button), .gift-shortcut');
+        assert.equal(await page.locator('.partner-play :is(a,button)').count(),1);
+        const tray = page.locator('.satchel :is(a,button)');
+        const trayRow = await tray.evaluateAll(buttons => buttons.map(control => control.getBoundingClientRect().y));
+        assert.equal(trayRow.length,4);
+        assert.equal(new Set(trayRow).size,1);
+        assert.ok(trayRow[0] >= speechBox.y + speechBox.height);
+        const gear = page.locator('.partner-head a, .satchel :is(a,button)');
         assert.equal(await gear.count(),8);
         for (const control of await gear.all()) {
           const {width,height} = await control.boundingBox();
@@ -125,6 +138,7 @@ try {
   await first.getByText('你也看见那盏小灯啦。').waitFor();
   await first.getByRole('button',{name:/你也看见那盏小灯啦。/}).click();
   await first.getByText('听说山里有家手作铺。').waitFor();
+  assert.equal(await first.evaluate(() => document.activeElement.dataset.value),'speech');
   for (const [name,target] of [
     [/黄晓西.*旅行伙伴/,'account'],[/0 次/,'wallet'],[/黔山漫游/,'scene'],
     ['衣橱','wardrobe'],['图鉴','collection'],['打卡','checkin'],['初见礼','gift'],
@@ -141,9 +155,23 @@ try {
   assert.equal(await first.getByRole('dialog').count(),0);
   await first.close();
 
+  const alternate = await sample(390,844,{alternate:true});
+  assert.equal(await alternate.getByRole('link',{name:'初见礼'}).count(),0);
+  assert.match(await alternate.locator('.partner-scene .world-art').getAttribute('style'),/map\.png/);
+  const still = alternate.locator('.companion-doll img');
+  const stillSource = await still.getAttribute('src');
+  const persisted = await alternate.evaluate(key => localStorage.getItem(key),progressKey);
+  await capture(alternate,'partner-gift-claimed');
+  await alternate.getByRole('button',{name:'和黄晓西打招呼'}).click();
+  await alternate.getByText('要换一身再出门吗？').waitFor();
+  assert.notEqual(await still.getAttribute('src'),stillSource);
+  assert.equal(await alternate.evaluate(key => localStorage.getItem(key),progressKey),persisted);
+  await capture(alternate,'partner-wave');
+  await alternate.close();
+
   assert.deepEqual(errors,[]);
   await writeFile(out + '/review.json', JSON.stringify({
-    chrome:browser.version(), results, shots, homepage:'八个入口及人物、对白回归', errors,
+    chrome:browser.version(), results, shots, homepage:'八个入口、单排道具、对白焦点、已领见面礼与可用的招手姿势', errors,
   },null,2) + '\n');
   console.log('三页共用导航，' + results.length + ' 组视口，' + shots.length + ' 张截图，资源与页面错误 0。');
 } finally {

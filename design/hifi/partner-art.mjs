@@ -33,6 +33,12 @@ export function partnerIcon(name) {
       <path d="M32 4C18 4 9 14 9 26c0 15 23 34 23 34s23-19 23-34C55 14 46 4 32 4Z" fill="url(#${id}-gold)" stroke="#9d7849" stroke-width="1.4"/>
       <path d="M32 9c-11 0-18 8-18 17 0 10 12 23 18 28 6-5 18-18 18-28 0-9-7-17-18-17Z" fill="url(#${id}-green)"/>
       <circle cx="32" cy="26" r="9" fill="#fff0ca"/><circle cx="32" cy="26" r="5" fill="#b5ba91"/>`,
+    gesture: `
+      <circle cx="31" cy="14" r="7" fill="url(#${id}-gold)" stroke="#99764c" stroke-width="1.6"/>
+      <path d="M29 25c-5 1-9 5-13 6l-7-4-3 6 11 6 10-5-1 9-8 11 6 4 10-14 6 14 7-3-8-17 1-12 4-5 7 1 2-6-11-4-8 12Z"
+        fill="url(#${id}-green)" stroke="#586949" stroke-width="1.7"/>
+      <path d="m51 9 4-3m2 11 5-1M10 22l-4-3" stroke="#a87d48" stroke-width="2"/>
+      <path d="m31 30-1 7" stroke="#dde0b6" stroke-width="2"/>`,
     flower: `
       <path d="M31 56c-2-14 0-27 7-37M30 49C12 51 6 39 8 34c12-1 20 4 22 15Zm5-8c17 1 22-11 20-17-12 0-19 6-20 17Z" fill="url(#${id}-green)" stroke="#69805b"/>
       <g fill="url(#${id}-paper)" stroke="#bfa16a" stroke-width="1"><ellipse cx="29" cy="21" rx="8" ry="15"/><ellipse cx="29" cy="21" rx="8" ry="15" transform="rotate(60 29 21)"/><ellipse cx="29" cy="21" rx="8" ry="15" transform="rotate(120 29 21)"/></g>
