@@ -103,13 +103,21 @@ try {
         const actor = page.locator('.companion-doll img');
         const [actorBox, speechBox] = await Promise.all([actor.boundingBox(), dialogue.boundingBox()]);
         assert.ok(actorBox.y + actorBox.height <= speechBox.y);
-        assert.equal(await page.locator('.partner-play :is(a,button)').count(),1);
-        const tray = page.locator('.satchel :is(a,button)');
-        const trayRow = await tray.evaluateAll(buttons => buttons.map(control => control.getBoundingClientRect().y));
-        assert.equal(trayRow.length,4);
-        assert.equal(new Set(trayRow).size,1);
-        assert.ok(trayRow[0] >= speechBox.y + speechBox.height);
-        const gear = page.locator('.partner-head a, .satchel :is(a,button)');
+        const controls = page.locator('.partner-play .satchel .tool');
+        const rail = await controls.evaluateAll(elements => elements.map(element => {
+          const {x,y,width,height} = element.getBoundingClientRect();
+          return {x,y,width,height};
+        }));
+        assert.equal(rail.length,4);
+        assert.equal(new Set(rail.map(item => item.x)).size,1);
+        assert.equal(new Set(rail.map(item => item.width)).size,1);
+        assert.ok(rail.every(item => item.x + item.width < actorBox.x + actorBox.width / 2));
+        assert.ok(rail.slice(1).every((item,index) => item.y >= rail[index].y + rail[index].height));
+        assert.ok(rail.at(-1).y + rail.at(-1).height < speechBox.y);
+        const gift = await page.locator('.partner-play .gift-shortcut').boundingBox();
+        assert.ok(gift.x >= actorBox.x + actorBox.width / 2);
+        assert.ok(gift.y + gift.height < speechBox.y);
+        const gear = page.locator('.partner-head a, .satchel .tool, .gift-shortcut');
         assert.equal(await gear.count(),8);
         for (const control of await gear.all()) {
           const {width,height} = await control.boundingBox();
@@ -171,7 +179,7 @@ try {
 
   assert.deepEqual(errors,[]);
   await writeFile(out + '/review.json', JSON.stringify({
-    chrome:browser.version(), results, shots, homepage:'八个入口、单排道具、对白焦点、已领见面礼与可用的招手姿势', errors,
+    chrome:browser.version(), results, shots, homepage:'八个入口、左列道具、右侧见面礼、对白焦点和招手状态', errors,
   },null,2) + '\n');
   console.log('三页共用导航，' + results.length + ' 组视口，' + shots.length + ' 张截图，资源与页面错误 0。');
 } finally {

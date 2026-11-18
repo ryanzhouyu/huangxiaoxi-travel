@@ -1,0 +1,90 @@
+{
+  "chrome": "157.0.8103.79",
+  "results": [
+    {
+      "width": 360,
+      "height": 640,
+      "safe": 0,
+      "routes": [
+        "partner",
+        "explore",
+        "memories"
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "safe": 0,
+      "routes": [
+        "partner",
+        "explore",
+        "memories"
+      ]
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "safe": 0,
+      "routes": [
+        "partner",
+        "explore",
+        "memories"
+      ]
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "safe": 0,
+      "routes": [
+        "partner",
+        "explore",
+        "memories"
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "safe": 0,
+      "routes": [
+        "partner",
+        "explore",
+        "memories"
+      ]
+    },
+    {
+      "width": 360,
+      "height": 640,
+      "safe": 30,
+      "routes": [
+        "partner",
+        "explore",
+        "memories"
+      ]
+    }
+  ],
+  "shots": [
+    "360x640-partner.png",
+    "360x640-explore.png",
+    "360x640-memories.png",
+    "390x844-partner.png",
+    "390x844-explore.png",
+    "390x844-memories.png",
+    "430x932-partner.png",
+    "430x932-explore.png",
+    "430x932-memories.png",
+    "1280x720-partner.png",
+    "1280x720-explore.png",
+    "1280x720-memories.png",
+    "1440x1000-partner.png",
+    "1440x1000-explore.png",
+    "1440x1000-memories.png",
+    "360x640-partner-safe.png",
+    "360x640-explore-safe.png",
+    "360x640-memories-safe.png",
+    "360x640-partner-first-visit-safe.png",
+    "390x844-partner-gift-claimed.png",
+    "390x844-partner-wave.png"
+  ],
+  "homepage": "八个入口、左列道具、右侧见面礼、对白焦点和招手状态",
+  "errors": []
+}
