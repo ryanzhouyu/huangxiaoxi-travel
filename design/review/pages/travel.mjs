@@ -1,5 +1,5 @@
 import {catalog} from '../review-service.mjs';
-import {pointRewardClaimed as claimed, pointVisited as seen} from './scene-guide.mjs';
+import {pointRewardClaimed as claimed} from './scene-guide.mjs?v=atlas-hierarchy';
 import {h, href, link, button, bar, section, header, icon, world, imageOf, stageFigure, artifact, note, status, empty, footer} from '../ui.mjs';
 
 const points = catalog.points;
@@ -12,19 +12,6 @@ const poolUrl = (pool, from) => href('pool', {id: pool.id, from});
 
 function placeRow(point, p, from) {
   return link(`${imageOf(point.id)}<span><strong>${point.name}</strong><small>${point.kind} · ${pointStatus(p, point)}</small></span><span aria-hidden="true">›</span>`, pointUrl(point, from), 'row place-row');
-}
-
-export function explore({p, nav}) {
-  return `<section class="destination root-world scene">
-    ${world('map')}
-    <div class="destination-body">
-      <header class="destination-head"><span>黄晓西 · 黔山同行</span><h1>发现贵州</h1></header>
-      ${section(`<div class="destination-kicker">贵州 · 评审景区</div>${header('黔山漫游', '从山门出发，去花溪边停一停。')}
-      ${p.events.length ? '<p class="stamp">' + points.filter(point => seen(p, point)).length + ' 处地点已留足迹</p>' : ''}
-      ${link('打开游玩地图', href('scene', {from: '#explore'}), 'button primary')}`, 'destination-card')}
-    </div>
-    ${nav}
-  </section>`;
 }
 
 export function gift({p, ui, back, here}) {

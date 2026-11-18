@@ -1,10 +1,11 @@
 import {prepareArtwork} from '../demo/renderer.mjs';
 import {composeImage, paintDraft} from '../demo/postcard.mjs';
 import {catalog, progressKey, reviewService as service} from './review-service.mjs';
-import {isEntry, isRoute, ownsWardrobeContext, routeInfo} from './routes.mjs?v=scene-guide-20261119';
+import {isEntry, isRoute, ownsWardrobeContext, routeInfo} from './routes.mjs?v=atlas-hierarchy';
 import {defaultFilter, readEditors, readTab, writeTab, makeCompose} from './drafts.mjs';
 import {filterEvents, eventContent, journalFilter, journalWork} from './pages/memory.mjs';
-import {bindGuide, guideMapHref, guidePlaces} from './pages/scene-guide.mjs';
+import {bindGuide, guideMapHref, guidePlaces, guidePointFor} from './pages/scene-guide.mjs?v=atlas-hierarchy';
+import {bindAtlas} from './pages/explore-atlas.mjs';
 import {sourceContent} from './pages/style.mjs';
 import {wardrobeControls} from './pages/wardrobe.mjs';
 import {h, href, link, button, icon, artifact, empty, note, day, time, dateKey, stageFigure, sceneNav} from './ui.mjs';
@@ -17,6 +18,7 @@ const toast = document.querySelector('#toast');
 const ui = {
   phone: '', consent: false, challenge: readTab('challenge'), starter: 'start-a', line: 0, greet: false,
   filter: '全部', guideFocus: null, memoryTab: 'events', memory: {...defaultFilter}, wardrobe: null, compose: null,
+  atlas: {region: 'all', category: 'all'},
   preview: null, pending: null, proof: undefined, busy: false, error: '',
 };
 const scrollPositions = new Map();
@@ -31,6 +33,7 @@ let toastTimer;
 let returnFocus;
 let leaveIntent;
 let newComposeIntent;
+let unbindAtlas;
 let bounced = false;
 let accountEpoch = 0;
 
@@ -62,6 +65,7 @@ function draftsFor(next) {
   if (!next) return;
   ui.guideFocus = null;
   ui.filter = '全部';
+  ui.atlas = {region: 'all', category: 'all'};
   const drafts = readEditors(next);
   ui.wardrobe = drafts.wardrobe;
   ui.compose = drafts.compose;
@@ -139,10 +143,11 @@ function updateCooldown() {
   control.textContent = seconds ? `重新获取（${seconds} 秒）` : '重新获取';
 }
 
-function render({focus = false, restorePoint} = {}) {
+function render({focus = false, restorePoint, restoreChapter} = {}) {
   if (!ready) return;
   const active = activeControl();
   closet.beforeRender();
+  unbindAtlas?.();
   app.querySelector('#guide-point-dialog[open]')?.close();
   const previousReading = app.querySelector('.reading[data-journal-key]');
   if (previousReading) journalPositions.set(previousReading.dataset.journalKey, previousReading.scrollTop);
@@ -181,6 +186,7 @@ function render({focus = false, restorePoint} = {}) {
     }
   } else if (active) app.querySelector(active)?.focus({preventScroll: true});
   bindGuide(app, {dismiss: dismissGuidePoint, restorePoint});
+  unbindAtlas = bindAtlas(app, {selection: ui.atlas, navigate, restoreChapter});
 }
 
 function openSheet(title, html, material = 'paper', trigger = document.activeElement) {
@@ -212,10 +218,11 @@ function show(value, {replace = false, pop = false, index, focus = true} = {}) {
   const previousPoint = route.name === 'scene' && route.params.get('point');
   value = guard(value);
   const next = routeInfo(value);
-  const point = next.name === 'scene' && catalog.points.find(item => item.id === next.params.get('point'));
+  const point = next.name === 'scene' && guidePointFor(next.params);
   const map = point && guideMapHref(value);
   const guideParent = map && (previous === map || history.state?.guideParent === map && previous === value) ? map : undefined;
   const restorePoint = previousPoint && guideMapHref(previous) === value ? previousPoint : null;
+  const restoreChapter = next.name === 'explore' && route.name === 'scene' ? route.id : null;
   if (point) ui.guideFocus = point.id;
   if (previous !== value || pop) {
     scrollPositions.set(previous, scrollY);
@@ -237,7 +244,7 @@ function show(value, {replace = false, pop = false, index, focus = true} = {}) {
   if (route.name === 'memories' && route.params.get('view') === 'works') ui.memoryTab = 'works';
   if (route.name === 'entry' && previous === '#code' && !ui.challenge) ui.consent = false;
   const preselected = prepare(previous);
-  render({focus: focus && !restorePoint, restorePoint});
+  render({focus: focus && !restorePoint && !restoreChapter, restorePoint, restoreChapter});
   if (preselected) closet.reveal(preselected);
   window.scrollTo(0, scrollPositions.get(value) ?? 0);
 }

@@ -168,7 +168,71 @@ try {
   await act('memoryTab', 'events');
   await next('游玩');
   await screenshot('explore');
-  await next('打开游玩地图');
+  const chapterPins = page.locator('.chapter-pin');
+  assert.deepEqual(await chapterPins.locator('strong').allTextContents(), ['甲秀楼', '黄果树', '小七孔']);
+  await page.locator('#region-filter').click();
+  await page.getByRole('button', {name: '安顺市', exact: true}).click();
+  await page.getByRole('button', {name: '人文', exact: true}).click();
+  await page.getByText('这组条件下暂无景区', {exact: true}).last().waitFor();
+  await caption('查看全部景区');
+  await page.locator('#region-filter').click();
+  await page.getByRole('button', {name: '安顺市', exact: true}).click();
+  await page.getByRole('button', {name: '自然风光', exact: true}).click();
+  assert.equal(await page.locator('.chapter-pin:visible').count(), 1);
+  await chapterPins.filter({hasText:'黄果树'}).click();
+  await at('scene');
+  assert.equal(new URL(page.url()).hash, '#scene?id=huangguoshu');
+  assert.equal(await page.locator('.chapter-title h1').innerText(), '黄果树');
+  assert.deepEqual(await page.locator('.chapter-map .trail-name').allTextContents(), ['陡坡塘›','大瀑布›','天星桥›','手作铺›']);
+  assert.equal(await page.locator('#guide-collection-count').innerText(), '2/6 套');
+  await screenshot('huangguoshu-chapter');
+  await page.goBack();
+  await page.waitForFunction(() => document.activeElement.dataset.chapter === 'huangguoshu');
+  assert.equal(await page.locator('#region-label').innerText(), '安顺市');
+  assert.equal(await page.locator('[data-category="nature"]').getAttribute('aria-pressed'), 'true');
+  assert.equal(await page.locator('.chapter-pin:visible').count(),1);
+  await chapterPins.filter({hasText:'黄果树'}).click();
+  await at('scene');
+  const beforePreview = await account();
+  for (const [id, point, pool] of [['duopotang','陡坡塘','陡坡塘卡池'],['waterfall','大瀑布','大瀑布卡池'],['tianxing','天星桥','天星桥卡池'],['market','手作铺','大瀑布卡池']]) {
+    await guidePoint(id).click();
+    await guideDialog.getByRole('heading', {name:point, exact:true}).waitFor();
+    assert.equal(await guideDialog.locator('.point-pool h3').innerText(), pool);
+    assert.equal(await guideDialog.locator('.point-pool-status').innerText(), id === 'tianxing' ? '待解锁' : '已解锁');
+    assert.equal(await guideDialog.getByRole('link').count(), 0);
+    if (id === 'waterfall') await screenshot('huangguoshu-pool-preview');
+    await page.keyboard.press('Escape');
+    await guideDialog.waitFor({state:'hidden'});
+    await page.waitForFunction(pointId => document.activeElement.dataset.guidePoint === pointId,id);
+  }
+  await guidePoint('waterfall').click();
+  await guideDialog.waitFor();
+  await page.reload();
+  await guideDialog.getByRole('heading',{name:'大瀑布',exact:true}).waitFor();
+  await guideDialog.getByRole('button',{name:'关闭详情'}).click();
+  await guideDialog.waitFor({state:'hidden'});
+  assert.deepEqual(await account(), beforePreview);
+  await page.locator('.chapter-map .back-label').click();
+  await at('explore');
+  // 刷新会重置当前会话筛选，返回仍恢复景区焦点。
+  await page.waitForFunction(() => document.activeElement.dataset.chapter === 'huangguoshu');
+  await page.locator('#region-filter').click();
+  await page.keyboard.press('Escape');
+  assert.equal(await page.locator('#region-filter').getAttribute('aria-expanded'),'false');
+  for (const [id,name,points] of [['jiaxiu','甲秀楼',['浮玉桥','甲秀楼','翠微园']],['xiaoqikong','小七孔',['小七孔古桥','翠谷瀑布','卧龙潭']]]) {
+    await page.locator(`.chapter-pin[data-chapter="${id}"]`).click();
+    await page.locator('.chapter-heading h1').waitFor();
+    assert.equal(await page.locator('.chapter-heading h1').innerText(),name);
+    assert.deepEqual(await page.locator('.stage-node').evaluateAll(nodes => nodes.map(node => node.dataset.stage)),points);
+    await page.locator('.stage-node').first().click();
+    assert.equal(await page.locator('.stage-status').innerText(),`${points[0]} · 待到访`);
+    await page.locator('.return-map').click();
+    await page.waitForFunction(chapterId => document.activeElement.dataset.chapter === chapterId,id);
+  }
+  pass('发现贵州三景区、市州和类别筛选、独立章内点位及卡池详情');
+  await next('伙伴');
+  await page.getByRole('link', {name:/黔山漫游/}).click();
+  await at('scene');
   await screenshot('scene');
   assert.equal(await page.locator('#guide-collection-count').innerText(), '0/2 套');
   assert.equal(await page.locator('.chapter-map .reward-counts').innerText(), '表情 1 · 动作 1 · 背景 2');
@@ -518,10 +582,23 @@ try {
 
   for (const [width, height] of [[360, 640], [430, 932], [1440, 1000], [1280, 720]]) {
     await page.setViewportSize({width, height});
-    for (const [name, fields] of [['partner'], ['scene', {from: '#explore'}], ['pool', {id: 'cloud'}], ['wardrobe'], ['memories', {view: 'events'}], ['compose'], ['work', {id: print.id}]]) {
+    for (const [name, fields] of [['partner'], ['explore'], ['scene', {from: '#explore'}], ['pool', {id: 'cloud'}], ['wardrobe'], ['memories', {view: 'events'}], ['compose'], ['work', {id: print.id}]]) {
       await go(name, fields);
       if (name === 'memories') await act('memoryTab', 'events');
       await screenshot(name);
+      if (name === 'explore') {
+        assert.equal(await page.locator('.chapter-pin:visible').count(),3);
+        await page.locator('.pin-huangguoshu .chapter-sign').click();
+        await page.getByRole('heading',{name:'黄果树',exact:true}).waitFor();
+        await screenshot('huangguoshu-chapter');
+        await guidePoint('waterfall').click();
+        await guideDialog.waitFor();
+        const rect = await guideDialog.boundingBox();
+        assert.ok(Math.abs(rect.y + rect.height / 2 - height / 2) <= 1);
+        await screenshot('huangguoshu-pool-preview');
+        await page.keyboard.press('Escape');
+        await guideDialog.waitFor({state:'hidden'});
+      }
       if (name === 'wardrobe') {
         const save = page.locator('[data-action="saveLook"]');
         const rect = await save.boundingBox();
@@ -570,6 +647,17 @@ try {
     const mobile = await browser.newContext({viewport: {width, height}, hasTouch: true, isMobile: true, reducedMotion: 'reduce'});
     await mobile.addInitScript(({key, value}) => localStorage.setItem(key, value), {key: progressKey, value: storageValue});
     const screen = await mobile.newPage();
+    await screen.goto(base + '#explore');
+    await screen.locator('.pin-huangguoshu .chapter-sign').tap();
+    const guide = screen.getByRole('heading',{name:'黄果树',exact:true});
+    await guide.waitFor();
+    await screen.locator('[data-guide-point="waterfall"] .trail-name').tap();
+    const sampleDialog = screen.locator('#guide-point-dialog[open]');
+    await sampleDialog.getByRole('heading',{name:'大瀑布卡池',exact:true}).waitFor();
+    await sampleDialog.getByRole('button',{name:'关闭详情'}).tap();
+    await sampleDialog.waitFor({state:'hidden'});
+    await screen.locator('.chapter-map .back-label').tap();
+    await screen.waitForFunction(() => document.activeElement.dataset.chapter === 'huangguoshu');
     await screen.goto(base + href('scene', {from: '#explore'}));
     await screen.locator('.chapter-map').waitFor();
     await screen.evaluate(inset => document.documentElement.style.setProperty('--safe', inset + 'px'), safe);
