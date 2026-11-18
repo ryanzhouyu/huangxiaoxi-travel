@@ -1,6 +1,6 @@
 /* 旅行手账评审稿的纸页、装订和木托架。样式限制在手账及其详情。 */
 body:has(.memory-review)::before { background: linear-gradient(#321e1bc9,#30241fef), var(--night) center 60% / cover; }
-.app[data-page="memories"] { padding-bottom: 0; background: #78543c; }
+.app[data-page="memories"] { background: #78543c; }
 .memory-review, #sheet[data-material="journal"] {
   --ink:#482c25;
   --secondary:#634b3d;
@@ -9,7 +9,12 @@ body:has(.memory-review)::before { background: linear-gradient(#321e1bc9,#30241f
   color:var(--ink);
   font:16px/1.45 var(--body);
 }
-.memory-review { height:100dvh; display:grid; grid-template-rows:minmax(0,1fr) auto; }
+.memory-review {
+  --book-tail-height:clamp(72px,25vw,113px);
+  height:100dvh;
+  display:grid;
+  grid-template-rows:minmax(0,1fr) auto;
+}
 .app[data-page="memories"] .pending-note {position:absolute;z-index:5;inset:52px 12px auto;}
 
 .memory-review .reading {
@@ -165,7 +170,7 @@ body:has(.memory-review)::before { background: linear-gradient(#321e1bc9,#30241f
 }
 
 .memory-review .book-tail {
-  height:clamp(72px,25vw,113px);
+  height:var(--book-tail-height);
   background:url('./journal-art/book-tail.webp') center bottom/100% 100% no-repeat;
   mask-image:linear-gradient(transparent,#000 35%);
 }
@@ -290,13 +295,23 @@ body:has(.memory-review)::before { background: linear-gradient(#321e1bc9,#30241f
 }
 
 .memory-review .dock {
+  position:relative;
+  isolation:isolate;
   display:grid;
-  gap:3px;
-  padding:7px 15px max(5px,var(--safe));
-  background:linear-gradient(#563b2ab0,#2f1e18de),url('./journal-art/wood.webp') center bottom/cover;
+  padding-top:7px;
+  background:linear-gradient(180deg,#39251b51,#39251bc4 45px,#2f201af5),url('./journal-art/wood.webp') center/100% 100%;
   color:#f8e5c3;
-  border-top:1px solid #9e6e45;
-  box-shadow:0 -2px 5px #3d251a43;
+}
+/* 从书尾原图的木纹边缘向下接一段，再融入托架。 */
+.memory-review .dock::before {
+  content:"";
+  position:absolute;
+  inset:0 0 auto;
+  height:22px;
+  z-index:-1;
+  background:url('./journal-art/book-tail.webp') center bottom/100% var(--book-tail-height) no-repeat;
+  transform:scaleY(-1);
+  mask-image:linear-gradient(transparent,#000);
 }
 
 .memory-review .primary,
@@ -330,104 +345,9 @@ body:has(.memory-review)::before { background: linear-gradient(#321e1bc9,#30241f
 }
 
 .memory-review .dock .primary {
-  width:100%;
+  margin:0 var(--edge) 2px;
   min-height:44px;
   font-size:15px;
-}
-
-.memory-review .nav {
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:5px;
-}
-
-.memory-review .nav .tab {
-  min-height:44px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  font:700 16px/1 var(--heading);
-  padding:4px 3px;
-  color:#ffefd2;
-  border-bottom:2px solid transparent;
-}
-
-.memory-review .nav .tab[aria-current=page] {
-  background:#f3dbb4;
-  color:#553526;
-  border-radius:4px 8px 3px 3px;
-  border-bottom-color:#9c524a;
-}
-
-.memory-review .icon-art {
-  display:inline-flex;
-  flex:0 0 24px;
-  width:24px;
-  height:24px;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-}
-
-.memory-review .icon-art.partner img {
-  height:23px;
-  width:23px;
-  border:1px solid #af875e;
-  border-radius:50%;
-  object-fit:cover;
-}
-
-.memory-review .icon-art.map {
-  width:24px;
-}
-
-.memory-review .icon-art.map::before {
-  content:'';
-  display:block;
-  width:21px;
-  height:18px;
-  background:linear-gradient(90deg,#d7c494 0 31%,#8ca185 31% 64%,#eee0b7 64%);
-  clip-path:polygon(0 23%,32% 3%,66% 22%,100% 4%,100% 77%,66% 96%,32% 77%,0 95%);
-  outline:1px solid #77523d;
-}
-
-.memory-review .icon-art.map::after {
-  content:'';
-  position:absolute;
-  background:#a84f48;
-  border:1px solid #e5c08e;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  top:2px;
-  right:4px;
-}
-
-.memory-review .icon-art.journal-icon::before {
-  content:'';
-  width:17px;
-  height:20px;
-  display:block;
-  border:1px solid #aa8156;
-  border-left:4px double #cfb080;
-  border-radius:3px 5px 5px 2px;
-  background:#dfc697;
-  transform:rotate(-8deg);
-  box-shadow:1px 1px #885e40;
-}
-
-.memory-review .icon-art.journal-icon::after {
-  content:'';
-  width:8px;
-  height:6px;
-  border:1px solid #e7cc9a;
-  background:#78836a;
-  display:block;
-  position:absolute;
-  top:7px;
-  left:8px;
-  transform:rotate(-8deg);
 }
 
 .memory-review .blank {
@@ -726,8 +646,6 @@ body:has(.memory-review)::before { background: linear-gradient(#321e1bc9,#30241f
 .memory-review .stamp { letter-spacing:normal; }
 .memory-review .work img { min-height:0; }
 .memory-review .filter { max-width: 100%; }
-.memory-review .nav .tab { border:0; background:none; box-shadow:none; border-bottom:2px solid transparent; }
-.memory-review .nav .tab[aria-current="page"] { background:#f3dbb4; color:#553526; border-bottom-color:#9c524a; }
 #sheet[data-material="journal"] .sheet-head button:focus-visible { outline-offset:0; }
 #sheet[data-material="journal"] .sheet-head h2[tabindex="-1"]:focus { outline:none; }
 #sheet[data-material="journal"] .date-fields[hidden], #sheet[data-material="journal"] .error[hidden] { display:none; }

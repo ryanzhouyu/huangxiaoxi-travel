@@ -21,7 +21,7 @@ const shapes={
   arrow:'<path d="M3 12h18m-7-7 7 7-7 7"/>',
   download:'<path d="M12 2v14m-5-5 5 5 5-5M3 16v6h18v-6"/>',
 };
-const paintedNames = {partner:'companion',map:'map',book:'memories',bag:'wardrobe',camera:'camera',pin:'pin',ticket:'ticket',gift:'gift',check:'check',lock:'lock',phone:'phone',chat:'chat',shield:'shield',flower:'flower',shop:'shop',download:'download'};
+const paintedNames = {partner:'companion',map:'map',book:'memories',catalog:'catalog',bag:'wardrobe',camera:'camera',pin:'pin',ticket:'ticket',gift:'gift',check:'check',lock:'lock',phone:'phone',chat:'chat',shield:'shield',flower:'flower',shop:'shop',download:'download'};
 export const icon=(name,cls='')=>paintedNames[name]
   ? partnerIcon(paintedNames[name]).replace('class="partner-art"',`class="icon ui-art ${cls}"`)
   : `<svg class="icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${shapes[name]||shapes.arrow}</svg>`;

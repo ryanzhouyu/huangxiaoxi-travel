@@ -1,4 +1,4 @@
-import {h, href, link, button, bar, section, header, note, stageFigure, status, pressed, day, time, dateKey, footer, empty} from '../ui.mjs';
+import {h, href, link, button, bar, section, header, note, stageFigure, status, pressed, day, time, dateKey, footer, empty, portrait} from '../ui.mjs';
 import {catalog} from '../review-service.mjs';
 
 const sorted = events => [...events].sort((a, b) => a.at.localeCompare(b.at));
@@ -27,11 +27,6 @@ function memoryArt(event, detail = false) {
     return `<span class="stamp${hero}" aria-hidden="true"><b>到访</b></span>`;
   }
   return `<img class="photo${hero}" src="${photo(event.pointId)}" alt="${h(event.name)}景观插画">`;
-}
-
-function journalNav() {
-  return `<nav class="nav" aria-label="主场景">${[['partner','partner','伙伴'],['explore','map','游玩'],['memories','journal-icon','回忆']].map(([route, icon, label]) =>
-    `<a class="tab" href="#${route}"${route === 'memories' ? ' aria-current="page"' : ''}><span class="icon-art ${icon}" aria-hidden="true">${icon === 'partner' ? `<img src="${photo('companion')}" alt="">` : ''}</span>${label}</a>`).join('')}</nav>`;
 }
 
 export function journalFilter(filter) {
@@ -64,12 +59,12 @@ function byDay(events, labelFor = day) {
   return groups;
 }
 
-export function memories({p, ui, here}) {
+export function memories({p, ui, here, nav}) {
   const works = ui.memoryTab === 'works';
   const events = sorted(filterEvents(p.events, ui.memory)).reverse();
   let body;
   if (!p.events.length && (!works || !p.works.length)) {
-    body = `<section class="blank"><img class="partner-medal" src="${photo('companion')}" alt="黄晓西">
+    body = `<section class="blank">${portrait('partner-medal', '黄晓西')}
       <h2>第一枚足迹，等你来。</h2><p>到访后，晓西会把地点和时间一起留在手账里。</p>${link('去游玩','#explore','primary')}</section>`;
   } else if (works) {
     body = p.works.length ? `<div class="works-grid">${p.works.map(print => {
@@ -103,7 +98,7 @@ export function memories({p, ui, here}) {
     <header class="book-head"><div class="book-headline"><h1>旅行手账</h1><span class="place">黔山漫游</span></div>
       <div class="chapters" role="group" aria-label="手账章节">${tabs}${filter}</div></header>
     <div class="content">${body}</div><div class="book-tail" aria-hidden="true"></div>
-    </div></div><footer class="dock">${print}${journalNav()}</footer></div>`;
+    </div></div><footer class="dock">${print}${nav}</footer></div>`;
 }
 
 export function eventContent(event, here) {

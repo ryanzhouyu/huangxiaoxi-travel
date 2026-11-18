@@ -4,6 +4,8 @@
 
 ## 当前接手位置
 
+2026-11-18 根据用户反馈优先调整[伙伴首页](http://127.0.0.1:8782/design/review/index.html#partner)，三个主场景使用同一套导航。伙伴和游玩原画延伸到屏底，回忆在书尾接续原木纹。专项核对五档视口与底部安全区，端到端回归及 PNG 下载通过。下一步体验工作接景区导览、山门到访与结果。[计划与验收](docs/伙伴首页与主场景导航验收.md) · [前后画面对照](output/partner-navigation/2026-11-18/index.html)
+
 2026-11-18 [游客评审原型](http://127.0.0.1:8782/design/review/index.html)已接入 `9391a63` 确认衣橱及评审过的装订手账。功能回归 25 项，照相馆往返后实际导出长图和单页 PNG，旧作品保持原值。五档桌面浏览器模拟视口核对通过。[接入计划和详细结果](docs/衣橱与回忆接入计划.md) · [确认稿对照与实际 PNG](output/wardrobe-memory-integration/2026-11-18/index.html)。
 
 2026-11-18 用户认可下方选衣版的整体观感，并要求优化拥挤及缩略图辨识。[大图选衣候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=detail)在同一舞台上放大常驻缩略图，增加查看大图与同类翻阅。实际更换仍停留在试穿，关闭恢复横滑位置。[本轮实屏对照](output/wardrobe-detail-review/2026-11-18/index.html)。

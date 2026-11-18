@@ -29,3 +29,22 @@ export const mask = number => number ? number.slice(0, 3) + ' **** ' + number.sl
 export const footer = content => `<footer class="actions">${content}</footer>`;
 export const empty = (iconName, title, body, action = '') => section(`<div class="empty">${icon(iconName)}<h2>${title}</h2><p>${body}</p>${action}</div>`);
 export const tabs = options => `<div class="tabs" role="group" aria-label="切换视图">${options.join('')}</div>`;
+
+const companionPortrait = new URL('./journal-art/companion.webp', import.meta.url).href;
+export const portrait = (classes = 'portrait', alt = '') => `<img class="${classes}" src="${companionPortrait}" alt="${h(alt)}">`;
+
+const mainScenes = [
+  ['partner', 'companion', '伙伴'],
+  ['explore', 'map', '游玩'],
+  ['memories', 'journal', '回忆'],
+];
+
+export function sceneNav(current) {
+  if (!mainScenes.some(([name]) => name === current)) return '';
+  const items = mainScenes.map(([name, symbol, label]) =>
+    `<a class="nav-tab" href="${href(name)}"${name === current ? ' aria-current="page"' : ''}>
+      <span class="nav-art nav-art-${symbol}" aria-hidden="true">${name === 'partner' ? portrait() : ''}</span>
+      <span>${label}</span>
+    </a>`);
+  return `<nav class="main-nav" aria-label="主场景">${items.join('')}</nav>`;
+}

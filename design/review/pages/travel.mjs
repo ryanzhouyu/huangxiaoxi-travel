@@ -16,13 +16,16 @@ function placeRow(point, p, from) {
   return link(`${imageOf(point.id)}<span><strong>${point.name}</strong><small>${point.kind} · ${pointStatus(p, point)}</small></span><span aria-hidden="true">›</span>`, pointUrl(point, from), 'row place-row');
 }
 
-export function explore({p}) {
-  return `<section class="destination scene">
+export function explore({p, nav}) {
+  return `<section class="destination root-world scene">
     ${world('map')}
-    <header class="destination-head"><span>黄晓西 · 黔山同行</span><h1>发现贵州</h1></header>
-    ${section(`<div class="destination-kicker">贵州 · 评审景区</div>${header('黔山漫游', '从山门出发，去花溪边停一停。')}
-    ${p.events.length ? '<p class="stamp">' + points.filter(point => seen(p, point)).length + ' 处地点已留足迹</p>' : ''}
-    ${link('打开游玩地图', href('scene', {from: '#explore'}), 'button primary')}`, 'destination-card')}
+    <div class="destination-body">
+      <header class="destination-head"><span>黄晓西 · 黔山同行</span><h1>发现贵州</h1></header>
+      ${section(`<div class="destination-kicker">贵州 · 评审景区</div>${header('黔山漫游', '从山门出发，去花溪边停一停。')}
+      ${p.events.length ? '<p class="stamp">' + points.filter(point => seen(p, point)).length + ' 处地点已留足迹</p>' : ''}
+      ${link('打开游玩地图', href('scene', {from: '#explore'}), 'button primary')}`, 'destination-card')}
+    </div>
+    ${nav}
   </section>`;
 }
 

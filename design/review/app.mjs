@@ -7,7 +7,7 @@ import {filterEvents, eventContent, journalFilter, journalWork} from './pages/me
 import {placesContent} from './pages/travel.mjs';
 import {sourceContent} from './pages/style.mjs';
 import {wardrobeControls} from './pages/wardrobe.mjs';
-import {h, href, link, button, icon, artifact, empty, note, day, time, dateKey, stageFigure} from './ui.mjs';
+import {h, href, link, button, icon, artifact, empty, note, day, time, dateKey, stageFigure, sceneNav} from './ui.mjs';
 
 const app = document.querySelector('#app');
 const sheet = document.querySelector('#sheet');
@@ -144,9 +144,7 @@ function render({focus = false} = {}) {
   const previousReading = app.querySelector('.reading[data-journal-key]');
   if (previousReading) journalPositions.set(previousReading.dataset.journalKey, previousReading.scrollTop);
   const codeValue = route.name === 'code' ? app.querySelector('[name="code"]')?.value : '';
-  const root = ['partner', 'explore', 'memories'].includes(route.name);
   app.dataset.page = route.name;
-  app.dataset.root = String(root);
   const wardrobePage = route.name === 'wardrobe' && !!progress?.look;
   document.body.toggleAttribute('data-grid', wardrobePage);
   if (wardrobePage) Object.assign(document.body.dataset, {layout:'atelier', picker:'detail'});
@@ -162,12 +160,9 @@ function render({focus = false} = {}) {
   const invalidWork = route.name === 'work' && !progress?.works.some(item => item.id === route.id);
   const body = route.invalid || invalidWork ?
     '<div class="stack">' + empty('pin', '找不到这个页面', '此链接可能已经失效，或不属于当前手账。', link('返回', route.back, 'button primary')) + '</div>' :
-    route.render(ctx());
+    route.render({...ctx(), nav: sceneNav(route.name)});
   const pending = ui.pending ? `<aside class="pending-note" role="status"><p>${h(ui.pending.message)}</p>${button('查询这次结果', 'recover', {disabled: ui.busy})}</aside>` : '';
-  const nav = root && route.name !== 'memories' ? `<nav class="main-nav" aria-label="主场景">${[['partner', 'partner', '伙伴'], ['explore', 'map', '游玩'], ['memories', 'book', '回忆']].map(([name, symbol, label]) =>
-    link(icon(symbol) + `<span>${label}</span>`, '#' + name, 'nav-tab').replace('<a ', name === route.name ? '<a aria-current="page" ' : '<a ')
-  ).join('')}</nav>` : '';
-  app.innerHTML = pending + body + nav;
+  app.innerHTML = pending + body;
   closet.afterRender();
   const reading = app.querySelector('.reading[data-journal-key]');
   if (reading) reading.scrollTop = journalPositions.get(reading.dataset.journalKey) ?? 0;

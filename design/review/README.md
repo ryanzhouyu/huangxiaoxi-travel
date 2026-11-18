@@ -24,3 +24,5 @@
 [完整网格候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=grid)复验设 `HXX_STUDY_LAYOUT=grid`，默认输出目录为 `.codex/wardrobe-grid-study`。附加 `profile=stress` 打开 30 件测试上装，包含试验配色。浏览、试穿和保存回归见[网格评审记录](../../output/wardrobe-grid-review/2026-11-18/index.html)。
 
 游客入口已接入确认衣橱和旅行手账。主线、导出及恢复复验用 `node design/review/tests/experience.mjs`，五档视口的同数据图稿用 `node design/review/tests/integration-visual.mjs`。后者可通过 `HXX_VISUAL_OUT` 指定输出目录。[接入与实屏验收](../../docs/衣橱与回忆接入计划.md)
+
+伙伴、游玩和回忆共用 `ui.mjs` 的主导航及 `main-scenes.css` 的样式，背景由各主场景延伸至屏底。运行 `node design/review/tests/main-scenes.mjs` 检查导航、首页动作及底部安全区。输出目录可通过 `HXX_MAIN_OUT` 指定。[首页前后对照](../../output/partner-navigation/2026-11-18/index.html)

@@ -1,5 +1,5 @@
 import {catalog} from '../review-service.mjs';
-import {h, href, link, button, bar, section, header, note, icon, stageFigure, itemArt, status, pressed, mask, day, time, empty, world} from '../ui.mjs';
+import {h, href, link, button, bar, section, header, note, icon, stageFigure, itemArt, status, pressed, mask, day, time, empty, world, portrait} from '../ui.mjs';
 
 const art = id => stageFigure(catalog.lookFor(id));
 
@@ -48,28 +48,35 @@ export function onboarding({ui}) {
   </section>`;
 }
 
-export function partner({p, ui}) {
+export function partner({p, ui, nav}) {
   const words = p.events.length
     ? ['刚才走过的地方，我都记住啦。', '要换一身再出门吗？', '有空一起翻翻手账吧。']
     : ['桥上的灯亮了，陪我走走吧。', '你也看见那盏小灯啦。', '听说山里有家手作铺。'];
   const tools = [
     ['bag', '衣橱', href('wardrobe', {from: '#partner'})],
-    ['book', '图鉴', href('collection', {from: '#partner'})],
-    ['camera', '打卡', href('checkin', {from: '#partner'})],
+    ['catalog', '图鉴', href('collection', {from: '#partner'})],
+    ['pin', '打卡', href('checkin', {from: '#partner'})],
   ];
-  return `<section class="partner-scene scene">
+  return `<section class="partner-scene root-world scene">
     ${world('night', p.look)}
-    <header class="partner-head">
-      ${link(`${icon('partner')}<span><strong>黄晓西</strong><small>旅行伙伴</small></span>`, href('account', {from: '#partner'}), 'identity light-chip')}
-      ${link(`${icon('ticket')}<span>${p.balance} 次</span>`, href('wallet', {from: '#partner'}), 'light-chip balance-chip')}
-    </header>
-    ${link('<span>黔山漫游 ›</span>', href('scene', {from: '#partner'}), 'location-chip')}
-    ${button(stageFigure(ui.greet ? {...p.look, pose: p.owned.includes('wave') ? 'wave' : p.look.pose} : p.look), 'greet', {classes: 'companion-doll' + (ui.greet ? ' responding' : ''), attrs: 'aria-label="和黄晓西打招呼"'})}
-    <aside class="satchel" aria-label="随身道具">${tools.map(([symbol, label, to]) => link(icon(symbol) + `<span>${label}</span>`, to, 'tool')).join('')}
-      ${button(icon('pose') + '<span>动作</span>', 'openPoses', {classes: 'tool'})}
-    </aside>
-    ${!p.gifts.includes('demo') ? link(icon('gift') + '初见礼', href('gift', {from: '#partner'}), 'gift-shortcut light-chip') : ''}
-    ${button(`${icon('partner')}<span><strong>黄晓西</strong><span>${words[ui.line % words.length]}</span></span><span aria-hidden="true">›</span>`, 'greet', {classes: 'speech', attrs: 'aria-live="polite"'})}
+    <div class="partner-stage">
+      <header class="partner-head">
+        <div>
+          ${link(`${portrait()}<div><h1>黄晓西</h1><small>旅行伙伴</small></div>`, href('account', {from: '#partner'}), 'partner-identity')}
+          ${link(`${icon('map')}<span>黔山漫游</span><span aria-hidden="true">›</span>`, href('scene', {from: '#partner'}), 'partner-location')}
+        </div>
+        ${link(`${icon('ticket')}<span><strong>${p.balance}</strong> 次</span>`, href('wallet', {from: '#partner'}), 'partner-balance')}
+      </header>
+      <div class="partner-play">
+        ${button(stageFigure(ui.greet ? {...p.look, pose: p.owned.includes('wave') ? 'wave' : p.look.pose} : p.look), 'greet', {classes: 'companion-doll' + (ui.greet ? ' responding' : ''), attrs: 'aria-label="和黄晓西打招呼"'})}
+        <aside class="satchel" aria-label="随身道具">${tools.map(([symbol, label, to]) => link(icon(symbol) + `<span>${label}</span>`, to, 'tool')).join('')}
+          ${button(icon('pose') + '<span>动作</span>', 'openPoses', {classes: 'tool'})}
+        </aside>
+        ${!p.gifts.includes('demo') ? link(icon('gift') + '<span>初见礼</span>', href('gift', {from: '#partner'}), 'gift-shortcut') : ''}
+      </div>
+      ${button(`${portrait()}<span><strong>黄晓西</strong><span>${words[ui.line % words.length]}</span></span><span class="speech-next" aria-hidden="true">›</span>`, 'greet', {classes: 'speech', attrs: 'aria-live="polite"'})}
+    </div>
+    ${nav}
   </section>`;
 }
 
