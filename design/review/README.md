@@ -18,3 +18,5 @@
 衣橱验证使用[独立入口](http://127.0.0.1:8782/design/review/wardrobe-study/)、[设计及验收说明](../../docs/衣橱验证设计.md)和[同数据对照](../../output/wardrobe-study/2026-11-18/index.html)。启动同一服务后运行 `node design/review/tests/wardrobe-study.mjs`。若使用其他本地端口，可设 `HXX_STUDY_ORIGIN`，如 `http://127.0.0.1:8765`；用 `HXX_STUDY_OUT` 可切换验证输出目录。
 
 本轮[下方选衣候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier)见[竞品与同屏对照](../../docs/衣橱竞品调研与视觉复验.md)。复验命令与上面相同，另设 `HXX_STUDY_LAYOUT=atelier` 即检查候选及横滑。默认输出目录为 `.codex/wardrobe-layout-study`。
+
+[大图选衣候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=detail)复验用 `HXX_STUDY_LAYOUT=detail`，默认输出目录为 `.codex/wardrobe-detail-study`。对照和浏览器记录见[底部操作与大图对照](../../output/wardrobe-detail-review/2026-11-18/index.html)。

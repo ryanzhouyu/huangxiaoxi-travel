@@ -5,8 +5,11 @@ import {makeFixture, sources} from '../wardrobe-study/fixture.mjs';
 
 const {chromium} = createRequire(import.meta.url)(process.env.HXX_PLAYWRIGHT || 'playwright');
 const origin = process.env.HXX_STUDY_ORIGIN || 'http://127.0.0.1:8782';
-const atelier = process.env.HXX_STUDY_LAYOUT === 'atelier';
-const out = process.env.HXX_STUDY_OUT || (atelier ? '.codex/wardrobe-layout-study' : '.codex/wardrobe-study-20261118');
+const layout = process.env.HXX_STUDY_LAYOUT;
+const detailPicker = layout === 'detail';
+const atelier = layout === 'atelier' || detailPicker;
+const defaultOut = detailPicker ? 'wardrobe-detail-study' : atelier ? 'wardrobe-layout-study' : 'wardrobe-study-20261118';
+const out = process.env.HXX_STUDY_OUT || '.codex/' + defaultOut;
 const browser = await chromium.launch({channel: 'chrome'});
 const checks = [], viewports = [], shots = [], errors = [];
 const mobile = {width: 360, height: 640};
@@ -18,6 +21,7 @@ const slot = (page, id) => page.locator('.slot[data-slot=' + id + ']').click();
 const look = (page, key = 'data-look') => page.locator('#study').getAttribute(key);
 const pass = label => checks.push(label);
 const hash = page => page.evaluate(() => location.hash);
+const leaveButton = page => detailPicker ? action(page,'leave') : button(page,'取消并返回');
 const railOffset = rail => rail.evaluate((element, horizontal) =>
   horizontal ? element.scrollLeft : element.scrollTop, atelier);
 
@@ -33,6 +37,7 @@ async function open(viewport, query = '', baseline = false, touch = false) {
   });
   const url = new URL(baseline ? 'design/review/index.html#wardrobe?from=%23partner' : 'design/review/wardrobe-study/' + query, origin);
   if (atelier && !baseline) url.searchParams.set('layout', 'atelier');
+  if (detailPicker && !baseline) url.searchParams.set('picker', 'detail');
   await page.goto(url.href);
   await (baseline ? page.locator('.wardrobe-stage').waitFor() : view(page));
   return page;
@@ -147,7 +152,8 @@ try {
   const rail = page.locator('.hangers');
   assert.equal(await page.locator('.hanger').count(), 6);
   assert.equal(await page.locator('.wear-state').allTextContents().then(items => items.join('/')), '已保存穿着');
-  assert.ok(await page.locator('.more-cue').isVisible());
+  if (detailPicker) assert.ok(await rail.evaluate(element => element.scrollWidth > element.clientWidth));
+  else assert.ok(await page.locator('.more-cue').isVisible());
   if (atelier) {
     await rail.hover();
     await page.mouse.wheel(0, 850);
@@ -189,10 +195,10 @@ try {
     assert.deepEqual((await look(page)).split('/'), before.map((value,i) => i === index ? id : value));
   }
   await slot(page,'top');
-  await button(page,'取消并返回').click();
+  await leaveButton(page).click();
   await capture(page,'study-360-cancel');
   await button(page,'继续试穿').click();
-  assert.equal(await page.evaluate(() => document.activeElement.textContent), '取消并返回');
+  assert.equal(await page.evaluate(() => document.activeElement.dataset.action), 'leave');
   await action(page,'reset').click();
   assert.equal(await look(page), await look(page,'data-saved'));
   assert.ok(await action(page,'save').isDisabled());
@@ -232,7 +238,7 @@ try {
 
   const gift = await open(mobile,'?source=gift&item=gift-top');
   assert.match(await look(gift), /gift-top/);
-  await button(gift,'取消并返回').click();
+  await leaveButton(gift).click();
   await button(gift,'放弃试穿并返回').click();
   await view(gift,'source');
   assert.equal(await hash(gift), sources.gift.hash);
@@ -241,8 +247,8 @@ try {
   await gift.close();
   const pool = await open(mobile,'?source=pool&item=mountain-top');
   assert.match(await look(pool), /mountain-top/);
-  await button(pool,'取消并返回').click();
-  await button(pool,'保存并返回').click();
+  await leaveButton(pool).click();
+  await pool.getByRole('dialog').getByRole('button',{name:'保存并返回',exact:true}).click();
   await view(pool,'source');
   assert.equal(await hash(pool), sources.pool.hash);
   assert.match(await look(pool,'data-saved'), /mountain-top/);
@@ -264,6 +270,64 @@ try {
     assert.match(await look(touch), /flower-top/);
     await touch.close();
     pass('模拟手机触摸横滑可选末项，桌面滚轮可翻选。短列表与长列表切换时舞台高度一致');
+  }
+  if (detailPicker) {
+    const detail = await open(mobile);
+    const dialog = detail.getByRole('dialog');
+    const head = dialog.locator('h2');
+    const rail = detail.locator('.hangers');
+    const original = await look(detail);
+    const preview = detail.locator('.inspection-media img');
+    await action(detail,'inspect').click();
+    assert.equal(await head.innerText(), '溪边薄荷·上装');
+    await detail.keyboard.press('ArrowRight');
+    assert.equal(await head.innerText(), '黔山初见·上装');
+    assert.equal(await look(detail), original);
+    assert.equal(await look(detail,'data-saved'), original);
+    await capture(detail,'detail-360-clothing');
+    await detail.keyboard.press('Escape');
+    assert.ok(!await dialog.isVisible());
+    assert.equal(await detail.evaluate(() => document.activeElement.dataset.action), 'inspect');
+    await rail.evaluate(element => {element.scrollLeft=element.scrollWidth;});
+    const offset = await railOffset(rail);
+    assert.ok(offset > 0);
+    await action(detail,'inspect').click();
+    assert.equal(await head.innerText(), '黔山初见·上装');
+    await button(detail,'下一件').click();
+    await button(detail,'下一件').click();
+    assert.ok(await button(detail,'下一件').isDisabled());
+    assert.equal(await head.innerText(), '花溪漫步·上装');
+    await button(detail,'关闭').click();
+    assert.equal(await railOffset(rail), offset);
+    assert.equal(await look(detail), original);
+    await action(detail,'inspect').click();
+    await button(detail,'试穿这一件').click();
+    assert.match(await look(detail), /gift-top/);
+    assert.equal(await look(detail,'data-saved'), original);
+    await selectionVisible(detail);
+    assert.equal(await detail.evaluate(() => document.activeElement.dataset.id), 'gift-top');
+    await slot(detail,'background');
+    const fromWorkshop = await look(detail);
+    await detail.evaluate(() => document.documentElement.style.setProperty('--safe', '30px'));
+    await action(detail,'inspect').click();
+    await button(detail,'下一件').click();
+    assert.equal(await head.innerText(), '山色留白');
+    assert.match(await preview.getAttribute('src'), /cloud-pavilion\.webp$/);
+    assert.equal(await preview.evaluate(image => getComputedStyle(image).objectFit), 'contain');
+    assert.equal(await look(detail), fromWorkshop);
+    const fullImage = await preview.boundingBox();
+    const thumbnail = await equip(detail,'mountain-bg').locator('img').boundingBox();
+    assert.ok(fullImage.height > thumbnail.height * 3);
+    const apply = await button(detail,'预览这个背景').boundingBox();
+    assert.ok(apply.y + apply.height <= 610);
+    await capture(detail,'detail-360-background-safe');
+    await button(detail,'预览这个背景').click();
+    assert.match(await detail.locator('.room').getAttribute('style'), /cloud-pavilion\.webp/);
+    assert.match(await look(detail), /mountain-bg$/);
+    assert.equal(await look(detail,'data-saved'), original);
+    assert.equal(await detail.evaluate(() => document.activeElement.dataset.id), 'mountain-bg');
+    await detail.close();
+    pass('大图从可见试穿项或第一个完整可见项进入，翻阅无写入，取消恢复焦点和横向位置，显式试穿或预览后定位到该项，背景整图及安全区可见');
   }
   assert.deepEqual(errors, []);
   await writeFile(out + '/checks.json', JSON.stringify({chrome:browser.version(), checks, viewports, shots, errors}, null, 2) + '\n');
