@@ -260,10 +260,35 @@ try {
   await screenshot('outfit');
   await go('memories');
   await screenshot('memories', {fullPage: true});
-  assert.ok(await page.locator('.journal-day').count() >= 2);
-  await page.locator('.journal-entry').first().click();
+  assert.ok(await page.locator('.reading .day').count() >= 2);
+  const repeatPhotos = await page.locator('.experience').filter({hasText:'山门入口'}).locator('img').evaluateAll(images => images.map(image => image.src));
+  assert.ok(repeatPhotos.length >= 2 && new Set(repeatPhotos).size === 1);
+  assert.ok(await page.locator('.experience').filter({hasText:'山间手作铺'}).locator('.stamp.shop').isVisible());
+  assert.ok(await page.locator('.experience').filter({hasText:'一枚旅行手作'}).locator('.stamp.craft').isVisible());
+  await act('journalFilter');
+  await act('journalRangeMode','custom');
+  await sheet.getByLabel('起始日期').fill('2099-11-20');
+  await sheet.getByLabel('截至日期').fill('2099-11-18');
+  await caption('查看足迹');
+  await sheet.getByRole('alert').waitFor();
+  await sheet.getByLabel('截至日期').fill('2099-11-20');
+  await caption('查看足迹');
+  await note('这段日期没有足迹');
+  await screenshot('memories-filter-empty');
+  await act('clearRange');
+  const reading = page.locator('.reading');
+  await reading.evaluate(element => {element.scrollTop = element.scrollHeight;});
+  const eventRow = page.locator('.experience').last();
+  await eventRow.scrollIntoViewIfNeeded();
+  const journalOffset = await reading.evaluate(element => element.scrollTop);
+  await eventRow.click();
+  await close();
+  assert.equal(await reading.evaluate(element => element.scrollTop), journalOffset);
+  assert.equal(await page.evaluate(() => document.activeElement.dataset.action), 'event');
+  pass('手账日期选择、逆序校验、筛选空态和清除；到店和手作用不同印签，同地点图一致，详情关闭恢复滚动及焦点');
+  await page.locator('.experience').first().click();
   await screenshot('event');
-  await next('用这一段经历制作');
+  await next('用这段经历做纪念');
   await at('compose');
   await page.locator('[data-model="compose.title"]').fill('山间的两日');
   await act('template', 'trail');
@@ -271,18 +296,33 @@ try {
   await page.locator('.visit-option input[value="' + extraVisit + '"]').check();
   assert.equal(await page.locator('.visit-option input:checked').count(), 2);
   await screenshot('compose', {fullPage: true});
+  const originalComposeUrl = page.url();
   await next('调整搭配');
   const restored = await account();
   const nextTop = restored.owned.find(id => id.endsWith('-top') && id !== restored.look.top);
   await act('slot', 'top');
-  await act('equip', nextTop);
+  await act('open-grid');
+  await sheet.locator(`.grid-detail[data-id="${nextTop}"]`).click();
+  await screenshot('wardrobe-full-detail');
+  await act('return-grid');
+  assert.equal(await page.evaluate(() => document.activeElement.dataset.id), nextTop);
+  await sheet.locator(`.grid-choice[data-id="${nextTop}"]`).click();
+  assert.equal(await page.evaluate(() => document.activeElement.dataset.value), nextTop);
+  assert.equal((await account()).look.top, restored.look.top);
+  const wardrobeUrl = page.url();
+  await next('套装图鉴');
+  await at('collection');
+  await next('返回');
+  await at('wardrobe');
+  assert.equal(page.url(), wardrobeUrl);
+  assert.equal(await page.locator(`.hanger[data-value="${nextTop}"]`).getAttribute('aria-pressed'), 'true');
   page.once('dialog', dialog => dialog.accept());
   await page.reload();
   await at('wardrobe');
   assert.equal(await page.locator('[data-value="' + nextTop + '"]').getAttribute('aria-pressed'), 'true');
   await act('slot', 'background');
   await act('equip', 'paper');
-  await next('取消并返回');
+  await next('返回');
   await screenshot('wardrobe-dirty');
   await caption('继续试穿');
   await setFault('saveLook', 'reject');
@@ -292,8 +332,10 @@ try {
   await act('saveLook');
   await at('compose');
   assert.equal((await account()).look.top, nextTop);
+  assert.equal(page.url(), originalComposeUrl);
   assert.equal(await page.locator('[data-model="compose.title"]').inputValue(), '山间的两日');
   assert.equal(await page.locator('.visit-option input:checked').count(), 2);
+  assert.equal(await page.locator('[data-action="template"][aria-pressed="true"]').getAttribute('data-value'), 'trail');
   await setFault('renderPrint', 'reject');
   await act('renderPrint');
   await alert();
@@ -322,6 +364,12 @@ try {
   const png = await readFile(pngPath);
   assert.deepEqual(png, Buffer.from(finalImage.split(',')[1], 'base64'));
   assert.equal(png.subarray(1, 4).toString(), 'PNG');
+  await page.evaluate(async image => {
+    const bytes = Uint8Array.from(atob(image.split(',')[1]), value => value.charCodeAt(0));
+    const decoded = await createImageBitmap(new Blob([bytes], {type:'image/png'}));
+    if (!decoded.width || !decoded.height) throw new Error('导出图片无法打开');
+    decoded.close();
+  }, 'data:image/png;base64,' + png.toString('base64'));
   pass('导出真实 PNG，与预览和入库图片逐字节相同', {width: png.readUInt32BE(16), height: png.readUInt32BE(20)});
   await act('zoom');
   await screenshot('work-zoom');
@@ -333,6 +381,10 @@ try {
   await close();
   await next('返回');
   await screenshot('works');
+  await act('journalWork', print.id);
+  assert.equal(await sheet.locator('.full-print').getAttribute('src'), print.image);
+  await screenshot('journal-work-preview');
+  await close();
   await go('account');
   await screenshot('account');
   await next('次数与收支');
@@ -350,6 +402,41 @@ try {
   await at('partner');
   assert.equal((await account()).works[0].image, print.image);
   pass('保存新搭配和刷新后，历史作品图片保持原值');
+
+  await next('回忆');
+  await act('memoryTab','events');
+  await page.locator('.experience').first().click();
+  await next('用这段经历做纪念');
+  await at('compose');
+  await page.locator('[data-model="compose.title"]').fill('晓西的一段旅程');
+  await act('template','single');
+  await act('renderPrint');
+  await at('preview');
+  await act('saveWork');
+  await at('work');
+  const single = (await account()).works.find(work => work.title === '晓西的一段旅程');
+  assert.ok(single);
+  assert.equal(single.template, 'single');
+  assert.equal(single.snapshots.length, 1);
+  assert.equal((await account()).works.find(work => work.id === print.id).image, print.image);
+  const singleEvent = page.waitForEvent('download');
+  await next('保存到设备');
+  const singleDownload = await singleEvent;
+  const singlePath = path.join(out,'travel-single.png');
+  await singleDownload.saveAs(singlePath);
+  const singlePng = await readFile(singlePath);
+  assert.deepEqual(singlePng, Buffer.from(single.image.split(',')[1], 'base64'));
+  await page.evaluate(async data => {
+    const image = new Image();
+    image.src = data;
+    await image.decode();
+  }, 'data:image/png;base64,' + singlePng.toString('base64'));
+  await next('返回');
+  assert.equal(await page.locator('.work-photo').count(), 2);
+  assert.equal(await page.locator('.work-photo.long').count(), 1);
+  await screenshot('journal-both-prints');
+  await next('伙伴');
+  pass('单页与长图分别生成、保存和实际打开 PNG，作品册保留两种比例，旧长图字节固定');
 
   const originalTop = (await account()).look.top;
   const alternatives = catalog.assets.filter(item => item.slot === 'top' && item.id !== originalTop);
@@ -376,7 +463,7 @@ try {
   await act('saveLook');
   await at('partner');
   assert.equal((await account()).look.top, localItem.id);
-  assert.equal((await account()).works[0].image, print.image);
+  assert.equal((await account()).works.find(work => work.id === print.id).image, print.image);
   await second.close();
   pass('浏览器返回受草稿守卫保护，另一标签保存时保留本页试穿并提示冲突');
 
@@ -394,10 +481,10 @@ try {
         const save = page.locator('[data-action="saveLook"]');
         const rect = await save.boundingBox();
         assert.ok(rect && rect.y >= 0 && rect.y + rect.height <= height);
-        const actor = await page.locator('.wardrobe-actor img').boundingBox();
-        const stage = await page.locator('.wardrobe-stage').boundingBox();
-        const categories = await page.locator('.wardrobe-cabinet .tabs').boundingBox();
-        assert.ok(actor && stage && actor.y >= stage.y && actor.y + actor.height < stage.y + stage.height);
+        const actor = await page.locator('.doll img').boundingBox();
+        const stage = await page.locator('.room').boundingBox();
+        const categories = await page.locator('.slots').boundingBox();
+        assert.ok(actor && stage && actor.y >= stage.y && actor.y + actor.height <= stage.y + stage.height);
         assert.ok(categories && categories.y + categories.height <= rect.y, '衣橱的部件分类被保存区遮住');
       }
       if (name === 'scene') {
@@ -408,7 +495,8 @@ try {
         assert.ok(pinsReachable, '地图分类或地点列表盖住了点位');
       }
       if (['memories', 'compose', 'wallet'].includes(name)) {
-        await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));
+        if (name === 'memories') await page.locator('.reading').evaluate(element => {element.scrollTop = element.scrollHeight;});
+        else await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));
         await screenshot(name + '-bottom');
       }
     }
@@ -418,7 +506,7 @@ try {
   await page.setViewportSize({width: 360, height: 640});
   await go('wardrobe');
   await page.evaluate(() => document.documentElement.style.setProperty('--safe', '30px'));
-  const bottom = await page.locator('.actions').boundingBox();
+  const bottom = await page.locator('.desk').boundingBox();
   const action = await page.locator('[data-action="saveLook"]').boundingBox();
   assert.ok(bottom.y + bottom.height - action.y - action.height >= 30);
   await screenshot('wardrobe-safe-area');

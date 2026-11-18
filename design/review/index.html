@@ -8,6 +8,11 @@
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="./review.css">
   <link rel="stylesheet" href="./scenes.css">
+  <link rel="stylesheet" href="./wardrobe-base.css">
+  <link rel="stylesheet" href="./wardrobe-study/atelier.css">
+  <link rel="stylesheet" href="./wardrobe-study/picker.css">
+  <link rel="stylesheet" href="./wardrobe-study/grid.css">
+  <link rel="stylesheet" href="./journal.css">
 </head>
 <body>
   <main id="app" class="app" aria-label="黄晓西旅行手账">
@@ -15,7 +20,7 @@
   </main>
   <dialog id="sheet" aria-labelledby="sheet-title">
     <header class="sheet-head"><h2 id="sheet-title"></h2><button type="button" data-action="close" aria-label="关闭">×</button></header>
-    <div id="sheet-body"></div>
+    <div id="sheet-body" class="sheet-body"></div>
   </dialog>
   <div id="toast" role="status" aria-live="polite"></div>
   <script type="module" src="./app.mjs"></script>

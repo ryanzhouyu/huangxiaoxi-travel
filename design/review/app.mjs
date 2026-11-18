@@ -3,9 +3,10 @@ import {composeImage, paintDraft} from '../demo/postcard.mjs';
 import {catalog, progressKey, reviewService as service} from './review-service.mjs';
 import {isEntry, isRoute, ownsWardrobeContext, routeInfo} from './routes.mjs';
 import {defaultFilter, readEditors, readTab, writeTab, makeCompose} from './drafts.mjs';
-import {filterEvents, eventContent} from './pages/memory.mjs';
+import {filterEvents, eventContent, journalFilter, journalWork} from './pages/memory.mjs';
 import {placesContent} from './pages/travel.mjs';
 import {sourceContent} from './pages/style.mjs';
+import {wardrobeControls} from './pages/wardrobe.mjs';
 import {h, href, link, button, icon, artifact, empty, note, day, time, dateKey, stageFigure} from './ui.mjs';
 
 const app = document.querySelector('#app');
@@ -36,6 +37,8 @@ let accountEpoch = 0;
 const findAsset = id => catalog.assets.find(item => item.id === id);
 const findEvent = id => progress.events.find(entry => entry.id === id);
 const ctx = () => ({...route, p: progress, ui});
+const closet = wardrobeControls({app, sheet, state:ctx, openSheet, closeSheet, equip:equipPart});
+const journalPositions = new Map();
 const currentImage = () => route.name === 'work' ? progress.works.find(work => work.id === route.id) : ui.preview;
 const dirtyWardrobe = () => ui.wardrobe && progress?.look && JSON.stringify(ui.wardrobe.look) !== JSON.stringify(progress.look);
 const validTarget = value => isRoute(value) && !isEntry(routeInfo(value).name) ? value : '#partner';
@@ -63,6 +66,8 @@ function draftsFor(next) {
   ui.memory = drafts.memory.filter;
   ui.memoryTab = drafts.memory.tab;
   ui.pending = readTab(next.id + '.request');
+  closet.clear();
+  journalPositions.clear();
 }
 
 function guard(value) {
@@ -81,6 +86,7 @@ function guard(value) {
 }
 
 function prepare(previous) {
+  let preselected;
   if (route.name === 'wardrobe' && !route.invalid && progress?.look) {
     const hadDraft = !!ui.wardrobe;
     ui.wardrobe ??= {look: {...progress.look}, version: progress.lookVersion, slot: 'top'};
@@ -88,6 +94,7 @@ function prepare(previous) {
     if (item && progress.owned.includes(item.id) && (!hadDraft || (!ownsWardrobeContext(previous ?? '') && previous !== route.here))) {
       ui.wardrobe.look[item.slot] = item.id;
       ui.wardrobe.slot = item.slot;
+      preselected = item.id;
     }
     putDraft('wardrobe', ui.wardrobe);
   }
@@ -98,6 +105,7 @@ function prepare(previous) {
       putDraft('compose', ui.compose);
     }
   }
+  return preselected;
 }
 
 function activeControl() {
@@ -132,12 +140,20 @@ function updateCooldown() {
 function render({focus = false} = {}) {
   if (!ready) return;
   const active = activeControl();
-  const rack = app.querySelector('.wardrobe-parts');
-  const rackScroll = rack?.dataset.slot === ui.wardrobe?.slot ? rack?.scrollTop : 0;
+  closet.beforeRender();
+  const previousReading = app.querySelector('.reading[data-journal-key]');
+  if (previousReading) journalPositions.set(previousReading.dataset.journalKey, previousReading.scrollTop);
   const codeValue = route.name === 'code' ? app.querySelector('[name="code"]')?.value : '';
   const root = ['partner', 'explore', 'memories'].includes(route.name);
   app.dataset.page = route.name;
   app.dataset.root = String(root);
+  const wardrobePage = route.name === 'wardrobe' && !!progress?.look;
+  document.body.toggleAttribute('data-grid', wardrobePage);
+  if (wardrobePage) Object.assign(document.body.dataset, {layout:'atelier', picker:'detail'});
+  else {
+    delete document.body.dataset.layout;
+    delete document.body.dataset.picker;
+  }
   app.setAttribute('aria-busy', String(ui.busy));
   if (fatal) {
     app.innerHTML = '<div class="stack">' + empty('book', '暂时无法打开手账', h(fatal), button('重新读取', 'reload')) + '</div>';
@@ -148,12 +164,13 @@ function render({focus = false} = {}) {
     '<div class="stack">' + empty('pin', '找不到这个页面', '此链接可能已经失效，或不属于当前手账。', link('返回', route.back, 'button primary')) + '</div>' :
     route.render(ctx());
   const pending = ui.pending ? `<aside class="pending-note" role="status"><p>${h(ui.pending.message)}</p>${button('查询这次结果', 'recover', {disabled: ui.busy})}</aside>` : '';
-  const nav = root ? `<nav class="main-nav" aria-label="主场景">${[['partner', 'partner', '伙伴'], ['explore', 'map', '游玩'], ['memories', 'book', '回忆']].map(([name, symbol, label]) =>
+  const nav = root && route.name !== 'memories' ? `<nav class="main-nav" aria-label="主场景">${[['partner', 'partner', '伙伴'], ['explore', 'map', '游玩'], ['memories', 'book', '回忆']].map(([name, symbol, label]) =>
     link(icon(symbol) + `<span>${label}</span>`, '#' + name, 'nav-tab').replace('<a ', name === route.name ? '<a aria-current="page" ' : '<a ')
   ).join('')}</nav>` : '';
   app.innerHTML = pending + body + nav;
-  const updatedRack = app.querySelector('.wardrobe-parts');
-  if (updatedRack && rackScroll) updatedRack.scrollTop = rackScroll;
+  closet.afterRender();
+  const reading = app.querySelector('.reading[data-journal-key]');
+  if (reading) reading.scrollTop = journalPositions.get(reading.dataset.journalKey) ?? 0;
   if (codeValue) app.querySelector('[name="code"]').value = codeValue;
   if (ui.busy) app.querySelectorAll('form input, form select').forEach(control => {control.disabled = true;});
   paint();
@@ -167,17 +184,24 @@ function render({focus = false} = {}) {
   } else if (active) app.querySelector(active)?.focus({preventScroll: true});
 }
 
-function openSheet(title, html, material = 'paper') {
-  if (!sheet.open) returnFocus = document.activeElement;
+function openSheet(title, html, material = 'paper', trigger = document.activeElement) {
+  if (!sheet.open) returnFocus = trigger;
   sheetTitle.textContent = title;
   sheet.dataset.material = material;
+  if (material === 'wardrobe-grid') sheet.dataset.panel = 'parts-grid';
+  else if (material === 'wardrobe-inspection') sheet.dataset.panel = 'inspection';
+  else delete sheet.dataset.panel;
   sheetBody.innerHTML = html;
   if (!sheet.open) sheet.showModal();
-  sheet.querySelector('[data-action="close"]').focus();
+  if (sheet.dataset.panel || material === 'journal') {
+    sheetTitle.tabIndex = -1;
+    sheetTitle.focus({preventScroll:true});
+  } else sheet.querySelector('[data-action="close"]').focus();
 }
 
 function closeSheet() {
   if (!sheet.open) return;
+  closet.closing();
   sheet.close();
   leaveIntent = null;
   newComposeIntent = null;
@@ -206,8 +230,9 @@ function show(value, {replace = false, pop = false, index, focus = true} = {}) {
   route = routeInfo(value);
   if (route.name === 'memories' && route.params.get('view') === 'works') ui.memoryTab = 'works';
   if (route.name === 'entry' && previous === '#code' && !ui.challenge) ui.consent = false;
-  prepare(previous);
+  const preselected = prepare(previous);
   render({focus});
+  if (preselected) closet.reveal(preselected);
   window.scrollTo(0, scrollPositions.get(value) ?? 0);
 }
 
@@ -358,11 +383,31 @@ function saveLook(destination = route.back) {
   send('saveLook', {look: {...ui.wardrobe.look}, version: ui.wardrobe.version}, {destination});
 }
 
+function equipPart(value, focus = false) {
+  const item = findAsset(value);
+  if (!item || item.slot !== ui.wardrobe?.slot || !progress.owned.includes(value)) return;
+  ui.wardrobe.look[item.slot] = value;
+  ui.error = '';
+  putDraft('wardrobe', ui.wardrobe);
+  render();
+  closet.reveal(value, focus);
+}
+
 function storeMemory() {
   putDraft('memory', {tab: ui.memoryTab, filter: ui.memory});
 }
 
+function applyMemoryRange(filter) {
+  closeSheet();
+  ui.memory = filter;
+  storeMemory();
+  render();
+  app.querySelector('.reading').scrollTop = 0;
+  app.querySelector('[data-action="journalFilter"]')?.focus({preventScroll:true});
+}
+
 const actions = {
+  ...closet.actions,
   reload: () => location.reload(),
   close: closeSheet,
   terms: () => openSheet('本机评审说明', note('请使用提供的评审身份和凭证。输入不会发送给后端。换装、足迹和纪念图保存在当前浏览器。')),
@@ -413,13 +458,7 @@ const actions = {
     if (item) openSheet('装扮来源', sourceContent(item, progress, route.here));
   },
   slot: value => {ui.wardrobe.slot = value; putDraft('wardrobe', ui.wardrobe); render();},
-  equip: value => {
-    const item = findAsset(value);
-    if (!item || !progress.owned.includes(value)) return;
-    ui.wardrobe.look[item.slot] = value;
-    putDraft('wardrobe', ui.wardrobe);
-    render();
-  },
+  equip: value => equipPart(value),
   resetLook: () => {
     ui.wardrobe = {look: {...progress.look}, version: progress.lookVersion, slot: ui.wardrobe.slot};
     putDraft('wardrobe', ui.wardrobe);
@@ -446,8 +485,23 @@ const actions = {
     if (row) openSheet(row.reason, `<p>${day(row.at)} · ${time(row.at)}</p><p>变动 ${row.delta > 0 ? '+' : ''}${row.delta} 次 · 当时剩余 ${row.balance} 次</p>`);
   },
   memoryTab: value => {ui.memoryTab = value; storeMemory(); render();},
-  clearRange: () => {ui.memory = {...defaultFilter}; storeMemory(); render();},
-  event: value => {const event = findEvent(value); if (event) openSheet('这一枚足迹', eventContent(event, route.here));},
+  clearRange: () => applyMemoryRange({...defaultFilter}),
+  journalFilter: (value, control) => openSheet('按日期查看', journalFilter(ui.memory), 'journal', control),
+  journalRangeMode: (value, control) => {
+    const form = control.form;
+    form.elements.range.value = value;
+    form.querySelector('.date-fields').hidden = value !== 'custom';
+    form.querySelector('.error').hidden = true;
+    for (const option of form.querySelectorAll('[data-action="journalRangeMode"]')) option.setAttribute('aria-pressed', String(option === control));
+  },
+  event: (value, control) => {
+    const event = findEvent(value);
+    if (event) openSheet(event.name, eventContent(event, route.here), 'journal', control);
+  },
+  journalWork: (value, control) => {
+    const print = progress.works.find(item => item.id === value);
+    if (print) openSheet(print.title, journalWork(print, route.here), 'journal', control);
+  },
   template: value => {
     ui.compose.template = value;
     ui.preview = null;
@@ -539,6 +593,16 @@ const forms = {
   }),
   visit: form => send('visit', {pointId: route.id, proof: String(form.get('proof')).trim()}),
   activity: form => send('activity', {proof: String(form.get('proof')).trim()}),
+  journalRange: form => {
+    const range = form.get('range');
+    const from = range === 'custom' ? String(form.get('from') ?? '') : '';
+    const to = range === 'custom' ? String(form.get('to') ?? '') : '';
+    if (from && to && to < from) {
+      sheetBody.querySelector('.error').hidden = false;
+      return;
+    }
+    applyMemoryRange({range,from,to});
+  },
 };
 
 document.addEventListener('click', event => {
@@ -548,7 +612,7 @@ document.addEventListener('click', event => {
     event.preventDefault();
     navigate(control.getAttribute('href'));
   } else if ((!ui.busy || control.dataset.action === 'close') && Object.hasOwn(actions, control.dataset.action)) {
-    actions[control.dataset.action](control.dataset.value);
+    actions[control.dataset.action](control.dataset.value ?? control.dataset.id, control);
   }
 });
 
@@ -596,8 +660,9 @@ document.addEventListener('change', event => {
 
 sheet.addEventListener('cancel', event => {
   event.preventDefault();
-  closeSheet();
+  if (!closet.cancel()) closeSheet();
 });
+sheet.addEventListener('keydown', closet.keydown);
 window.addEventListener('popstate', event => {
   if (!ready) return;
   if (bounced) {bounced = false; return;}

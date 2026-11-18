@@ -1,0 +1,745 @@
+/* 旅行手账评审稿的纸页、装订和木托架。样式限制在手账及其详情。 */
+body:has(.memory-review)::before { background: linear-gradient(#321e1bc9,#30241fef), var(--night) center 60% / cover; }
+.app[data-page="memories"] { padding-bottom: 0; background: #78543c; }
+.memory-review, #sheet[data-material="journal"] {
+  --ink:#482c25;
+  --secondary:#634b3d;
+  --border:#ab8a5d;
+  --heading:KaiTi,STKaiti,"Kaiti SC","Songti SC",SimSun,serif;
+  color:var(--ink);
+  font:16px/1.45 var(--body);
+}
+.memory-review { height:100dvh; display:grid; grid-template-rows:minmax(0,1fr) auto; }
+.app[data-page="memories"] .pending-note {position:absolute;z-index:5;inset:52px 12px auto;}
+
+.memory-review .reading {
+  min-height:0;
+  overflow:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:none;
+}
+
+.memory-review .reading::-webkit-scrollbar {
+  display:none;
+}
+
+.memory-review .book {
+  min-height:100%;
+  position:relative;
+  isolation:isolate;
+  display:flex;
+  flex-direction:column;
+  background:#f1dfbd url('./journal-art/paper.webp') repeat-y center top/100% auto;
+}
+
+.memory-review .book::before {
+  content:'';
+  position:absolute;
+  inset:50px 0 35px;
+  z-index:-1;
+  pointer-events:none;
+  background:linear-gradient(90deg,#52302730,transparent 6% 95%,#6e49343b);
+  box-shadow:inset 2px 0 #795a39,inset -2px 0 #947255;
+}
+
+.memory-review .book-head {
+  position:relative;
+  isolation:isolate;
+  min-height:109px;
+  padding:21px 19px 9px 24px;
+}
+
+.memory-review .book-head::before {
+  content:'';
+  position:absolute;
+  inset:0 0 -2px;
+  z-index:-1;
+  background:url('./journal-art/book-head.webp') center top/100% 100% no-repeat;
+  mask-image:linear-gradient(#000 82%,transparent);
+}
+
+.memory-review .book-headline {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:6px;
+}
+
+.memory-review .book-headline h1 {
+  font:700 clamp(25px,7vw,32px)/1.12 var(--heading);
+  background:#f4dfb8e6;
+  padding:4px 11px;
+  border-radius:2px 11px 3px 8px;
+  color:#553629;
+}
+
+.memory-review .book-headline .place {
+  padding:3px 8px;
+  color:#6b4433;
+  font:700 14px/1.2 var(--heading);
+  background:#f8e8cde8;
+  border:1px solid #b8986d5c;
+  border-radius:1px 5px;
+  white-space:nowrap;
+}
+
+.memory-review .chapters {
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-top:9px;
+}
+
+.memory-review .chapters button,
+.memory-review .filter {
+  border:0;
+  background:transparent;
+  min-height:44px;
+  padding:0 6px;
+  color:#5a3d2d;
+  font:700 16px/1.18 var(--heading);
+  white-space:nowrap;
+}
+
+.memory-review .chapters button[aria-pressed=true] {
+  color:#3f5b42;
+  box-shadow:inset 0 -2px #4d6b4e;
+}
+
+.memory-review .chapters .filter {
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  min-height:44px;
+  padding-inline:8px;
+  font:650 13px/1.2 var(--body);
+  background:#f5e4c5e8;
+  border-radius:3px 7px 4px 2px;
+  box-shadow:inset 0 -1px #a6865f;
+}
+
+.memory-review .cal {
+  position:relative;
+  width:14px;
+  height:14px;
+  border:1.5px solid currentColor;
+  border-radius:2px;
+  display:inline-block;
+  margin-top:3px;
+}
+
+.memory-review .cal::before {
+  content:'';
+  position:absolute;
+  inset:3px 0 auto;
+  border-top:1px solid currentColor;
+}
+
+.memory-review .cal::after {
+  content:'';
+  position:absolute;
+  inset:-4px 2px auto;
+  height:5px;
+  border-inline:1px solid currentColor;
+}
+
+.memory-review .content {
+  position:relative;
+  min-height:0;
+  flex:1;
+  padding:3px 18px 0 25px;
+  background:linear-gradient(to left,#8f674439 0,transparent 5% 96%,#a1794c29 100%);
+}
+
+.memory-review .book::after {
+  position:absolute;
+  content:'';
+  left:0;
+  top:94px;
+  bottom:clamp(63px,21vw,98px);
+  width:clamp(17px,5vw,23px);
+  background:url('./journal-art/binding.webp') left top/100% 68px repeat-y;
+  mask-image:linear-gradient(transparent,#000 23px,#000 calc(100% - 17px),transparent);
+  z-index:-1;
+}
+
+.memory-review .book-tail {
+  height:clamp(72px,25vw,113px);
+  background:url('./journal-art/book-tail.webp') center bottom/100% 100% no-repeat;
+  mask-image:linear-gradient(transparent,#000 35%);
+}
+
+.memory-review .day {
+  margin-bottom:14px;
+}
+
+.memory-review .day:last-child {
+  margin-bottom:1px;
+}
+
+.memory-review .day h2 {
+  font:700 17px/1.18 var(--heading);
+  color:#6b4337;
+  margin:4px 0 7px;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.memory-review .day h2::before {
+  content:'';
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  border:1px solid #a17155;
+  box-shadow:inset 0 0 0 2px #f5dfbd;
+  background:#925344;
+}
+
+.memory-review .rows {
+  display:grid;
+  gap:7px;
+}
+
+.memory-review .experience {
+  width:100%;
+  text-align:left;
+  min-height:78px;
+  display:grid;
+  align-items:center;
+  grid-template-columns:clamp(72px,22vw,99px) minmax(0,1fr) 12px;
+  gap:9px;
+  padding:6px 9px 6px 7px;
+  border:1px solid var(--border);
+  border-radius:5px;
+  background:linear-gradient(130deg,#fff4dce8,#f7e7cbd9);
+  box-shadow:0 2px 2px #69462e24;
+}
+
+.memory-review .experience:hover,
+.memory-review .experience:active {
+  background:#f6e1bd;
+}
+
+.memory-review .experience strong {
+  font-size:16px;
+  line-height:1.25;
+  display:block;
+  overflow-wrap:anywhere;
+}
+
+.memory-review .experience .sub {
+  font-size:13px;
+  color:var(--secondary);
+  margin-top:4px;
+  display:block;
+  line-height:1.35;
+}
+
+.memory-review .chevron {
+  color:#785743;
+  font-size:20px;
+  line-height:1;
+}
+
+.memory-review .photo,
+#sheet[data-material="journal"] .photo,
+.memory-visit-art .photo {
+  width:100%;
+  aspect-ratio:1.39;
+  display:block;
+  border:3px solid #fff7e3;
+  background:#ebd7b3;
+  object-fit:cover;
+  border-radius:2px;
+}
+
+.memory-review .stamp,
+#sheet[data-material="journal"] .stamp,
+.memory-visit-art .stamp {
+  border:1px solid #9f6d55;
+  border-radius:3px;
+  display:grid;
+  align-content:center;
+  justify-items:center;
+  gap:3px;
+  background:linear-gradient(130deg,#eddbb8,#f6ead2);
+  color:#774435;
+  aspect-ratio:1.39;
+  min-height:52px;
+}
+
+.memory-review .stamp.shop,
+#sheet[data-material="journal"] .stamp.shop,
+.memory-visit-art .stamp.shop {
+  background:linear-gradient(130deg,#e0dfc2,#edead5);
+  border-color:#87906a;
+  color:#526044;
+}
+
+.memory-review .stamp b,
+#sheet[data-material="journal"] .stamp b,
+.memory-visit-art .stamp b {
+  font:700 17px/1.05 var(--heading);
+  letter-spacing:.10em;
+  border:1px solid currentColor;
+  padding:5px 6px;
+  border-radius:3px;
+  transform:rotate(-5deg);
+}
+
+.memory-review .dock {
+  display:grid;
+  gap:3px;
+  padding:7px 15px max(5px,var(--safe));
+  background:linear-gradient(#563b2ab0,#2f1e18de),url('./journal-art/wood.webp') center bottom/cover;
+  color:#f8e5c3;
+  border-top:1px solid #9e6e45;
+  box-shadow:0 -2px 5px #3d251a43;
+}
+
+.memory-review .primary,
+#sheet[data-material="journal"] .primary,
+.memory-review .secondary,
+#sheet[data-material="journal"] .secondary,
+.memory-review button.text,
+#sheet[data-material="journal"] button.text {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  min-height:44px;
+  border:1px solid #a87f54;
+  border-radius:999px;
+  padding:5px 14px;
+  text-align:center;
+  text-decoration:none;
+  font-weight:680;
+  background:#f6e3c1;
+  color:#684235;
+}
+
+.memory-review .primary,
+#sheet[data-material="journal"] .primary {
+  color:#fff3d8;
+  background:#84493f;
+  border:1px solid #a46f57;
+  box-shadow:inset 0 0 0 2px #eac18b69;
+  letter-spacing:.01em;
+}
+
+.memory-review .dock .primary {
+  width:100%;
+  min-height:44px;
+  font-size:15px;
+}
+
+.memory-review .nav {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:5px;
+}
+
+.memory-review .nav .tab {
+  min-height:44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  font:700 16px/1 var(--heading);
+  padding:4px 3px;
+  color:#ffefd2;
+  border-bottom:2px solid transparent;
+}
+
+.memory-review .nav .tab[aria-current=page] {
+  background:#f3dbb4;
+  color:#553526;
+  border-radius:4px 8px 3px 3px;
+  border-bottom-color:#9c524a;
+}
+
+.memory-review .icon-art {
+  display:inline-flex;
+  flex:0 0 24px;
+  width:24px;
+  height:24px;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.memory-review .icon-art.partner img {
+  height:23px;
+  width:23px;
+  border:1px solid #af875e;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.memory-review .icon-art.map {
+  width:24px;
+}
+
+.memory-review .icon-art.map::before {
+  content:'';
+  display:block;
+  width:21px;
+  height:18px;
+  background:linear-gradient(90deg,#d7c494 0 31%,#8ca185 31% 64%,#eee0b7 64%);
+  clip-path:polygon(0 23%,32% 3%,66% 22%,100% 4%,100% 77%,66% 96%,32% 77%,0 95%);
+  outline:1px solid #77523d;
+}
+
+.memory-review .icon-art.map::after {
+  content:'';
+  position:absolute;
+  background:#a84f48;
+  border:1px solid #e5c08e;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  top:2px;
+  right:4px;
+}
+
+.memory-review .icon-art.journal-icon::before {
+  content:'';
+  width:17px;
+  height:20px;
+  display:block;
+  border:1px solid #aa8156;
+  border-left:4px double #cfb080;
+  border-radius:3px 5px 5px 2px;
+  background:#dfc697;
+  transform:rotate(-8deg);
+  box-shadow:1px 1px #885e40;
+}
+
+.memory-review .icon-art.journal-icon::after {
+  content:'';
+  width:8px;
+  height:6px;
+  border:1px solid #e7cc9a;
+  background:#78836a;
+  display:block;
+  position:absolute;
+  top:7px;
+  left:8px;
+  transform:rotate(-8deg);
+}
+
+.memory-review .blank {
+  display:grid;
+  place-items:center;
+  text-align:center;
+  min-height:clamp(310px,53vh,500px);
+  align-content:center;
+  gap:10px;
+  padding:24px 12px;
+  color:#5b3a2d;
+}
+
+.memory-review .blank h2,
+.memory-review .filter-empty h2 {
+  font:700 23px/1.2 var(--heading);
+}
+
+.memory-review .blank p,
+.memory-review .filter-empty p {
+  font-size:14px;
+  color:var(--secondary);
+  max-width:24em;
+}
+
+.memory-review .blank .partner-medal {
+  height:73px;
+  width:73px;
+  border:4px solid #f8eccf;
+  border-radius:50%;
+  box-shadow:0 2px 5px #71513757;
+  object-fit:cover;
+}
+
+.memory-review .blank-print {
+  height:57px;
+  width:73px;
+  background:linear-gradient(#e9cf9e,#f1e0b9);
+  border:7px solid #fff4dc;
+  border-bottom-width:13px;
+  transform:rotate(-5deg);
+  box-shadow:0 2px 5px #7151375e;
+}
+
+.memory-review .filter-empty {
+  text-align:left;
+  min-height:200px;
+  padding:18px 4px;
+  border-top:1px dashed #a88d6a;
+  display:grid;
+  justify-items:start;
+  align-content:start;
+  gap:9px;
+}
+
+.memory-review .filter-empty .range {
+  font:650 13px var(--body);
+  color:#724d3d;
+}
+
+.memory-review .works-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+  padding:7px 0 12px;
+}
+
+.memory-review .work {
+  display:flex;
+  flex-direction:column;
+  border:1px solid #bb9e74;
+  border-radius:4px;
+  background:#fff4d8;
+  box-shadow:0 2px 3px #6a4b2e31;
+  padding:5px;
+  text-align:left;
+  min-width:0;
+}
+
+.memory-review .work-photo {
+  display:grid;
+  width:100%;
+  position:relative;
+  place-items:center;
+  background:#efe0bd;
+  aspect-ratio:1/1.12;
+  overflow:hidden;
+}
+
+.memory-review .work-photo img {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.memory-review .work-photo.long img {
+  object-fit:cover;
+  object-position:50% 3%;
+}
+
+.memory-review .work .works-title {
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  padding:5px 3px 0;
+  font-size:15px;
+  line-height:1.3;
+  font-weight:700;
+}
+
+.memory-review .work .work-meta {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:3px;
+  color:#684b37;
+  font-size:12px;
+  padding:5px 3px 2px;
+  margin-top:auto;
+}
+
+.memory-review .work-photo em {
+  position:absolute;
+  bottom:4px;
+  right:3px;
+  color:#fff4d8;
+  background:#4e5d43;
+  padding:2px 5px;
+  border-radius:3px;
+  font:600 12px/1.2 var(--body);
+}
+
+#sheet[data-material="journal"] {
+  width:min(94vw,435px);
+  max-height:calc(100dvh - 30px - var(--safe));
+  padding:0;
+  border:1px solid #a07d55;
+  border-radius:7px;
+  background:#f6e6c7;
+  color:var(--ink);
+  box-shadow:0 10px 45px #25150e83;
+  overscroll-behavior:contain;
+}
+
+#sheet[data-material="journal"]::backdrop {
+  background:#281f19a3;
+}
+
+#sheet[data-material="journal"] .sheet-head {
+  position:sticky;
+  z-index:2;
+  top:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:5px;
+  background:#f6e6c7;
+  padding:4px 12px;
+  border-bottom:1px solid #d7ba8b;
+}
+
+#sheet[data-material="journal"] .sheet-head h2 {
+  font:700 24px/1.2 var(--heading);
+}
+
+#sheet[data-material="journal"] .close {
+  min-height:44px;
+  min-width:44px;
+  background:none;
+  border:0;
+  font-size:24px;
+}
+
+#sheet[data-material="journal"] #sheet-body {
+  display:grid;
+  gap:11px;
+  padding:13px 14px 16px;
+}
+
+#sheet[data-material="journal"] .sheet-hero {
+  width:100%;
+  max-height:196px;
+  aspect-ratio:2/1;
+}
+
+#sheet[data-material="journal"] .stamp.sheet-hero {
+  padding:11px;
+  min-height:83px;
+  aspect-ratio:auto;
+}
+
+#sheet[data-material="journal"] .stamp.sheet-hero b {
+  font-size:26px;
+}
+
+#sheet[data-material="journal"] .facts {
+  list-style:none;
+  display:grid;
+  gap:6px;
+  padding:0;
+  margin:0;
+  color:var(--secondary);
+  font-size:14px;
+}
+
+#sheet[data-material="journal"] .sheet-actions {
+  display:grid;
+  gap:6px;
+}
+
+#sheet[data-material="journal"] .sheet-actions .primary,
+#sheet[data-material="journal"] .sheet-actions .secondary {
+  width:100%;
+}
+
+#sheet[data-material="journal"] .status-line {
+  font-size:14px;
+  color:#684b37;
+}
+
+#sheet[data-material="journal"] .full-print {
+  display:inline-block;
+  max-width:100%;
+  margin-inline:auto;
+  object-fit:contain;
+}
+
+#sheet[data-material="journal"] .print-view {
+  max-height:47vh;
+  overflow:auto;
+  background:#efdbb9;
+  display:grid;
+  justify-content:center;
+  padding:5px;
+}
+
+#sheet[data-material="journal"] .print-view img {
+  max-width:100%;
+  height:auto;
+}
+
+#sheet[data-material="journal"] .inline-note {
+  font-size:13px;
+  color:var(--secondary);
+}
+
+#sheet[data-material="journal"] .error {
+  color:#803a32;
+  line-height:1.4;
+}
+
+#sheet[data-material="journal"] .date-form {
+  display:grid;
+  gap:10px;
+}
+
+#sheet[data-material="journal"] .date-fields {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+#sheet[data-material="journal"] .date-fields label {
+  font-size:13px;
+  min-width:0;
+}
+
+#sheet[data-material="journal"] .date-fields input {
+  display:block;
+  width:100%;
+  min-width:0;
+  min-height:44px;
+  padding:4px;
+  background:#fff7e8;
+  border:1px solid #9a7b55;
+  border-radius:4px;
+  color:var(--ink);
+  font-size:14px;
+}
+
+#sheet[data-material="journal"] .range-picks {
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+#sheet[data-material="journal"] .range-picks .secondary[aria-pressed=true] {
+  background:#4d684b;
+  color:#fff8e9;
+}
+
+
+.memory-review :is(h1,h2,p) { letter-spacing: normal; }
+.memory-review .book-headline .place { border-color:#b8986d5c; }
+.memory-review .stamp { letter-spacing:normal; }
+.memory-review .work img { min-height:0; }
+.memory-review .filter { max-width: 100%; }
+.memory-review .nav .tab { border:0; background:none; box-shadow:none; border-bottom:2px solid transparent; }
+.memory-review .nav .tab[aria-current="page"] { background:#f3dbb4; color:#553526; border-bottom-color:#9c524a; }
+#sheet[data-material="journal"] .sheet-head button:focus-visible { outline-offset:0; }
+#sheet[data-material="journal"] .sheet-head h2[tabindex="-1"]:focus { outline:none; }
+#sheet[data-material="journal"] .date-fields[hidden], #sheet[data-material="journal"] .error[hidden] { display:none; }
+@media(max-width:374px){
+  .memory-review .content{padding-left:22px;padding-right:13px}
+  .memory-review .book-head{padding-left:21px;padding-right:14px}
+  .memory-review .chapters{gap:3px}
+  .memory-review .chapters button{padding-inline:5px}
+  .memory-review .chapters .filter{font-size:12px}
+}
+
+.memory-visit-art { display:block; width:100%; min-width:0; --heading: KaiTi,STKaiti,SimSun,serif; }
+.row .memory-visit-art { width:52px; flex:none; }
+.memory-visit-art :is(.photo,.stamp) {height:38px; min-height:0; max-width:100%;}
+.memory-visit-art .stamp b {font-size:12px; padding:2px 3px;}

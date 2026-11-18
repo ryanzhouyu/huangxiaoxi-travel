@@ -242,7 +242,7 @@ input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--moss); f
   text-align: left;
 }
 .row:last-child { border-bottom: 0; }
-.row small, .identity small, .pool-card small, .collection-card small, .visit-option small, .work-card small { display: block; color: var(--muted); }
+.row small, .identity small, .pool-card small, .collection-card small, .visit-option small { display: block; color: var(--muted); }
 .ledger-row { grid-template-columns: minmax(0, 1fr) 40px; }
 .ledger-row b { color: var(--moss); text-align: right; }
 .static-row { grid-template-columns: 66px 1fr; }
@@ -271,8 +271,8 @@ input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--moss); f
 .onboarding {
   background: linear-gradient(#3026239c, #382d2556 55%, #251b15bc), var(--closet) center / cover;
 }
-.stage-top, .stage-label { display: flex; align-items: start; justify-content: space-between; gap: 8px; text-shadow: 0 1px 4px #231910; }
-.stage-top .light-chip, .stage-label .light-chip { text-shadow: none; }
+.stage-top { display: flex; align-items: start; justify-content: space-between; gap: 8px; text-shadow: 0 1px 4px #231910; }
+.stage-top .light-chip { text-shadow: none; }
 .welcome-doll { height: clamp(225px, 54dvh, 580px); margin: auto auto -5px; }
 .starter-rack { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
 .starter {
@@ -460,7 +460,7 @@ input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--moss); f
 .theater-caption h2 { font-size: 20px; }
 .theater-caption span { font-size: 12px; }
 .theater-link { position: absolute; right: var(--edge); bottom: 18px; }
-.progress-title, .chosen { display: flex; justify-content: space-between; gap: 7px; align-items: center; }
+.progress-title { display: flex; justify-content: space-between; gap: 7px; align-items: center; }
 .progress-title b { color: var(--berry); font-size: 18px; }
 progress { width: 100%; height: 9px; appearance: none; border: none; background: #e3ceb1; border-radius: 6px; }
 progress::-webkit-progress-bar { background: #e3ceb1; border-radius: 6px; }
@@ -494,24 +494,6 @@ progress::-moz-progress-bar { background: var(--moss); border-radius: 6px; }
 .collection-card { padding: 8px; text-align: center; row-gap: 2px; }
 .collection-doll { height: 162px; background: #ead5b2; border-radius: 4px 10px; }
 .collection-card small { font-size: 13px; }
-.wardrobe-stage {
-  height: clamp(259px, calc(100dvh - 400px), 520px);
-  flex: 1 0 auto;
-  padding: 8px;
-  color: var(--paper);
-  background: linear-gradient(#20181361, transparent 49%, #38241758), var(--closet) center 55% / cover;
-}
-.wardrobe-stage[data-background="mountain-bg"] { background-image: linear-gradient(#24312a5c, transparent 49%, #2b4b4542), var(--cloud); }
-.wardrobe-stage[data-background="flower-bg"] { background-image: linear-gradient(#3024295c, transparent 49%, #642b3842), var(--flower); }
-.wardrobe-stage .stage-figure { filter: drop-shadow(0 3px 9px #21171095); }
-.stage-label { position: absolute; inset: 8px var(--edge) auto; }
-.stage-label h2 { font-size: 23px; }
-.stage-label span { font-size: 13px; }
-.wardrobe-cabinet { display: grid; gap: 7px; padding: 9px var(--edge); background: #f5e7cc; border-top: 1px solid #c6a87f; }
-.wardrobe-cabinet .tabs { display: grid; grid-template-columns: repeat(7, minmax(44px, 1fr)); gap: 2px; padding-bottom: 2px; }
-.wardrobe-cabinet .tab { padding-inline: 2px; font-size: 13px; }
-.chosen { font-size: 14px; }
-.chosen span { color: var(--muted); }
 .source-art { display: grid; justify-items: center; gap: 6px; padding: 8px; margin-bottom: 5px; background: #f5e3c5; border-radius: 6px 16px; text-align: center; }
 .source-art .artifact-art, .source-art .artifact-art img { height: 130px; }
 .source-art .artifact-art .item-art { max-height: 130px; }
@@ -521,53 +503,6 @@ progress::-moz-progress-bar { background: var(--moss); border-radius: 6px; }
 .pose-option { display: grid; }
 
 /* 手账、照相馆及作品 */
-.journal {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(#f3e4cce0, #f3e5cdde), var(--journal) center top / 100% auto repeat-y;
-}
-.journal-head { display: grid; gap: 2px; padding: 22px var(--edge) 9px; color: #472c23; }
-.journal-head span { color: var(--berry); font-size: 14px; font-weight: 760; letter-spacing: .18em; }
-.journal-head h1 { font-size: 39px; }
-.journal > .tabs { margin: 0 var(--edge); }
-.journal > .tabs .tab { flex: 1; }
-.journal-day { display: grid; gap: 9px; }
-.journal-day > h2 {
-  justify-self: start;
-  font: 700 15px/1.2 var(--body);
-  padding: 6px 14px;
-  background: var(--moss);
-  color: #fff8e6;
-  border-radius: 3px 8px;
-  font-variant-numeric: tabular-nums;
-}
-.journal-thread { display: grid; gap: 7px; }
-.journal-entry {
-  display: grid;
-  grid-template-columns: 39% minmax(0, 1fr);
-  align-items: center;
-  gap: 9px;
-  border: 0;
-  background: none;
-  text-align: left;
-  padding: 3px 2px;
-}
-.journal-entry.reverse { grid-template-columns: minmax(0, 1fr) 39%; }
-.journal-entry.reverse .place-photo { grid-column: 2; grid-row: 1; transform: rotate(1.15deg); }
-.journal-entry.reverse .entry-slip { grid-column: 1; grid-row: 1; }
-.journal-entry .place-photo {
-  height: 95px;
-  border: 5px solid #fff9e8;
-  border-bottom-width: 8px;
-  transform: rotate(-1.15deg);
-  box-shadow: 0 4px 10px #55412b42;
-}
-.entry-slip { display: grid; padding: 8px 9px; background: #fff6e1; border: 1px solid #c9ae83; border-radius: 8px 4px; box-shadow: var(--shadow); }
-.entry-slip small { color: var(--berry); font-size: 12px; }
-.entry-slip span { color: var(--muted); font-size: 13px; }
-.work-card { gap: 2px; padding: 7px; align-content: start; }
-.work-card img { margin-bottom: 4px; width: 100%; height: 184px; object-fit: contain; background: #ead7b8; border-radius: 3px; }
 .date-fields { min-width: 0; }
 .studio {
   display: grid;
@@ -651,7 +586,6 @@ dialog::backdrop { background: #271d25a6; }
 @media (max-height: 700px) {
   .arrival-heading h1 { font-size: 42px; }
   .arrival-doll { height: 176px; }
-  .wardrobe-stage { height: 243px; }
   .theater { height: 270px; }
   .partner-scene { height: max(510px, calc(100dvh - var(--nav-height))); }
 }

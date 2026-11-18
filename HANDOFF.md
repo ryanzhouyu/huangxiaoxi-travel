@@ -4,7 +4,7 @@
 
 ## 当前接手位置
 
-2026-11-18 用户确认采用 `9391a63` 的[衣橱方案](docs/衣橱验证设计.md#已确认方案)。[独立样板](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=grid)已验证全身工坊、底部快选、三列服饰／两列背景、单品大图、勾标和试穿描边。[30 件评审样本](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=grid&profile=stress)用于长列表复验。游客评审入口接入待执行，优先走通照相馆往返与实际 PNG 导出，再校核制作链路。[实屏与浏览器记录](output/wardrobe-grid-review/2026-11-18/index.html)。
+2026-11-18 [游客评审原型](http://127.0.0.1:8782/design/review/index.html)已接入 `9391a63` 确认衣橱及评审过的装订手账。功能回归 25 项，照相馆往返后实际导出长图和单页 PNG，旧作品保持原值。五档桌面浏览器模拟视口核对通过。[接入计划和详细结果](docs/衣橱与回忆接入计划.md) · [确认稿对照与实际 PNG](output/wardrobe-memory-integration/2026-11-18/index.html)。
 
 2026-11-18 用户认可下方选衣版的整体观感，并要求优化拥挤及缩略图辨识。[大图选衣候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=detail)在同一舞台上放大常驻缩略图，增加查看大图与同类翻阅。实际更换仍停留在试穿，关闭恢复横滑位置。[本轮实屏对照](output/wardrobe-detail-review/2026-11-18/index.html)。
 

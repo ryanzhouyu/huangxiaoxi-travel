@@ -4,6 +4,7 @@ import * as arrival from './pages/arrival.mjs';
 import * as travel from './pages/travel.mjs';
 import * as style from './pages/style.mjs';
 import * as memory from './pages/memory.mjs';
+import {wardrobe} from './pages/wardrobe.mjs';
 
 const routes = {
   entry: [arrival.entry, ''],
@@ -18,7 +19,7 @@ const routes = {
   activity: [travel.activity, href('point', {id: 'shop'})],
   opportunities: [travel.opportunities, '#scene'],
   pool: [style.poolPage, '#scene', catalog.pools],
-  wardrobe: [style.wardrobe, '#partner'],
+  wardrobe: [wardrobe, '#partner'],
   collection: [style.collection, '#partner'],
   outfit: [style.outfit, '#collection', catalog.outfits],
   memories: [memory.memories, ''],

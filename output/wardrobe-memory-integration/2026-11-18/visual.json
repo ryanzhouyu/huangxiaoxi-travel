@@ -1,0 +1,80 @@
+{
+  "chrome": "157.0.8103.79",
+  "findings": [
+    {
+      "width": 360,
+      "height": 640,
+      "wardrobe": "7 类触区；全身、网格和大图",
+      "memory": "三日六条、书尾、两种作品比例、原图"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "wardrobe": "7 类触区；全身、网格和大图",
+      "memory": "三日六条、书尾、两种作品比例、原图"
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "wardrobe": "7 类触区；全身、网格和大图",
+      "memory": "三日六条、书尾、两种作品比例、原图"
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "wardrobe": "7 类触区；全身、网格和大图",
+      "memory": "三日六条、书尾、两种作品比例、原图"
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "wardrobe": "7 类触区；全身、网格和大图",
+      "memory": "三日六条、书尾、两种作品比例、原图"
+    }
+  ],
+  "shots": [
+    "360x640-wardrobe.png",
+    "360x640-wardrobe-grid.png",
+    "360x640-wardrobe-detail.png",
+    "360x640-memory.png",
+    "360x640-memory-tail.png",
+    "360x640-memory-event.png",
+    "360x640-memory-works.png",
+    "360x640-memory-print.png",
+    "390x844-wardrobe.png",
+    "390x844-wardrobe-grid.png",
+    "390x844-wardrobe-detail.png",
+    "390x844-memory.png",
+    "390x844-memory-tail.png",
+    "390x844-memory-event.png",
+    "390x844-memory-works.png",
+    "390x844-memory-print.png",
+    "430x932-wardrobe.png",
+    "430x932-wardrobe-grid.png",
+    "430x932-wardrobe-detail.png",
+    "430x932-memory.png",
+    "430x932-memory-tail.png",
+    "430x932-memory-event.png",
+    "430x932-memory-works.png",
+    "430x932-memory-print.png",
+    "1280x720-wardrobe.png",
+    "1280x720-wardrobe-grid.png",
+    "1280x720-wardrobe-detail.png",
+    "1280x720-memory.png",
+    "1280x720-memory-tail.png",
+    "1280x720-memory-event.png",
+    "1280x720-memory-works.png",
+    "1280x720-memory-print.png",
+    "1440x1000-wardrobe.png",
+    "1440x1000-wardrobe-grid.png",
+    "1440x1000-wardrobe-detail.png",
+    "1440x1000-memory.png",
+    "1440x1000-memory-tail.png",
+    "1440x1000-memory-event.png",
+    "1440x1000-memory-works.png",
+    "1440x1000-memory-print.png",
+    "360x640-memory-empty.png",
+    "390x844-memory-empty-works.png"
+  ],
+  "errors": []
+}

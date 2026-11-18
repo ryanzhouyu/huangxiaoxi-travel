@@ -41,7 +41,7 @@ async function open(viewport, query = '', baseline = false, touch = false) {
   if (atelier && !baseline) url.searchParams.set('layout', 'atelier');
   if (detailPicker && !baseline) url.searchParams.set('picker', layout);
   await page.goto(url.href);
-  await (baseline ? page.locator('.wardrobe-stage').waitFor() : view(page));
+  await (baseline ? page.locator('#app[data-page="wardrobe"] .doll').waitFor() : view(page));
   return page;
 }
 
@@ -143,9 +143,9 @@ try {
     await page.close();
     if (width <= 390) {
       const baseline = await open({width,height}, '', true);
-      await capture(baseline,'prior-' + width + '-default');
+      await capture(baseline,'visitor-' + width + '-default');
       await action(baseline,'equip').filter({hasText:'黔山初见'}).click();
-      await capture(baseline,'prior-' + width + '-try');
+      await capture(baseline,'visitor-' + width + '-try');
       await baseline.close();
     }
   }

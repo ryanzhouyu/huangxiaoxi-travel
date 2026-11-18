@@ -1,5 +1,5 @@
 import {catalog} from '../review-service.mjs';
-import {h, href, link, button, bar, section, header, icon, stageFigure, artifact, note, status, pressed, tabs, footer} from '../ui.mjs';
+import {h, href, link, button, bar, section, header, icon, stageFigure, artifact, note, status, footer} from '../ui.mjs';
 
 const assets = catalog.assets;
 const slots = catalog.slots;
@@ -63,31 +63,4 @@ export function poolPage({p, ui, id, here, back}) {
       ${section('<span id="unlock-places" tabindex="-1"></span>' + header(locked && !complete ? '到访任一地点即可解锁' : '关联地点') + places.map(point => link(point.name, href('point', {id: point.id, from: here}))).join(''))}
     </div>
     ${footer(action)}`;
-}
-
-export function wardrobe({p, ui, here, back}) {
-  const edit = ui.wardrobe;
-  const dirty = JSON.stringify(edit.look) !== JSON.stringify(p.look);
-  const picked = assets.find(item => item.id === edit.look[edit.slot]);
-  const choices = assets.filter(item => item.slot === edit.slot && p.owned.includes(item.id));
-  const category = Object.entries(slots).map(([slot, name]) => button(name, 'slot', {value: slot, classes: 'tab', attrs: pressed(slot === edit.slot)}));
-  return `${bar('旅行衣橱', back, link('图鉴', href('collection', {from: here}), 'compact counter'))}
-    <div class="wardrobe-stage scene" data-background="${edit.look.background}">
-      <div class="stage-label"><h2 class="cloth-label">${dirty ? '试穿中 · 尚未保存' : '当前搭配'}</h2></div>
-      <div class="wardrobe-actor">${stageFigure(edit.look)}</div>
-      <div class="wardrobe-parts" data-slot="${edit.slot}" aria-label="拥有的部件，向下滑动查看更多">${choices.map(item => button(
-        artifact({...item, name: item.outfit ? outfits.find(outfit => outfit.id === item.outfit).name : item.name},
-          item.id === p.look[edit.slot] ? '已穿着' : item.id === picked?.id ? '试穿中' : ''),
-        'equip', {value: item.id, classes: 'artifact', attrs: pressed(item.id === picked?.id)}
-      )).join('')}</div>
-    </div>
-    <div class="wardrobe-cabinet">
-      <div class="chosen"><span>${slots[edit.slot]}</span><strong>${h(picked?.name)}</strong></div>
-      ${tabs(category)}
-      ${status(ui.error, 'error')}
-    </div>
-    ${footer(button('保存搭配并返回', 'saveLook', {disabled: !dirty || !!(ui.busy || ui.pending)}) +
-      `<div class="two">${button('恢复原搭配', 'resetLook', {classes: 'text', disabled: !dirty || !!ui.pending})}
-      ${link('取消并返回', back, 'button text')}</div>`)}
-  `;
 }

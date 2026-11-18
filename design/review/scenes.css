@@ -72,10 +72,10 @@
   font-weight: 600;
   letter-spacing: 0;
 }
-.app:is([data-page="scene"], [data-page="point"], [data-page="activity"], [data-page="gift"], [data-page="wardrobe"], [data-page="pool"], [data-page="outfit"], [data-page="compose"], [data-page="preview"], [data-page="work"]) .page-bar {
+.app:is([data-page="scene"], [data-page="point"], [data-page="activity"], [data-page="gift"], [data-page="pool"], [data-page="outfit"], [data-page="compose"], [data-page="preview"], [data-page="work"]) .page-bar {
   background: linear-gradient(#2117188e 0%, #2f22232c 70%, transparent);
 }
-.page-bar + :is(.map-view, .place-hero, .activity-hero, .wardrobe-stage, .theater, .studio) {
+.page-bar + :is(.map-view, .place-hero, .activity-hero, .theater, .studio) {
   margin-top: calc(-1 * var(--scene-bar-height));
 }
 .page-bar + .place-hero, .page-bar + .activity-hero { min-height: 285px; padding-top: calc(var(--scene-bar-height) + 35px); }
@@ -242,128 +242,11 @@
 .pool-state strong { color: #614236; font-size: 15px; }
 .pool-state .note { font-size: 13px; }
 .app[data-page=pool], .app[data-page=gift], .app[data-page=outfit] { background: #674530; }
-.app[data-page=wardrobe] { background: #543c28; }
-.app[data-page=wardrobe] .wardrobe-stage {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(76px, 23vw, 94px);
-  height: clamp(385px, calc(100dvh - 209px - var(--safe)), 690px);
-  padding: calc(var(--scene-bar-height) + 40px) var(--edge) 15px;
-  gap: 8px;
-}
-.app[data-page=wardrobe] .stage-label { top: var(--scene-bar-height); }
-.cloth-label { position: relative; padding: 4px 12px; background: #465136; color: #ffefcb; font-size: 16px; font-weight: 500; text-shadow: none; }
-.wardrobe-actor { position: relative; min-height: 0; min-width: 0; }
-.wardrobe-actor .stage-figure { position: absolute; inset: 0; height: 100%; width: 100%; object-position: 50% 83%; }
-.app[data-page=wardrobe] .wardrobe-parts {
-  position: relative;
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 4px 3px;
-  overflow: hidden auto;
-  background: #3e2b2373;
-  border: 1px solid #d6ae79a3;
-  border-radius: 9px 6px;
-  scrollbar-color: #e5c394 #593b26;
-  scrollbar-width: thin;
-}
-.app[data-page=wardrobe] .wardrobe-parts .artifact {
-  flex: none;
-  width: 100%;
-  min-height: 68px;
-  padding: 4px 1px;
-  color: #53382a;
-  background: linear-gradient(#fff2d3, #ebd6aa);
-  border: 1px solid #9c784e;
-  box-shadow: inset 0 0 0 2px #fff1cfbb;
-}
-.app[data-page=wardrobe] .wardrobe-parts .artifact[aria-pressed=true] {
-  background: #eed29c;
-  border: 2px solid #884b43;
-}
-.wardrobe-parts .artifact-art, .wardrobe-parts .artifact-art img { height: 36px; }
-.wardrobe-parts .tag { font-size: 11px; }
-.wardrobe-cabinet {
-  position: relative;
-  background: linear-gradient(#f8e9c5, #f1ddb1);
-  border-top-color: #916c46;
-}
-.app .wardrobe-cabinet .tab {
-  padding-inline: 1px;
-  background: transparent;
-  border-color: transparent;
-  border-radius: 4px 10px;
-}
-.app .wardrobe-cabinet .tab[aria-pressed=true] { background: #864c44; color: #fff2d7; border: 1px solid #ad795a; }
-
-/* 手账的纸页、装订和路线是主视觉。筛选附在页边。 */
-.app[data-page=memories] { background: #e4cfab; }
-.app .journal {
-  background: linear-gradient(180deg, #f5e7c725 55%, #f0ddbd 94%) center top / 100% min(151vw, 725px) no-repeat,
-    var(--journal) center top / 100% auto no-repeat, #f0ddbd;
-}
-.journal-head { display: flex; justify-content: space-between; align-items: center; gap: 4px; padding: 20px var(--edge) 11px; }
-.journal-head h1, .journal-head span {
-  background: #f9e6bff0;
-  border: 1px solid #c09a67;
-  border-radius: 100px;
-  color: #5d4131;
-}
-.journal-head h1 { font-size: clamp(26px, 8vw, 39px); padding: 3px 14px; font-weight: 600; }
-.journal-head span { padding: 4px 7px; letter-spacing: 0; font: 700 13px/1.15 var(--heading); }
-.journal-head .ui-icon { height: 19px; width: 19px; }
-.app .journal > .tabs {
-  margin-top: 5px;
-  margin-bottom: 3px;
-  padding-inline: 2px;
-  gap: 8px;
-}
-.app .journal > .tabs .tab {
-  border-radius: 2px 12px;
-  background: #f5dfb9e8;
-  color: #624334;
-  font: 700 16px/1.2 var(--heading);
-}
-.app .journal > .tabs .tab[aria-pressed=true] { background: var(--leaf); color: var(--leaf-ink); border-color: #d3b688; }
-.journal-filter { display: grid; justify-items: end; }
-.journal-filter .compact-field {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #5e402d;
-  font: 700 14px/1.3 var(--heading);
-}
-.journal-filter select {
-  width: auto;
-  height: 44px;
-  padding-inline: 9px;
-  border-radius: 999px;
-  background: #f9e9c9;
-  color: #534038;
-}
-.journal-filter .date-fields { margin-top: 6px; width: 100%; }
-.journal-day > h2 { background: #805143; color: #fff0d1; border: 1px solid #ac7e58; border-radius: 2px 8px; }
-.journal-day:nth-of-type(even) > h2 { background: #586349; }
-.journal-thread { position: relative; isolation: isolate; }
-.journal-thread::before {
-  content: "";
-  position: absolute;
-  height: 97%;
-  inset: 2% 50% 0 auto;
-  z-index: -1;
-  border-left: 2px dashed #74533783;
-  transform: rotate(5deg);
-}
-.journal-entry .entry-slip {
-  background: #f8e8c7ed;
-  border: 1px solid #aa875c;
-  box-shadow: inset 0 0 0 2px #fff0d4, 0 3px 8px #3b291a25;
-}
-.app .journal .actions { background: #ebd4a9d8; }
-.app :is(.preview-studio, .studio) { background-position: center 34%; }
 .app[data-page=compose], .app[data-page=preview], .app[data-page=work] {
-  background: linear-gradient(#5838293d, #2d1b1f84), var(--photo) center / cover fixed;
+  background: linear-gradient(#58382945, #2d1b1f95), var(--photo) center / cover fixed, #483126;
+}
+.app:is([data-page=compose], [data-page=preview], [data-page=work]) .studio {
+  background: none;
 }
 .app[data-page=work] .stack > .button.secondary { background: #f1d8ab; }
 .print-object { border-color: #faebcc; transform: rotate(-.7deg); }
@@ -405,13 +288,10 @@
 .desk-cover .button { justify-self: start; padding-inline: 24px; }
 
 @media (max-height: 700px) {
-  .app[data-page=wardrobe] .wardrobe-stage { height: max(385px, calc(100dvh - 208px - var(--safe))); }
   .app .arrival-doll { height: 210px; }
   .page-bar + .theater { height: 355px; }
   .app[data-page=code] .signal-paper { margin-top: min(12dvh, 76px); }
 }
 @media (max-width: 374px) {
   .arrival-paper .consent, .arrival-paper .text.compact { font-size: 12px; }
-  .app[data-page=wardrobe] .wardrobe-stage { padding-inline: 10px; gap: 4px; }
-  .app .wardrobe-cabinet { padding-inline: 10px; }
 }
