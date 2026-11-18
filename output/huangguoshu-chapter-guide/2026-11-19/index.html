@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>黄果树景区地图 · 视觉确认稿</title>
+  <link rel="stylesheet" href="../../../design/review/main-scenes.css">
+  <link rel="stylesheet" href="./chapter-base.css">
+  <link rel="stylesheet" href="./overview.css">
+  <script src="./overview.js" defer></script>
+</head>
+<body>
+  <main class="review">
+    <header class="review-head">
+      <p>黄晓西 · 黔山同行</p>
+      <h1>黄果树景区地图</h1>
+      <p>景点详情弹层与全景区奖励概览 · 奖励为评审样例</p>
+    </header>
+
+    <div class="guide-layout">
+      <figure>
+        <figcaption>景区导览 <span>景区概览版</span></figcaption>
+        <section class="phone map-screen guide game-guide overview-guide" aria-label="黄果树景区导览评审">
+          <div class="terrain" aria-hidden="true"><span class="terrain-focus"></span></div>
+          <header class="chapter-head">
+            <span class="back-label"><b aria-hidden="true">‹</b> 发现贵州</span>
+            <div class="chapter-title"><p>安顺市</p><h2>黄果树</h2></div>
+            <span class="map-progress" aria-label="已打卡景点 2 处，共 3 处">已留足迹 <strong>2/3</strong></span>
+          </header>
+
+          <div class="guide-markers" id="guide-markers" role="group" aria-label="景区点位"></div>
+          <p class="map-caption">景区示意图</p>
+
+          <section class="guide-dock" id="scene-dock" aria-label="黄果树景区概览">
+            <section class="pool-overview" id="pool-overview" aria-labelledby="pool-title" hidden>
+              <header><h3 id="pool-title">黄果树 · 全部奖励</h3><button type="button" class="close-overview" id="close-overview" aria-label="关闭全部奖励">×</button></header>
+              <div id="pool-list"></div>
+            </section>
+            <div class="collection-row scene-collection">
+              <span class="collection-title">已集齐 <strong id="collection-count"></strong></span>
+              <span class="suit-progress" id="suit-progress" aria-hidden="true"></span>
+            </div>
+            <div class="featured-looks" id="featured-looks" aria-label="主推套装"></div>
+            <div class="collection-footer">
+              <span id="reward-counts" class="reward-counts"></span>
+              <button type="button" class="reward-toggle" id="collection-toggle" aria-expanded="false" aria-controls="pool-overview">全部奖励 <b aria-hidden="true">›</b></button>
+            </div>
+            <div id="reward-feedback" class="reward-feedback" hidden>
+              <span role="status"></span><button type="button">重试</button>
+            </div>
+          </section>
+
+          <div class="main-nav mock-nav" aria-label="主场景导航示意">
+            <span class="nav-tab"><span class="nav-art" aria-hidden="true"><img class="portrait" src="../../../design/review/journal-art/companion.webp" alt=""></span>伙伴</span>
+            <span class="nav-tab" aria-current="page"><span class="nav-art nav-art-map" aria-hidden="true"></span>游玩</span>
+            <span class="nav-tab"><span class="nav-art nav-art-journal" aria-hidden="true"></span>回忆</span>
+          </div>
+
+          <dialog class="point-dialog" id="point-dialog" aria-labelledby="point-title">
+            <header class="point-dialog-head">
+              <span class="map-prop" id="point-prop" aria-hidden="true"></span>
+              <div>
+                <h3 id="point-title"></h3>
+                <p class="point-visit" id="point-visit"></p>
+              </div>
+              <form method="dialog"><button type="submit" aria-label="关闭详情" autofocus>×</button></form>
+            </header>
+            <div class="point-dialog-scroll" role="region" aria-label="卡池奖品与打卡奖励" tabindex="0">
+              <div id="point-pools"></div>
+              <dl class="point-first-reward">
+                <div>
+                  <dt id="point-reward-label"></dt>
+                  <dd><span class="reward-ticket point-ticket" id="point-ticket" aria-hidden="true"></span><span id="point-reward"></span></dd>
+                </div>
+              </dl>
+            </div>
+          </dialog>
+        </section>
+      </figure>
+
+      <aside class="plan" aria-label="景区地图评审说明">
+        <section>
+          <h2>地图选点</h2>
+          <p>空心铜环表示未打卡，实心足迹章表示已打卡，小店保留商户轮廓。点选地标恢复其局部色彩，加强金边和石座柔影。待解锁的卡池对应哑金票券，已解锁的卡池显示服装章。手作铺可同时预览首次到店票券和共享池进度。</p>
+          <p class="reference">轻点地标或路牌，在画面中央打开详情，收起时回到地图上的该点。</p>
+        </section>
+
+        <section>
+          <h2>全景区收集</h2>
+          <ul>
+            <li>底部常驻 <strong>2/6 套</strong>，六枚服装章亮起两枚。两套主推装扮各展示一张服饰细节横图，短名放在下方。</li>
+            <li>套装部件集齐计入总进度，共享套装和其它奖励分别按 ID 去重。下排统计表情、动作、背景。</li>
+            <li>点击「全部奖励」可预览各卡池的地点归属、可收集套装及解锁条件。收起后回到原选点。</li>
+          </ul>
+          <p class="reference"><a href="../../../docs/一期产品规则与业务流程.md">到访与卡池规则</a></p>
+        </section>
+
+        <section>
+          <h2>素材与范围</h2>
+          <p>套装裁自已确认素材。弹层列出当前点位关联卡池内的奖品、已收集的项目和套装部件进度。点位与奖品配置为评审样例。</p>
+          <p class="reference"><a href="./README.md#已确认的交互">已确认方案</a> · <a href="../../../reviews/2026-11-05-wardrobe/selected/README.md">套装素材来源</a></p>
+        </section>
+
+        <section>
+          <h2>复验路径</h2>
+          <p>依次选大瀑布、天星桥、手作铺，核对地点、奖品及收集状态。展开全部奖励可查看全景区概览。</p>
+          <p class="reference"><a href="./README.md#归档复验">本轮实屏与验收记录</a></p>
+        </section>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

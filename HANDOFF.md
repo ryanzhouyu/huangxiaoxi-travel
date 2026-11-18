@@ -6,7 +6,7 @@
 
 2026-11-19 汇总[游客端确认主线与资料取舍](docs/游客端设计资料取舍.md)。伙伴首页已采用左右道具与底部对白，衣橱和回忆已接入游客评审。现行实屏见[首页与导航验收](docs/伙伴首页与主场景导航验收.md)和[衣橱与回忆接入验收](docs/衣橱与回忆接入计划.md)。淘汰稿的原件与复盘证据从 Git 旧提交查阅。
 
-「游玩」首层以[章节地图确认稿](http://127.0.0.1:8782/output/explore-chapter-map/2026-11-18/index.html?v=landmark-light-20261118)为视觉依据。下一步体验工作接入游客游玩入口，再衔接景区章节、实际景点和到访结果。[地图交互与实屏](output/explore-chapter-map/2026-11-18/README.md)
+「游玩」首层以[贵州章节地图确认稿](output/explore-chapter-map/2026-11-18/README.md)为依据。黄果树章内已确认[景区导览与景点卡池详情](output/huangguoshu-chapter-guide/2026-11-19/README.md)，包含地图点位、全景区收集概览和景点居中弹层。两层均为独立视觉稿。接入游客游玩入口时，使用正式点位、卡池和到访数据衔接两层。[打开黄果树确认稿](http://127.0.0.1:8782/output/huangguoshu-chapter-guide/2026-11-19/index.html)
 
 当前运行入口为[游客评审原型](http://127.0.0.1:8782/design/review/index.html)。试穿、手账和 PNG 导出可操作，身份、现场核验和结算使用隔离评审适配器。复验用的凭证与故障设置见[评审工具](http://127.0.0.1:8782/design/review/desk.html)及[运行说明](design/review/README.md)。
 

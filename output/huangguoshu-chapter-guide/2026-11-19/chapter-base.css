@@ -1,0 +1,268 @@
+/* 评审画布、章节表头与共用底栏。 */
+:root {
+  --heading: KaiTi, "Kaiti SC", STKaiti, "Songti SC", SimSun, serif;
+  --body: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --paper: #fcf0d5;
+  --ink: #42352b;
+  font-family: var(--body);
+  color: #f1e7ce;
+  background: #222d25;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: radial-gradient(ellipse at 50% 19%, #4a594280, transparent 58%); }
+h1, h2, h3, p, figure { margin: 0; }
+h1, h2, h3 { font-family: var(--heading); line-height: 1.13; }
+a { color: inherit; }
+.review { width: min(100% - 28px, 930px); margin: auto; padding: 36px 0 50px; }
+.review-head { display: grid; justify-items: center; gap: 9px; margin-bottom: 27px; text-align: center; }
+.review-head h1 { font-size: clamp(31px, 4.9vw, 48px); font-weight: 700; letter-spacing: .045em; }
+.review-head p { color: #d7cfb5; font-size: 14px; }
+.phone {
+  position: relative;
+  isolation: isolate;
+  container: phone / size;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 390 / 844;
+  min-height: 650px;
+  border-radius: 11px;
+  background: #24382c;
+  box-shadow: 0 15px 42px #1017119c, 0 0 0 1px #bfac7d85;
+}
+.map-screen {
+  --edge: 15px;
+  --safe: 0px;
+  --nav-heading: var(--heading);
+}
+.chapter-head { position: relative; padding: 22px 17px 0; text-shadow: 0 2px 5px #16281fbe; }
+.back-label {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 11px 3px 9px;
+  border: 1px solid #d0b484b5;
+  border-radius: 5px 8px 5px 7px;
+  color: #fff0d0;
+  background: #24372cdb;
+  box-shadow: 0 2px 8px #16241847;
+  font-size: 13px;
+  font-weight: 650;
+}
+.back-label b { font: 22px/1 var(--heading); }
+.chapter-title { margin-top: 15px; }
+.chapter-title p { color: #fff3d5; font-size: 13px; letter-spacing: .13em; font-weight: 650; }
+.chapter-title h2 { color: #fff1d2; font-size: 42px; margin-top: 3px; letter-spacing: .05em; }
+.map-progress {
+  position: absolute;
+  right: 16px;
+  top: 112px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 9px;
+  border: 1px solid #dfc69c95;
+  border-radius: 5px 8px 5px 7px;
+  background: #273c31de;
+  color: #f5e5c9;
+  font-size: 12px;
+}
+.map-progress strong { color: #fff0bd; font-size: 15px; font-variant-numeric: tabular-nums; }
+.level-marker {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  display: grid;
+  justify-items: center;
+  transform: translate(-50%, -8px);
+}
+.map-caption { position: absolute; right: 17px; bottom: 139px; color: #fff0d5; font-size: 10px; text-shadow: 0 1px 4px #17281d; }
+.mock-nav { position: absolute; inset: auto 0 0; }
+.plan { display: grid; gap: 16px; margin-top: 32px; color: var(--ink); }
+.plan > section { padding: 20px 22px; border: 1px solid #b99b64; border-radius: 5px 15px 5px 12px; background: #f6ead0; }
+.plan h2 { margin-bottom: 11px; font-size: 26px; }
+.plan p, .plan li, .plan td, .plan th { font-size: 14px; line-height: 1.65; }
+.plan ul { margin: 0; padding-left: 1.25em; }
+.plan li + li { margin-top: 7px; }
+.plan a { color: #436143; text-underline-offset: 3px; }
+@media (max-width: 485px) {
+  .plan > section { padding: 16px 14px; }
+}
+
+/* 导览布局与景区奖励概览。 */
+.review { width: min(100% - 28px, 900px); }
+.guide-layout { display: grid; grid-template-columns: minmax(0, 390px) minmax(0, 410px); justify-content: center; gap: 27px; }
+.guide-layout figcaption { display: flex; justify-content: space-between; gap: 6px; margin-bottom: 9px; font-size: 14px; font-weight: 650; }
+.guide-layout figcaption span { color: #d4cdb4; font-size: 12px; font-weight: normal; }
+.guide-layout .plan { align-content: start; gap: 12px; margin-top: 25px; }
+.plan .reference { margin-top: 8px; }
+.guide .map-caption { left: 17px; right: auto; bottom: 195px; }
+.guide .level-marker {
+  min-width: 100px;
+  min-height: 48px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+.guide .level-marker:focus-visible { outline: 2px solid #fff0b5; outline-offset: 4px; border-radius: 7px; }
+.guide-dock {
+  position: absolute;
+  bottom: 59px;
+  inset-inline: 15px;
+  border: 1px solid #b99762;
+  border-radius: 5px 13px 5px 10px;
+  background: linear-gradient(145deg, #fff2d4, #ecdbb4);
+  box-shadow: 0 4px 14px #18281f96, inset 0 0 0 2px #fff6dc80;
+  color: var(--ink);
+}
+.collection-row {
+  display: grid;
+  grid-template-columns: max-content minmax(28px, 1fr) max-content;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  padding: 7px 11px;
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid #b697655c;
+  border-radius: 5px 12px 0 0;
+  color: #4d432f;
+  background: #f5e4bc;
+  cursor: pointer;
+  font: 700 13px/1.2 var(--body);
+}
+.collection-row:hover { background: #f9eac8; }
+.collection-row:focus-visible, .close-overview:focus-visible { outline: 2px solid #486047; outline-offset: -3px; }
+.collection-title { white-space: nowrap; }
+.collection-title strong { margin-left: 4px; color: #3c533b; font-weight: 760; }
+.suit-progress { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; }
+.suit-progress span { height: 7px; min-width: 0; border: 1px solid #b997638a; border-radius: 2px; background: #e4d2a9; }
+.suit-progress .collected { border-color: #66805b; background: linear-gradient(#829672,#566e50); }
+.pool-overview {
+  position: absolute;
+  z-index: 2;
+  inset-inline: -1px;
+  bottom: calc(100% + 5px);
+  padding: 0 11px 7px;
+  border: 1px solid #b99762;
+  border-radius: 6px 12px 6px 10px;
+  background: linear-gradient(150deg, #fff0d3, #eddbb3);
+  box-shadow: 0 5px 17px #18281fb7;
+}
+.pool-overview[hidden] { display: none; }
+.pool-overview header { display: flex; justify-content: space-between; align-items: center; }
+.pool-overview h3 { font-size: 23px; }
+.close-overview { width: 44px; height: 44px; padding: 0; border: 0; border-radius: 4px; color: #694932; background: transparent; font-size: 24px; cursor: pointer; }
+.pool-row { display: flex; gap: 6px; justify-content: space-between; align-items: center; min-height: 37px; border-top: 1px solid #ba9c6669; font-size: 13px; }
+.pool-row span { color: #53634a; font-size: 12px; }
+
+@media (max-width: 825px) {
+  .guide-layout { grid-template-columns: minmax(0, 390px); }
+  .guide-layout .plan { margin-top: 0; }
+}
+
+/* 地标精灵图、地名、票券和收集印章。 */
+:root { --props: url("./assets/landmark-props.png"); }
+.game-guide .level-marker {
+  --prop-size: 66px;
+  min-width: 96px;
+  padding: 0;
+  transform: translate(-50%, calc(-1 * var(--prop-size) + 5px));
+}
+.game-guide .marker-duopotang { --x: 25%; --y: 32%; }
+.game-guide .marker-waterfall { --x: 78%; --y: 56%; }
+.game-guide .marker-market { --x: 32%; --y: 69%; }
+.game-guide .marker-tianxing { --x: 68%; --y: 71%; }
+.map-prop {
+  --prop-size: 66px;
+  display: block;
+  width: var(--prop-size);
+  height: var(--prop-size);
+  flex: 0 0 var(--prop-size);
+  background-image: var(--props);
+  background-repeat: no-repeat;
+  background-size: 200% 200%;
+  filter: drop-shadow(0 4px 2px #2534219c);
+}
+.level-marker .map-prop { --prop-size: inherit; }
+.prop-pending { background-position: left top; }
+.prop-visited { background-position: right top; }
+.prop-shop { background-position: left bottom; }
+.trail-name {
+  min-width: 61px;
+  padding: 3px 8px 4px;
+  border-radius: 2px 6px 2px 5px;
+  background: linear-gradient(158deg,#40553c,#273a2d);
+  box-shadow: inset 0 0 0 1px #d3b777b3, 0 2px 5px #243826a1;
+  color: #fff0c9;
+  font: 700 17px/1.05 var(--heading);
+  text-shadow: 0 1px 2px #193224;
+  white-space: nowrap;
+}
+.reward-ticket {
+  position: absolute;
+  top: calc(var(--prop-size) - 37px);
+  left: calc(50% + 14px);
+  display: grid;
+  place-items: center;
+  width: 49px;
+  height: 27px;
+  color: #50391f;
+  background: var(--props) -61px -74px / 119px 119px no-repeat;
+  filter: drop-shadow(0 1px 2px #4a382475);
+  font: 750 12px/1 var(--body);
+  white-space: nowrap;
+  transform: rotate(-7deg);
+}
+.marker-suits, .pool-stamps { display: flex; gap: 3px; }
+.marker-suits {
+  position: absolute;
+  top: calc(var(--prop-size) - 27px);
+  left: calc(50% + 14px);
+  transform: rotate(7deg);
+}
+.suit-stamp, .game-guide .suit-progress span {
+  display: grid;
+  width: 19px;
+  height: 21px;
+  min-width: 0;
+  place-items: center;
+  border: 1px solid #8c805d;
+  border-radius: 5px 5px 7px 7px;
+  background: #ebddb4;
+  box-shadow: inset 0 0 0 1px #fcf0cc82;
+}
+.suit-stamp::before {
+  content: "";
+  width: 68%;
+  height: 67%;
+  background: #978864;
+  clip-path: polygon(26% 4%,37% 0,50% 16%,63% 0,74% 4%,100% 39%,80% 58%,72% 46%,74% 100%,26% 100%,28% 46%,20% 58%,0 39%);
+}
+.suit-stamp.collected, .game-guide .suit-progress .collected {
+  background: linear-gradient(145deg,#70845d,#435a40);
+  border-color: #9b8151;
+  box-shadow: inset 0 0 0 1px #e9c28580;
+}
+.suit-stamp.collected::before { background: #ffe2a4; }
+.marker-suits .suit-stamp { width: 17px; height: 19px; box-shadow: 0 1px 3px #242611a1; }
+.game-guide .suit-progress { width: min(100%, 149px); justify-self: center; }
+.game-guide .suit-progress span { width: 100%; max-width: 22px; }
+.game-guide .collection-row { min-height: 47px; background: linear-gradient(160deg,#fbefcc,#ead8b0); }
+.game-guide .collection-row:hover { background: #fff2cf; }
+.game-guide .pool-row { display: grid; grid-template-columns: minmax(70px, 1fr) auto auto; }
+.game-guide .pool-row-status { min-width: 80px; text-align: right; }
+@container phone (max-height: 805px) {
+  .game-guide .level-marker { --prop-size: 58px; }
+  .game-guide .marker-duopotang { --y: 32%; }
+  .game-guide .marker-waterfall { --x: 78%; --y: 49%; }
+  .game-guide .marker-market { --x: 29%; --y: 63%; }
+  .game-guide .marker-tianxing { --y: 65%; }
+}
+@container phone (max-height: 695px) {
+  .game-guide .marker-market { --x: 30%; --y: 67.6%; }
+  .game-guide .marker-market .trail-name { position: absolute; top: -16px; }
+}
