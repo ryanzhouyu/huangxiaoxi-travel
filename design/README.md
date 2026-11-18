@@ -14,7 +14,7 @@ npm --prefix design start
 
 | 用途 | 入口与状态 |
 | --- | --- |
-| 视觉与交互评审原型 | [review/desk.html](http://127.0.0.1:8765/design/review/desk.html)，[评审说明](review/README.md) |
+| 黔山同行游客原型 | [review/index.html](http://127.0.0.1:8765/design/review/index.html)，[评审说明](review/README.md) |
 | 当前游客演示 | [demo/index.html](http://127.0.0.1:8765/design/demo/index.html) |
 | 三栏投屏台 | [demo/stage.html](http://127.0.0.1:8765/design/demo/stage.html)，准备／备份／回放与游客业务分离 |
 | 旧单页准备台 | [demo/presenter.html](http://127.0.0.1:8765/design/demo/presenter.html)，仍可使用 |

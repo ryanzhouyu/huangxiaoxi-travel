@@ -1,0 +1,648 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "label": "到访 gate",
+      "balance": 2,
+      "reward": 2
+    },
+    {
+      "label": "抽取 cloud",
+      "item": "mountain-top",
+      "balance": 1
+    },
+    {
+      "label": "抽取 cloud",
+      "item": "mountain-bottom",
+      "balance": 0
+    },
+    {
+      "label": "到访 gate",
+      "balance": 0,
+      "reward": 0
+    },
+    {
+      "label": "到访 ridge",
+      "balance": 2,
+      "reward": 2
+    },
+    {
+      "label": "到访 shop",
+      "balance": 3,
+      "reward": 1
+    },
+    {
+      "label": "到访 brook",
+      "balance": 7,
+      "reward": 2
+    },
+    {
+      "label": "抽取 cloud",
+      "item": "mountain-shoes",
+      "balance": 6
+    },
+    {
+      "label": "抽取 cloud",
+      "item": "wave",
+      "balance": 5
+    },
+    {
+      "label": "抽取 cloud",
+      "item": "mountain-hair",
+      "balance": 4
+    },
+    {
+      "label": "抽取 cloud",
+      "item": "mountain-bg",
+      "balance": 3
+    },
+    {
+      "label": "抽取 cloud",
+      "item": "joy",
+      "balance": 2
+    },
+    {
+      "label": "抽取 bloom",
+      "item": "flower-shoes",
+      "balance": 1
+    },
+    {
+      "label": "抽取 bloom",
+      "item": "flower-hair",
+      "balance": 0
+    },
+    {
+      "label": "导出真实 PNG，与预览和入库图片逐字节相同",
+      "width": 680,
+      "height": 950
+    },
+    {
+      "label": "保存新搭配和刷新后，历史作品图片保持原值"
+    },
+    {
+      "label": "浏览器返回受草稿守卫保护，另一标签保存时保留本页试穿并提示冲突"
+    },
+    {
+      "label": "适配设计视口",
+      "width": 360,
+      "height": 640
+    },
+    {
+      "label": "适配设计视口",
+      "width": 430,
+      "height": 932
+    },
+    {
+      "label": "适配设计视口",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "label": "适配设计视口",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "label": "360×640 另模拟 30px 底部安全区"
+    },
+    {
+      "label": "未登录扫码后恢复原地点和凭证，身份隔离"
+    }
+  ],
+  "shots": [
+    {
+      "name": "entry",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "entry-terms",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "code",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "code-error",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "onboarding",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "partner",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "memories-empty",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "works-empty",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "explore",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "scene",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "places",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "gift",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "gift-result",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "wardrobe",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "pool-locked",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "point-gate",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "checkin-error",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "checkin",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "receipt-first",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "pool-ready",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "source",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "draw-unknown",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "draw-result",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "pool-empty-balance",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "opportunities",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "receipt-repeat",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "point-ridge",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "point-shop",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "activity",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "activity-done",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "point-brook",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "pool-complete",
+      "width": 390,
+      "height": 844,
+      "fullPage": true
+    },
+    {
+      "name": "opportunities-exhausted",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "collection",
+      "width": 390,
+      "height": 844,
+      "fullPage": true
+    },
+    {
+      "name": "outfit",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "memories",
+      "width": 390,
+      "height": 844,
+      "fullPage": true
+    },
+    {
+      "name": "event",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "compose",
+      "width": 390,
+      "height": 844,
+      "fullPage": true
+    },
+    {
+      "name": "wardrobe-dirty",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "compose-error",
+      "width": 390,
+      "height": 844,
+      "fullPage": true
+    },
+    {
+      "name": "preview",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "work",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "work-zoom",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "share",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "works",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "account",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "wallet",
+      "width": 390,
+      "height": 844,
+      "fullPage": true
+    },
+    {
+      "name": "ledger",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "wardrobe-conflict",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "not-found",
+      "width": 390,
+      "height": 844,
+      "fullPage": false
+    },
+    {
+      "name": "partner",
+      "width": 360,
+      "height": 640,
+      "fullPage": false
+    },
+    {
+      "name": "scene",
+      "width": 360,
+      "height": 640,
+      "fullPage": false
+    },
+    {
+      "name": "pool",
+      "width": 360,
+      "height": 640,
+      "fullPage": false
+    },
+    {
+      "name": "wardrobe",
+      "width": 360,
+      "height": 640,
+      "fullPage": false
+    },
+    {
+      "name": "memories",
+      "width": 360,
+      "height": 640,
+      "fullPage": false
+    },
+    {
+      "name": "memories-bottom",
+      "width": 360,
+      "height": 640,
+      "fullPage": false
+    },
+    {
+      "name": "compose",
+      "width": 360,
+      "height": 640,
+      "fullPage": false
+    },
+    {
+      "name": "compose-bottom",
+      "width": 360,
+      "height": 640,
+      "fullPage": false
+    },
+    {
+      "name": "work",
+      "width": 360,
+      "height": 640,
+      "fullPage": false
+    },
+    {
+      "name": "partner",
+      "width": 430,
+      "height": 932,
+      "fullPage": false
+    },
+    {
+      "name": "scene",
+      "width": 430,
+      "height": 932,
+      "fullPage": false
+    },
+    {
+      "name": "pool",
+      "width": 430,
+      "height": 932,
+      "fullPage": false
+    },
+    {
+      "name": "wardrobe",
+      "width": 430,
+      "height": 932,
+      "fullPage": false
+    },
+    {
+      "name": "memories",
+      "width": 430,
+      "height": 932,
+      "fullPage": false
+    },
+    {
+      "name": "memories-bottom",
+      "width": 430,
+      "height": 932,
+      "fullPage": false
+    },
+    {
+      "name": "compose",
+      "width": 430,
+      "height": 932,
+      "fullPage": false
+    },
+    {
+      "name": "compose-bottom",
+      "width": 430,
+      "height": 932,
+      "fullPage": false
+    },
+    {
+      "name": "work",
+      "width": 430,
+      "height": 932,
+      "fullPage": false
+    },
+    {
+      "name": "partner",
+      "width": 1440,
+      "height": 1000,
+      "fullPage": false
+    },
+    {
+      "name": "scene",
+      "width": 1440,
+      "height": 1000,
+      "fullPage": false
+    },
+    {
+      "name": "pool",
+      "width": 1440,
+      "height": 1000,
+      "fullPage": false
+    },
+    {
+      "name": "wardrobe",
+      "width": 1440,
+      "height": 1000,
+      "fullPage": false
+    },
+    {
+      "name": "memories",
+      "width": 1440,
+      "height": 1000,
+      "fullPage": false
+    },
+    {
+      "name": "memories-bottom",
+      "width": 1440,
+      "height": 1000,
+      "fullPage": false
+    },
+    {
+      "name": "compose",
+      "width": 1440,
+      "height": 1000,
+      "fullPage": false
+    },
+    {
+      "name": "compose-bottom",
+      "width": 1440,
+      "height": 1000,
+      "fullPage": false
+    },
+    {
+      "name": "work",
+      "width": 1440,
+      "height": 1000,
+      "fullPage": false
+    },
+    {
+      "name": "partner",
+      "width": 1280,
+      "height": 720,
+      "fullPage": false
+    },
+    {
+      "name": "scene",
+      "width": 1280,
+      "height": 720,
+      "fullPage": false
+    },
+    {
+      "name": "pool",
+      "width": 1280,
+      "height": 720,
+      "fullPage": false
+    },
+    {
+      "name": "wardrobe",
+      "width": 1280,
+      "height": 720,
+      "fullPage": false
+    },
+    {
+      "name": "memories",
+      "width": 1280,
+      "height": 720,
+      "fullPage": false
+    },
+    {
+      "name": "memories-bottom",
+      "width": 1280,
+      "height": 720,
+      "fullPage": false
+    },
+    {
+      "name": "compose",
+      "width": 1280,
+      "height": 720,
+      "fullPage": false
+    },
+    {
+      "name": "compose-bottom",
+      "width": 1280,
+      "height": 720,
+      "fullPage": false
+    },
+    {
+      "name": "work",
+      "width": 1280,
+      "height": 720,
+      "fullPage": false
+    },
+    {
+      "name": "wardrobe-safe-area",
+      "width": 360,
+      "height": 640,
+      "fullPage": false
+    }
+  ],
+  "errorLog": [],
+  "baseline": "1b2e99c",
+  "date": "2026-11-18",
+  "environment": "Windows Chrome via Playwright，手机尺寸为视口模拟",
+  "visualScope": "衣橱人物与分类按钮边界、地图各点位可点击、手账滚到底、安全区、实际 PNG 下载",
+  "export": {
+    "size": [
+      680,
+      950
+    ],
+    "sha256": "df71092f50a7c3cb3934ed3f3564d872bb2a037fd136e23dfcda883de2b7b01a"
+  }
+}

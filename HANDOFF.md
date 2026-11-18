@@ -4,7 +4,7 @@
 
 ## 当前接手位置
 
-2026-11-18 在 `codex/production-frontend` 完成黔山同行前端评审原型。用[评审工具](http://127.0.0.1:8782/design/review/desk.html)进入，启动及测试见[原型说明](design/review/README.md)；[前后视觉对照](output/frontend-review/2026-11-18/index.html)和[逐页优化](docs/前端体验优化与评审.md)供评审。原型能完成实际试穿与 PNG 导出，身份、现场核验和结算来自隔离评审适配器。
+2026-11-18 在 `codex/production-frontend` 完成黔山同行前端评审原型。根据用户反馈，视觉回到已确认的场景构图。直接打开[游客原型](http://127.0.0.1:8782/design/review/index.html)，凭证和故障设置在[评审工具](http://127.0.0.1:8782/design/review/desk.html)。启动及测试见[原型说明](design/review/README.md)，变化见[场景回调对照](output/frontend-review/2026-11-18/scene-revision/index.html)。原型能实际试穿与导出 PNG，身份、现场核验和结算来自隔离评审适配器。
 
 2026-11-18 先完成分支精简，当前接续分支为 `codex/production-frontend`，从完整研发基线 `e5fb44a52c8b63fb6d0b3566e2f4094e08d134d7` 派生。6 个无独有提交的旧阶段分支已清理。保留完整规划基线、后端交接分支、旧 main 与冻结演示标签，详见[分支精简与接续记录](docs/分支精简与接续记录-20261118.md)。
 

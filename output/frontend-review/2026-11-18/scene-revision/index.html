@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>黔山同行 · 场景视觉回调</title>
+  <link rel="icon" href="data:,">
+  <style>
+    * { box-sizing: border-box }
+    body { margin: 0; background: #eee0c3; color: #39271e; font: 16px/1.55 "Microsoft YaHei", "PingFang SC", sans-serif }
+    main { width: min(100%, 980px); margin: auto; padding: 24px 16px }
+    header { border-bottom: 1px solid #b89d74; padding-bottom: 22px }
+    h1, h2 { margin: 0; font-family: KaiTi, STKaiti, serif }
+    h1 { font-size: clamp(32px, 5.6vw, 50px) }
+    h2 { font-size: 25px }
+    p { margin: 4px 0 12px }
+    a { color: #773933 }
+    nav { display: flex; flex-wrap: wrap; gap: 12px }
+    article { padding-block: 24px; border-bottom: 1px solid #b89d74 }
+    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px }
+    figure { margin: 0; padding: 10px; text-align: center; border-radius: 6px; background: #fbefd6 }
+    figcaption { margin-bottom: 7px }
+    img { display: block; width: min(100%, 390px); height: auto; margin: auto }
+    @media (max-width: 530px) { main { padding-inline: 9px } figure { padding: 3px } .pair { gap: 6px } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>把风景还给旅伴</h1>
+      <p>左侧是上一轮评审截图，右侧是按「黔山同行」确认稿回调后的实际界面。点开查看原尺寸。</p>
+      <nav aria-label="评审入口">
+        <a href="../../../../design/review/index.html">进入游客原型</a>
+        <a href="../../../companion-visual-review/index.html">确认稿与旧演示</a>
+        <a href="./wardrobe-small.webp">360px 衣橱安全区</a>
+        <a href="./verification.json">本轮验证</a>
+      </nav>
+    </header>
+    <div id="scenes"></div>
+  </main>
+  <script type="module">
+    const scenes = [
+      ['partner', '伙伴首页', '夜景与全身旅伴占据主要画面。身份、打卡和图鉴是随身道具，对白靠近人物。'],
+      ['scene', '景区导览', '标题、分类、地点和见面礼浮在连续山水上。地图仍能筛选并打开原点位。'],
+      ['pool-ready', '云山卡池', '木廊与远山连到顶部，套装名回到竖牌上，角色像站在展台里。'],
+      ['wardrobe', '旅行衣橱', '工坊人物和可滑动衣架并排。状态用布签表达，七类装扮和保存操作留在下方。'],
+      ['memories', '旅行手账', '原画的装订、纸页和页签恢复，按日期沿照片和路线阅读。'],
+      ['preview', '回忆照相馆', '把预览当作一张冲洗出来的照片放进照相馆，收藏与返回作为底部操作。'],
+      ['entry', '旅途初见', '邮驿和人物先出现，号码和协议留在场景底部的信纸上。'],
+    ];
+    const photo = (source, caption, name, priority) =>
+      `<figure><figcaption>${caption}</figcaption><a href="${source}"><img ${priority ? '' : 'loading="lazy"'} src="${source}" alt="${name} · ${caption}" width="390" height="844"></a></figure>`;
+    document.querySelector('#scenes').innerHTML = scenes.map(([id, name, text], index) =>
+      `<article id="${id}"><h2>${name}</h2><p>${text}</p><div class="pair">
+        ${photo('../after/390x844/' + id + '.webp', '上一轮', name, index === 0)}
+        ${photo('./' + id + '.webp', '本轮回调', name, index === 0)}
+      </div></article>`
+    ).join('');
+  </script>
+</body>
+</html>

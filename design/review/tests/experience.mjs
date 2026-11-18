@@ -394,6 +394,18 @@ try {
         const save = page.locator('[data-action="saveLook"]');
         const rect = await save.boundingBox();
         assert.ok(rect && rect.y >= 0 && rect.y + rect.height <= height);
+        const actor = await page.locator('.wardrobe-actor img').boundingBox();
+        const stage = await page.locator('.wardrobe-stage').boundingBox();
+        const categories = await page.locator('.wardrobe-cabinet .tabs').boundingBox();
+        assert.ok(actor && stage && actor.y >= stage.y && actor.y + actor.height < stage.y + stage.height);
+        assert.ok(categories && categories.y + categories.height <= rect.y, '衣橱的部件分类被保存区遮住');
+      }
+      if (name === 'scene') {
+        const pinsReachable = await page.locator('.map-pin').evaluateAll(pins => pins.every(pin => {
+          const bounds = pin.firstElementChild.getBoundingClientRect();
+          return pin.contains(document.elementFromPoint(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2));
+        }));
+        assert.ok(pinsReachable, '地图分类或地点列表盖住了点位');
       }
       if (['memories', 'compose', 'wallet'].includes(name)) {
         await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));

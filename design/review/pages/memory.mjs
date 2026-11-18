@@ -37,13 +37,13 @@ export function memories({p, ui, here}) {
   } else if (!p.events.length) {
     body = empty('pin', '第一枚足迹，等你来。', '有效到访后，地点和时间会写进这本手账。', link('去游玩', '#explore', 'button primary'));
   } else {
-    body = section(chooser(ui.memory, 'memory'), 'range-paper') + (events.length ? [...byDay(events)].map(([date, rows]) =>
+    body = `<div class="journal-filter">${chooser(ui.memory, 'memory')}</div>` + (events.length ? [...byDay(events)].map(([date, rows]) =>
       `<section class="journal-day"><h2>${date}</h2><div class="journal-thread">${rows.map((event, index) =>
         button(`${imageOf(event.pointId)}<span class="entry-slip"><small>${time(event.at)} · ${h(event.kind)}</small><strong>${h(event.name)}</strong><span>${event.reward ? '收获 +' + event.reward + ' 次' : '留下一枚足迹'}</span></span>`, 'event', {value: event.id, classes: 'journal-entry' + (index % 2 ? ' reverse' : '')})
       ).join('')}</div></section>`
     ).join('') : empty('book', '这个日期范围没有足迹', '可以调整起止日期，或查看全部。', button('查看全部', 'clearRange', {classes: 'button secondary'})));
   }
-  return `<section class="journal"><header class="journal-head"><span>黔山同行</span><h1>旅行手账</h1></header>
+  return `<section class="journal"><header class="journal-head"><h1>旅行手账</h1><span>${icon('pin')} 黔山漫游</span></header>
     ${tabs([['events', '一路足迹'], ['works', '纪念作品']].map(([id, label]) => button(label, 'memoryTab', {value: id, classes: 'tab', attrs: pressed(ui.memoryTab === id)})))}
     <div class="stack">${body}</div>
     ${!works && events.length ? footer(link('用这些经历做纪念', composeUrl(here, {range: ui.memory.range, start: ui.memory.from, end: ui.memory.to}), 'button primary')) : ''}

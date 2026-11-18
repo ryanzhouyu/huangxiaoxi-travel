@@ -132,6 +132,8 @@ function updateCooldown() {
 function render({focus = false} = {}) {
   if (!ready) return;
   const active = activeControl();
+  const rack = app.querySelector('.wardrobe-parts');
+  const rackScroll = rack?.dataset.slot === ui.wardrobe?.slot ? rack?.scrollTop : 0;
   const codeValue = route.name === 'code' ? app.querySelector('[name="code"]')?.value : '';
   const root = ['partner', 'explore', 'memories'].includes(route.name);
   app.dataset.page = route.name;
@@ -150,6 +152,8 @@ function render({focus = false} = {}) {
     link(icon(symbol) + `<span>${label}</span>`, '#' + name, 'nav-tab').replace('<a ', name === route.name ? '<a aria-current="page" ' : '<a ')
   ).join('')}</nav>` : '';
   app.innerHTML = pending + body + nav;
+  const updatedRack = app.querySelector('.wardrobe-parts');
+  if (updatedRack && rackScroll) updatedRack.scrollTop = rackScroll;
   if (codeValue) app.querySelector('[name="code"]').value = codeValue;
   if (ui.busy) app.querySelectorAll('form input, form select').forEach(control => {control.disabled = true;});
   paint();
@@ -163,9 +167,10 @@ function render({focus = false} = {}) {
   } else if (active) app.querySelector(active)?.focus({preventScroll: true});
 }
 
-function openSheet(title, html) {
+function openSheet(title, html, material = 'paper') {
   if (!sheet.open) returnFocus = document.activeElement;
   sheetTitle.textContent = title;
+  sheet.dataset.material = material;
   sheetBody.innerHTML = html;
   if (!sheet.open) sheet.showModal();
   sheet.querySelector('[data-action="close"]').focus();
@@ -330,9 +335,9 @@ function committed(request, {progress: next, result}) {
     if (request.action === 'gift') openSheet('见面礼已收好', `<div class="prize-look">${stageFigure(catalog.lookFor('gift'))}</div>` +
       note('四件装扮已收进衣橱，当前穿着不变。') +
       link('立即试穿', href('wardrobe', {item: 'gift-top', from: request.source}), 'button primary') +
-      button('先收好', 'close', {classes: 'button secondary'}));
-    if (request.action === 'visit' || request.action === 'activity') openSheet('足迹已写进手账', receipt(result, request.source));
-    if (request.action === 'draw') openSheet('旅途收获', reveal(result, request.source));
+      button('先收好', 'close', {classes: 'button secondary'}), 'gift');
+    if (request.action === 'visit' || request.action === 'activity') openSheet('足迹已写进手账', receipt(result, request.source), 'receipt');
+    if (request.action === 'draw') openSheet('旅途收获', reveal(result, request.source), 'gift');
   }
 }
 

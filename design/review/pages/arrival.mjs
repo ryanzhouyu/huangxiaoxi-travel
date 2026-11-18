@@ -6,9 +6,9 @@ const art = id => stageFigure(catalog.lookFor(id));
 export function entry({ui, params}) {
   const byCode = params.get('resume') === '1' && ui.challenge;
   return `<section class="arrival scene">
-    <header class="arrival-heading"><span>黔山同行</span><h1>黄晓西</h1><p>山门见，一起走吧。</p></header>
+    <header class="arrival-heading"><h1>黄晓西</h1><span>黔山同行</span></header>
     <div class="arrival-doll">${art('gift')}</div>
-    ${section(`<p class="stamp">评审原型</p>
+    ${section(`<p class="arrival-letter">山门见，一起走吧。</p>
       ${header('用手机号进入', '使用评审用号码。本原型不会发送短信。')}
       ${byCode ? link('返回验证码', href('code')) : ''}
       <form data-submit="sendCode" class="form-stack">
@@ -63,7 +63,7 @@ export function partner({p, ui}) {
       ${link(`${icon('partner')}<span><strong>黄晓西</strong><small>旅行伙伴</small></span>`, href('account', {from: '#partner'}), 'identity light-chip')}
       ${link(`${icon('ticket')}<span>${p.balance} 次</span>`, href('wallet', {from: '#partner'}), 'light-chip balance-chip')}
     </header>
-    ${link('黔山漫游 ›', href('scene', {from: '#partner'}), 'location-chip')}
+    ${link('<span>黔山漫游 ›</span>', href('scene', {from: '#partner'}), 'location-chip')}
     ${button(stageFigure(ui.greet ? {...p.look, pose: p.owned.includes('wave') ? 'wave' : p.look.pose} : p.look), 'greet', {classes: 'companion-doll' + (ui.greet ? ' responding' : ''), attrs: 'aria-label="和黄晓西打招呼"'})}
     <aside class="satchel" aria-label="随身道具">${tools.map(([symbol, label, to]) => link(icon(symbol) + `<span>${label}</span>`, to, 'tool')).join('')}
       ${button(icon('pose') + '<span>动作</span>', 'openPoses', {classes: 'tool'})}

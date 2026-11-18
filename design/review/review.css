@@ -512,8 +512,6 @@ progress::-moz-progress-bar { background: var(--moss); border-radius: 6px; }
 .wardrobe-cabinet .tab { padding-inline: 2px; font-size: 13px; }
 .chosen { font-size: 14px; }
 .chosen span { color: var(--muted); }
-.wardrobe-parts { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: thin; padding: 2px 2px 4px; }
-.wardrobe-parts .artifact { flex: 0 0 max(78px, calc((100% - 18px) / 4)); min-height: 74px; }
 .source-art { display: grid; justify-items: center; gap: 6px; padding: 8px; margin-bottom: 5px; background: #f5e3c5; border-radius: 6px 16px; text-align: center; }
 .source-art .artifact-art, .source-art .artifact-art img { height: 130px; }
 .source-art .artifact-art .item-art { max-height: 130px; }
@@ -570,7 +568,6 @@ progress::-moz-progress-bar { background: var(--moss); border-radius: 6px; }
 .entry-slip span { color: var(--muted); font-size: 13px; }
 .work-card { gap: 2px; padding: 7px; align-content: start; }
 .work-card img { margin-bottom: 4px; width: 100%; height: 184px; object-fit: contain; background: #ead7b8; border-radius: 3px; }
-.range-paper { padding: 9px; }
 .date-fields { min-width: 0; }
 .studio {
   display: grid;

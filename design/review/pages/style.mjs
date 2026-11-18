@@ -51,13 +51,13 @@ export function poolPage({p, ui, id, here, back}) {
   else action = button(ui.busy ? '正在抽取…' : '抽取一次 · 消耗 1 次', 'draw', {value: id, disabled: !!(ui.busy || ui.pending)});
   const places = pool.points.map(id => catalog.points.find(point => point.id === id));
   return `${bar(pool.name, back, link(icon('ticket') + p.balance + ' 次', href('wallet', {from: here}), 'compact counter'))}
-    <div class="theater pool-theater ${id}"><div class="theater-caption"><span>${pool.name}</span><h2>${outfits.find(item => item.id === pool.outfits[0]).name}</h2></div>${stageFigure(catalog.lookFor(pool.outfits[0]))}
+    <div class="theater pool-theater ${id}"><div class="theater-caption"><h2>${outfits.find(item => item.id === pool.outfits[0]).name}</h2><span aria-hidden="true">✿</span></div>${stageFigure(catalog.lookFor(pool.outfits[0]))}
       ${link('套装图鉴 ›', href('outfit', {id: pool.outfits[0], from: here}), 'light-chip theater-link')}
     </div>
     <div class="stack overlap">
       ${section(`<div class="progress-title"><h2>本池收集</h2><b>${count} / ${total}</b></div><progress value="${count}" max="${total}" aria-label="本池收集"></progress>
         <div class="part-strip">${poolAssets.filter(item => item.outfit).map(item => button(artifact({...item, name: slots[item.slot]}, p.owned.includes(item.id) ? '已拥有' : '待收集'), 'source', {value: item.id, classes: 'artifact'})).join('')}</div>
-        <h3>${state}</h3>${note(complete ? '不会再扣除次数。' : '跨池排除已拥有项，剩余 ' + remaining.length + ' 件等概率。')}
+        <div class="pool-state"><strong>${state}</strong>${note(complete ? '不会再扣除次数。' : '跨池排除已拥有项，剩余 ' + remaining.length + ' 件等概率。')}</div>
         ${status(ui.error, 'error')}`, 'pool-inventory')}
       ${section(header('表情、姿势与背景') + `<div class="artifact-grid three">${poolAssets.filter(item => !item.outfit).map(item => button(artifact(item, p.owned.includes(item.id) ? '已拥有' : '待收集'), 'source', {value: item.id, classes: 'artifact'})).join('')}</div>`)}
       ${section('<span id="unlock-places" tabindex="-1"></span>' + header(locked && !complete ? '到访任一地点即可解锁' : '关联地点') + places.map(point => link(point.name, href('point', {id: point.id, from: here}))).join(''))}
@@ -73,17 +73,17 @@ export function wardrobe({p, ui, here, back}) {
   const category = Object.entries(slots).map(([slot, name]) => button(name, 'slot', {value: slot, classes: 'tab', attrs: pressed(slot === edit.slot)}));
   return `${bar('旅行衣橱', back, link('图鉴', href('collection', {from: here}), 'compact counter'))}
     <div class="wardrobe-stage scene" data-background="${edit.look.background}">
-      <div class="stage-label"><div><span>试衣间</span><h2>${dirty ? '试穿中' : '当前搭配'}</h2></div>${dirty ? '<span class="light-chip">尚未保存</span>' : ''}</div>
-      ${stageFigure(edit.look)}
-    </div>
-    <div class="wardrobe-cabinet">
-      ${tabs(category)}
-      <div class="chosen"><span>${slots[edit.slot]}</span><strong>${h(picked?.name)}</strong></div>
-      <div class="wardrobe-parts" aria-label="拥有的部件">${choices.map(item => button(
+      <div class="stage-label"><h2 class="cloth-label">${dirty ? '试穿中 · 尚未保存' : '当前搭配'}</h2></div>
+      <div class="wardrobe-actor">${stageFigure(edit.look)}</div>
+      <div class="wardrobe-parts" data-slot="${edit.slot}" aria-label="拥有的部件，向下滑动查看更多">${choices.map(item => button(
         artifact({...item, name: item.outfit ? outfits.find(outfit => outfit.id === item.outfit).name : item.name},
-          item.id === p.look[edit.slot] ? '已保存穿着' : item.id === picked?.id ? '正在试穿' : ''),
+          item.id === p.look[edit.slot] ? '已穿着' : item.id === picked?.id ? '试穿中' : ''),
         'equip', {value: item.id, classes: 'artifact', attrs: pressed(item.id === picked?.id)}
       )).join('')}</div>
+    </div>
+    <div class="wardrobe-cabinet">
+      <div class="chosen"><span>${slots[edit.slot]}</span><strong>${h(picked?.name)}</strong></div>
+      ${tabs(category)}
       ${status(ui.error, 'error')}
     </div>
     ${footer(button('保存搭配并返回', 'saveLook', {disabled: !dirty || !!(ui.busy || ui.pending)}) +
