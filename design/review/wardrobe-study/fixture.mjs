@@ -1,4 +1,4 @@
-import {POINTS} from '../../data.mjs';
+import {ASSETS, OUTFITS, POINTS} from '../../data.mjs';
 import * as store from '../../store.mjs';
 
 export const sources = {
@@ -9,6 +9,21 @@ export const sources = {
 };
 
 export const composeDraft = {title: '与晓西看山色', template: 'trail', selected: ['study-gate', 'study-ridge']};
+
+// 评审只借用上装原件生成配色，模拟衣橱容量。正式资产、获得规则和游客存档仍使用原件 ID。
+const colorSamples = [
+  {id:'mist', name:'晨岚', filter:'hue-rotate(62deg) saturate(.76)'},
+  {id:'day', name:'日影', filter:'hue-rotate(138deg) saturate(.9)'},
+  {id:'dusk', name:'暮云', filter:'hue-rotate(210deg) saturate(.8)'},
+  {id:'night', name:'月色', filter:'hue-rotate(292deg) saturate(.64)'},
+];
+export const stressTops = colorSamples.flatMap(color => ASSETS.filter(item => item.slot === 'top').map(item => ({
+  ...item,
+  id: 'sample-' + color.id + '-' + item.id,
+  name: OUTFITS.find(outfit => outfit.id === item.outfit).name + '·' + color.name,
+  original: item.id,
+  filter: color.filter,
+})));
 
 // 样本在独立标签页使用，库存由既有规则构成，两个对照入口使用同一份数据。
 export function makeFixture(profile = 'full') {

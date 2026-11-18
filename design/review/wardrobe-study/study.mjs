@@ -2,15 +2,20 @@ import {ASSETS, OUTFITS, SLOTS, asset, lookFor} from '../../data.mjs';
 import {prepareWardrobe, renderedLook, thumbnailUrl} from '../../demo/wardrobe-art.mjs';
 import {saveLook} from '../../store.mjs';
 import {h} from '../ui.mjs';
-import {composeDraft, makeFixture, sources} from './fixture.mjs';
+import {composeDraft, makeFixture, sources, stressTops} from './fixture.mjs';
+import {partGrid} from './grid.mjs';
 
 const params = new URLSearchParams(location.search);
 const atelier = params.get('layout') === 'atelier';
-const detailPicker = atelier && params.get('picker') === 'detail';
+const gridPicker = atelier && params.get('picker') === 'grid';
+const detailPicker = gridPicker || (atelier && params.get('picker') === 'detail');
+const stress = gridPicker && params.get('profile') === 'stress';
+const testParts = new Map(stress ? stressTops.map(item => [item.id, item]) : []);
+const itemById = id => testParts.get(id) || asset(id);
 const sourceId = Object.hasOwn(sources, params.get('source')) ? params.get('source') : 'partner';
 const source = sources[sourceId];
 const profile = params.get('profile') === 'starter' ? 'starter' : 'full';
-const requestedItem = asset(params.get('item'));
+const requestedItem = itemById(params.get('item'));
 const db = makeFixture(profile);
 const sample = db.accounts[db.current];
 const sourceDraft = sourceId === 'compose' ? {
@@ -20,6 +25,7 @@ const sourceDraft = sourceId === 'compose' ? {
 const root = document.querySelector('#study');
 if (atelier) document.body.dataset.layout = 'atelier';
 if (detailPicker) document.body.dataset.picker = 'detail';
+if (gridPicker) document.body.dataset.grid = '';
 const sheet = document.querySelector('#sheet');
 const title = document.querySelector('#sheet-title');
 const sheetBody = sheet.querySelector('.sheet-body');
@@ -28,23 +34,26 @@ const thumbs = new Map();
 const wardrobeHome = '#wardrobe';
 const templateLabels = {single: '单页纪念', trail: '足迹长图'};
 const draftKey = 'hxx.wardrobe-study.v1.' + sourceId + '.' + profile + '.' + (requestedItem?.id || 'plain') +
-  (atelier ? '.atelier' : '') + (detailPicker ? '.detail' : '');
+  (atelier ? '.atelier' : '') + (gridPicker ? (stress ? '.grid.stress' : '.grid') : detailPicker ? '.detail' : '');
 const scenes = {paper: 'travel-journal.webp', 'mountain-bg': 'cloud-pavilion.webp', 'flower-bg': 'flower-creek.webp'};
 const sceneUrl = filename => new URL('../../demo/assets/scenes/' + filename, import.meta.url);
-const owned = item => item && sample.owned.includes(item.id);
+const owned = item => item && sample.owned.includes(item.original || item.id);
+let savedLook = {...sample.look};
 let draft = {...sample.look};
 let slot = 'top', error = '', busy = false, returned = '', view = 'wardrobe';
 let failNext = params.get('save') === 'reject';
 let lastFocus;
 let inspection;
 const scrollBySlot = new Map();
+const gridBySlot = new Map();
 
 function readDraft() {
   try {
     const saved = JSON.parse(sessionStorage.getItem(draftKey));
     if (!saved || !Object.hasOwn(SLOTS, saved.slot)) return false;
     for (const part of Object.keys(SLOTS)) {
-      if (!owned(asset(saved.draft?.[part])) || asset(saved.draft[part]).slot !== part) return false;
+      const item = itemById(saved.draft?.[part]);
+      if (!owned(item) || item.slot !== part) return false;
     }
     slot = saved.slot;
     draft = {...saved.draft};
@@ -64,12 +73,13 @@ if (!readDraft() && owned(requestedItem)) {
   slot = requestedItem.slot;
   draft[slot] = requestedItem.id;
 }
-const dirty = () => Object.keys(SLOTS).some(part => draft[part] !== sample.look[part]);
+const dirty = () => Object.keys(SLOTS).some(part => draft[part] !== savedLook[part]);
 const makeAction = (action, label, classes = 'plain', state = '') =>
   `<button type="button" data-action="${action}" class="${classes}" ${state}>${label}</button>`;
-const exit = () => { error = ''; draft = {...sample.look}; persistDraft(); showSource('cancel'); };
+const exit = () => { error = ''; draft = {...savedLook}; persistDraft(); showSource('cancel'); };
 
 function term(item) {
+  if (item.original) return item.name;
   return OUTFITS.find(outfit => outfit.id === item.outfit)?.name || item.name;
 }
 function faceCrop(item) {
@@ -84,37 +94,47 @@ function faceCrop(item) {
   return thumbs.get(item.id);
 }
 function imageFor(item) {
-  if (item.outfit) return thumbnailUrl(item.id);
+  if (item.outfit) return thumbnailUrl(item.original || item.id);
   if (item.slot === 'expression') return faceCrop(item);
   if (item.slot === 'pose') return renderedLook({...lookFor('start-c'), pose: item.id}).src;
   return sceneUrl(scenes[item.id]).href;
 }
 function figure(look, klass = 'figure') {
-  return `<img class="${klass}" src="${renderedLook(look).src}" alt="黄晓西的全身搭配">`;
+  const style = testParts.get(look.top);
+  const figureLook = style ? renderedLook({...look, top: style.original}, {topFilter:style.filter}) : renderedLook(look);
+  return `<img class="${klass}" src="${figureLook.src}" alt="黄晓西的全身搭配">`;
 }
 function availableParts() {
-  return ASSETS.filter(item => item.slot === slot && owned(item));
+  return [...ASSETS, ...testParts.values()].filter(item => item.slot === slot && owned(item));
+}
+function quickParts(items) {
+  if (!gridPicker || items.length <= 6) return items;
+  const pinned = new Set([savedLook[slot], draft[slot]]);
+  const leading = items.filter(item => !pinned.has(item.id)).slice(0, 6 - pinned.size);
+  const quick = new Set([...leading.map(item => item.id), ...pinned]);
+  return items.filter(item => quick.has(item.id));
 }
 function wearLabel(item) {
-  if (sample.look[item.slot] === item.id) {
+  if (savedLook[item.slot] === item.id) {
     return detailPicker && !item.outfit ? '已保存' : '已保存穿着';
   }
   if (draft[item.slot] !== item.id) return '';
   return detailPicker && !item.outfit ? '正在预览' : '正在试穿';
 }
 function railCard(item) {
-  const saved = sample.look[slot] === item.id;
+  const saved = savedLook[slot] === item.id;
   const selected = draft[slot] === item.id;
   const label = wearLabel(item);
   const partClass = atelier ? 'part-' + item.slot : item.slot;
-  return makeAction('equip', `<img src="${imageFor(item)}" class="thumb ${partClass}" alt=""><span class="piece">${h(term(item))}</span>${label ? `<span class="wear-state">${label}</span>` : ''}`,
+  const filter = item.filter ? ` style="filter:${item.filter}"` : '';
+  return makeAction('equip', `<img src="${imageFor(item)}" class="thumb ${partClass}" alt=""${filter}><span class="piece">${h(term(item))}</span>${label ? `<span class="wear-state">${label}</span>` : ''}`,
     'hanger', `data-id="${item.id}" data-saved="${saved}" aria-pressed="${selected}"`);
 }
 
 function wardrobe() {
   const available = availableParts();
   const hasChange = dirty();
-  const activeName = asset(draft[slot]).name;
+  const activeName = itemById(draft[slot]).name;
   const stage = slot === 'background' ? scenes[draft.background] : 'wardrobe-studio.webp';
   const categories = Object.entries(SLOTS).map(([part, name]) =>
     makeAction('slot', name, 'slot', `aria-pressed="${part === slot}" data-slot="${part}"`)).join('');
@@ -123,7 +143,7 @@ function wardrobe() {
     reset: makeAction('reset', '恢复上次保存', 'text', !hasChange || busy ? 'disabled' : ''),
     leave: makeAction('leave', '取消并返回', 'text', busy ? 'disabled' : ''),
   };
-  const rail = `<div class="hangers" data-slot="${slot}" aria-label="${SLOTS[slot]}部件">${available.map(railCard).join('')}</div>`;
+  const rail = `<div class="hangers" data-slot="${slot}" aria-label="${SLOTS[slot]}部件">${quickParts(available).map(railCard).join('')}</div>`;
   const rack = atelier ? '' : `<aside class="rack" aria-label="${SLOTS[slot]}衣架">
       <div class="rack-strip"><strong>${SLOTS[slot]}</strong><span>${available.length} 件</span></div>${rail}
       <div class="rack-foot" aria-hidden="true"><span class="more-cue">继续下滑</span></div>
@@ -131,7 +151,8 @@ function wardrobe() {
   const picked = `<div class="picked"><strong>${h(activeName)}</strong><span class="rail-count">${available.length} 件<span class="more-cue" aria-hidden="true"> · 左右滑动</span></span></div>`;
   const selection = atelier ? (detailPicker ? rail : picked + rail)
     : `<div class="picked"><span>${slot === 'background' ? '预览背景' : SLOTS[slot]}</span><strong>${h(activeName)}</strong></div>`;
-  const inspect = makeAction('inspect', '查看大图', 'text inspect', `aria-haspopup="dialog"${busy ? ' disabled' : ''}`);
+  const browse = gridPicker ? '全部' + SLOTS[slot] + ' · ' + available.length + (slot === 'background' ? ' 张' : ' 件') : '查看大图';
+  const inspect = makeAction(gridPicker ? 'open-grid' : 'inspect', browse, 'text inspect', `aria-haspopup="dialog"${busy ? ' disabled' : ''}`);
   const finish = atelier
     ? `<div class="finish">${detailPicker ? inspect : actions.leave}${actions.reset}${actions.save}</div>`
     : `${actions.save}<div class="secondary-row">${actions.reset}${actions.leave}</div>`;
@@ -166,7 +187,7 @@ function sourcePage(){
   const context = sourceDraft ? `<dl><dt>标题</dt><dd>${h(sourceDraft.title)}</dd><dt>模板</dt><dd>${h(templateLabels[sourceDraft.template])}</dd><dt>已选经历</dt><dd>${h(sourceDraft.selected.join('、') || '尚未选择')}</dd></dl>` : '';
   return `<div class="source-page"><header class="top"><h1>${source.title}</h1></header><section class="source-note">
     <p>${returned==='save'?'搭配已保存。':'已返回，原搭配未变。'}</p>
-    <div class="source-figure">${figure(sample.look)}</div>${context}
+    <div class="source-figure">${figure(savedLook)}</div>${context}
     ${makeAction('wardrobe','返回衣橱','primary')}
   </section></div>`;
 }
@@ -215,7 +236,7 @@ function render(next=view,{focus=false,control=null}={}){
   view=next;
   root.dataset.view=view;
   root.dataset.look=Object.values(draft).join('/');
-  root.dataset.saved=Object.values(sample.look).join('/');
+  root.dataset.saved=Object.values(savedLook).join('/');
   root.setAttribute('aria-busy',String(busy));
   root.innerHTML=view==='wardrobe'?wardrobe():view==='catalog'?catalog():sourcePage();
   const rack=root.querySelector('.hangers');
@@ -232,8 +253,8 @@ function render(next=view,{focus=false,control=null}={}){
     heading.focus({preventScroll:true});
   }
 }
-function openSheet(label,body,{panel='',focusAction}={}){
-  if(!sheet.open)lastFocus=document.activeElement;
+function openSheet(label,body,{panel='',focusAction,trigger=document.activeElement}={}){
+  if(!sheet.open)lastFocus=trigger;
   sheet.dataset.panel=panel;
   title.textContent=label;
   sheetBody.innerHTML=body;
@@ -242,8 +263,9 @@ function openSheet(label,body,{panel='',focusAction}={}){
   const target = focusAction && sheetBody.querySelector(`[data-action="${focusAction}"]:enabled`);
   (target || title).focus({preventScroll:true});
 }
-function closeSheet(restore=true){
+function closeSheet(restore=true, control=document.activeElement){
   if(!sheet.open)return;
+  rememberGrid(control);
   sheet.close();
   inspection=undefined;
   if(restore && lastFocus?.isConnected)lastFocus.focus({preventScroll:true});
@@ -262,7 +284,7 @@ function inspectParts() {
   showInspection();
 }
 function showInspection(focusAction) {
-  const {items, index} = inspection;
+  const {items, index, fromGrid} = inspection;
   const item = items[index];
   const name = item.name;
   const state = wearLabel(item);
@@ -273,11 +295,13 @@ function showInspection(focusAction) {
     <span class="inspection-count" aria-live="polite">${index + 1} / ${items.length}</span>
     ${makeAction('inspect-next','下一件','text',index+1===items.length?'disabled':'')}
   </nav>` : '';
+  const filter = item.filter ? ` style="filter:${item.filter}"` : '';
   openSheet(name, `<figure class="inspection-media">
-    <img src="${imageFor(item)}" class="detail-${item.slot}" alt="${h(name)}">
+    <img src="${imageFor(item)}" class="detail-${item.slot}" alt="${h(name)}"${filter}>
     <figcaption>${state}</figcaption>
   </figure>${paging}
   <div class="inspection-actions">
+    ${fromGrid ? makeAction('return-grid','返回列表','text') : ''}
     ${makeAction(isCurrent?'close':'apply-inspection',isCurrent?'返回衣橱':trialLabel,'primary')}
   </div>`, {panel:'inspection',focusAction});
 }
@@ -297,6 +321,32 @@ function equipPart(item) {
   render(view,{control:`button.hanger[data-id="${item.id}"]`});
   revealSelection();
 }
+function rememberGrid(control = document.activeElement) {
+  const list = sheetBody.querySelector('.all-parts');
+  if (!list) return;
+  const previous = gridBySlot.get(slot);
+  const target = list.contains(control) ? control.dataset : previous;
+  gridBySlot.set(slot, {offset:list.scrollTop, id:target?.id, action:target?.action});
+}
+function showPartGrid(trigger) {
+  const items = availableParts();
+  inspection = undefined;
+  openSheet('全部' + SLOTS[slot] + ' · ' + items.length + (slot === 'background' ? ' 张' : ' 件'),
+    partGrid(items, {slot, nameFor:term, imageFor, labelFor:wearLabel, currentId:draft[slot], stress}),
+    {panel:'parts-grid',trigger});
+  const position = gridBySlot.get(slot);
+  if (position) {
+    const list = sheetBody.querySelector('.all-parts');
+    list.scrollTop = position.offset;
+    if (position.id) list.querySelector(`[data-action="${position.action}"][data-id="${position.id}"]`)?.focus({preventScroll:true});
+  }
+}
+function inspectFromGrid(control) {
+  rememberGrid(control);
+  const items = availableParts();
+  inspection = {items, index:items.findIndex(item => item.id === control.dataset.id), fromGrid:true};
+  showInspection();
+}
 function askLeave(){
   if(!dirty())return exit();
   openSheet('试穿尚未保存', `<p class="hint">可以保存这一身再返回，或放弃这次试穿。</p><div class="sheet-actions">
@@ -311,7 +361,10 @@ async function submit(){
   await new Promise(resolve=>setTimeout(resolve,180));
   try{
     if(failNext){failNext=false;throw new Error('暂时无法保存。你的试穿还在，可以重试。');}
-    saveLook(sample,draft);
+    const top = testParts.get(draft.top);
+    const validatedLook = top ? {...draft, top:top.original} : draft;
+    saveLook(sample,validatedLook);
+    savedLook = {...draft};
     persistDraft();
   }catch(problem){
     busy=false;
@@ -329,6 +382,13 @@ document.addEventListener('click',event=>{
   if(!control || control.disabled || busy)return;
   const {action,id,slot:part}=control.dataset;
   if(action==='close') closeSheet();
+  if(action==='open-grid') showPartGrid(control);
+  if(action==='return-grid') showPartGrid();
+  if(action==='grid-inspect') inspectFromGrid(control);
+  if(action==='grid-equip'){
+    closeSheet(false,control);
+    equipPart(itemById(id));
+  }
   if(action==='inspect') inspectParts();
   if(action==='inspect-previous') stepInspection(-1, action);
   if(action==='inspect-next') stepInspection(1, action);
@@ -347,16 +407,20 @@ document.addEventListener('click',event=>{
   if(action==='discard') exit();
   if(action==='save') void submit();
   if(action==='reset'){
-    draft={...sample.look};
+    draft={...savedLook};
     error='';
     persistDraft();
     announcement.textContent='已恢复到最近一次保存的搭配。';
     render(view,{control:`button.slot[data-slot="${slot}"]`});
   }
   if(action==='slot' && Object.hasOwn(SLOTS,part)){slot=part;persistDraft();render(view,{control:`button.slot[data-slot="${part}"]`});}
-  if(action==='equip') equipPart(asset(id));
+  if(action==='equip') equipPart(itemById(id));
 });
-sheet.addEventListener('cancel',event=>{event.preventDefault();closeSheet();});
+sheet.addEventListener('cancel',event=>{
+  event.preventDefault();
+  if (inspection?.fromGrid) showPartGrid();
+  else closeSheet();
+});
 sheet.addEventListener('keydown', event => {
   if (!inspection || !['ArrowLeft','ArrowRight'].includes(event.key)) return;
   const move = event.key === 'ArrowLeft' ? -1 : 1;

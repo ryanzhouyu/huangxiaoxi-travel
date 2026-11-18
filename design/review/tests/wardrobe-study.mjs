@@ -6,9 +6,11 @@ import {makeFixture, sources} from '../wardrobe-study/fixture.mjs';
 const {chromium} = createRequire(import.meta.url)(process.env.HXX_PLAYWRIGHT || 'playwright');
 const origin = process.env.HXX_STUDY_ORIGIN || 'http://127.0.0.1:8782';
 const layout = process.env.HXX_STUDY_LAYOUT;
-const detailPicker = layout === 'detail';
+const gridPicker = layout === 'grid';
+const detailPicker = layout === 'detail' || gridPicker;
 const atelier = layout === 'atelier' || detailPicker;
-const defaultOut = detailPicker ? 'wardrobe-detail-study' : atelier ? 'wardrobe-layout-study' : 'wardrobe-study-20261118';
+const defaultOut = gridPicker ? 'wardrobe-grid-study' :
+  detailPicker ? 'wardrobe-detail-study' : atelier ? 'wardrobe-layout-study' : 'wardrobe-study-20261118';
 const out = process.env.HXX_STUDY_OUT || '.codex/' + defaultOut;
 const browser = await chromium.launch({channel: 'chrome'});
 const checks = [], viewports = [], shots = [], errors = [];
@@ -37,7 +39,7 @@ async function open(viewport, query = '', baseline = false, touch = false) {
   });
   const url = new URL(baseline ? 'design/review/index.html#wardrobe?from=%23partner' : 'design/review/wardrobe-study/' + query, origin);
   if (atelier && !baseline) url.searchParams.set('layout', 'atelier');
-  if (detailPicker && !baseline) url.searchParams.set('picker', 'detail');
+  if (detailPicker && !baseline) url.searchParams.set('picker', layout);
   await page.goto(url.href);
   await (baseline ? page.locator('.wardrobe-stage').waitFor() : view(page));
   return page;
@@ -271,7 +273,7 @@ try {
     await touch.close();
     pass('模拟手机触摸横滑可选末项，桌面滚轮可翻选。短列表与长列表切换时舞台高度一致');
   }
-  if (detailPicker) {
+  if (detailPicker && !gridPicker) {
     const detail = await open(mobile);
     const dialog = detail.getByRole('dialog');
     const head = dialog.locator('h2');
@@ -328,6 +330,99 @@ try {
     assert.equal(await detail.evaluate(() => document.activeElement.dataset.id), 'mountain-bg');
     await detail.close();
     pass('大图从可见试穿项或第一个完整可见项进入，翻阅无写入，取消恢复焦点和横向位置，显式试穿或预览后定位到该项，背景整图及安全区可见');
+  }
+  if (gridPicker) {
+    const stress = await open(mobile, '?profile=stress', false, true);
+    const dialog = stress.getByRole('dialog');
+    const list = dialog.locator('.all-parts');
+    const gridChoice = id => dialog.locator('.grid-choice[data-id=' + id + ']');
+    const gridDetail = id => dialog.locator('.grid-detail[data-id=' + id + ']');
+    const current = await look(stress);
+    const browse = () => action(stress,'open-grid').click();
+    const gridOffset = () => list.evaluate(element => element.scrollTop);
+    const lastId = 'sample-night-flower-top';
+    assert.equal(await action(stress,'open-grid').innerText(), '全部上装 · 30 件');
+    assert.equal(await stress.locator('.hanger').count(), 6);
+    assert.equal(await equip(stress,lastId).count(), 0);
+    await browse();
+    assert.equal(await dialog.locator('h2').innerText(), '全部上装 · 30 件');
+    const breadth = await list.evaluate(element => {
+      const frame = element.getBoundingClientRect();
+      const inside = [...element.children].filter(card => {
+        const rect = card.getBoundingClientRect();
+        return rect.bottom <= frame.bottom && rect.top >= frame.top;
+      }).length;
+      return {fullCards:inside, total:element.children.length, horizontalOverflow:element.scrollWidth - element.clientWidth};
+    });
+    assert.deepEqual(breadth, {fullCards:9, total:30, horizontalOverflow:0});
+    viewports.push({gridWidth:360, height:640, ...breadth});
+    await capture(stress,'grid-360-thirty');
+    const scrollRegion = await list.boundingBox();
+    const scrolling = await stress.context().newCDPSession(stress);
+    const x = Math.round(scrollRegion.x + scrollRegion.width / 2);
+    const startY = Math.round(scrollRegion.y + scrollRegion.height * .8);
+    await scrolling.send('Input.dispatchTouchEvent',{type:'touchStart', touchPoints:[{x,y:startY}]});
+    for (const distance of [25,55,85,115,145,175]) {
+      await scrolling.send('Input.dispatchTouchEvent',{type:'touchMove', touchPoints:[{x,y:startY-distance}]});
+    }
+    await scrolling.send('Input.dispatchTouchEvent',{type:'touchEnd', touchPoints:[]});
+    await stress.waitForFunction(() => document.querySelector('.all-parts').scrollTop > 0);
+    await gridChoice(lastId).scrollIntoViewIfNeeded();
+    const end = await gridOffset();
+    assert.ok(end > 0);
+    await gridDetail(lastId).click();
+    assert.equal(await dialog.locator('h2').innerText(), '花溪漫步·月色');
+    assert.equal(await look(stress), current);
+    assert.equal(await look(stress,'data-saved'), current);
+    await capture(stress,'grid-360-last-detail');
+    await button(stress,'返回列表').click();
+    assert.equal(await gridOffset(), end);
+    assert.equal(await stress.evaluate(() => document.activeElement.dataset.id), lastId);
+    await button(stress,'关闭').click();
+    assert.equal(await stress.evaluate(() => document.activeElement.dataset.action), 'open-grid');
+    assert.equal(await look(stress), current);
+    await browse();
+    assert.equal(await gridOffset(), end);
+    await capture(stress,'grid-360-end-restored');
+    await gridChoice(lastId).click();
+    assert.ok(!await dialog.isVisible());
+    assert.equal(await look(stress), current.replace('start-c-top',lastId));
+    assert.equal(await look(stress,'data-saved'), current);
+    assert.equal(await stress.locator('.hanger').count(), 6);
+    assert.equal(await stress.evaluate(() => document.activeElement.dataset.id), lastId);
+    await selectionVisible(stress);
+    await capture(stress,'grid-360-try-last');
+    await browse();
+    assert.equal(await gridOffset(), end);
+    assert.equal(await gridChoice(lastId).getAttribute('aria-pressed'), 'true');
+    await stress.keyboard.press('Escape');
+    assert.ok(!await dialog.isVisible());
+    await slot(stress,'background');
+    await stress.evaluate(() => document.documentElement.style.setProperty('--safe', '30px'));
+    await browse();
+    assert.equal(await dialog.locator('h2').innerText(), '全部背景 · 3 张');
+    assert.equal(await list.evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length), 2);
+    const lastBackground = await gridChoice('flower-bg').boundingBox();
+    assert.ok(lastBackground.y + lastBackground.height <= 610);
+    await capture(stress,'grid-360-background');
+    await gridDetail('mountain-bg').click();
+    const scene = dialog.locator('.inspection-media img');
+    assert.match(await scene.getAttribute('src'), /cloud-pavilion\.webp$/);
+    assert.equal(await scene.evaluate(element => getComputedStyle(element).objectFit), 'contain');
+    await stress.keyboard.press('Escape');
+    assert.equal(await dialog.locator('h2').innerText(), '全部背景 · 3 张');
+    await gridChoice('mountain-bg').click();
+    assert.match(await stress.locator('.room').getAttribute('style'), /cloud-pavilion\.webp/);
+    await stress.reload();
+    await view(stress);
+    assert.match(await look(stress), /sample-night-flower-top\/.*\/mountain-bg$/);
+    await action(stress,'save').click();
+    await view(stress,'source');
+    assert.match(await look(stress,'data-saved'), /sample-night-flower-top\/.*\/mountain-bg$/);
+    assert.equal(await stress.evaluate(() => localStorage.getItem('hxx.review.v1')), '隔离测试原值');
+    await stress.close();
+    pass('30 件上装的底栏保留六件，360×640 网格首屏显示九件；模拟触摸可纵向浏览，末项查看和退出可恢复滚动与焦点，点选只改试穿且进入快选');
+    pass('背景两列及原画大图通过，模拟 30px 安全区后末项可点击；测试配色草稿刷新和显式保存通过，原游客存档原值保留');
   }
   assert.deepEqual(errors, []);
   await writeFile(out + '/checks.json', JSON.stringify({chrome:browser.version(), checks, viewports, shots, errors}, null, 2) + '\n');

@@ -20,3 +20,5 @@
 本轮[下方选衣候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier)见[竞品与同屏对照](../../docs/衣橱竞品调研与视觉复验.md)。复验命令与上面相同，另设 `HXX_STUDY_LAYOUT=atelier` 即检查候选及横滑。默认输出目录为 `.codex/wardrobe-layout-study`。
 
 [大图选衣候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=detail)复验用 `HXX_STUDY_LAYOUT=detail`，默认输出目录为 `.codex/wardrobe-detail-study`。对照和浏览器记录见[底部操作与大图对照](../../output/wardrobe-detail-review/2026-11-18/index.html)。
+
+[完整网格候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=grid)复验设 `HXX_STUDY_LAYOUT=grid`，默认输出目录为 `.codex/wardrobe-grid-study`。附加 `profile=stress` 打开 30 件测试上装，包含试验配色。浏览、试穿和保存回归见[网格评审记录](../../output/wardrobe-grid-review/2026-11-18/index.html)。

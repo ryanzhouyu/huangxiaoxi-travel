@@ -4,6 +4,8 @@
 
 ## 当前接手位置
 
+2026-11-18 已实现[完整网格候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=grid)，另有[30 件上装评审样本](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=grid&profile=stress)验证同类服饰增多时的翻找。快选保留当前搭配和已保存部件，三列服饰／两列背景按类别展开，支持单品大图和回到原浏览位置。[实屏与浏览器记录](output/wardrobe-grid-review/2026-11-18/index.html)。
+
 2026-11-18 用户认可下方选衣版的整体观感，并要求优化拥挤及缩略图辨识。[大图选衣候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=detail)在同一舞台上放大常驻缩略图，增加查看大图与同类翻阅。实际更换仍停留在试穿，关闭恢复横滑位置。[本轮实屏对照](output/wardrobe-detail-review/2026-11-18/index.html)。
 
 2026-11-18 根据衣橱评审反馈完成[竞品调研与视觉复验](docs/衣橱竞品调研与视觉复验.md)。新增[下方选衣候选稿](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier)及[同搭配对照](output/wardrobe-layout-review/2026-11-18/index.html)，用居中人物、分层工坊与同区选衣验证协调性，视觉待评审。原衣橱样板仍可从同目录的默认地址访问。

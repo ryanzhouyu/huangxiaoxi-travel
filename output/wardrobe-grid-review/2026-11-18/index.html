@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>旅行衣橱 · 完整网格评审</title>
+  <style>
+    * { box-sizing: border-box }
+    body { margin: 0; background: #eee7d9; color: #352a27; font: 15px/1.65 "PingFang SC", "Microsoft YaHei", sans-serif }
+    main { max-width: 900px; margin: auto; padding: 24px 16px 40px }
+    h1, h2 { margin: 0 0 8px; font-family: "Songti SC", SimSun, serif; line-height: 1.2 }
+    h1 { font-size: clamp(24px, 6vw, 36px) }
+    h2 { font-size: 23px }
+    p { margin: 7px 0 }
+    a { color: #653e34; text-underline-offset: 4px }
+    header { padding-bottom: 14px; border-bottom: 1px solid #b8a490 }
+    nav { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 9px }
+    section { margin-top: 24px }
+    .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 14px }
+    figure { margin: 0; padding: 8px; border: 1px solid #c7b39f; background: #f7f1e5 }
+    figcaption { margin-bottom: 5px }
+    img { display: block; width: 100%; height: auto; background: #5f493d }
+    @media (max-width: 510px) { .pair { grid-template-columns: minmax(0, 1fr) } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>旅行衣橱 · 完整网格</h1>
+    <p>快速试穿保留在舞台下方。点「全部」浏览当前类别。这里用 6 件原上装和 24 个试验配色验证浏览容量。</p>
+    <nav aria-label="评审入口">
+      <a href="../../../design/review/wardrobe-study/?layout=atelier&amp;picker=grid">试穿普通库存</a>
+      <a href="../../../design/review/wardrobe-study/?layout=atelier&amp;picker=grid&amp;profile=stress">浏览 30 件上装</a>
+      <a href="checks.json">浏览器记录</a>
+    </nav>
+  </header>
+  <section>
+    <h2>360×640 · 从快选展开完整网格</h2>
+    <div class="pair">
+      <figure><figcaption>底部横滑快选</figcaption><img src="study-360-default.webp" width="360" height="640" alt="少量单品通过横滑直接试穿，操作区左下是全部上装入口"></figure>
+      <figure><figcaption>30 件样本 · 首屏看清 9 件</figcaption><img src="grid-360-thirty.webp" width="360" height="640" alt="舞台保留在上方，三列网格首屏显示三行九件上装，网格向下滚动"></figure>
+    </div>
+  </section>
+  <section>
+    <h2>单品大图、返回原位置与试穿</h2>
+    <div class="pair">
+      <figure><figcaption>放大看第 30 件</figcaption><img src="grid-360-last-detail.webp" width="360" height="640" alt="第30件试验配色大图，底部可返回列表或试穿" loading="lazy"></figure>
+      <figure><figcaption>从大图返回原位置</figcaption><img src="grid-360-end-restored.webp" width="360" height="640" alt="回到同一个网格底部，最后一件仍在原来的位置" loading="lazy"></figure>
+      <figure><figcaption>点选后在全身舞台看效果</figcaption><img src="grid-360-try-last.webp" width="360" height="640" alt="试穿末件的配色后晓西全身可见，选中单品出现在底部快选" loading="lazy"></figure>
+      <figure><figcaption>背景两列 · 模拟 30px 安全区</figcaption><img src="grid-360-background.webp" width="360" height="640" alt="三张背景以两列显示，第三张仍可点击" loading="lazy"></figure>
+    </div>
+  </section>
+</main>
+</body>
+</html>
