@@ -1,6 +1,6 @@
 # 游玩章节地图视觉样稿
 
-2026-11-18 · 视觉待评审。[打开新地图](http://127.0.0.1:8782/output/explore-chapter-map/2026-11-18/index.html) · [上一版列表对照](../../explore-destination-design/2026-11-18/390x844.webp)
+2026-11-18 · 视觉待评审。[打开地图](http://127.0.0.1:8782/output/explore-chapter-map/2026-11-18/index.html?v=landmark-light-20261118) · [历史列表稿](../../explore-destination-design/2026-11-18/390x844.webp)
 
 ## 两层怎么呈现
 
@@ -13,12 +13,14 @@
 
 ## 地标与筛选交互
 
-- 三处地标沿原画轮廓裁切成独立的交互区域，地标和名牌共用一个入口。鼠标悬浮或键盘聚焦时，只有对应景区提亮并出现柔阴影。触屏轻点会先短暂提亮，然后进入章节。启用减少动态效果时直接切换。
+- 三处地标沿原画轮廓裁切成独立的交互区域，地标和名牌共用一个入口。
+- 常态地图原画亮度为 93%、饱和度为 88%。悬浮或键盘聚焦时，当前地标恢复原色，定位点出现细金环。按下或确认进入时，地标再提亮、金环亮实。触屏轻点同样显示确认反馈，约 180 毫秒后推进章节。启用减少动态效果时直接切换。
+- 确认高光分别落在黄果树岩壁和水潭、甲秀楼飞檐和台基、小七孔桥拱和近处水面。地图保持日间色调，黄果树的白水纹理、古桥拱洞仍清晰可辨。
 - 地市州选项紧贴筛选按钮向下展开，当前选项有勾。选择、再次点击按钮、点击其他区域或按 Esc 都会收起。类别筛选可以与地市州叠加。
 
-[甲秀楼悬浮](./interactions/390-hover-jiaxiu.webp) · [黄果树悬浮](./interactions/390-hover-huangguoshu.webp) · [小七孔悬浮](./interactions/390-hover-xiaoqikong.webp) · [360×640 下拉展开](./interactions/360-dropdown.webp)
+[常态](./landmark-light/390-idle.webp) · [甲秀楼悬浮](./landmark-light/390-jiaxiu-hover.webp) · [甲秀楼确认进入](./landmark-light/390-jiaxiu-confirm.webp) · [黄果树确认进入](./landmark-light/390-huangguoshu-confirm.webp) · [小七孔确认进入](./landmark-light/390-xiaoqikong-confirm.webp) · [窄屏筛选展开](./interactions/360-dropdown.webp)
 
-景区章节仍用上一轮布局。此次在相同五档视口复核地图位置、三个实际裁切区域的独立点击和高亮、下拉锚定、键盘关闭、筛选叠加及章节返回。触屏使用 Chrome 模拟。
+在相同五档视口逐一验证三处地标的常态、悬浮、确认反馈与章节返回，并复核下拉锚定、键盘关闭和筛选叠加。人工查看 390×844 和 1440×1000 实屏，检查瀑布、楼阁与古桥的纹理及底栏衔接。触屏使用 Chrome 模拟。
 
 ## 景点示例
 

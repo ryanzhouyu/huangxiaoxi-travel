@@ -21,7 +21,8 @@
 .atlas-art {
   z-index: -2;
   background: var(--atlas-image) center / cover;
-  transition: transform 380ms ease;
+  filter: brightness(.93) saturate(.88);
+  transition: transform 380ms ease, filter 260ms ease;
 }
 .atlas-content { min-height: 0; }
 .atlas-header {
@@ -58,6 +59,10 @@
 .map-labels { z-index: 1; pointer-events: none; }
 
 .chapter-pin {
+  --landmark-reveal: 0;
+  --confirmation-light: 0;
+  --light-transition: 130ms;
+  --landmark-filter: brightness(1) saturate(1);
   position: absolute;
   top: calc(var(--pin-y) * 100%);
   left: calc(var(--pin-x) * 100%);
@@ -72,7 +77,30 @@
   pointer-events: auto;
 }
 .chapter-pin:hover, .chapter-pin:focus-visible, .chapter-pin[data-entering] { z-index: 2; }
-.chapter-pin:focus-visible { outline: 2px solid #fff6ce; border-radius: 6px; outline-offset: 3px; }
+.chapter-pin:focus-visible {
+  --landmark-reveal: 1;
+  outline: 2px solid #fff6ce;
+  border-radius: 6px;
+  outline-offset: 3px;
+}
+.chapter-pin:is(:active, [data-entering]) {
+  --landmark-reveal: 1;
+  --confirmation-light: 1;
+  --light-transition: 90ms;
+  --landmark-filter: var(--landmark-confirmation);
+  --pin-fill: #ffedb0;
+  --pin-halo: 0 0 4px 1px #fff0b6b0, 0 0 15px 3px #e9ab519c;
+}
+/* 确认进入时，收回其他地标的局部光效。 */
+.map-labels:has(.chapter-pin[data-entering]) .chapter-pin:not([data-entering]) {
+  --landmark-reveal: 0;
+  --confirmation-light: 0;
+  --pin-fill: var(--enamel);
+}
+@media (hover: hover) {
+  .chapter-pin:hover { --landmark-reveal: 1; }
+  .map-labels:has(.chapter-pin:hover) .chapter-pin:focus-visible:not(:hover, [data-entering]) { --landmark-reveal: 0; }
+}
 
 /* 锚点与裁切框共用原图坐标，因此缩放后仍与底图同一位置。 */
 .pin-jiaxiu {
@@ -83,7 +111,8 @@
   --landmark-y: .308;
   --landmark-w: .289;
   --landmark-h: .162;
-  --landmark-light: 1.13;
+  --landmark-confirmation: brightness(1.13) saturate(1.13);
+  --landmark-warmth: radial-gradient(ellipse 54% 44% at 55% 65%, #ffdb913d, transparent 82%);
   --landmark-feather: linear-gradient(#000 84%, transparent);
   --silhouette: polygon(2% 81%, 12% 72%, 17% 64%, 25% 63%, 25% 58%, 21% 56%, 27% 48%, 29% 42%, 29% 34%, 32% 33%, 37% 25%, 48% 12%, 52% 2%, 56% 14%, 64% 22%, 73% 28%, 74% 34%, 71% 40%, 80% 47%, 79% 54%, 85% 57%, 87% 64%, 80% 72%, 97% 80%, 96% 92%, 69% 97%, 37% 99%, 12% 92%);
 }
@@ -95,7 +124,9 @@
   --landmark-y: .438;
   --landmark-w: .53;
   --landmark-h: .215;
-  --landmark-light: 1.06;
+  --landmark-confirmation: brightness(1.04) saturate(1.16);
+  --landmark-warmth: radial-gradient(ellipse 32% 36% at 78% 55%, #ffd88a47, transparent 80%),
+    radial-gradient(ellipse 43% 18% at 60% 87%, #b2e9c732, transparent 86%);
   --landmark-feather: linear-gradient(transparent, #000 18% 74%, transparent 99%);
   --silhouette: polygon(2% 48%, 7% 35%, 16% 22%, 25% 16%, 33% 13%, 38% 6%, 47% 13%, 56% 15%, 65% 16%, 71% 22%, 81% 23%, 85% 29%, 86% 52%, 90% 62%, 99% 76%, 93% 84%, 82% 88%, 64% 94%, 52% 91%, 39% 97%, 25% 91%, 12% 88%, 4% 73%);
 }
@@ -107,7 +138,8 @@
   --landmark-y: .719;
   --landmark-w: .672;
   --landmark-h: .072;
-  --landmark-light: 1.11;
+  --landmark-confirmation: brightness(1.11) saturate(1.16);
+  --landmark-warmth: radial-gradient(ellipse 79% 34% at 53% 53%, #ffdc8f36, transparent 81%);
   --landmark-feather: linear-gradient(transparent, #000 30% 63%, transparent 90%);
   --silhouette: polygon(0 52%, 7% 42%, 18% 29%, 30% 22%, 40% 17%, 54% 15%, 67% 18%, 78% 23%, 90% 31%, 100% 45%, 100% 83%, 90% 85%, 78% 84%, 61% 83%, 44% 80%, 26% 85%, 9% 87%, 0 83%);
 }
@@ -129,14 +161,18 @@
   background: var(--atlas-image) no-repeat;
   background-size: var(--map-width) var(--map-height);
   background-position: calc(-1 * var(--landmark-x) * var(--map-width)) calc(-1 * var(--landmark-y) * var(--map-height));
-  filter: brightness(var(--landmark-light)) saturate(1.08);
-  opacity: 0;
-  transition: opacity 150ms ease;
+  filter: var(--landmark-filter);
+  opacity: var(--landmark-reveal);
+  transition: opacity var(--light-transition) ease, filter var(--light-transition) ease;
 }
-.chapter-pin:is(:focus-visible, :active, [data-entering]) .landmark-art { opacity: 1; }
-@media (hover: hover) {
-  .chapter-pin:hover .landmark-art { opacity: 1; }
-  .chapter-pin:hover .chapter-sign { box-shadow: 0 4px 11px #17241f9c, inset 0 0 0 1px #fff6db; }
+.landmark-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--landmark-warmth);
+  opacity: var(--confirmation-light);
+  pointer-events: none;
+  transition: opacity var(--light-transition) ease;
 }
 .pin-point {
   position: relative;
@@ -146,8 +182,20 @@
   margin-bottom: 9px;
   border: 2px solid #fff0c0;
   border-radius: 50%;
-  background: var(--enamel);
-  box-shadow: 0 0 0 1px #81541e, 0 1px 11px #fef0ab9e, inset 0 0 0 2px #1e2d2e2b;
+  background: var(--pin-fill, var(--enamel));
+  box-shadow: 0 0 0 1px #81541e, 0 1px 4px #2d251970, inset 0 0 0 2px #1e2d2e2b;
+  transition: background-color var(--light-transition) ease;
+}
+.pin-point::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 1px solid #ffe4a2;
+  border-radius: 50%;
+  box-shadow: var(--pin-halo, 0 0 5px 1px #eac47280);
+  opacity: var(--landmark-reveal);
+  pointer-events: none;
+  transition: opacity var(--light-transition) ease;
 }
 .pin-point::after {
   content: "";
@@ -173,6 +221,9 @@
 }
 .chapter-pin:is(:focus-visible, :active, [data-entering]) .chapter-sign {
   box-shadow: 0 4px 11px #17241f9c, inset 0 0 0 1px #fff6db;
+}
+@media (hover: hover) {
+  .chapter-pin:hover .chapter-sign { box-shadow: 0 4px 11px #17241f9c, inset 0 0 0 1px #fff6db; }
 }
 .chapter-sign::after {
   content: "";
@@ -227,6 +278,7 @@
 
 .atlas[data-chapter] .atlas-art {
   transform: translate(calc(-50% + var(--camera-x)), calc(-50% + var(--camera-y))) scale(1.7);
+  filter: none;
 }
 .atlas[data-chapter="huangguoshu"] { --camera-x: 29cqw; --camera-y: -25cqh; }
 .atlas[data-chapter="jiaxiu"] { --camera-x: -34cqw; --camera-y: 1cqh; }
@@ -325,5 +377,5 @@
   .chapter-heading { gap: 9px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .atlas-art, .landmark-art { transition: none; }
+  .atlas-art, .landmark-art, .landmark-art::after, .pin-point, .pin-point::before { transition: none; }
 }
