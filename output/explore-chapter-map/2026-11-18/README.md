@@ -1,6 +1,6 @@
 # 游玩章节地图视觉确认稿
 
-2026-11-18 · 用户已确认采用 `63bb28a` 的章节地图作为「游玩」首层视觉基线。[打开确认稿](http://127.0.0.1:8782/output/explore-chapter-map/2026-11-18/index.html?v=landmark-light-20261118) · [历史列表稿](../../explore-destination-design/2026-11-18/390x844.webp)
+2026-11-18 · 用户已确认采用 `63bb28a` 的章节地图作为「游玩」首层视觉基线。[打开确认稿](http://127.0.0.1:8782/output/explore-chapter-map/2026-11-18/index.html?v=landmark-light-20261118)
 
 ## 两层怎么呈现
 

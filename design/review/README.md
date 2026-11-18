@@ -17,13 +17,7 @@
 
 浏览器复验使用本机 Chrome。环境变量 `HXX_PLAYWRIGHT` 指向已安装的 Playwright 包，或使用 Node 可解析的 Playwright。启动 8782 后运行 `node design/review/tests/experience.mjs`。可用 `HXX_REVIEW_URL` 切换服务地址，用 `HXX_REVIEW_OUT` 切换输出路径。默认报告、截图和图片写入忽略目录 `.codex/frontend-review/after/`。
 
-衣橱验证使用[独立入口](http://127.0.0.1:8782/design/review/wardrobe-study/)、[设计及验收说明](../../docs/衣橱验证设计.md)和[同数据对照](../../output/wardrobe-study/2026-11-18/index.html)。启动同一服务后运行 `node design/review/tests/wardrobe-study.mjs`。若使用其他本地端口，可设 `HXX_STUDY_ORIGIN`，如 `http://127.0.0.1:8765`；用 `HXX_STUDY_OUT` 可切换验证输出目录。
-
-本轮[下方选衣候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier)见[竞品与同屏对照](../../docs/衣橱竞品调研与视觉复验.md)。复验命令与上面相同，另设 `HXX_STUDY_LAYOUT=atelier` 即检查候选及横滑。默认输出目录为 `.codex/wardrobe-layout-study`。
-
-[大图选衣候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=detail)复验用 `HXX_STUDY_LAYOUT=detail`，默认输出目录为 `.codex/wardrobe-detail-study`。对照和浏览器记录见[底部操作与大图对照](../../output/wardrobe-detail-review/2026-11-18/index.html)。
-
-[完整网格候选](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=grid)复验设 `HXX_STUDY_LAYOUT=grid`，默认输出目录为 `.codex/wardrobe-grid-study`。附加 `profile=stress` 打开 30 件测试上装，包含试验配色。浏览、试穿和保存回归见[网格评审记录](../../output/wardrobe-grid-review/2026-11-18/index.html)。
+衣橱独立评审以[完整网格确认稿](http://127.0.0.1:8782/design/review/wardrobe-study/?layout=atelier&picker=grid)为准。复验设 `HXX_STUDY_LAYOUT=grid` 后运行 `node design/review/tests/wardrobe-study.mjs`，默认输出目录为 `.codex/wardrobe-grid-study`。其他端口设 `HXX_STUDY_ORIGIN`，输出目录可用 `HXX_STUDY_OUT` 切换。附加 `profile=stress` 打开 30 件测试上装，包含试验配色。[网格确认及检查记录](../../output/wardrobe-grid-review/2026-11-18/index.html)
 
 游客入口已接入确认衣橱和旅行手账。主线、导出及恢复复验用 `node design/review/tests/experience.mjs`，五档视口的同数据图稿用 `node design/review/tests/integration-visual.mjs`。后者可通过 `HXX_VISUAL_OUT` 指定输出目录。[接入与实屏验收](../../docs/衣橱与回忆接入计划.md)
 
