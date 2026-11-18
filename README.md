@@ -2,14 +2,14 @@
 
 以黄晓西数字伙伴承载游客的贵州游玩经历，通过到访、收集、换装和纪念图形成陪伴体验。当前可运行成果是采用「黔山同行」视觉的游客演示与三栏投屏台；进度保存在本浏览器。真实账号、云端进度和连续角色动画是已确认的下一阶段目标，尚未实现。
 
-私有仓库：[ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel)。**最新接手分支、冻结演示版本及验收状态只看 [HANDOFF](HANDOFF.md)**，默认分支 `main` 暂不代表最新演示成果。
+仓库（2026-11-18 核实为公开）：[ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel)。**最新接手分支、冻结演示版本及验收状态只看 [HANDOFF](HANDOFF.md)**，默认分支 `main` 暂不代表最新演示成果。
 
 ## 启动当前成果
 
-首次获取当前正式前端协作方案分支（可运行页面仍是旧演示，正式工程尚未提取）：
+首次获取当前正式前端开发分支（可运行页面仍是旧演示，正式工程尚未提取）：
 
 ```powershell
-git clone -b codex/production-frontend-plan-20261112 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
+git clone -b codex/production-frontend https://github.com/ryanzhouyu/huangxiaoxi-travel.git
 cd huangxiaoxi-travel
 .\Start-Local.ps1
 ```

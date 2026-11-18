@@ -1,13 +1,13 @@
 # GitHub 与双机协作
 
-更新日期：2026-11-12。私有仓库为 [ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel)。当前分支与冻结版本以 [HANDOFF](../HANDOFF.md) 为唯一入口，不能把默认 main 当成最新交付。
+更新日期：2026-11-18。仓库（当日核实为公开）为 [ryanzhouyu/huangxiaoxi-travel](https://github.com/ryanzhouyu/huangxiaoxi-travel)。当前分支与冻结版本以 [HANDOFF](../HANDOFF.md) 为唯一入口，不能把默认 main 当成最新交付。
 
 ## 新电脑接手
 
-安装 Git、Python 3；执行检查还需要 Node.js／npm。克隆需要当前 GitHub 账号有仓库权限。
+安装 Git、Python 3；执行检查还需要 Node.js／npm。公开仓库可直接克隆；推送需要当前 GitHub 账号有写入权限。
 
 ```powershell
-git clone -b codex/production-frontend-plan-20261112 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
+git clone -b codex/production-frontend https://github.com/ryanzhouyu/huangxiaoxi-travel.git
 cd huangxiaoxi-travel
 git status -sb
 git log -1 --oneline
@@ -49,7 +49,7 @@ git ls-remote origin refs/heads/当前分支名
 
 命令中的“本次文件路径”“当前分支名”为需替换的示意。只有远端提交与本地一致才记录同步完成；commit 本身只保存本地。按可独立回退的目标提交，不把用户其他改动混入。
 
-新任务用 `codex/` 前缀分支。正式开发应从 HANDOFF 指定的已验收计划提交派生，冻结演示标签只用于复演／回溯。主线合并单独决定；不移动标签、强推或重写历史。换电脑继续同一任务时沿用该分支，不靠复制目录搬修改。
+新任务用 `codex/` 前缀分支。当前正式开发统一在 HANDOFF 指定的开发分支接续，独立任务再从该分支派生，冻结演示标签只用于复演／回溯。主线合并单独决定；不移动标签、强推或重写历史。换电脑继续同一任务时沿用该分支，不靠复制目录搬修改。
 
 ## 文件保存与资料策略
 

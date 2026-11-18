@@ -1,8 +1,10 @@
 # 黄晓西项目接续说明
 
-更新时间：2026-11-12。本文维护当前状态；工作要求见 [AGENTS](AGENTS.md)，资料职责见[文档索引](docs/README.md)。
+更新时间：2026-11-18。本文维护当前状态；工作要求见 [AGENTS](AGENTS.md)，资料职责见[文档索引](docs/README.md)。
 
 ## 当前接手位置
+
+2026-11-18 用户确认按盘点方案精简分支，并选定后续开发入口。当前唯一接续分支为 `codex/production-frontend`，从完整研发基线 `e5fb44a52c8b63fb6d0b3566e2f4094e08d134d7` 派生；已删除 6 个无独有提交的旧阶段分支，本地及远端均已清理。保留完整规划基线、后端交接分支、旧 main 与冻结演示标签，详见[分支精简与接续记录](docs/分支精简与接续记录-20261118.md)。本轮只改 Git 引用与接手文档，未提取正式工程、未改运行代码。
 
 2026-11-12 用户新增协作安排：用户侧负责前端，开发同事负责后端，后端技术栈与接口未定；要求交付实际上线的正式前端，不含旧演示。用户已确认首个正式版本免费游玩、购买暂不开放，覆盖旧 D04 对正式首发的模拟购买要求。
 
@@ -14,14 +16,13 @@
 
 | 版本 | 用途与状态 |
 | --- | --- |
-| `codex/production-frontend-plan-20261112` | 当前接续分支，从 `98df47c` 派生；正式前端与后端协作方案、P04 免费首发范围，未改运行代码。 |
-| `codex/account-animation-design-20261108` → `98df47c` | 账号／动画及迁移设计与隔离契约基线，不修改游客功能或原素材。 |
-| `codex/internal-alpha-r00-20261108` → `0e6f94e` | 已验收 R00 基线，五项准备及 G0；[原阶段证据](docs/R00阶段验收记录.md)保留。 |
-| `codex/internal-alpha-plan-20261108` → `8c5ba35` | 详细计划基线；45 项任务与 61 项用例，保留历史状态。 |
-| `codex/project-housekeeping-20261108` → `3df7f3d` | 资料整理基线，验收见[整理记录](docs/项目复盘与资料整理记录.md)。 |
-| `demo-20261106-stage-v1` → `68d9f33` | 冻结演示基线，原分支 `codex/presenter-console-20261106` 保留；不得覆盖标签。 |
-| `codex/client-demo-20261106` → `48dfc4f` | 更早客户演示基线，保留回溯。 |
-| `main` → `4d2c933` | 原主线，未合入上述工作；不能直接从默认分支接续。 |
+| `codex/production-frontend` | 当前唯一开发入口；从 `e5fb44a` 派生，本轮完成分支精简与接手文档同步。 |
+| `codex/production-frontend-plan-20261112` → `e5fb44a` | 完整研发规划留档基线；后续实现统一在新开发分支推进。 |
+| `codex/backend-review-lite-20261112` → `cc91b2d` | 后端研判交接包，游客端相关 73 个文件与 `e5fb44a` 一致；省略原件及过程资料，不作为开发源头，不整体合回。 |
+| `demo-20261106-stage-v1` → `68d9f33` | 冻结演示标签，继续保留且不得覆盖；对应旧分支已删除。 |
+| `main` → `4d2c933` | 旧主线及 GitHub 默认分支；未合入新成果，不能直接接续，本轮未合并或变更默认分支。 |
+
+已删除阶段分支的完整提交与恢复方法见[精简记录](docs/分支精简与接续记录-20261118.md)，所有历史提交仍可从当前开发分支追溯。
 
 新候选模块位于 [specs/alpha](specs/alpha/README.md)，不被运行页面导入。Node 的 15 个账号／动画契约及 8 个迁移预检场景通过；PostgreSQL 并发实验因本机 Docker Engine 返回错误停止在容器预检查，未创建容器、未运行 SQL。此次没有真实部署、采购或外部联系，也未改变历史规则、素材、演示代码或用户浏览器存档。不存在可直接生产使用的动画母版／绑定数据。
 
@@ -38,7 +39,7 @@
 首次克隆：
 
 ```powershell
-git clone -b codex/production-frontend-plan-20261112 https://github.com/ryanzhouyu/huangxiaoxi-travel.git
+git clone -b codex/production-frontend https://github.com/ryanzhouyu/huangxiaoxi-travel.git
 cd huangxiaoxi-travel
 git status -sb
 git log -1 --oneline
@@ -49,12 +50,12 @@ git log -1 --oneline
 
 ```powershell
 git fetch origin
-git switch codex/production-frontend-plan-20261112
+git switch codex/production-frontend
 git pull --ff-only
 .\Start-Local.ps1
 ```
 
-若本地尚无该分支，使用 `git switch --track origin/codex/production-frontend-plan-20261112`。私有仓库需要本人 GitHub 权限；不复制旧电脑凭证或代理设置。详细环境与处理见[双机协作](docs/GitHub与双机协作.md)。
+若本地尚无该分支，使用 `git switch --track origin/codex/production-frontend`。2026-11-18 核实仓库为公开；推送仍需本人 GitHub 写入权限；不复制旧电脑凭证或代理设置。详细环境与处理见[双机协作](docs/GitHub与双机协作.md)。
 
 | 用途 | 入口 |
 | --- | --- |
@@ -81,4 +82,4 @@ git pull --ff-only
 
 聊天、工具登录、环境、服务进程、浏览器存档均不随代码同步。演示台可手动导出／载入演示备份，个人备份不上传仓库。新域名／端口会使用独立浏览器存储；正式账号的数据迁移政策尚未确定。
 
-> 接续提示：先核对当前协作方案分支、远端和工作区，读 AGENTS、HANDOFF 及正式前端拆分方案。正式首发免费、购买关闭已经确认；后端栈／接口待双方共同确定。旧模拟内测及本地演示不能作为正式版本交付。
+> 接续提示：先核对 `codex/production-frontend`、远端和工作区，读 AGENTS、HANDOFF 及正式前端拆分方案。正式首发免费、购买关闭已经确认；后端栈／接口待双方共同确定。旧模拟内测及本地演示不能作为正式版本交付。
