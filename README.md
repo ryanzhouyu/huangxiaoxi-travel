@@ -20,7 +20,8 @@ cd huangxiaoxi-travel
 
 | 用途 | 入口 |
 | --- | --- |
-| 当前游客演示 | [打开游客页](http://127.0.0.1:8765/design/demo/index.html) |
+| 当前游客评审 | [伙伴首页](http://127.0.0.1:8765/design/review/index.html#partner) · [两级游玩地图](http://127.0.0.1:8765/design/review/index.html?v=atlas-hierarchy#explore) |
+| 冻结客户演示 | [打开游客演示页](http://127.0.0.1:8765/design/demo/index.html) |
 | 电脑三栏投屏与存档备份 | [打开演示台](http://127.0.0.1:8765/design/demo/stage.html) |
 | 已确认整套视觉 | [黔山同行设计说明](docs/高保真设计说明.md) |
 | 已确认六套服装与重建来源 | [拆件说明](reviews/2026-11-05-wardrobe/selected/README.md) |
