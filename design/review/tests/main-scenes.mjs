@@ -34,12 +34,21 @@ function fixture(visited, alternate) {
   return db;
 }
 
-async function sample(width, height, {visited = true, safe = 0, alternate = false} = {}) {
+async function sample(width, height, {visited = true, safe = 0, alternate = false, staleIconRegistry = false} = {}) {
   const page = await browser.newPage({viewport:{width,height}, timezoneId:'Asia/Shanghai', reducedMotion:'reduce'});
   page.on('pageerror',error => errors.push(error.message));
   page.on('response',response => {
     if (response.status() >= 400) errors.push(response.status() + ' ' + response.url());
   });
+  if (staleIconRegistry) {
+    await page.route('**/hifi/art.mjs*', async route => {
+      const response = await route.fetch();
+      const source = await response.text();
+      // 旧版通用图标模块缺少这三个名称，实际标签曾因此渲染成默认箭头。
+      const staleSource = source.replace(/,\s*(?:closet|catalog|gesture)\s*:\s*'[^']+'/g, '');
+      await route.fulfill({response, body:staleSource});
+    });
+  }
   await page.addInitScript(({key, db}) => localStorage.setItem(key, JSON.stringify(db)), {key:progressKey, db:fixture(visited, alternate)});
   await page.goto(base + '#partner');
   await page.locator('#app[data-page=partner] .main-nav').waitFor();
@@ -82,7 +91,8 @@ async function inspectNav(page, current, safe) {
 try {
   await mkdir(out,{recursive:true});
   for (const [width,height,safe = 0] of [...dims,[360,640,30]]) {
-    const page = await sample(width,height,{safe});
+    const staleIconRegistry = width === 1440;
+    const page = await sample(width,height,{safe,staleIconRegistry});
     const nav = page.getByRole('navigation',{name:'主场景',exact:true});
     let firstLayout;
     for (const [name,label] of scenes) {
@@ -140,7 +150,7 @@ try {
     await page.goBack();
     await page.locator('#app[data-page=memories]').waitFor();
     assert.equal(await page.locator('[aria-current=page]').getAttribute('href'),'#memories');
-    results.push({width,height,safe,routes:scenes.map(([name]) => name)});
+    results.push({width,height,safe,staleIconRegistry,routes:scenes.map(([name]) => name)});
     await page.close();
   }
 

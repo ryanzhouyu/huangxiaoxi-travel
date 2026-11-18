@@ -1,4 +1,5 @@
 import {catalog} from '../review-service.mjs';
+import {partnerIcon} from '../../hifi/partner-art.mjs?v=home-icons-20261118';
 import {h, href, link, button, bar, section, header, note, icon, stageFigure, itemArt, status, pressed, mask, day, time, empty, world, portrait} from '../ui.mjs';
 
 const art = id => stageFigure(catalog.lookFor(id));
@@ -72,8 +73,8 @@ export function partner({p, ui, nav}) {
       <div class="partner-play">
         ${button(stageFigure(look), 'greet', {value: 'figure', classes: 'companion-doll' + (ui.greet ? ' responding' : ''), attrs: 'aria-label="和黄晓西打招呼"'})}
         <aside class="satchel" aria-label="随身道具">
-          ${tools.map(([symbol, label, to]) => link(icon(symbol) + `<span>${label}</span>`, to, 'tool')).join('')}
-          ${button(icon('gesture') + '<span>动作</span>', 'openPoses', {classes: 'tool'})}
+          ${tools.map(([symbol, label, to]) => link(partnerIcon(symbol, 'ui-icon') + `<span>${label}</span>`, to, 'tool')).join('')}
+          ${button(partnerIcon('gesture', 'ui-icon') + '<span>动作</span>', 'openPoses', {classes: 'tool'})}
         </aside>
         ${!p.gifts.includes('demo') ? link(icon('gift') + '<span>初见礼</span>', href('gift', {from: '#partner'}), 'gift-shortcut') : ''}
       </div>

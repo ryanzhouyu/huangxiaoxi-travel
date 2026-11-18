@@ -1,7 +1,7 @@
 import {prepareArtwork} from '../demo/renderer.mjs';
 import {composeImage, paintDraft} from '../demo/postcard.mjs';
 import {catalog, progressKey, reviewService as service} from './review-service.mjs';
-import {isEntry, isRoute, ownsWardrobeContext, routeInfo} from './routes.mjs';
+import {isEntry, isRoute, ownsWardrobeContext, routeInfo} from './routes.mjs?v=home-icons-20261118';
 import {defaultFilter, readEditors, readTab, writeTab, makeCompose} from './drafts.mjs';
 import {filterEvents, eventContent, journalFilter, journalWork} from './pages/memory.mjs';
 import {placesContent} from './pages/travel.mjs';

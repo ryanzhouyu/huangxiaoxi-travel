@@ -1,6 +1,6 @@
 /** 全稿共用的道具插画；沿用首页材质，辅助方向符号另由 art.mjs 绘制。 */
 let artworkInstance = 0;
-export function partnerIcon(name) {
+export function partnerIcon(name, className = 'partner-art') {
   const id = `painted-${name}-${++artworkInstance}`;
   const shapes = {
     companion: `
@@ -130,7 +130,7 @@ export function partnerIcon(name) {
       <path d="m30 23 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1Z" fill="#8b9a73"/>
       <path d="M43 20v24" stroke="#bd9e63" stroke-width="1.2" stroke-dasharray="2 3"/>`,
   };
-  return `<svg class="partner-art" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+  return `<svg class="${className}" viewBox="0 0 64 64" fill="none" aria-hidden="true">
     <defs>
       <linearGradient id="${id}-gold" x1="14" y1="8" x2="48" y2="56" gradientUnits="userSpaceOnUse"><stop stop-color="#f6e3b5"/><stop offset=".48" stop-color="#d3ad70"/><stop offset="1" stop-color="#b58a50"/></linearGradient>
       <linearGradient id="${id}-paper" x1="16" y1="12" x2="47" y2="54" gradientUnits="userSpaceOnUse"><stop stop-color="#fff4d8"/><stop offset="1" stop-color="#e6cd9a"/></linearGradient>

@@ -1,6 +1,6 @@
 import {catalog} from './review-service.mjs';
 import {href} from './ui.mjs';
-import * as arrival from './pages/arrival.mjs';
+import * as arrival from './pages/arrival.mjs?v=home-icons-20261118';
 import * as travel from './pages/travel.mjs';
 import * as style from './pages/style.mjs';
 import * as memory from './pages/memory.mjs';
