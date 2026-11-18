@@ -4,7 +4,7 @@
 
 ## 当前接手位置
 
-2026-11-18 用户认可[章节地图样稿](http://127.0.0.1:8782/output/explore-chapter-map/2026-11-18/index.html?v=landmark-light-20261118)的视觉方向。黄果树、甲秀楼、小七孔分别为景区章节，章内可点选景点关卡及查看足迹示意。地图常态轻降亮度与饱和度，地标悬浮恢复原色，确认进入时以局部暖光和实心定位点区分。地市州为原位下拉，可与自然风光／人文筛选叠加。当前样稿独立评审，游客入口待相应接入决定。[实屏与验收](output/explore-chapter-map/2026-11-18/README.md) · [历史列表稿](output/explore-destination-design/2026-11-18/README.md)
+2026-11-18 用户确认采用[章节地图](http://127.0.0.1:8782/output/explore-chapter-map/2026-11-18/index.html?v=landmark-light-20261118)作为「游玩」首层视觉基线。黄果树、甲秀楼、小七孔分别为景区章节，章内可点选景点关卡。常态地图轻降亮度与饱和度，地标悬浮恢复原色，确认进入时亮起局部暖光与实心定位点。地市州原位下拉可与自然风光／人文筛选叠加。游客入口接入待实施。[确认稿与验收](output/explore-chapter-map/2026-11-18/README.md) · [历史列表稿](output/explore-destination-design/2026-11-18/README.md)
 
 2026-11-18 复核[首页侧边图标及点击内容](docs/伙伴首页与主场景导航验收.md)。衣橱、图鉴、动作直接载入衣柜、收藏册及举手伙伴的图稿。修复旧浏览器标签里三项落到默认箭头的问题，已在同一标签刷新并点击核对。站立和挥手的缩略图按实际姿势生成，选中后进入试穿。[修复后侧栏](output/partner-icon-review/2026-11-18/browser-refresh.webp)
 
